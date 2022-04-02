@@ -7,14 +7,12 @@ function ButtonBalancefy(props) {
     }
     return (
     <>
-        <Button type="submit" variant="contained" 
-        style={{
-            color: props.variant === buttonTypes.Secondary ? "#FFF" : "#131515",
-            backgroundColor: props.variant === buttonTypes.Secondary ? "#4B4B4B" : "#7DE2D1",
+        <Button type="submit" variant="contained" color={props.color}
+          style={{
             width: props.width,
-            height: "60px"
-            }}>
-                {props.children}
+            height: props.height
+          }}>
+            {props.children}
         </Button>
     </>
     )
