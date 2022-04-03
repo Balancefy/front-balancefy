@@ -18,6 +18,3 @@ function Container(props) {
 
 export default Container;
 
-/*      height: "620px",
-width: "380px",
-*/
