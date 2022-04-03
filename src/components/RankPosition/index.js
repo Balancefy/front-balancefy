@@ -19,7 +19,6 @@ export default function RankPosition(props) {
           fontSize: "18px",
           marginLeft: "20px",
           justifyContent: "center",
-          alignItems: "center"
         }}>
           #{props.position}
         </div>
