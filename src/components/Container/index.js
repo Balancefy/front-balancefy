@@ -7,7 +7,7 @@ function Container(props) {
       width: props.width,
       left: "1509px",
       top: "36px",
-      borderRadius: "10px"
+      borderRadius: props.borderRadius
     }}>
       {props.children}
     </div>
