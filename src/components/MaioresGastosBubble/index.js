@@ -32,7 +32,7 @@ export default function MaioresGastosBubble(props) {
               <div style={{
                 fontWeight: "bold"
               }}>
-              {props.id}.{props.desc}
+              {props.key}.{props.desc}
               </div>
               <div>
                 {props.porcentagem}%
