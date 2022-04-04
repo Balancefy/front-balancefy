@@ -1,18 +1,17 @@
 import React from 'react'
-import Roadmap from './components/Roadmap';
+import MaioresGastos from './components/MaioresGastos'
 
 function App() {
 
-  const goals = [
-    { id: 1, desc: "Viajar para a Australia", xp:"4000"},
-    { id: 1, desc: "task 1", xp:"400"},
-    { id: 2, desc: "task 2", xp:"400"},
-    { id: 3, desc: "task 3", xp:"400"},
-    { id: 4, desc: "task4", xp:"400"}
+  const gastos = [
+    { id: 1, desc: "UBER", porcentagem: "55"},
+    { id: 2, desc: "UBER", porcentagem: "37"},
+    { id: 3, desc: "Roupa", porcentagem: "17"}
   ]
+  
   return (
     <div className="App">
-      <Roadmap data={goals}></Roadmap>
+      <MaioresGastos data={gastos}></MaioresGastos>
     </div>
   );
 }
