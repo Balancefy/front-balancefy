@@ -13,7 +13,7 @@ export default function Ranking(props) {
 
   return (
     <>
-      <Container height="372px" width="380px">
+      <Container height="372px" width="380px" borderRadius="10px">
         <h3 style={{textAlign: "center", marginTop: "5px"}}>
           Ranking
         </h3>

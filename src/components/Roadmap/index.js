@@ -13,7 +13,7 @@ export default function Roadmap(props) {
 
   return (
     <>
-      <Container height="1009px" width="380px">
+      <Container height="1009px" width="380px" borderRadius="10px">
         <h2 style={{ textAlign: "center", margin: "5px" }}>Roadmap</h2>
         {Goals}
       </Container>

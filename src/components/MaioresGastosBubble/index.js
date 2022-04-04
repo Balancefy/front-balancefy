@@ -3,7 +3,7 @@ import Container from "../Container";
 export default function MaioresGastosBubble(props) {
   return (
     <>
-      <Container height="1009px" width="1285px">
+      <Container height="1009px" width="1285px" borderRadius="10px">
         <div style={{
           display: "flex",
           height: "348px",

@@ -12,7 +12,7 @@ export default function MaioresGastos(props) {
 
   return (
     <>
-      <Container height="1009px" width="380px">
+      <Container height="1009px" width="380px" borderRadius="10px">
         {Gastos}
       </Container>
     </>

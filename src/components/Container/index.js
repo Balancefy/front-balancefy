@@ -5,7 +5,7 @@ function Container(props) {
       background: "#131515",
       height: props.height,
       width: props.width,
-      borderRadius: "10px"
+      borderRadius: props.borderRadius
     }}>
       {props.children}
     </div>
