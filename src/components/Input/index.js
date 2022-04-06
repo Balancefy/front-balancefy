@@ -2,16 +2,16 @@ import { Box, TextField } from "@mui/material";
 
 export default function Input(props) {
   const style =  props.type === "primary" ? {
-    width: '550px',
+    width: props.width,
     variant: 'outlined'
   } : {
-    width: '220px',
+    width: '340px',
     variant: 'standard'
   }
   
   return(
-    <Box component="form" sx={{'& > :not(style)': { mt: props.mt, width: style.width, }}}>
-      <TextField label={props.label} color="primary" variant={style.variant} />
+    <Box sx={{'& > :not(style)': { mt: props.mt, width: style.width}}}>
+      <TextField multiline rows={props.row} label={props.label} color="primary" variant={style.variant} />
     </Box>
   )
 }

@@ -1,9 +1,17 @@
+import { LocalizationProvider } from '@mui/lab';
 import React from 'react'
-import Transaction from './components/Transaction';
+import AdapterDayjs from '@mui/lab/AdapterDayjs'
+import ButtonChangePass from './components/ButtonChangePass';
+
 function App() {
   return (
-    <div className="App">
-    </div>
+    <>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <div className="App">
+          <ButtonChangePass>Alterar Senha</ButtonChangePass>
+        </div>
+      </LocalizationProvider>
+    </>
   );
 }
 
