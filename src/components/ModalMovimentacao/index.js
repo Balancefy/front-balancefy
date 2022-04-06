@@ -1,43 +1,35 @@
 import { Box, IconButton, Modal, Typography } from "@mui/material";
 import React from "react";
-import Container from "../Container";
 import CloseIcon from '@mui/icons-material/Close';
 import Input from "../Input";
 import SelectBalancefy from "../Select";
+import { style } from "./style"
+import InputValue from "../InputValue";
+import ButtonBalancefy from "../Button";
 
-export default function ModalComponent(props) {
-  const [modalState, setModalState] = React.useState(true);
 
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 420,
-    background: '#131515',
-    boxShadow: 24,
-    color: 'white',
-    pt: 2,
-    px: 4,
-    pb: 3,
-  };
+export default function ModalMovimentacao(props) {
+  const [modalState, setModalState] = React.useState(false);
 
   return (
-    <Modal
-      open={modalState}
-    >
+    <Modal open={modalState}>
       <Box sx={style}>
         <IconButton
-          sx={{ position: "absolute", top: 10, right: 10, color: 'white' }}
+          sx={{ position: "absolute", top: 0, right: 0, color: 'white' }}
           onClick={props.onClick}
         >
           <CloseIcon />
         </IconButton>
-        <Typography variant="h6" component="h2">
+        <Typography variant="h6" color="primary" sx={{mt: 1}}>
           {props.title}
         </Typography>
-        <Input label="Descricao"/>
-        <SelectBalancefy label="Categoria" width="340px"/>
+        <form>
+          <Input mt='10px' label="Descrição"/>
+          <InputValue mt='20px' label="Valor"/>
+          <SelectBalancefy mt='20px' type="categoryTransaction" label="Categoria" width="340px"/>
+          <SelectBalancefy mt='20px' mb="40px" content="type" label="Tipo de Movimentação" width="340px"/>
+          <ButtonBalancefy width="340px" color="primary" height="40px">Concluir</ButtonBalancefy>
+        </form>
       </Box>
     </Modal>
   )

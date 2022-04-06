@@ -1,19 +1,17 @@
+import { LocalizationProvider } from '@mui/lab';
 import React from 'react'
-import Roadmap from './components/Roadmap';
+import AdapterDayjs from '@mui/lab/AdapterDayjs'
+import ButtonChangePass from './components/ButtonChangePass';
 
 function App() {
-
-  const goals = [
-    { id: 1, desc: "Viajar para a Australia", xp:"4000"},
-    { id: 1, desc: "task 1", xp:"400"},
-    { id: 2, desc: "task 2", xp:"400"},
-    { id: 3, desc: "task 3", xp:"400"},
-    { id: 4, desc: "task4", xp:"400"}
-  ]
   return (
-    <div className="App">
-      <Roadmap data={goals}></Roadmap>
-    </div>
+    <>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <div className="App">
+          <ButtonChangePass>Alterar Senha</ButtonChangePass>
+        </div>
+      </LocalizationProvider>
+    </>
   );
 }
 

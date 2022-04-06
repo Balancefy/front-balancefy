@@ -1,26 +1,13 @@
 import { Box, IconButton, Modal, Typography } from "@mui/material";
 import React from "react";
-import Container from "../Container";
 import CloseIcon from '@mui/icons-material/Close';
 import Input from "../Input";
-import SelectBalancefy from "../Select";
+import ButtonBalancefy from "../Button";
+import { style } from "./style"
 
-export default function ModalComponent(props) {
+
+export default function ModalTopico(props) {
   const [modalState, setModalState] = React.useState(true);
-
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 420,
-    background: '#131515',
-    boxShadow: 24,
-    color: 'white',
-    pt: 2,
-    px: 4,
-    pb: 3,
-  };
 
   return (
     <Modal
@@ -28,16 +15,30 @@ export default function ModalComponent(props) {
     >
       <Box sx={style}>
         <IconButton
-          sx={{ position: "absolute", top: 10, right: 10, color: 'white' }}
+          sx={{ position: "absolute", top: 0, right: 0, color: 'white' }}
           onClick={props.onClick}
         >
           <CloseIcon />
         </IconButton>
-        <Typography variant="h6" component="h2">
+        <Typography variant="h6" color="primary" sx={{mt: 1}}>
           {props.title}
         </Typography>
-        <Input label="Descricao"/>
-        <SelectBalancefy label="Categoria" width="340px"/>
+        <form>
+          <Input mt='20px' type="primary" width="340px" label="Título"/>
+          <Input mt='20px' type="primary" width="340px" label="Descrição" row={4}/>
+          <Box sx={{mt: 4}}>
+            <ButtonBalancefy width="340px" color="primary" height="40px">Publicar</ButtonBalancefy>
+          </Box>
+          {
+            props.edit ? 
+              <Box sx={{mt: 2}}>
+                <ButtonBalancefy width="340px" color="secondary" height="40px">Excluir</ButtonBalancefy>
+              </Box> 
+              : 
+              <></>
+          }
+          
+        </form>
       </Box>
     </Modal>
   )
