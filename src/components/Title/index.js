@@ -7,7 +7,7 @@ function TitleBalancefy(props) {
         style={{
             color: props.color
         }}>
-            {props.title}
+            {props.children}
         </Typography>
     </>
     )

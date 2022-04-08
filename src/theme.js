@@ -11,15 +11,19 @@ const theme = createTheme({
     },
     h2: {
       fontSize: 24,
+      fontWeight: 500
     },
     h3: {
       fontSize: 20,
+      fontWeight: 400
     },
     h4: {
       fontSize: 16,
+      fontWeight: 400
     },
     h5: {
       fontSize: 12,
+      fontWeight: 500
     },
   },
   components: {
