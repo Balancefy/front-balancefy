@@ -5,23 +5,18 @@ import { Margin } from "@mui/icons-material";
 import AvatarBalancefy from "../Avatar";
 import TitleBalancefy from "../Title";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory';
-
+import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 
 function CommentBalancefy(props) {
   return (
     <>
-      <Container
-        height="294px"
-        width="36%"
-        borderRadius
-      >
+      <Container height="294px" width="36%" borderRadius>
         <div
           style={{
             height: "100%",
             width: "90%",
             margin: "auto",
-            paddingTop: "20px"
+            paddingTop: "20px",
           }}
         >
           <div
@@ -75,14 +70,18 @@ function CommentBalancefy(props) {
             <TitleBalancefy variant="h4"> Muito díficil... </TitleBalancefy>
           </div>
 
-          <div style={{
+          <div
+            style={{
               paddingLeft: "83px",
-              paddingTop: "8px"
-          }}>
+              paddingTop: "8px",
+            }}
+          >
             Mostrar menos
-            <ChangeHistoryIcon style={{
+            <ChangeHistoryIcon
+              style={{
                 paddingTop: "12px",
-            }}></ChangeHistoryIcon>
+              }}
+            ></ChangeHistoryIcon>
           </div>
         </div>
       </Container>
