@@ -3,13 +3,17 @@ import Avatar from "@mui/material/Avatar";
 function AvatarBalancefy(props) {
     return (
     <>
-        <Avatar src={props.imageAvatar}
+        <Avatar onClick={props.onClick} src={props.imageAvatar}
         style={{
             width: props.width,
             height: props.width,
+            backgroundColor: "#7DE2D1",
             border: "2px solid Black",
-            borderRadius: "50%"
-        }}/>
+            borderRadius: "50%",
+            ...props.style
+        }}>
+            {props.children}
+        </Avatar>
     </>
     )
 }
