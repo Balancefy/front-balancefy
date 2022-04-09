@@ -1,46 +1,32 @@
 import Container from "../Container";
 
 export default function MaioresGastosBubble(props) {
+  const size = props.porcentagem + 100;
   return (
+    
     <>
-      <Container height="1009px" width="1285px">
+      <div style={{
+        display: "flex",
+        height: `${size}px`,
+        width: `${size}px`,
+        backgroundColor: `${props.color}`,
+        borderRadius: "50%",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: 'column',
+        position: 'relative',
+        left: "8%",
+        margin: "80px -10px 0 15px",
+      }}>
         <div style={{
-          display: "flex",
-          height: "348px",
-          width: "533px",
-          background: "#4B4B4B",
-          borderRadius: "10px"
+          fontWeight: "bold"
         }}>
-          <h3 style={{
-            margin: 0
-          }}>Maiores Gastos</h3>
-
-          <div style={{
-            display: "flex",
-            alignItems: "center"
-          }}>
-            <div style={{
-              display: "flex",
-              height: "150px",
-              width: "150px",
-              backgroundColor: "#7DE2D1",
-              borderRadius: "50%",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: 'column'
-            }}>
-              <div style={{
-                fontWeight: "bold"
-              }}>
-              {props.key}.{props.desc}
-              </div>
-              <div>
-                {props.porcentagem}%
-              </div>
-            </div>
-          </div>
+          {props.id}.{props.desc}
         </div>
-      </Container>
+        <div>
+          {props.porcentagem}%
+        </div>
+      </div>
     </>
   );
 }
