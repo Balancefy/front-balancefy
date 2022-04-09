@@ -32,15 +32,16 @@ function ProfileBalancefy(props) {
                         float: "left",
                         marginTop: "285px" 
                     }}>
-                        <TitleBalancefy variant="h3" title="Matias"></TitleBalancefy>
-                        <TitleBalancefy variant="h3" color="#7DE2D1" title="Perfil de pobre"></TitleBalancefy>
+                        <TitleBalancefy variant="h3">Matias</TitleBalancefy>
+                        <TitleBalancefy variant="h3" color="#7DE2D1">Perfil de pobre</TitleBalancefy>
                     </div>
 
                     <div style={{
                          width: "60%",
                          textAlign: "right",
                          float: "right",
-                         marginTop: "288px" 
+                         marginTop: "288px",
+                         display: 'in'
                     }}>
                         <ButtonBalancefy width="150px" height="40px" color="primary" radius="7px">
                             Editar

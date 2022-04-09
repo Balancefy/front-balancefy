@@ -25,6 +25,14 @@ const theme = createTheme({
       fontSize: 12,
       fontWeight: 500
     },
+    body1: {
+      fontSize: 16,
+      textAlign: "justify"
+    },
+    subtitle1: {
+      fontSize: 16,
+      textDecoration: "underline"
+    } 
   },
   components: {
     MuiTypography: {
