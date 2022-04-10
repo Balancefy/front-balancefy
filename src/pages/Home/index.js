@@ -1,7 +1,10 @@
+import Menu from "../../components/Menu"
+// import {Exemplo} from "../../components/Menu"
+
 export default function Home() {
     return(
         <>
-           idk, home stuff
+            <Menu page="Goals"></Menu>
         </>
     );
 }
