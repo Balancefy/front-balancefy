@@ -14,9 +14,9 @@ export default function Ranking(props) {
   return (
     <>
       <Container height="372px" width="380px" borderRadius="10px">
-        <h3 style={{textAlign: "center", marginTop: "5px"}}>
+        <h2 style={{textAlign: "center", paddingTop: "5px", margin: 0}}>
           Ranking
-        </h3>
+        </h2>
           {Positions}
       </Container>
     </>

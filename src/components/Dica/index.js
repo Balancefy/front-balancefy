@@ -5,7 +5,6 @@ function Dica(props) {
   return (
     <>
       <div style={{
-        display: 'flex',
         margin: "10px auto",
         background: "#4B4B4B",
         height: "158px",
