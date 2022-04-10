@@ -2,7 +2,8 @@ import Menu from "../../components/Menu";
 import Ranking from "../../components/Ranking";
 import Container from "../../components/Container";
 import { Box, Grid } from "@mui/material";
-import Dica from "../../components/Dica"
+import Dica from "../../components/Dica";
+import Transaction from "../../components/Transaction";
 
 export default function Home() {
     const users = [
@@ -20,103 +21,127 @@ export default function Home() {
 
     return (
         <>
-            <Box className="App" sx={{ display: "flex", alignItems: "flex-start", direction: "row"}}>
+            <div style={{ display: "flex" }}>
                 <Menu></Menu>
-                <Grid Item container>
-                    <Grid item md={4}>
-                        <Grid Item>
-                            <Container background="#4B4B4B" height="291px" width="560px" borderRadius="10px">
-                                <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                    Saldo Atual em Conta
-                                </h2>
+                <Box className="App" sx={{ display: "flex", alignItems: "flex-start", paddingTop: "30px", width: "100%" }}>
+                    <Grid Item container>
+                        <Grid container item md={4.8} justifyContent={"center"}>
+                            <Grid item>
+                                <Container background="#4B4B4B" height="291px" width="521px" borderRadius="10px">
+                                    <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
+                                        Saldo Atual em Conta
+                                    </h2>
+                                </Container>
+                            </Grid>
+                            <Grid item>
+                                <Container background="#4B4B4B" height="90px" width="521px" borderRadius="10px">
+                                    <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
+                                        Movimentações fixas
+                                    </h2>
+                                </Container>
+                            </Grid>
+
+                            <Grid container direction="row" spacing={20} justifyContent={"center"} alignContent={"row"}>
+                                <Grid item>
+                                    <Container background="#4B4B4B" height="50px" width="180px" borderRadius="10px">
+                                        <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
+                                            Entrada
+                                        </h3>
+                                    </Container>
+                                </Grid>
+                                <Grid item>
+                                    <Container background="#4B4B4B" height="50px" width="180px" borderRadius="10px">
+                                        <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
+                                            Lazer
+                                        </h3>
+                                    </Container>
+                                </Grid>
+                            </Grid>
+
+                            <Grid container item justifyContent={"center"}>
+                                <Grid item >
+                                    <Grid container item direction={"row"} alignItems={"center"}>
+                                        <Grid md={4}>
+                                            <Transaction category="Lazer" type="out" title="Netflix">50,00</Transaction>
+                                        </Grid>
+                                        <Grid md={4}>
+                                            <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
+                                        </Grid>
+                                        <Grid md={4}>
+                                            <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+
+                            <Grid container item justifyContent={"center"}>
+                                <Grid item >
+                                    <Grid container item direction={"row"} alignItems={"center"}>
+                                        <Grid md={4}>
+                                            <Transaction category="Lazer" type="out" title="Netflix">50,00</Transaction>
+                                        </Grid>
+                                        <Grid md={4}>
+                                            <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
+                                        </Grid>
+                                        <Grid md={4}>
+                                            <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+
+                            <Grid container item justifyContent={"center"}>
+                                <Grid item >
+                                    <Grid container item direction={"row"} alignItems={"center"}>
+                                        <Grid md={4}>
+                                            <Transaction category="Lazer" type="out" title="Netflix">50,00</Transaction>
+                                        </Grid>
+                                        <Grid md={4}>
+                                            <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
+                                        </Grid>
+                                        <Grid md={4}>
+                                            <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+
+                        </Grid>
+
+                        <Grid item container md={5.2}>
+                            <Container height="100%" width="560px" borderRadius="10px">
+                                <Grid>
+                                    <Container height="64px" width="480px" borderRadius="10px" backgroundColor="#4B4B4B">
+                                        <div style={{ justifyContent: "center", width: "480px", height: "64px" }}>
+                                            <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
+                                                COMPRAR PC GAMER
+                                            </h3>
+                                        </div>
+                                    </Container>
+                                </Grid>
                             </Container>
                         </Grid>
-                        <Grid Item>
-                            <Container background="#4B4B4B" height="90px" width="560px" borderRadius="10px">
-                                <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                    Movimentações fixas
-                                </h2>
-                            </Container>
-                        </Grid>
-
-                        <Grid container spacing={1} direction="row">
-                            <Grid Item>
-                                <Container background="#4B4B4B" height="50px" width="180px" borderRadius="10px">
-                                    <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                        Entrada
-                                    </h3>
-                                </Container>
-                            </Grid>
-                            <Grid Item item>
-                                <Container background="#4B4B4B" height="50px" width="180px" borderRadius="10px">
-                                    <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                        Lazer
-                                    </h3>
-                                </Container>
-                            </Grid>
-                        </Grid>
 
 
-                        <Grid container direction="row" justifyContent="flex-start">
-                            <Grid item container>
-                                <Container background="#4B4B4B" height="127px" width="180px" borderRadius="10px">
-                                    <h4 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                        #Lazer
-                                    </h4>
-                                    <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                        Netflix
-                                    </h3>
+                        <Grid container item md={1} justifyContent={"center"} spacing={3}>
+                            <Grid item>
+                                <Container background="#4B4B4B" height="570px" width="380px" borderRadius="10px">
+                                    <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
+                                        Dicas Para Você
+                                    </h2>
+                                    <Dica title="Economia">Procure por trajetos de ônibus para economizar 50% dos seus gastos, que são utilizados em Uber</Dica>
+                                    <Dica title="Investimento">“Investimentos em Tesouro Selic te trarão 20% de rendimento ao ano” </Dica>
+                                    <Dica title="Investimento">"Acesse esse site e entenda o básico de investimento: <a href='www.google.com'>Investimentos1000”</a></Dica>
                                 </Container>
                             </Grid>
-                            <Grid container item>
-                                <Container background="#4B4B4B" height="127px" width="180px" borderRadius="10px">
-                                    <h4 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                        #Lazer
-                                    </h4>
-                                    <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                        Netflix
-                                    </h3>
-                                </Container>
-                            </Grid>
-                            <Grid container item>
-                                <Container background="#4B4B4B" height="127px" width="180px" borderRadius="10px">
-                                    <h4 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                        #Lazer
-                                    </h4>
-                                    <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                        Netflix
-                                    </h3>
-                                </Container>
+                            <Grid item>
+                                <Ranking data={users} marginTop="150px"></Ranking>
                             </Grid>
                         </Grid>
                     </Grid>
+                </Box>
+            </div>
 
-                    <Grid item container md={4}>
-                        <Container background="#4B4B4B" height="1013px" width="560px" borderRadius="10px">
-
-                        </Container>
-                    </Grid>
-
-
-                    <Grid item container md={4}>
-                        <Grid item>
-                            <Container background="#4B4B4B" height="620px" width="380px" borderRadius="10px">
-                                <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                    Dicas Para Você
-                                </h2>
-                                <Dica title="Economia">Procure por trajetos de ônibus para economizar 50% dos seus gastos, que são utilizados em Uber</Dica>
-                                <Dica title="Investimento">“Investimentos em Tesouro Selic te trarão 20% de rendimento ao ano” </Dica>
-                                <Dica title="Investimento">"Acesse esse site e entenda o básico de investimento: <a href='www.google.com'>Investimentos1000”</a></Dica>
-                            </Container>
-                        </Grid>
-                        <Grid item>
-                            <Container background="#4B4B4B" height="372px" width="380px" borderRadius="10px">
-                                <Ranking data={users} marginTop="100px"></Ranking>
-                            </Container>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Box>
         </>
     );
 }
