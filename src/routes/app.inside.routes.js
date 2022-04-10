@@ -4,6 +4,7 @@ import {
     Route
 } from "react-router-dom";
 
+import Forum from "../pages/Forum";
 import Home from "../pages/Home";
 
 export const AuthenticatedRoutes = () => {
@@ -11,6 +12,7 @@ export const AuthenticatedRoutes = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<Home/>} />
+                <Route path="/forum" element={<Forum/>} />
             </Routes>
         </ Router>
     )

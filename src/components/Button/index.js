@@ -7,12 +7,17 @@ function ButtonBalancefy(props) {
     }
     return (
     <>
-        <Button type="submit" variant="contained" color={props.color}
+        <Button   
+          type="submit" 
+          variant="contained" 
+          color={props.color}
           style={{
             width: props.width,
             height: props.height,
             borderRadius: props.radius
-          }}>
+          }}
+          onClick={props.onClick}  
+        >
             {props.children}
         </Button>
     </>

@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import scrollbar from "./components/scrollbar";
 
 // A custom theme for this app
 const theme = createTheme({
@@ -48,6 +49,11 @@ const theme = createTheme({
           body1: 'span',
           body2: 'span',
         },
+      },
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: scrollbar(),
       },
     },
   },
