@@ -10,23 +10,21 @@ function TopicBalancefy(props) {
 
     return (
         <>
-            <Container backgroundColor="#131515" height="222px" width="36%" borderRadius="10px">
+            <Container backgroundColor="#131515" height="222px" width={props.width} borderRadius="10px">
                 <div style={{
                     width: "90%",
                     height: "100%",
                     margin: "auto",
-                    paddingTop: "20px"
                 }}>
                     <div style={{
                     }}>
-                        <TitleBalancefy variant="h2" color="#7DE2D1">Economizar dinheiro</TitleBalancefy>
+                        <TitleBalancefy variant="h2" color="#7DE2D1">{props.title}</TitleBalancefy>
                     </div>
 
                     <div style={{
                         paddingTop: "15px"
                     }}>
-                        <TitleBalancefy variant="body1" color="#FFF">Como vocës fazem para não gastar o dinheiro assim que ele cai na conta?
-                            Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.</TitleBalancefy>
+                        <TitleBalancefy variant="body1" color="#FFF">{props.description}</TitleBalancefy>
                     </div>
 
                     <div style={{
@@ -34,7 +32,7 @@ function TopicBalancefy(props) {
                         width: "10%",
                         float: "left"
                     }}>
-                        <AvatarBalancefy width="50px" imageAvatar="https://img.freepik.com/fotos-gratis/menina-com-fundo-amarelo-isolado-comprando-com-o-celular-com-um-cartao-de-credito-enquanto-pensa_1368-220330.jpg"></AvatarBalancefy>
+                        <AvatarBalancefy width="50px" imageAvatar={props.avatar}></AvatarBalancefy>
                     </div>
 
                     <div style={{
@@ -46,7 +44,7 @@ function TopicBalancefy(props) {
 
                     }}>
                         <TitleBalancefy variant="subtitle1">
-                            Beatriz Santos
+                            {props.name}
                         </TitleBalancefy>
                     </div>
 
@@ -61,10 +59,10 @@ function TopicBalancefy(props) {
 
                     }}>
                         
-                            <CommentIcon></CommentIcon> 11
-                            <ThumbUpIcon></ThumbUpIcon> 11
-                            <RemoveRedEyeIcon></RemoveRedEyeIcon> 11
-                            <AccessTimeIcon></AccessTimeIcon> 2d
+                            <CommentIcon></CommentIcon> {props.comment}
+                            <ThumbUpIcon></ThumbUpIcon> {props.like}
+                            <RemoveRedEyeIcon></RemoveRedEyeIcon> {props.views}
+                            <AccessTimeIcon></AccessTimeIcon> {props.date}
                     </div>
                 </div>
 

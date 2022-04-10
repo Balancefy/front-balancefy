@@ -8,8 +8,8 @@ import ButtonBalancefy from "../Button";
 import { style } from "./style"
 import DateInput from "../DateInput";
 
-export default function ModalComponent(props) {
-  const [modalState, setModalState] = React.useState(false);
+export default function ModalObjetivo(props) {
+  let modalState = props.open
 
   return (
     <Modal open={modalState}>

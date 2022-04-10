@@ -9,7 +9,7 @@ import ButtonBalancefy from "../Button";
 
 
 export default function ModalMovimentacao(props) {
-  const [modalState, setModalState] = React.useState(false);
+  let modalState = props.open
 
   return (
     <Modal open={modalState}>

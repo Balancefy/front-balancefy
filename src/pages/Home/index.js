@@ -4,7 +4,6 @@ import Container from "../../components/Container";
 import { Box, Grid } from "@mui/material";
 import Dica from "../../components/Dica"
 
-
 export default function Home() {
     const users = [
         { id: 1, p: 1, name: "Bruno Ferreira", goals: 1, tasks: 13 },
@@ -12,6 +11,11 @@ export default function Home() {
         { id: 3, p: 3, name: "Julia Mendes", goals: 1, tasks: 13 },
         { id: 4, p: 4, name: "Lucas Alves", goals: 1, tasks: 13 },
         { id: 5, p: 5, name: "Beatriz Santos", goals: 1, tasks: 1 },
+        { id: 1, p: 1, name: "Bruno Ferreira", goals: 1, tasks: 13 },
+        { id: 2, p: 2, name: "Amanda", goals: 1, tasks: 13 },
+        { id: 3, p: 3, name: "Julia Mendes", goals: 1, tasks: 13 },
+        { id: 4, p: 4, name: "Lucas Alves", goals: 1, tasks: 13 },
+        { id: 5, p: 5, name: "Beatriz Santos", goals: 1, tasks: 1 }
     ]
 
     return (

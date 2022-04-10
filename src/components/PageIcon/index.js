@@ -1,4 +1,3 @@
-import Icon from '@mui/material/Icon';
 
 
 export default function PageIcon(props) {
