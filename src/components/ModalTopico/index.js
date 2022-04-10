@@ -7,7 +7,7 @@ import { style } from "./style"
 
 
 export default function ModalTopico(props) {
-  const [modalState, setModalState] = React.useState(true);
+  let modalState = props.open
 
   return (
     <Modal
