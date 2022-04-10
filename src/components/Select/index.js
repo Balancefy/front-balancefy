@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React from "react";
+import { content } from "./content";
 
 export default function SelectBalancefy(props) {
   const style =  props.type === "primary" ? {
@@ -8,21 +9,35 @@ export default function SelectBalancefy(props) {
     variant: 'standard'
   }
 
-  const [age, setAge] = React.useState('');
+  const [category, setCategory] = React.useState('');
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setCategory(event.target.value);
   };
   
   return(
-      <FormControl variant={style.variant} sx={{ mt: props.mt, mr: props.mr, width: props.width}}>
+      <FormControl variant={style.variant} sx={{ mt: props.mt, mr: props.mr, mb: props.mb, width: props.width}}>
         <InputLabel>{props.label}</InputLabel>
         <Select
-          value={age}
+          value={category}
           label={props.label}
           onChange={handleChange}
         >
-          <MenuItem value={10}>Ten</MenuItem>
+          {
+            props.content === "category" ? 
+              content.category.map((c) => {
+                return <MenuItem value={c}>{c}</MenuItem>
+              })
+            :
+            props.content === "type" ?
+              content.type.map((t) => {
+                return <MenuItem value={t}>{t}</MenuItem>
+              })
+            : 
+              content.categoryTransaction.map((t) => {
+                return <MenuItem value={t}>{t}</MenuItem>
+              })
+          }
         </Select>
       </FormControl>
   )

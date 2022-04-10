@@ -1,11 +1,12 @@
 function Container(props) {
+
   return (
     <>
     <div style={{
-      background: "#131515",
+      background: props.backgroundColor === "#4B4B4B" ? "#4B4B4B" : "#131515",
       height: props.height,
       width: props.width,
-      borderRadius: "10px"
+      borderRadius: props.borderRadius
     }}>
       {props.children}
     </div>
