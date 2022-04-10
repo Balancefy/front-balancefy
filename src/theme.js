@@ -8,7 +8,9 @@ const theme = createTheme({
       'Poppins',
     ],
     h1: {
-      fontSize: 48,
+      fontSize: 64,
+      fontWeight: 600,
+      textAlign: "initial"
     },
     h2: {
       fontSize: 24,

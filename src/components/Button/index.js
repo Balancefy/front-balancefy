@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 function ButtonBalancefy(props) {
     const buttonTypes = {
         Primary: "primary",
-        Secondary: "secondary"
+        Secondary: "secondary",
     }
     return (
     <>
