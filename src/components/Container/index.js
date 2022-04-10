@@ -6,8 +6,9 @@ function Container(props) {
       background: props.backgroundColor === "#4B4B4B" ? "#4B4B4B" : "#131515",
       height: props.height,
       width: props.width,
-      borderRadius: props.borderRadius,
-      margin: props.margin
+      borderRadius: "10px",
+      margin: props.margin,
+      ...props.style
     }}>
       {props.children}
     </div>

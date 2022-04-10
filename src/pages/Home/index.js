@@ -12,11 +12,11 @@ export default function Home() {
         { id: 3, p: 3, name: "Julia Mendes", goals: 1, tasks: 13 },
         { id: 4, p: 4, name: "Lucas Alves", goals: 1, tasks: 13 },
         { id: 5, p: 5, name: "Beatriz Santos", goals: 1, tasks: 1 },
-        { id: 1, p: 1, name: "Bruno Ferreira", goals: 1, tasks: 13 },
-        { id: 2, p: 2, name: "Amanda", goals: 1, tasks: 13 },
-        { id: 3, p: 3, name: "Julia Mendes", goals: 1, tasks: 13 },
-        { id: 4, p: 4, name: "Lucas Alves", goals: 1, tasks: 13 },
-        { id: 5, p: 5, name: "Beatriz Santos", goals: 1, tasks: 1 }
+        { id: 6, p: 1, name: "Bruno Ferreira", goals: 1, tasks: 13 },
+        { id: 21, p: 2, name: "Amanda", goals: 1, tasks: 13 },
+        { id: 31, p: 3, name: "Julia Mendes", goals: 1, tasks: 13 },
+        { id: 41, p: 4, name: "Lucas Alves", goals: 1, tasks: 13 },
+        { id: 51, p: 5, name: "Beatriz Santos", goals: 1, tasks: 1 }
     ]
 
     return (
@@ -24,7 +24,7 @@ export default function Home() {
             <div style={{ display: "flex" }}>
                 <Menu></Menu>
                 <Box className="App" sx={{ display: "flex", alignItems: "flex-start", paddingTop: "30px", width: "100%" }}>
-                    <Grid Item container>
+                    <Grid item container>
                         <Grid container item md={4.8} justifyContent={"center"}>
                             <Grid item>
                                 <Container background="#4B4B4B" height="291px" width="521px" borderRadius="10px">
@@ -61,13 +61,13 @@ export default function Home() {
                             <Grid container item justifyContent={"center"}>
                                 <Grid item >
                                     <Grid container item direction={"row"} alignItems={"center"}>
-                                        <Grid md={4}>
+                                        <Grid item md={4}>
                                             <Transaction category="Lazer" type="out" title="Netflix">50,00</Transaction>
                                         </Grid>
-                                        <Grid md={4}>
+                                        <Grid item md={4}>
                                             <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
                                         </Grid>
-                                        <Grid md={4}>
+                                        <Grid item md={4}>
                                             <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
                                         </Grid>
                                     </Grid>
@@ -77,13 +77,13 @@ export default function Home() {
                             <Grid container item justifyContent={"center"}>
                                 <Grid item >
                                     <Grid container item direction={"row"} alignItems={"center"}>
-                                        <Grid md={4}>
+                                        <Grid item md={4}>
                                             <Transaction category="Lazer" type="out" title="Netflix">50,00</Transaction>
                                         </Grid>
-                                        <Grid md={4}>
+                                        <Grid item md={4}>
                                             <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
                                         </Grid>
-                                        <Grid md={4}>
+                                        <Grid item md={4}>
                                             <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
                                         </Grid>
                                     </Grid>
@@ -93,13 +93,13 @@ export default function Home() {
                             <Grid container item justifyContent={"center"}>
                                 <Grid item >
                                     <Grid container item direction={"row"} alignItems={"center"}>
-                                        <Grid md={4}>
+                                        <Grid item md={4}>
                                             <Transaction category="Lazer" type="out" title="Netflix">50,00</Transaction>
                                         </Grid>
-                                        <Grid md={4}>
+                                        <Grid item md={4}>
                                             <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
                                         </Grid>
-                                        <Grid md={4}>
+                                        <Grid item md={4}>
                                             <Transaction category="Mesada" type="in" title="Mesada">50,00</Transaction>
                                         </Grid>
                                     </Grid>
@@ -109,11 +109,11 @@ export default function Home() {
                         </Grid>
 
                         <Grid item container md={5.2}>
-                            <Container height="100%" width="560px" borderRadius="10px">
+                            <Container style={{display:"flex", height:"100%",width:"560px", justifyContent:"center"}}>
                                 <Grid>
                                     <Container height="64px" width="480px" borderRadius="10px" backgroundColor="#4B4B4B">
-                                        <div style={{ justifyContent: "center", width: "480px", height: "64px" }}>
-                                            <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
+                                        <div style={{display:"flex", width: "480px", height: "64px", margin: "40px", textAlign: "center", color: "#7DE2D1"}}>
+                                            <h3>
                                                 COMPRAR PC GAMER
                                             </h3>
                                         </div>
