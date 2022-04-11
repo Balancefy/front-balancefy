@@ -21,7 +21,7 @@ export default function Home() {
 
     return (
         <>
-            <MainContainer>
+            <MainContainer page= "Home">
                 <Box className="App" sx={{ display: "flex", alignItems: "flex-start", paddingTop: "30px", width: "100%" }}>
                     <Grid item container>
                         <Grid container item md={4.8} justifyContent={"center"}>

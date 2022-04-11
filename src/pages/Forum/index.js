@@ -72,7 +72,7 @@ export default function Forum(props) {
 
     return(
         <>  
-            <MainContainer style={{display: "flex", alignItems: "center"}}>
+            <MainContainer page="Forum" style={{display: "flex", alignItems: "center"}}>
                 <Container margin="auto" height="95vh" width="90%" borderRadius={10} >
                     <Box sx={styles.bar}>
                         <Paper component="form" elevation={6} sx={styles.search}>

@@ -5,7 +5,7 @@ export default function MainContainer(props) {
     return(
         <>
             <Box sx={{display: "flex"}}>
-                <Menu></Menu>
+                <Menu page={props.page}></Menu>
                 {props.children}
             </Box>
         </>
