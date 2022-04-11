@@ -1,9 +1,9 @@
-import Menu from "../../components/Menu";
 import Ranking from "../../components/Ranking";
 import Container from "../../components/Container";
 import { Box, Grid } from "@mui/material";
 import Dica from "../../components/Dica";
 import Transaction from "../../components/Transaction";
+import MainContainer from "../../components/MainContainer";
 
 export default function Home() {
     const users = [
@@ -21,8 +21,7 @@ export default function Home() {
 
     return (
         <>
-            <div style={{ display: "flex" }}>
-                <Menu></Menu>
+            <MainContainer>
                 <Box className="App" sx={{ display: "flex", alignItems: "flex-start", paddingTop: "30px", width: "100%" }}>
                     <Grid item container>
                         <Grid container item md={4.8} justifyContent={"center"}>
@@ -140,7 +139,7 @@ export default function Home() {
                         </Grid>
                     </Grid>
                 </Box>
-            </div>
+            </MainContainer>
 
         </>
     );

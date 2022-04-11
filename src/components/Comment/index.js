@@ -10,7 +10,7 @@ import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 function CommentBalancefy(props) {
   return (
     <>
-      <Container height="294px" width="36%" borderRadius>
+      <Container height="10vh" width="36%" borderRadius>
         <div
           style={{
             height: "100%",
@@ -28,7 +28,7 @@ function CommentBalancefy(props) {
               justifyContent: "center",
             }}
           >
-            <AvatarBalancefy width="50px"></AvatarBalancefy>
+            <AvatarBalancefy width="40px"></AvatarBalancefy>
           </div>
 
           <div
@@ -38,7 +38,6 @@ function CommentBalancefy(props) {
               display: "flex",
               alignItens: "center",
               justifyContent: "left",
-              height: "50px",
               paddingTop: "12px",
               paddingLeft: "20px",
             }}
@@ -70,7 +69,7 @@ function CommentBalancefy(props) {
             <TitleBalancefy variant="h4"> Muito díficil... </TitleBalancefy>
           </div>
 
-          <div
+          {/* <div
             style={{
               paddingLeft: "83px",
               paddingTop: "8px",
@@ -82,7 +81,7 @@ function CommentBalancefy(props) {
                 paddingTop: "12px",
               }}
             ></ChangeHistoryIcon>
-          </div>
+          </div> */}
         </div>
       </Container>
     </>

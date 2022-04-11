@@ -7,14 +7,14 @@ import TitleBalancefy from "../../components/Title";
 import { styles } from "./style"
 import { Box } from "@mui/system";
 import TopicMostLiked from "../../components/TopicMostLiked";
-import Menu from "../../components/Menu";
 import ModalTopico from "../../components/ModalTopico";
 import { useState } from "react";
 import SpeedAdd from "../../components/SpeedAdd";
-import Input from "../../components/Input";
+import MainContainer from "../../components/MainContainer";
 
 export default function Forum(props) {
     const [modalState, setModalState] = useState(false);
+    const [like, setLike] = useState(false);
     const [modalTitle, setModalTitle] = useState("Novo Tópico");
 
     const topics = [
@@ -72,8 +72,7 @@ export default function Forum(props) {
 
     return(
         <>  
-            <Box sx={{display: "flex", alignItems: "center"}}>
-                <Menu></Menu>
+            <MainContainer style={{display: "flex", alignItems: "center"}}>
                 <Container margin="auto" height="95vh" width="90%" borderRadius={10} >
                     <Box sx={styles.bar}>
                         <Paper component="form" elevation={6} sx={styles.search}>
@@ -110,6 +109,8 @@ export default function Forum(props) {
                                                     like={post.like}
                                                     views={post.views}
                                                     date={post.date}
+                                                    liked={like}
+                                                    style="forum"
                                                 />
                                             </div>
                                         )
@@ -141,7 +142,7 @@ export default function Forum(props) {
                     }}
                 />      
                 
-            </Box>
+            </MainContainer>
         </>
     )
 }

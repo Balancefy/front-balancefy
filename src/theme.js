@@ -32,6 +32,10 @@ const theme = createTheme({
       fontSize: 16,
       textAlign: "justify"
     },
+    body2: {
+      fontSize: 14,
+      textAlign: "justify"
+    },
     subtitle1: {
       fontSize: 16,
       textDecoration: "underline"
