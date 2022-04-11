@@ -10,7 +10,8 @@ import TopicWithComments from "../../components/TopicWithComments";
 import { Link } from "react-router-dom";
 import Input from "../../components/Input";
 import AvatarBalancefy from "../../components/Avatar";
-import CommentBalancefy from "../../components/Comment";
+import CommentBalancefy from "../../components/CommentsSection";
+import CommentsSection from "../../components/CommentsSection";
 
 export default function Comments(props) {
     const topics = [
@@ -87,8 +88,8 @@ export default function Comments(props) {
                             </Box>
                             
                             <Box sx={{mt: 2, ml: 4}}>
-                                <CommentBalancefy></CommentBalancefy>
-                                <CommentBalancefy></CommentBalancefy>
+                               <CommentsSection> </CommentsSection>
+                               <CommentsSection> </CommentsSection>
                             </Box>
 
                         </Grid>

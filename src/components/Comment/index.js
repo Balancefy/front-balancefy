@@ -8,6 +8,9 @@ import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 
 function CommentBalancefy(props) {
+  let responses = props.data
+
+
   return (
     <>
       <Container height="10vh" width="36%" borderRadius>
@@ -42,7 +45,7 @@ function CommentBalancefy(props) {
               paddingLeft: "20px",
             }}
           >
-            <TitleBalancefy variant="h3">Bianca</TitleBalancefy>
+            <TitleBalancefy variant="h3">{props.name}</TitleBalancefy>
           </div>
 
           <div
@@ -66,10 +69,11 @@ function CommentBalancefy(props) {
               paddingLeft: "83px",
             }}
           >
-            <TitleBalancefy variant="h4"> Muito díficil... </TitleBalancefy>
+            <TitleBalancefy variant="h4"> {props.children} </TitleBalancefy>
           </div>
-
-          {/* <div
+          {responses.length == 0 || responses == null || responses == undefined ? <></> :
+<>
+          <div
             style={{
               paddingLeft: "83px",
               paddingTop: "8px",
@@ -81,7 +85,11 @@ function CommentBalancefy(props) {
                 paddingTop: "12px",
               }}
             ></ChangeHistoryIcon>
-          </div> */}
+          </div>
+
+          </>
+          }
+          
         </div>
       </Container>
     </>
