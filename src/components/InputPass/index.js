@@ -18,7 +18,7 @@ export default function InputPass(props) {
   };
 
   return(
-    <FormControl sx={{'& > :not(style)': { m: 0, width: props.width, }}}>
+    <FormControl sx={{'& > :not(style)': { m: 0}}}>
       <InputLabel htmlFor="filled-adornment-password">{props.label}</InputLabel>
       <OutlinedInput 
         type={values.showPassword ? 'text' : 'password'}
@@ -26,6 +26,7 @@ export default function InputPass(props) {
         value={props.password}
         onChange={props.onChange}
         required
+        width={props.width}
         endAdornment={
             <InputAdornment position="end">
                 <IconButton

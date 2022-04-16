@@ -36,6 +36,10 @@ const theme = createTheme({
       fontSize: 14,
       textAlign: "justify"
     },
+    body3: {
+      fontSize: 24,
+      fontWeight: 400
+    },
     subtitle1: {
       fontSize: 16,
       textDecoration: "underline"
@@ -54,6 +58,7 @@ const theme = createTheme({
           subtitle2: 'sub2',
           body1: 'span',
           body2: 'span',
+          body3: 'span',
         },
       },
     },
