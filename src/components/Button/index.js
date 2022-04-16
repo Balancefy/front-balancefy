@@ -14,7 +14,8 @@ function ButtonBalancefy(props) {
           style={{
             width: props.width,
             height: props.height,
-            borderRadius: props.radius
+            borderRadius: props.radius,
+            ...props.style
           }}
           onClick={props.onClick}  
         >
