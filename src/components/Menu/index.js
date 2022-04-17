@@ -7,13 +7,12 @@ import AddIcon from '@mui/icons-material/Add';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
 import AvatarBalancefy from '../Avatar';
-
-
-export function Exemplo(props) {
-
-}
+import { AuthContext } from '../../contexts/auth';
+import React from 'react';
 
 export default function Menu(props) {
+
+    const { signOut } = React.useContext(AuthContext);
     return (
         <>
             <div style={{
@@ -51,8 +50,7 @@ export default function Menu(props) {
                 <div style={{
                     marginTop: "auto"
                 }}>
-                    {/* Adicionar as imagens! (logo e logout) */}
-                    <PageIcon icon={<LogoutIcon sx={{ fontSize: "45px" }} />}></PageIcon>
+                    <PageIcon onClick={signOut} icon={<LogoutIcon sx={{ fontSize: "45px" }} />}></PageIcon>
                     <img style={{height: "50px"}} src="./img/icon-white.svg"/>
                 </div>
             </div>
