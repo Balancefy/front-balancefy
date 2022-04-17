@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import ButtonBalancefy from "../../components/Button";
 import TitleBalancefy from "../../components/Title";
 import Input from "../../components/Input";
@@ -9,10 +10,36 @@ import LogoGoogle from "../../Images/Google.svg";
 import LogoInsta from "../../Images/Instagram.svg";
 import Ou from "../../Images/Ou.svg";
 import { Box } from "@mui/system";
-import { Button, Grid, IconButton } from "@mui/material";
+import { Button, Grid, IconButton, Typography } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import { AuthContext } from '../../contexts/auth';
+import { ChangeCircle } from '@mui/icons-material';
 
 function Login() {
+
+  const [login, setLogin] = React.useState('');
+  const [senha, setSenha] = React.useState('');
+  const [wrongUser, setWrongUser] = React.useState('');
+  const { signIn, user } = React.useContext(AuthContext);
+
+  const handleChangeEmail = (event) => {
+    setLogin(event.target.value);
+  };
+
+  const handleChangeSenha = (event) => {
+    setSenha(event.target.value);
+  };
+
+  const handleLogin = async () => {
+    await signIn(login, senha);
+
+    if (user == null) {
+      setWrongUser('Email/Senha inválidos')
+      setLogin('')
+      setSenha('')
+    }
+  }
+
   return (
     <>
       <Container
@@ -21,11 +48,7 @@ function Login() {
         height="95vh"
         width="90%"
       >
-        <div
-          style={{
-            display: "flex",
-          }}
-        >
+        <div style={{ display: "flex", }}>
           <Box sx={{ width: "60%", display: "flex", alignItems: "center" }}>
             <div
               style={{
@@ -45,37 +68,27 @@ function Login() {
                 </TitleBalancefy>
               </div>
 
-              <div
-                style={{
-                  marginTop: "10%",
-                }}
-              >
-                <Input label="Email" type="primary" width="100%"></Input>
-              </div>
+              <form onSubmit={(event) => {
+                event.preventDefault()
+                handleLogin()
+              }}>
+                <div style={{ marginTop: "10%" }}>
+                  <Input label="Email" type="primary" width="100%" onChange={handleChangeEmail} value={login}></Input>
+                </div>
 
-              <div
-                style={{
-                  marginTop: "5%",
-                }}
-              >
-                <InputPass label="Senha" type="primary"></InputPass>
-              </div>
+                <div style={{ marginTop: "5%" }}>
+                  <InputPass label="Senha" type="primary" onChange={handleChangeSenha} password={senha}></InputPass>
+                </div>
 
-              <div
-                style={{
-                  marginTop: "5%",
-                  marginBottom: "5%",
-                }}
-              >
-                <Checkbox>Lembre-me</Checkbox>
-              </div>
-              <ButtonBalancefy width="100%">Entrar</ButtonBalancefy>
-
-              <div
-                style={{
-                  marginTop: "10%",
-                }}
-              >
+                <div style={{ marginTop: "5%", marginBottom: "5%" }}>
+                  <Checkbox>Lembre-me</Checkbox>
+                </div>
+                <Typography variant="subtitle1" component="span" style={{ fontWeight: 'bold', textDecoration: 'none', color: '#F74F4F' }}>
+                  {wrongUser}
+                </Typography>
+                <ButtonBalancefy width="100%">Entrar</ButtonBalancefy>
+              </form>
+              <div style={{ marginTop: "10%" }}>
                 <img src={Ou} />
               </div>
 
