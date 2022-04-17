@@ -47,7 +47,8 @@ export function AuthProvider(props) {
 
     if (token) {
       api.defaults.headers.common.authorization = `Bearer ${token}`
-      api.get('user').then(response => {
+
+      api.get('users').then(response => {
         setUser(response.data)
       })
     }

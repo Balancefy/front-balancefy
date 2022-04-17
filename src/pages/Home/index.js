@@ -4,6 +4,8 @@ import { Box, Grid } from "@mui/material";
 import Dica from "../../components/Dica";
 import Transaction from "../../components/Transaction";
 import MainContainer from "../../components/MainContainer";
+import { AuthContext } from "../../contexts/auth";
+import React from "react";
 
 export default function Home() {
     const users = [
