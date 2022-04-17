@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ButtonBalancefy from "../../components/Button";
 import TitleBalancefy from "../../components/Title";
 import Input from "../../components/Input";
 import InputPass from "../../components/InputPass";
 import Container from "../../components/Container";
-import images from "../../Images/login.png";
-import LogoFace from "../../Images/Facebook.svg";
-import LogoGoogle from "../../Images/Google.svg";
-import LogoInsta from "../../Images/Instagram.svg";
-import Ou from "../../Images/Ou.svg";
+import background from "../../img/login.png";
+import logoFace from "../../img/facebook.svg";
+import logoGoogle from "../../img/google.svg";
+import logoInsta from "../../img/instagram.svg";
+import ou from "../../img/ou.svg";
 import { Box } from "@mui/system";
-import { Button, Grid, IconButton, Typography } from "@mui/material";
+import { FormControlLabel, IconButton, Typography } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { AuthContext } from '../../contexts/auth';
-import { ChangeCircle } from '@mui/icons-material';
 
 function Login() {
 
@@ -77,11 +76,11 @@ function Login() {
                 </div>
 
                 <div style={{ marginTop: "5%" }}>
-                  <InputPass label="Senha" type="primary" onChange={handleChangeSenha} password={senha}></InputPass>
+                  <InputPass  width="100%" label="Senha" type="primary" onChange={handleChangeSenha} password={senha}></InputPass>
                 </div>
 
                 <div style={{ marginTop: "5%", marginBottom: "5%" }}>
-                  <Checkbox>Lembre-me</Checkbox>
+                  <FormControlLabel control={<Checkbox defaultChecked />} label="Lembre-me" />
                 </div>
                 <Typography variant="subtitle1" component="span" style={{ fontWeight: 'bold', textDecoration: 'none', color: '#F74F4F' }}>
                   {wrongUser}
@@ -89,7 +88,7 @@ function Login() {
                 <ButtonBalancefy width="100%">Entrar</ButtonBalancefy>
               </form>
               <div style={{ marginTop: "10%" }}>
-                <img src={Ou} />
+                <img alt="or" style={{ width: "100%" }} src={ou} />
               </div>
 
               <div
@@ -100,25 +99,26 @@ function Login() {
                 }}
               >
                 <IconButton>
-                  <img src={LogoGoogle} />
+                  <img alt="gmail" src={logoGoogle} />
                 </IconButton>
 
                 <IconButton>
-                  <img src={LogoInsta} />
+                  <img alt="instagram" src={logoInsta} />
                 </IconButton>
 
                 <IconButton>
-                  <img src={LogoFace} />
+                  <img alt="facebook" src={logoFace} />
                 </IconButton>
               </div>
             </div>
           </Box>
           <Box>
             <img
+              alt="background"
               style={{
                 height: "95vh",
               }}
-              src={images}
+              src={background}
             />
           </Box>
         </div>
