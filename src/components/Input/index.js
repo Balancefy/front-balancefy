@@ -5,13 +5,13 @@ export default function Input(props) {
     width: props.width,
     variant: 'outlined'
   } : {
-    width: '340px',
+    width: props.width,
     variant: 'standard'
   }
   
   return(
     <Box sx={{'& > :not(style)': { mt: props.mt, width: style.width}}}>
-      <TextField multiline rows={props.row} label={props.label} color="primary" variant={style.variant} />
+      <TextField multiline rows={props.row} label={props.label} color="primary" variant={style.variant} onChange={props.onChange} value={props.value} />
     </Box>
   )
 }

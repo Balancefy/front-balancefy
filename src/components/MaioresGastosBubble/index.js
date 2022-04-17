@@ -1,46 +1,55 @@
-import Container from "../Container";
-
 export default function MaioresGastosBubble(props) {
-  return (
-    <>
-      <Container height="1009px" width="1285px" borderRadius="10px">
-        <div style={{
-          display: "flex",
-          height: "348px",
-          width: "533px",
-          background: "#4B4B4B",
-          borderRadius: "10px"
-        }}>
-          <h3 style={{
-            margin: 0
-          }}>Maiores Gastos</h3>
+  const size = props.porcentagem + 100;
 
-          <div style={{
-            display: "flex",
-            alignItems: "center"
-          }}>
-            <div style={{
-              display: "flex",
-              height: "150px",
-              width: "150px",
-              backgroundColor: "#7DE2D1",
-              borderRadius: "50%",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: 'column'
-            }}>
-              <div style={{
-                fontWeight: "bold"
-              }}>
-              {props.key}.{props.desc}
-              </div>
-              <div>
-                {props.porcentagem}%
-              </div>
-            </div>
-          </div>
+  const bubbleStyle = props.third ? {
+    backgroundColor: `#339989`,
+    marginTop: "120px"
+  } : props.secondary ? {
+    backgroundColor: `#5DCAB8`,
+    marginTop: "80px"
+  } : {
+    backgroundColor: `#7DE2D1`,
+    marginTop: "0px"
+  }
+  return (
+
+    <>
+      <div style={{
+        display: "flex",
+        height: `${size}px`,
+        width: `${size}px`,
+        borderRadius: "50%",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: 'column',
+        position: 'relative',
+        ...bubbleStyle,
+        ...props.style
+      }}>
+        <div style={{
+          fontWeight: "bold"
+        }}>
+          {props.id}.{props.desc}
         </div>
-      </Container>
+        <div>
+          {props.porcentagem}%
+        </div>
+      </div>
     </>
   );
 }
+
+// export default function Home() {
+//   const gastos = [
+//       { id: 3, desc: "Comida", porcentagem: 17},
+//       { id: 1, desc: "UBER", porcentagem: 55},
+//       { id: 2, desc: "Roupa", porcentagem: 37},
+//   ]
+//   return (
+//       <>
+//           <div className="App">
+//               <MaioresGastos data={gastos}></MaioresGastos>
+//           </div>
+//       </>
+//   );
+// }

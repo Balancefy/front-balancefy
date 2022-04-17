@@ -5,23 +5,21 @@ import { Margin } from "@mui/icons-material";
 import AvatarBalancefy from "../Avatar";
 import TitleBalancefy from "../Title";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory';
-
+import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 
 function CommentBalancefy(props) {
+  let responses = props.data
+
+
   return (
     <>
-      <Container
-        height="294px"
-        width="36%"
-        borderRadius
-      >
+      <Container height="10vh" width="36%" borderRadius>
         <div
           style={{
             height: "100%",
             width: "90%",
             margin: "auto",
-            paddingTop: "20px"
+            paddingTop: "20px",
           }}
         >
           <div
@@ -33,7 +31,7 @@ function CommentBalancefy(props) {
               justifyContent: "center",
             }}
           >
-            <AvatarBalancefy width="50px"></AvatarBalancefy>
+            <AvatarBalancefy width="40px"></AvatarBalancefy>
           </div>
 
           <div
@@ -43,12 +41,11 @@ function CommentBalancefy(props) {
               display: "flex",
               alignItens: "center",
               justifyContent: "left",
-              height: "50px",
               paddingTop: "12px",
               paddingLeft: "20px",
             }}
           >
-            <TitleBalancefy variant="h3">Bianca</TitleBalancefy>
+            <TitleBalancefy variant="h3">{props.name}</TitleBalancefy>
           </div>
 
           <div
@@ -72,18 +69,27 @@ function CommentBalancefy(props) {
               paddingLeft: "83px",
             }}
           >
-            <TitleBalancefy variant="h4"> Muito díficil... </TitleBalancefy>
+            <TitleBalancefy variant="h4"> {props.children} </TitleBalancefy>
+          </div>
+          {responses.length == 0 || responses == null || responses == undefined ? <></> :
+<>
+          <div
+            style={{
+              paddingLeft: "83px",
+              paddingTop: "8px",
+            }}
+          >
+            Mostrar menos
+            <ChangeHistoryIcon
+              style={{
+                paddingTop: "12px",
+              }}
+            ></ChangeHistoryIcon>
           </div>
 
-          <div style={{
-              paddingLeft: "83px",
-              paddingTop: "8px"
-          }}>
-            Mostrar menos
-            <ChangeHistoryIcon style={{
-                paddingTop: "12px",
-            }}></ChangeHistoryIcon>
-          </div>
+          </>
+          }
+          
         </div>
       </Container>
     </>

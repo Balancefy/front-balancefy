@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import scrollbar from "./components/scrollbar";
 
 // A custom theme for this app
 const theme = createTheme({
@@ -7,7 +8,9 @@ const theme = createTheme({
       'Poppins',
     ],
     h1: {
-      fontSize: 48,
+      fontSize: 64,
+      fontWeight: 600,
+      textAlign: "initial"
     },
     h2: {
       fontSize: 24,
@@ -29,6 +32,14 @@ const theme = createTheme({
       fontSize: 16,
       textAlign: "justify"
     },
+    body2: {
+      fontSize: 14,
+      textAlign: "justify"
+    },
+    body3: {
+      fontSize: 24,
+      fontWeight: 400
+    },
     subtitle1: {
       fontSize: 16,
       textDecoration: "underline"
@@ -47,7 +58,13 @@ const theme = createTheme({
           subtitle2: 'sub2',
           body1: 'span',
           body2: 'span',
+          body3: 'span',
         },
+      },
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: scrollbar(),
       },
     },
   },

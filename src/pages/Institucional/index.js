@@ -1,4 +1,4 @@
-import { styles, itemForm, itemLogo, itemArco, itemArco2 } from './styles.js';
+import { styles, itemForm, itemLogo, itemArco, itemArco2, itemPlanejamento, itemAcompanhamento, itemObjetivos } from './styles.js';
 import ButtonBalancefy from '../../components/Button/index.js';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import TitleBalancefy from '../../components/Title';
@@ -36,8 +36,8 @@ function Institucional() {
                     }}>Produto</a>
 
                     <div style={styles.sloganDiv}>
-                    <TitleBalancefy variant="h1">UM JEITO FÁCIL DE ALCANÇAR SEUS</TitleBalancefy>
-                    <TitleBalancefy variant="h1" color="#7DE2D1">OBJETIVOS</TitleBalancefy>
+                        <TitleBalancefy variant="h1">UM JEITO FÁCIL DE ALCANÇAR SEUS</TitleBalancefy>
+                        <TitleBalancefy variant="h1" color="#7DE2D1">OBJETIVOS</TitleBalancefy>
                     </div>
 
                     <div style={styles.formsDiv}>
@@ -69,7 +69,7 @@ function Institucional() {
                         background: "transparent",
                         position: "absolute",
                         margin: "2rem 0rem 0rem 0rem",
-                        left: "1600px"
+                        left: "1600px",
                     }}>
                         Cadastrar
                     </button>
@@ -83,16 +83,17 @@ function Institucional() {
                         color: "#2B2C28"
 
                     }}>
-                        <span style={{
-                            position: "absolute"
-                        }}>Acessar</span>
+                        <Link to="/Login" style={{ color: "#2B2C28" }}>
+                            <span style={{
+                                position: "absolute"
+                            }}>Acessar</span>
 
-                        <ArrowForwardIcon sx={{ color: "#2B2C28" }} style={{
-                            position: "absolute",
-                            left: "75px",
-                            top: "2px"
-
-                        }}></ArrowForwardIcon>
+                            <ArrowForwardIcon sx={{ color: "#2B2C28" }} style={{
+                                position: "absolute",
+                                left: "75px",
+                                top: "2px"
+                            }}></ArrowForwardIcon>
+                        </Link>
                     </a>
                 </div>
 
@@ -101,6 +102,31 @@ function Institucional() {
             <div style={styles.valores}>
                 <div style={styles.container2}>
 
+                    <div style={styles.titleValores}>
+                        <TitleBalancefy variant="h3"
+                            style={{
+                                color: "#7DE2D1"
+                            }}>
+                            PLANEJAMENO FINANCEIRO QUE FUNCIONA
+                        </TitleBalancefy>
+                    </div>
+
+                    <div style={styles.imagesValores}>
+                        <img style={{
+                            height: "300px",
+                            marginRight: "200px"
+                        }} src={itemPlanejamento.img}></img>
+
+                        <img style={{
+                            height: "300px",
+                            marginLeft: "100px"
+                        }} src={itemAcompanhamento.img}></img>
+
+                        <img style={{
+                            height: "300px",
+                            marginLeft: "250px"
+                        }} src={itemObjetivos.img}></img>
+                    </div>
                 </div>
             </div>
 

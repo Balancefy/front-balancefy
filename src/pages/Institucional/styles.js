@@ -3,6 +3,10 @@ import Form from '../../Images/Vector.png';
 import Logo from '../../Images/ICON.png';
 import Arco from '../../Images/Arco1.png';
 import Arco2 from '../../Images/Arco2.png';
+import Planejamento from '../../Images/Planejamento.png';
+import Acompanhamento from '../../Images/Acompanhamento.png';
+import Objetivos from '../../Images/Objetivos.png';
+
 
 export const styles = {
     container: {
@@ -52,7 +56,25 @@ export const styles = {
     },
 
     container2: {
+        width: "95%",
+        margin: "auto",
+        height: "500px",
         
+    },
+
+    titleValores: {
+        marginTop: "65px",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center"
+    },
+
+    imagesValores: {
+        marginTop: "50px",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItens: "inline"
     }
 
 };
@@ -77,3 +99,17 @@ export const itemArco2 ={
     title: "arco 2"
 }
 
+export const itemPlanejamento ={
+    img: `${Planejamento}`,
+    title: "planejamento"
+}
+
+export const itemAcompanhamento ={
+    img: `${Acompanhamento}`,
+    title: "planejamento"
+}
+
+export const itemObjetivos ={
+    img: `${Objetivos}`,
+    title: "planejamento"
+}
