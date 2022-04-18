@@ -7,6 +7,10 @@ import Planejamento from '../../Images/Planejamento.png';
 import Acompanhamento from '../../Images/Acompanhamento.png';
 import Objetivos from '../../Images/Objetivos.png';
 import imageDescricao from '../../Images/imageDescricao.png';
+import iconFacebook from '../../Images/facebook.png';
+import iconInstagram from '../../Images/instagram.png';
+import iconLinkedin from '../../Images/linkedin.png';
+
 
 
 export const styles = {
@@ -123,7 +127,73 @@ export const styles = {
         flexWrap: "wrap",
         justifyContent: "center",
         alignItems: "center",
-    }
+    },
+
+    footer: {
+        width: "100%",
+        height: "300px",
+        background: "#131515",
+        position: "absolute",
+        marginTop: "2335px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
+    containerFooter: {
+        width: "95%",
+        margin: "auto",
+        height: "250px",
+        display: "flex",
+        flexWrap: "wrap",
+        alignContent: "space-between"
+    },
+
+    boxFooter: {
+        width: "25%",
+        height: "100%",
+    },
+
+    titleBoxes: {
+        width: "100%",
+        height: "60px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "left",
+        fontSize: "20px",
+        textDecoration: "underline #7DE2D1 1px"
+    },
+
+    textSobreNos: {
+        width: "80%",
+        height: "180px",
+        display: "flex",
+        justifyContent: "left"
+    },
+    
+    textSecoes: {
+        width: "80%",
+        height: "180px",
+        display: "flex",
+        flexWrap: "wrap",
+        flexDirection: "column",
+        justifyContent: "left",
+    },
+
+    paragrafosFooter: {
+        color: "gray",
+        fontSize: "14px"
+    },
+
+    iconsRedes: {
+        width: "80%",
+        height: "180px",
+        display: "flex",
+        flexWrap: "wrap",
+        alignContent: "space-between"
+    },
+    
+   
 
 };
 
@@ -164,5 +234,20 @@ export const itemObjetivos ={
 
 export const itemImageDescricao ={
     img: `${imageDescricao}`,
+    title: "Imagem da descrição"
+}
+
+export const itemFacebook ={
+    img: `${iconFacebook}`,
+    title: "Imagem da descrição"
+}
+
+export const itemInstagram ={
+    img: `${iconInstagram}`,
+    title: "Imagem da descrição"
+}
+
+export const itemLinkedin ={
+    img: `${iconLinkedin}`,
     title: "Imagem da descrição"
 }

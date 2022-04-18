@@ -1,4 +1,5 @@
-import { styles, itemForm, itemLogo, itemArco, itemArco2, itemPlanejamento, itemAcompanhamento, itemObjetivos, itemImageDescricao } from './styles.js';
+import { styles, itemForm, itemLogo, itemArco, itemArco2, itemPlanejamento, itemAcompanhamento, itemObjetivos, itemImageDescricao,
+    itemFacebook, itemInstagram, itemLinkedin } from './styles.js';
 import ButtonBalancefy from '../../components/Button/index.js';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import TitleBalancefy from '../../components/Title';
@@ -163,6 +164,61 @@ function Institucional() {
                                 Conheça
                             </ButtonBalancefy>
                         </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style={styles.footer}>
+                <div style={styles.containerFooter}>
+
+                    <div style={styles.boxFooter}>
+                        <div style={styles.titleBoxes}>
+                            Sobre nós
+                        </div>
+
+                        <div style={styles.textSobreNos}>
+                            <p style={styles.paragrafosFooter}>Lorem IPsum dolor sit amet, lorem IPsum dolor sit amet lorem IPsum dolor sit amet, lorem IPsum dolor s
+                                Lorem IPsum dolor sit amet, lorem  </p>
+                        </div>
+
+                    </div>
+
+                    <div style={styles.boxFooter}>
+                        <div style={styles.titleBoxes}>
+                            Seções
+                        </div>
+
+                        <div style={styles.textSecoes}>
+                            <p style={styles.paragrafosFooter}>Home</p>
+                            <p style={styles.paragrafosFooter}>Produtos</p>
+                            <p style={styles.paragrafosFooter}>Plataforma</p>
+                        </div>
+
+                    </div>
+
+                    <div style={styles.boxFooter}>
+                        <div style={styles.titleBoxes}>
+                            Links úteis
+                        </div>
+
+                        <div style={styles.textSecoes}>
+                            <p style={styles.paragrafosFooter}>Cadastro</p>
+                            <p style={styles.paragrafosFooter}>Login</p>
+                        </div>
+                    </div>
+
+                    <div style={styles.boxFooter}>
+                        <div style={styles.titleBoxes}>
+                            Redes sociais
+                        </div>
+
+                        <div style={styles.iconsRedes}>
+                            <img style={{ height: '40px', marginRight: "40px" }} src={itemFacebook.img}/>
+                            <img style={{ height: '40px', marginRight: "40px" }} src={itemInstagram.img}/>
+                            <img style={{ height: '40px', marginRight: "40px" }} src={itemLinkedin.img}/>
+                        </div>
+
                     </div>
 
                 </div>
