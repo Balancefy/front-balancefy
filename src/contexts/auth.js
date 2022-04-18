@@ -9,23 +9,23 @@ export function AuthProvider(props) {
   async function signIn(email, senha) {
 
     try {
-      const response = await api.post('login', {
+      const response = await api.post('auth', {
         email: email,
         senha: senha
       })
       console.log(response.data)
 
-      localStorage.setItem('@balancefy:token', response.data);
+      const token = response.data.token
 
-      api.defaults.headers.common.authorization = `Bearer ${response.data}`
+      localStorage.setItem('@balancefy:token', token);
 
-      setUser(response.data);
+      api.defaults.headers.common.authorization = `Bearer ${token}`
+
+      setUser(response.data.conta);
 
       console.log(localStorage.getItem('@balancefy:token'))
 
     } catch (e) {
-
-      console.log(e.response.status)
 
       const status = e.response.status
 
