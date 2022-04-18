@@ -6,6 +6,7 @@ import Arco2 from '../../Images/Arco2.png';
 import Planejamento from '../../Images/Planejamento.png';
 import Acompanhamento from '../../Images/Acompanhamento.png';
 import Objetivos from '../../Images/Objetivos.png';
+import imageDescricao from '../../Images/imageDescricao.png';
 
 
 export const styles = {
@@ -75,6 +76,53 @@ export const styles = {
         display: "flex",
         justifyContent: "center",
         alignItens: "inline"
+    },
+
+    descricao: {
+        width: "100%",
+        height: "800px",
+        position: "absolute",
+        marginTop: "1500px"
+    },
+
+    container3: {
+        width: "95%",
+        margin: "auto",
+        height: "100%",
+    },
+
+    titleDescricao: {
+        height: "100px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
+    imageDescricao: {
+        height: "720px",
+        width: "65%",
+        float: "left",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
+    textDescricao: {
+        height: "650px",
+        width: "35%",
+        float: "right",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+
+    boxTextDescricao: {
+        width: "450px",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
     }
 
 };
@@ -112,4 +160,9 @@ export const itemAcompanhamento ={
 export const itemObjetivos ={
     img: `${Objetivos}`,
     title: "planejamento"
+}
+
+export const itemImageDescricao ={
+    img: `${imageDescricao}`,
+    title: "Imagem da descrição"
 }

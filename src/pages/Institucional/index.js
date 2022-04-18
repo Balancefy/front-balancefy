@@ -1,4 +1,4 @@
-import { styles, itemForm, itemLogo, itemArco, itemArco2, itemPlanejamento, itemAcompanhamento, itemObjetivos } from './styles.js';
+import { styles, itemForm, itemLogo, itemArco, itemArco2, itemPlanejamento, itemAcompanhamento, itemObjetivos, itemImageDescricao } from './styles.js';
 import ButtonBalancefy from '../../components/Button/index.js';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import TitleBalancefy from '../../components/Title';
@@ -127,6 +127,44 @@ function Institucional() {
                             marginLeft: "250px"
                         }} src={itemObjetivos.img}></img>
                     </div>
+                </div>
+            </div>
+
+            <div style={styles.descricao}>
+                <div style={styles.container3}>
+
+                    <div style={styles.titleDescricao}>
+                        <TitleBalancefy variant="h3" style={{
+                            color: "#7DE2D1"
+                        }}>
+                            PLATAFORMA MODERNA E INTUITIVA
+                        </TitleBalancefy>
+                    </div>
+
+                    <div style={styles.imageDescricao}>
+                        <img style={{ height: '850px' }} src={itemImageDescricao.img} alt={itemImageDescricao.title} />
+                    </div>
+
+                    <div style={styles.textDescricao}>
+                        <div style={styles.boxTextDescricao}>
+                            <p style={{
+                                width: "480px",
+                                fontSize: "20px",
+                                textAlign: "center"
+                            }}> Lorem IPsum dolor sit amet,
+                                lorem IPsum dolor sit amet Lorem IPsum dolor sit amet,
+                                lorem IPsum dolor sit amet.</p>
+
+                            <ButtonBalancefy style={{
+                                width: "340px",
+                                height: "40px",
+                                borderRadius: "10px"
+                            }}>
+                                Conheça
+                            </ButtonBalancefy>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
