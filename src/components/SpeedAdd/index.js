@@ -27,6 +27,8 @@ export default function SpeedAdd(props) {
                     position: 'absolute',
                     bottom: 35,
                     left: '95%',
+                    borderRadius: 0,
+                    ...props.style
                 }}
                 icon={<SpeedDialIcon />}
             >

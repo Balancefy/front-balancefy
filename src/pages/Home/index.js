@@ -4,8 +4,10 @@ import { Box, Grid } from "@mui/material";
 import Dica from "../../components/Dica";
 import Transaction from "../../components/Transaction";
 import MainContainer from "../../components/MainContainer";
+import SpeedAdd from "../../components/SpeedAdd";
 import { AuthContext } from "../../contexts/auth";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
     const users = [
@@ -118,6 +120,7 @@ export default function Home() {
                                                 COMPRAR PC GAMER
                                             </h3>
                                         </div>
+                                        <SpeedAdd style={{left:"50%", position:"relative", top:"53vh"}}/>
                                     </Container>
                                 </Grid>
                             </Container>
@@ -132,7 +135,7 @@ export default function Home() {
                                     </h2>
                                     <Dica title="Economia">Procure por trajetos de ônibus para economizar 50% dos seus gastos, que são utilizados em Uber</Dica>
                                     <Dica title="Investimento">“Investimentos em Tesouro Selic te trarão 20% de rendimento ao ano” </Dica>
-                                    <Dica title="Investimento">"Acesse esse site e entenda o básico de investimento: <a href='www.google.com'>Investimentos1000”</a></Dica>
+                                    <Dica title="Investimento">"Acesse esse site e entenda o básico de investimento: <Link to='www.google.com'>Investimentos1000</Link></Dica>
                                 </Container>
                             </Grid>
                             <Grid item>
