@@ -8,6 +8,8 @@ import SpeedAdd from "../../components/SpeedAdd";
 import { AuthContext } from "../../contexts/auth";
 import React from "react";
 import { Link } from "react-router-dom";
+import BalanceBalancefy from "../../components/Balance";
+import GoalsBalancefy from "../../components/EndGoal";
 
 export default function Home() {
     const users = [
@@ -30,11 +32,7 @@ export default function Home() {
                     <Grid item container>
                         <Grid container item md={4.8} justifyContent={"center"}>
                             <Grid item>
-                                <Container background="#4B4B4B" height="291px" width="521px" borderRadius="10px">
-                                    <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                        Saldo Atual em Conta
-                                    </h2>
-                                </Container>
+                             <BalanceBalancefy></BalanceBalancefy> 
                             </Grid>
                             <Grid item>
                                 <Container background="#4B4B4B" height="90px" width="521px" borderRadius="10px">
@@ -114,14 +112,7 @@ export default function Home() {
                         <Grid item container md={5.2}>
                             <Container style={{display:"flex", height:"100%",width:"560px", justifyContent:"center"}}>
                                 <Grid>
-                                    <Container height="64px" width="480px" borderRadius="10px" backgroundColor="#4B4B4B">
-                                        <div style={{display:"flex", width: "480px", height: "64px", margin: "40px", textAlign: "center", color: "#7DE2D1"}}>
-                                            <h3>
-                                                COMPRAR PC GAMER
-                                            </h3>
-                                        </div>
-                                        <SpeedAdd style={{left:"50%", position:"relative", top:"53vh"}}/>
-                                    </Container>
+                                    <GoalsBalancefy></GoalsBalancefy>
                                 </Grid>
                             </Container>
                         </Grid>
