@@ -24,10 +24,9 @@ export default function Menu(props) {
                 padding: "40px 0 40px 0",
                 backgroundColor: "#131515"
             }} >
-                <Link to="/">
+                <Link to="/profile">
                     <AvatarBalancefy width="65px" style={{ border: "1px solid #000", marginBottom: "137px", cursor: "pointer" }}></AvatarBalancefy>
                 </Link>
-                
                 {props.page === "Home" ?
                     <PageIcon selected icon={<HomeIcon sx={{ fontSize: "45px" }} />}></PageIcon> :
                     <Link to="/" style={{ color:"white" }}>
