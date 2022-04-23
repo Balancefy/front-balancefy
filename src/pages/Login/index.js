@@ -14,6 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 import { AuthContext } from '../../contexts/auth';
+import { Link } from 'react-router-dom';
 
 function Login() {
 
@@ -68,11 +69,14 @@ function Login() {
             >
               <div>
                 <TitleBalancefy variant="h2">Faça seu Login.</TitleBalancefy>
-                <TitleBalancefy variant="body3">
-                  Não tem uma conta?{" "}
+                <TitleBalancefy variant="body3"> Não tem uma conta?{" "}
                 </TitleBalancefy>
                 <TitleBalancefy variant="body3" color="#7DE2D1">
-                  Cadastre-se
+                <Link
+                    to="/cadastro"
+                    style={{ color: "#7DE2D1", textDecoration: "none" }}
+                  > Cadastre-se
+                  </Link>
                 </TitleBalancefy>
               </div>
 
