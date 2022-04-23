@@ -1,33 +1,53 @@
 import Ranking from "../../components/Ranking";
 import Container from "../../components/Container";
-import { Box, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import Dica from "../../components/Dica";
 import Transaction from "../../components/Transaction";
 import MainContainer from "../../components/MainContainer";
 import SpeedAdd from "../../components/SpeedAdd";
-import { AuthContext } from "../../contexts/auth";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import BalanceBalancefy from "../../components/Balance";
 import GoalsBalancefy from "../../components/EndGoal";
+import { AuthContext } from "../../contexts/auth";
+import api from "../../service/api";
+
+
+const downloadCsv = (event) => {
+    api
+        .get('transaction/report', { responseType: 'blob' })
+        .then(async (res) => {
+            let blob = new Blob([res.data], { type: 'application/csv' })
+            let link = document.createElement("a");
+            link.href = await URL.createObjectURL(blob);
+            link.download = 'movimentacoes.csv'
+            link.click()
+            URL.revokeObjectURL(link.href)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
 
 export default function Home() {
     const users = [
-        { id: 1, p: 1, name: "Bruno Ferreira", goals: 1, tasks: 13 },
-        { id: 2, p: 2, name: "Amanda", goals: 1, tasks: 13 },
-        { id: 3, p: 3, name: "Julia Mendes", goals: 1, tasks: 13 },
-        { id: 4, p: 4, name: "Lucas Alves", goals: 1, tasks: 13 },
-        { id: 5, p: 5, name: "Beatriz Santos", goals: 1, tasks: 1 },
-        { id: 6, p: 1, name: "Bruno Ferreira", goals: 1, tasks: 13 },
-        { id: 21, p: 2, name: "Amanda", goals: 1, tasks: 13 },
-        { id: 31, p: 3, name: "Julia Mendes", goals: 1, tasks: 13 },
-        { id: 41, p: 4, name: "Lucas Alves", goals: 1, tasks: 13 },
-        { id: 51, p: 5, name: "Beatriz Santos", goals: 1, tasks: 1 }
-    ]
+        { id: 1, p: 1, name: "Bruno Ferreira", goals: 1, tasks: 23 },
+        { id: 2, p: 2, name: "Amanda", goals: 1, tasks: 16 },
+        { id: 3, p: 3, name: "Julia Mendes", goals: 1, tasks: 15 },
+        { id: 4, p: 4, name: "Lucas Alves", goals: 1, tasks: 14 },
+        { id: 5, p: 5, name: "Beatriz Santos", goals: 1, tasks: 13 },
+        { id: 6, p: 6, name: "Bruno Ferreira", goals: 1, tasks: 9 },
+        { id: 7, p: 7, name: "Amanda", goals: 1, tasks: 8 },
+        { id: 8, p: 8, name: "Julia Mendes", goals: 1, tasks: 7 },
+        { id: 9, p: 9, name: "Lucas Alves", goals: 1, tasks: 6 },
+        { id: 10, p: 10, name: "Ricardo Santos", goals: 1, tasks: 5 }
+    ];
+
+
 
     return (
         <>
-            <MainContainer page= "Home">
+            <MainContainer page="Home">
                 <Box className="App" sx={{ display: "flex", alignItems: "flex-start", paddingTop: "30px", width: "100%" }}>
                     <Grid item container>
                         <Grid container item md={4.8} justifyContent={"center"}>
@@ -35,10 +55,15 @@ export default function Home() {
                              <BalanceBalancefy></BalanceBalancefy> 
                             </Grid>
                             <Grid item>
-                                <Container background="#4B4B4B" height="90px" width="521px" borderRadius="10px">
-                                    <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                        Movimentações fixas
-                                    </h2>
+                                <Container background="#4B4B4B" height="90px" width="521px" borderRadius="10px" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                    <div>
+                                        <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
+                                            Movimentações fixas
+                                        </h2>
+                                        <div style={{ display: "flex" }}>
+                                            <Button onClick={downloadCsv} sx={{ height: "3vh", width: "300px" }}>Download CSV</Button>
+                                        </div>
+                                    </div>
                                 </Container>
                             </Grid>
 
@@ -110,7 +135,7 @@ export default function Home() {
                         </Grid>
 
                         <Grid item container md={5.2}>
-                            <Container style={{display:"flex", height:"100%",width:"560px", justifyContent:"center"}}>
+                            <Container style={{ display: "flex", height: "100%", width: "560px", justifyContent: "center" }}>
                                 <Grid>
                                     <GoalsBalancefy></GoalsBalancefy>
                                 </Grid>
@@ -126,7 +151,7 @@ export default function Home() {
                                     </h2>
                                     <Dica title="Economia">Procure por trajetos de ônibus para economizar 50% dos seus gastos, que são utilizados em Uber</Dica>
                                     <Dica title="Investimento">“Investimentos em Tesouro Selic te trarão 20% de rendimento ao ano” </Dica>
-                                    <Dica title="Investimento">"Acesse esse site e entenda o básico de investimento: <Link to='www.google.com'>Investimentos1000</Link></Dica>
+                                    <Dica title="Investimento">"Acesse esse site e entenda o básico de investimento: <Link to="/" style={{color:"#7DE2D1", textDecoration:"none"}}>Investimentos1000</Link></Dica>
                                 </Container>
                             </Grid>
                             <Grid item>
@@ -136,7 +161,6 @@ export default function Home() {
                     </Grid>
                 </Box>
             </MainContainer>
-
         </>
     );
 }
