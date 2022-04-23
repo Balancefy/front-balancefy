@@ -4,13 +4,17 @@ import { Box, Button, Grid } from "@mui/material";
 import Dica from "../../components/Dica";
 import Transaction from "../../components/Transaction";
 import MainContainer from "../../components/MainContainer";
-import SpeedAdd from "../../components/SpeedAdd";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import BalanceBalancefy from "../../components/Balance";
 import GoalsBalancefy from "../../components/EndGoal";
-import { AuthContext } from "../../contexts/auth";
 import api from "../../service/api";
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import Chip from '@mui/material/Chip';
+
 
 
 const downloadCsv = (event) => {
@@ -43,6 +47,10 @@ export default function Home() {
         { id: 10, p: 10, name: "Ricardo Santos", goals: 1, tasks: 5 }
     ];
 
+    const [transactionType, setTransactionType] = React.useState("");
+    const [transactionCategory, setTransactionCategory] = React.useState("");
+
+
 
 
     return (
@@ -52,10 +60,10 @@ export default function Home() {
                     <Grid item container>
                         <Grid container item md={4.8} justifyContent={"center"}>
                             <Grid item>
-                             <BalanceBalancefy></BalanceBalancefy> 
+                                <BalanceBalancefy></BalanceBalancefy>
                             </Grid>
                             <Grid item>
-                                <Container background="#4B4B4B" height="90px" width="521px" borderRadius="10px" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                <Container background="#4B4B4B" height="90px" width="521px" borderRadius="10px" style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "20px" }}>
                                     <div>
                                         <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
                                             Movimentações fixas
@@ -69,18 +77,32 @@ export default function Home() {
 
                             <Grid container direction="row" spacing={20} justifyContent={"center"} alignContent={"row"}>
                                 <Grid item>
-                                    <Container background="#4B4B4B" height="50px" width="180px" borderRadius="10px">
-                                        <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                            Entrada
-                                        </h3>
-                                    </Container>
+                                    <FormControl sx={{width:"180px",marginTop:"15px", backgroundColor: "#131515"}}>
+                                        <InputLabel id="transaction-type">Tipo</InputLabel>
+                                        <Select
+                                            labelId="transaction-type"
+                                            label="Tipo"
+                                            value={transactionType}
+                                            onChange={(e) => setTransactionType(e.target.value)}
+                                        >
+                                            <MenuItem value={"Entrada"}>Entrada</MenuItem>
+                                            <MenuItem value={"Saída"}>Saída</MenuItem>
+
+                                        </Select>
+                                    </FormControl>
                                 </Grid>
                                 <Grid item>
-                                    <Container background="#4B4B4B" height="50px" width="180px" borderRadius="10px">
-                                        <h3 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                            Lazer
-                                        </h3>
-                                    </Container>
+                                <FormControl sx={{width:"180px",marginTop:"15px", backgroundColor: "#131515"}}>
+                                        <InputLabel id="transaction-category">Categoria</InputLabel>
+                                        <Select
+                                            labelId="transaction-category"
+                                            label="Categoria"
+                                            onChange={(e) => setTransactionCategory(e.target.value)}
+                                        >
+                                            <MenuItem value={"Lazer"}>Lazer</MenuItem>
+                                            <MenuItem value={"Mesada"}>Mesada</MenuItem>
+                                        </Select>
+                                    </FormControl>
                                 </Grid>
                             </Grid>
 
@@ -151,7 +173,7 @@ export default function Home() {
                                     </h2>
                                     <Dica title="Economia">Procure por trajetos de ônibus para economizar 50% dos seus gastos, que são utilizados em Uber</Dica>
                                     <Dica title="Investimento">“Investimentos em Tesouro Selic te trarão 20% de rendimento ao ano” </Dica>
-                                    <Dica title="Investimento">"Acesse esse site e entenda o básico de investimento: <Link to="/" style={{color:"#7DE2D1", textDecoration:"none"}}>Investimentos1000</Link></Dica>
+                                    <Dica title="Investimento">"Acesse esse site e entenda o básico de investimento: <Link to="/" style={{ color: "#7DE2D1", textDecoration: "none" }}>Investimentos1000</Link></Dica>
                                 </Container>
                             </Grid>
                             <Grid item>

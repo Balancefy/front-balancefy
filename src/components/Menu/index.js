@@ -1,4 +1,3 @@
-import Avatar from '../Avatar'
 import PageIcon from '../PageIcon'
 import HomeIcon from '@mui/icons-material/Home';
 import ForumIcon from '@mui/icons-material/Forum';
@@ -18,6 +17,8 @@ export default function Menu(props) {
             <div style={{
                 height: "100vh",
                 width: "135px",
+                minWidth: "135px",
+                maxWidth: "135px",
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "column",
