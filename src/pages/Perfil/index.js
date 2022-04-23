@@ -1,9 +1,48 @@
 import Container from '../../components/Container'
 import MainContainer from '../../components/MainContainer'
-import { default as Avatar } from '../../components/Avatar'
-import {default as Button} from '../../components/Button'
+import ProfileBalancefy from '../../components/Profile'
+import React from 'react'
+import { default as TopicBalancefy } from '../../components/Topic/profileVariant'
 
 export default function Profile(props) {
+    const [like, setLike] = React.useState(false);
+
+    const topics = [
+        {
+            key: 1,
+            title: "Economizar dinheiro",
+            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
+            avatar: "BS",
+            name: "Beatriz Santos",
+            comment: "11",
+            like: "11",
+            views: "11",
+            date: "2d"
+        },
+        {
+            key: 2,
+            title: "Economizar dinheiro",
+            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
+            avatar: "BS",
+            name: "Beatriz Santos",
+            comment: "11",
+            like: "11",
+            views: "11",
+            date: "2d"
+        },
+        {
+            key: 3,
+            title: "Economizar dinheiro",
+            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
+            avatar: "BS",
+            name: "Beatriz Santos",
+            comment: "11",
+            like: "11",
+            views: "11",
+            date: "2d"
+        }
+    ]
+
     return (
         <>
             <MainContainer page={"profile"}>
@@ -12,63 +51,35 @@ export default function Profile(props) {
                         height: "90%",
                         width: "90%",
                         margin: "auto",
+                        display: "flex",
+                        alignItems: "center",
+                        flexDirection: "column"
                     }}>
+                        <ProfileBalancefy></ProfileBalancefy>
                         <div style={{
-                            height: "448px",
                             width: "100%",
                             display: "flex",
-                            alignItems: "flex-end",
-                            position: "relative",
+                            justifyContent: "space-between",
+                            marginTop: "100px"
                         }}>
-                            <div style={{
-                                position: "absolute",
-                                height: "334px",
-                                width: "100%",
-                                backgroundColor: "black",
-                                borderTopLeftRadius: "10px",
-                                borderTopRightRadius: "10px",
-                                backgroundImage: `url("https://wallpaperaccess.com/full/1860098.jpg")`,
-                                backgroundPosition: "center",
-                                backgroundSize: '100%',
-                                top: 0,
-                                left: 0
-                            }}></div>
-                            <div style={{
-                                position: "relative",
-                                height: "114px",
-                                width: "100%",
-                                marginLeft: "70px",
-                                display: "flex",
-                                flexDirection: "row",
-                            }}>
-                                <div style={{
-                                    position:"absolute",
-                                    top: "-150px"
-                                }}>
-                                    <Avatar width="250px" style={{
-                                        border: "10px solid #131515"
-                                    }}></Avatar>
-                                </div>
-                                <div style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    marginLeft:"270px",
-                                    display:"flex",
-                                    flexDirection:"row",
-                                    justifyContent:"space-between",
-                                    paddingTop:"30px"
-                                }}>
-                                    <div>
-                                       AAAAAAAAAAAAA
-                                    </div>
-                                    <div>
-                                        <Button width="150px" height="50px" style={{
-                                            fontWeight: "bold",
-                                        }}>Editar</Button>
-                                    </div>
-                                </div>
-                            </div>
+                            {topics.map((topic) => {
+                               return (
+                                 <TopicBalancefy 
+                                 description={topic.description}
+                                 title={topic.title}
+                                 avatar={topic.avatar}
+                                 name={topic.name}
+                                 comment={topic.comment}
+                                 like={topic.like}
+                                 views={topic.views}
+                                 date={topic.date}
+                                 />
+                               )
+                            })
+                            }
+
                         </div>
+
                     </div>
                 </Container>
             </MainContainer>
