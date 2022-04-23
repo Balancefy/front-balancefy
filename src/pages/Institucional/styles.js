@@ -146,11 +146,12 @@ export const styles = {
         height: "250px",
         display: "flex",
         flexWrap: "wrap",
-        alignContent: "space-between"
+        alignContent: "space-between",
+        justifyContent: "center"
     },
 
     boxFooter: {
-        width: "25%",
+        width: "20%",
         height: "100%",
     },
 
