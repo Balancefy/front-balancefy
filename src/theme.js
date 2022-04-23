@@ -43,6 +43,10 @@ const theme = createTheme({
     subtitle1: {
       fontSize: 16,
       textDecoration: "underline"
+    }, 
+    subtitle2: {
+      fontSize: 14,
+      textDecoration: "underline"
     } 
   },
   components: {
