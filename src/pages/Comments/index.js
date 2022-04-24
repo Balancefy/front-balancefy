@@ -1,8 +1,7 @@
-import { Divider, Grid, IconButton } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import Container from "../../components/Container";
 import MainContainer from "../../components/MainContainer";
-import SpeedAdd from "../../components/SpeedAdd";
 import TitleBalancefy from "../../components/Title";
 import TopicBalancefy from "../../components/Topic";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -10,7 +9,6 @@ import TopicWithComments from "../../components/TopicWithComments";
 import { Link } from "react-router-dom";
 import Input from "../../components/Input";
 import AvatarBalancefy from "../../components/Avatar";
-import CommentBalancefy from "../../components/CommentsSection";
 import CommentsSection from "../../components/CommentsSection";
 
 export default function Comments(props) {
@@ -53,7 +51,7 @@ export default function Comments(props) {
 
      return(
          <>
-            <MainContainer>
+            <MainContainer page="Forum">
                 <Container margin="auto" height="95vh" width="90%" borderRadius={10} >
                     <Box sx={{display: "flex", alignItems: "center", mt: 4, ml: 4}}>
                             <Link to="/forum">
@@ -122,9 +120,6 @@ export default function Comments(props) {
                             }
                         </Grid>
                     </Grid>
-
-                    <SpeedAdd/>
-
                 </Container>
             </MainContainer>
          </>

@@ -1,18 +1,13 @@
 import CommentBalancefy from "../Comment";
+import avatar from "../../Images/user2.jpg"
 
 export default function CommentsSection(props) {
   const comentarios = [
     {
       id: 1,
-      nome: "Verdinha",
+      nome: "Ana",
       descricao: "muito fácil...",
-      comentarios: [
-        {
-          id: 2,
-          nome: "Minóquio",
-          descricao: "mó trampo",
-        },
-      ],
+      imagem: avatar
     },
   ];
 
@@ -22,8 +17,8 @@ export default function CommentsSection(props) {
         return (
           <CommentBalancefy
             name={comentario.nome}
-            data={comentario.comentarios}
-          ></CommentBalancefy>
+            imagem={comentario.imagem}
+          >{comentario.descricao}</CommentBalancefy>
         );
       })}
     </>

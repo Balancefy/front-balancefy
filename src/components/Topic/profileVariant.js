@@ -17,7 +17,7 @@ export default function TopicProfile(props) {
                         color: "#7DE2D1",
                         margin: 0,
                         fontSize: "24px"
-                    }}>Economizar Dinheiro</h2>
+                    }}>{props.title}</h2>
                     <EditIcon style={{ cursor: "pointer" }}></EditIcon>
                 </div>
                 <div style={{
@@ -26,7 +26,7 @@ export default function TopicProfile(props) {
                 }}>
                     <AvatarBalancefy width={"25px"} imageAvatar={props.avatar}></AvatarBalancefy>
                     <Box sx={{ ml: 2, fontSize: "14px", fontWeight: 400 }}>
-                        Beatriz Santos
+                        {props.name}
                     </Box>
                 </div>
                 <div style={{

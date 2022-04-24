@@ -9,7 +9,6 @@ import { Box } from "@mui/system";
 import TopicMostLiked from "../../components/TopicMostLiked";
 import ModalTopico from "../../components/ModalTopico";
 import { useState } from "react";
-import SpeedAdd from "../../components/SpeedAdd";
 import MainContainer from "../../components/MainContainer";
 
 export default function Forum(props) {
@@ -132,7 +131,6 @@ export default function Forum(props) {
                             }
                         </Grid>
                     </Grid>
-                    <SpeedAdd/>
                 </Container>
                 <ModalTopico 
                     open={modalState}

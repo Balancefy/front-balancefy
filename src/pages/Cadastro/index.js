@@ -9,11 +9,14 @@ import logoFace from "../../img/facebook.svg";
 import logoGoogle from "../../img/google.svg";
 import logoInsta from "../../img/instagram.svg";
 import ou from "../../img/ou.svg";
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
 import { Box, flexbox } from "@mui/system";
 import {
   Button,
   FormControlLabel,
   IconButton,
+  InputAdornment,
 } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Alert from "@mui/material/Alert";
@@ -67,12 +70,12 @@ export default function Cadastro() {
                     display: "flex",
                   }}
                 >
-                  <Input label="Nome" type="primary" width="267px"></Input>
+                  <Input label="Nome" type="primary" width="267px" adornment={<InputAdornment position="end"><PersonIcon/></InputAdornment>}></Input>
                   <Input label="Sobrenome" type="primary" width="267px"></Input>
                 </div>
 
                 <div style={{ marginTop: "5%" }}>
-                  <Input label="Email" type="primary" width="100%"></Input>
+                  <Input label="Email" type="primary" width="100%" adornment={<InputAdornment position="end"><EmailIcon/></InputAdornment>}></Input>
                 </div>
 
                 <div style={{ marginTop: "5%" }}>

@@ -36,7 +36,7 @@ function ProfileBalancefy(props) {
                         position: "absolute",
                         top: "-150px"
                     }}>
-                        <Avatar width="250px" style={{
+                        <Avatar width="250px" imageAvatar={props.imagem} style={{
                             border: "10px solid #131515"
                         }}></Avatar>
                     </div>
@@ -54,7 +54,7 @@ function ProfileBalancefy(props) {
                                 fontSize:"24px",
                                 fontWeight: "bold"
                             }}>
-                                Beatriz Santos
+                                {props.name}
                             </div>
                             <div style={{
                                 fontSize: "20px",
@@ -77,6 +77,3 @@ function ProfileBalancefy(props) {
 }
 
 export default ProfileBalancefy;
-
-
-// <ProfileBalancefy backgroundProfile="https://marcuspessoa.com.br/wp-content/uploads/2021/02/As-melhores-capas-para-o-Facebook-1.jpg"></ProfileBalancefy>

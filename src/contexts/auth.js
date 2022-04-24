@@ -13,17 +13,16 @@ export function AuthProvider(props) {
         email: email,
         senha: senha
       })
-      console.log(response.data)
 
       const token = response.data.token
 
       localStorage.setItem('@balancefy:token', token);
 
+      localStorage.setItem('@balancefy:user', JSON.stringify(response.data.conta));
+
       api.defaults.headers.common.authorization = `Bearer ${token}`
 
       setUser(response.data.conta);
-
-      console.log(localStorage.getItem('@balancefy:token'))
 
     } catch (e) {
 
@@ -48,9 +47,12 @@ export function AuthProvider(props) {
     if (token) {
       api.defaults.headers.common.authorization = `Bearer ${token}`
 
-      api.get('users').then(response => {
-        setUser(response.data)
-      })
+      var usuario = localStorage.getItem('@balancefy:user')
+  
+      setUser(JSON.parse(usuario))      
+      // api.get('users').then(response => {
+        
+      // })
     }
   }, [])
 

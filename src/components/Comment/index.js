@@ -1,7 +1,4 @@
-import Avatar from "../Avatar";
 import Container from "../Container";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import { Margin } from "@mui/icons-material";
 import AvatarBalancefy from "../Avatar";
 import TitleBalancefy from "../Title";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
@@ -9,7 +6,6 @@ import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 
 function CommentBalancefy(props) {
   let responses = props.data
-
 
   return (
     <>
@@ -31,7 +27,7 @@ function CommentBalancefy(props) {
               justifyContent: "center",
             }}
           >
-            <AvatarBalancefy width="40px"></AvatarBalancefy>
+            <AvatarBalancefy imageAvatar={props.imagem} width="40px"></AvatarBalancefy>
           </div>
 
           <div
@@ -71,23 +67,22 @@ function CommentBalancefy(props) {
           >
             <TitleBalancefy variant="h4"> {props.children} </TitleBalancefy>
           </div>
-          {responses.length == 0 || responses == null || responses == undefined ? <></> :
-<>
-          <div
-            style={{
-              paddingLeft: "83px",
-              paddingTop: "8px",
-            }}
-          >
-            Mostrar menos
-            <ChangeHistoryIcon
-              style={{
-                paddingTop: "12px",
-              }}
-            ></ChangeHistoryIcon>
-          </div>
-
-          </>
+          { responses === null || responses === undefined || responses.length === 0? <></> :
+            <>
+              <div
+                style={{
+                  paddingLeft: "83px",
+                  paddingTop: "8px",
+                }}
+              >
+                Mostrar menos
+                <ChangeHistoryIcon
+                  style={{
+                    paddingTop: "12px",
+                  }}
+                ></ChangeHistoryIcon>
+              </div>
+            </>
           }
           
         </div>

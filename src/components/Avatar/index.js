@@ -4,14 +4,14 @@ function AvatarBalancefy(props) {
     return (
     <>
         <Avatar onClick={props.onClick} src={props.imageAvatar}
-        style={{
-            width: props.width,
-            height: props.width,
-            backgroundColor: "#7DE2D1",
-            border: "2px solid Black",
-            borderRadius: "50%",
-            ...props.style
-        }}>
+            style={{
+                width: props.width,
+                height: props.width,
+                backgroundColor: "#7DE2D1",
+                border: "2px solid Black",
+                borderRadius: "50%",
+                ...props.style
+            }}>
             {props.children}
         </Avatar>
     </>

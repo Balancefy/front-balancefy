@@ -9,9 +9,10 @@ import logoGoogle from "../../img/google.svg";
 import logoInsta from "../../img/instagram.svg";
 import ou from "../../img/ou.svg";
 import { Box } from "@mui/system";
-import { Button, CircularProgress, FormControlLabel, IconButton } from "@mui/material";
+import { Button, CircularProgress, FormControlLabel, IconButton, InputAdornment } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Alert from '@mui/material/Alert';
+import EmailIcon from '@mui/icons-material/Email';
 import Collapse from '@mui/material/Collapse';
 import { AuthContext } from '../../contexts/auth';
 import { Link } from 'react-router-dom';
@@ -87,7 +88,7 @@ function Login() {
 
               }}>
                 <div style={{ marginTop: "10%" }}>
-                  <Input label="Email" type="primary" width="100%" onChange={handleChangeEmail} value={login}></Input>
+                  <Input label="Email" type="primary" width="100%" onChange={handleChangeEmail} value={login} adornment={<InputAdornment position="end"><EmailIcon/></InputAdornment>}></Input>
                 </div>
 
                 <div style={{ marginTop: "5%" }}>
