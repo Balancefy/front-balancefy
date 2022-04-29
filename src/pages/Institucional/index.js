@@ -1,4 +1,7 @@
-import { styles, itemForm, itemLogo, itemArco, itemArco2, itemPlanejamento, itemAcompanhamento, itemObjetivos } from './styles.js';
+import {
+    styles, itemForm, itemLogo, itemArco, itemArco2, itemPlanejamento, itemAcompanhamento, itemObjetivos, itemImageDescricao,
+    itemFacebook, itemInstagram, itemLinkedin
+} from './styles.js';
 import ButtonBalancefy from '../../components/Button/index.js';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import TitleBalancefy from '../../components/Title';
@@ -61,19 +64,20 @@ function Institucional() {
                 </div>
 
                 <div style={styles.imageDiv}>
-                    <button style={{
-                        width: "125px",
-                        height: "40px",
-                        borderRadius: "7px",
-                        border: "2px solid #2B2C28",
-                        background: "transparent",
-                        position: "absolute",
-                        margin: "2rem 0rem 0rem 0rem",
-                        left: "1600px",
-                    }}>
-                        Cadastrar
-                    </button>
-
+                    <Link to="/Cadastro" style={{ color: "#2B2C28" }}>
+                        <button style={{
+                            width: "125px",
+                            height: "40px",
+                            borderRadius: "7px",
+                            border: "2px solid #2B2C28",
+                            background: "transparent",
+                            position: "absolute",
+                            margin: "2rem 0rem 0rem 0rem",
+                            left: "1600px",
+                        }}>
+                            Cadastrar
+                        </button>
+                    </Link>
                     <a style={{
                         position: "absolute",
                         margin: "2.4rem 0rem 0rem 0rem",
@@ -127,6 +131,110 @@ function Institucional() {
                             marginLeft: "250px"
                         }} src={itemObjetivos.img}></img>
                     </div>
+                </div>
+            </div>
+
+            <div style={styles.descricao}>
+                <div style={styles.container3}>
+
+                    <div style={styles.titleDescricao}>
+                        <TitleBalancefy variant="h3" style={{
+                            color: "#7DE2D1"
+                        }}>
+                            PLATAFORMA MODERNA E INTUITIVA
+                        </TitleBalancefy>
+                    </div>
+
+                    <div style={styles.imageDescricao}>
+                        <img style={{ height: '850px' }} src={itemImageDescricao.img} alt={itemImageDescricao.title} />
+                    </div>
+
+                    <div style={styles.textDescricao}>
+                        <div style={styles.boxTextDescricao}>
+                            <p style={{
+                                width: "480px",
+                                fontSize: "20px",
+                                textAlign: "center"
+                            }}> Uma plataforma moderna e intuitiva, para cuidar da sua vida financeira de maneira divertida e eficiente.</p>
+
+                            <Link to="/Cadastro" style={{ color: "#2B2C28" }}>
+                                <ButtonBalancefy style={{
+                                    width: "340px",
+                                    height: "40px",
+                                    borderRadius: "10px"
+                                }}>
+                                    Conheça
+                                </ButtonBalancefy>
+                            </Link>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style={styles.footer}>
+                <div style={styles.containerFooter}>
+
+                    <div style={styles.boxFooter}>
+                        <div style={styles.titleBoxes}>
+                            Sobre nós
+                        </div>
+
+                        <div style={styles.textSobreNos}>
+                            <p style={styles.paragrafosFooter}> Balancefy é uma plataforma de planejamento financeiro, 
+                            que permite que o usuário cuide de toda sua vida financeira e de seus objetivos e metas
+                             de forma intuitiva e moderna.  </p>
+                        </div>
+
+                    </div>
+
+                    <div style={styles.boxFooter}>
+                        <div style={styles.titleBoxes}>
+                            Seções
+                        </div>
+
+                        <div style={styles.textSecoes}>
+                            <p style={styles.paragrafosFooter}>Home</p>
+                            <p style={styles.paragrafosFooter}>Produtos</p>
+                            <p style={styles.paragrafosFooter}>Plataforma</p>
+                        </div>
+
+                    </div>
+
+                    <div style={styles.boxFooter}>
+                        <div style={styles.titleBoxes}>
+                            Links úteis
+                        </div>
+
+                        <div style={styles.textSecoes}>
+                            <p style={styles.paragrafosFooter}>Cadastro</p>
+                            <p style={styles.paragrafosFooter}>Login</p>
+                        </div>
+                    </div>
+
+                    <div style={styles.boxFooter}>
+                        <div style={styles.titleBoxes}>
+                            Redes sociais
+                        </div>
+
+                        <div style={styles.iconsRedes}>
+
+                            <a href='https://www.facebook.com/' target="_blank">
+                                <img style={{ height: '40px', marginRight: "40px" }} src={itemFacebook.img} />
+                            </a>
+
+                            <a href='https://www.instagram.com/balancefy_/' target="_blank">
+                                <img style={{ height: '40px', marginRight: "40px" }} src={itemInstagram.img} />
+                            </a>
+
+                            <a href='https://www.linkedin.com/in/mateus-ferreira-andrade-1735231b0/' target="_blank">
+                                <img style={{ height: '40px', marginRight: "40px" }} src={itemLinkedin.img} />
+                            </a>
+
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
 

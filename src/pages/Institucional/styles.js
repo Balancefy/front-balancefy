@@ -6,6 +6,11 @@ import Arco2 from '../../Images/Arco2.png';
 import Planejamento from '../../Images/Planejamento.png';
 import Acompanhamento from '../../Images/Acompanhamento.png';
 import Objetivos from '../../Images/Objetivos.png';
+import imageDescricao from '../../Images/imageDescricao.png';
+import iconFacebook from '../../Images/facebook.png';
+import iconInstagram from '../../Images/instagram.png';
+import iconLinkedin from '../../Images/linkedin.png';
+
 
 
 export const styles = {
@@ -75,7 +80,121 @@ export const styles = {
         display: "flex",
         justifyContent: "center",
         alignItens: "inline"
-    }
+    },
+
+    descricao: {
+        width: "100%",
+        height: "800px",
+        position: "absolute",
+        marginTop: "1500px"
+    },
+
+    container3: {
+        width: "95%",
+        margin: "auto",
+        height: "100%",
+    },
+
+    titleDescricao: {
+        height: "100px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
+    imageDescricao: {
+        height: "720px",
+        width: "65%",
+        float: "left",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
+    textDescricao: {
+        height: "650px",
+        width: "35%",
+        float: "right",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+
+    boxTextDescricao: {
+        width: "450px",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+
+    footer: {
+        width: "100%",
+        height: "300px",
+        background: "#131515",
+        position: "absolute",
+        marginTop: "2335px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
+    containerFooter: {
+        width: "95%",
+        margin: "auto",
+        height: "250px",
+        display: "flex",
+        flexWrap: "wrap",
+        alignContent: "space-between",
+        justifyContent: "center"
+    },
+
+    boxFooter: {
+        width: "20%",
+        height: "100%",
+    },
+
+    titleBoxes: {
+        width: "100%",
+        height: "60px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "left",
+        fontSize: "20px",
+        textDecoration: "underline #7DE2D1 1px"
+    },
+
+    textSobreNos: {
+        width: "80%",
+        height: "180px",
+        display: "flex",
+        justifyContent: "left"
+    },
+    
+    textSecoes: {
+        width: "80%",
+        height: "180px",
+        display: "flex",
+        flexWrap: "wrap",
+        flexDirection: "column",
+        justifyContent: "left",
+    },
+
+    paragrafosFooter: {
+        color: "gray",
+        fontSize: "14px"
+    },
+
+    iconsRedes: {
+        width: "80%",
+        height: "180px",
+        display: "flex",
+        flexWrap: "wrap",
+        alignContent: "space-between"
+    },
+    
+   
 
 };
 
@@ -112,4 +231,24 @@ export const itemAcompanhamento ={
 export const itemObjetivos ={
     img: `${Objetivos}`,
     title: "planejamento"
+}
+
+export const itemImageDescricao ={
+    img: `${imageDescricao}`,
+    title: "Imagem da descrição"
+}
+
+export const itemFacebook ={
+    img: `${iconFacebook}`,
+    title: "Imagem da descrição"
+}
+
+export const itemInstagram ={
+    img: `${iconInstagram}`,
+    title: "Imagem da descrição"
+}
+
+export const itemLinkedin ={
+    img: `${iconLinkedin}`,
+    title: "Imagem da descrição"
 }

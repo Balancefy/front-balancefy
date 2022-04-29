@@ -1,5 +1,4 @@
 import React from 'react';
-import ButtonBalancefy from "../../components/Button";
 import TitleBalancefy from "../../components/Title";
 import Input from "../../components/Input";
 import InputPass from "../../components/InputPass";
@@ -10,15 +9,19 @@ import logoGoogle from "../../img/google.svg";
 import logoInsta from "../../img/instagram.svg";
 import ou from "../../img/ou.svg";
 import { Box } from "@mui/system";
-import { CircularProgress, FormControlLabel, IconButton, Typography } from "@mui/material";
+import { Button, CircularProgress, FormControlLabel, IconButton, InputAdornment } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import Alert from '@mui/material/Alert';
+import EmailIcon from '@mui/icons-material/Email';
+import Collapse from '@mui/material/Collapse';
 import { AuthContext } from '../../contexts/auth';
+import { Link } from 'react-router-dom';
 
 function Login() {
 
+  const [open, setOpen] = React.useState(false);
   const [login, setLogin] = React.useState('');
   const [senha, setSenha] = React.useState('');
-  const [wrongUser, setWrongUser] = React.useState('');
   const { signIn, user } = React.useContext(AuthContext);
 
   const [loading, setLoading] = React.useState(false)
@@ -36,7 +39,7 @@ function Login() {
     setLoading(false)
 
     if (user == null) {
-      setWrongUser('Email/Senha inválidos')
+      setOpen(true)
       setLogin('')
       setSenha('')
     }
@@ -44,6 +47,11 @@ function Login() {
 
   return (
     <>
+      <Collapse sx={{position: "absolute", top: 20, left: 20, width: 500}} in={open}>
+        <Alert variant="filled" severity="error">
+          Email/Senha inválidos
+        </Alert>
+      </Collapse>
       <Container
         style={{ marginTop: "1.5%" }}
         margin="auto"
@@ -62,11 +70,14 @@ function Login() {
             >
               <div>
                 <TitleBalancefy variant="h2">Faça seu Login.</TitleBalancefy>
-                <TitleBalancefy variant="body3">
-                  Não tem uma conta?{" "}
+                <TitleBalancefy variant="body3"> Não tem uma conta?{" "}
                 </TitleBalancefy>
                 <TitleBalancefy variant="body3" color="#7DE2D1">
-                  Cadastre-se
+                <Link
+                    to="/cadastro"
+                    style={{ color: "#7DE2D1", textDecoration: "none" }}
+                  > Cadastre-se
+                  </Link>
                 </TitleBalancefy>
               </div>
 
@@ -77,7 +88,7 @@ function Login() {
 
               }}>
                 <div style={{ marginTop: "10%" }}>
-                  <Input label="Email" type="primary" width="100%" onChange={handleChangeEmail} value={login}></Input>
+                  <Input label="Email" type="primary" width="100%" onChange={handleChangeEmail} value={login} adornment={<InputAdornment position="end"><EmailIcon/></InputAdornment>}></Input>
                 </div>
 
                 <div style={{ marginTop: "5%" }}>
@@ -87,15 +98,21 @@ function Login() {
                 <div style={{ marginTop: "5%", marginBottom: "5%" }}>
                   <FormControlLabel control={<Checkbox defaultChecked />} label="Lembre-me" />
                 </div>
-                <Typography variant="subtitle1" component="span" style={{ fontWeight: 'bold', textDecoration: 'none', color: '#F74F4F' }}>
-                  {wrongUser}
-                </Typography>
                 <Box sx={{display: "flex", flexDirection: "row", position: "relative", width: "100%"}}>
-                  <ButtonBalancefy width="100%">Entrar</ButtonBalancefy>
+                  <Button sx={{width: "100%", height: "5vh"}} variant="contained" disabled={loading} type="submit">Entrar</Button>
                   {
-                    loading && (<Box sx={{display: "flex", alignItems: "center", justifyContent: "center", position: "absolute", right: "0", marginRight: "-45px"}}>
-                      <CircularProgress size={36} sx={{ color: "rgb(125, 226, 209)"}} />
-                    </Box>)
+                    loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: "#7DE2D1",
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        marginTop: '-12px',
+                        marginLeft: '-12px',
+                      }}
+                    />)
                   }
                 </Box>
               </form>

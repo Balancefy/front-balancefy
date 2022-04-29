@@ -23,11 +23,7 @@ export default function SpeedAdd(props) {
         <>
             <SpeedDial
                 ariaLabel="SpeedDial"
-                sx={{ 
-                    position: 'absolute',
-                    bottom: 35,
-                    left: '95%',
-                }}
+                direction="down"
                 icon={<SpeedDialIcon />}
             >
                 {actions.map((action) => (
