@@ -9,8 +9,10 @@ import logoFace from "../../img/facebook.svg";
 import logoGoogle from "../../img/google.svg";
 import logoInsta from "../../img/instagram.svg";
 import ou from "../../img/ou.svg";
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
+import PersonIcon from "@mui/icons-material/Person";
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import AddIcon from "@mui/icons-material/Add";
+import EmailIcon from "@mui/icons-material/Email";
 import { Box, flexbox } from "@mui/system";
 import {
   Button,
@@ -22,6 +24,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse";
 import { AuthContext } from "../../contexts/auth";
+import DateInput from "../../components/DateInput";
 
 export default function Cadastro() {
   return (
@@ -44,9 +47,10 @@ export default function Cadastro() {
             >
               <div>
                 <TitleBalancefy variant="h2">
-                  Crie uma nova conta.
+                  Conte-nos sobre você.
                 </TitleBalancefy>
-                <TitleBalancefy variant="body3">
+
+                {/* <TitleBalancefy variant="body3">
                   Já tem uma conta?{" "}
                   <Link
                     to="/login"
@@ -54,7 +58,7 @@ export default function Cadastro() {
                   >
                     Log in
                   </Link>
-                </TitleBalancefy>
+                </TitleBalancefy> */}
               </div>
 
               <form
@@ -63,40 +67,105 @@ export default function Cadastro() {
                   event.preventDefault();
                 }}
               >
+                <div style={{ marginTop: "5%", width: "100%" }}>
+                  <TitleBalancefy variant="body4">
+                    Data de nascimento
+                  </TitleBalancefy>
+                  <DateInput width="100%"> </DateInput>
+                </div>
+
+                <div>
+                  <Input
+                    label="Renda"
+                    type="primary"
+                    width="100%"
+                    adornment={
+                      <InputAdornment position="end">
+                        <CurrencyExchangeIcon />
+                      </InputAdornment>
+                    }
+                  ></Input>
+                </div>
+
+                <div style={{ marginTop: "5%", width: "100%" }}>
+                  <TitleBalancefy variant="body4">Gastos fixos</TitleBalancefy>
+                  <Input label="Descrição" type="primary" width="100%"></Input>
+                </div>
+
                 <div
+                  style={{
+                    justifyContent: "space-between",
+                    marginTop: "5%",
+                    display: "flex",
+                  }}
+                >
+                  <Input
+                    label="Valor"
+                    type="primary"
+                    width="267px"
+                    adornment={
+                      <InputAdornment position="end">
+                        <CurrencyExchangeIcon />
+                      </InputAdornment>
+                    }
+                  ></Input>
+                  <Input label="Categoria" type="primary" width="267px"></Input>
+                </div>
+
+                <div style={{ marginTop: "5%" }}>
+                  <AddIcon color="primary"></AddIcon>
+                  <subtitle2>Adicionar Gasto</subtitle2>
+                </div>
+
+                {/* <div
                   style={{
                     justifyContent: "space-between",
                     marginTop: "10%",
                     display: "flex",
                   }}
                 >
-                  <Input label="Nome" type="primary" width="267px" adornment={<InputAdornment position="end"><PersonIcon/></InputAdornment>}></Input>
+                  <Input
+                    label="Nome"
+                    type="primary"
+                    width="267px"
+                    adornment={
+                      <InputAdornment position="end">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
+                  ></Input>
                   <Input label="Sobrenome" type="primary" width="267px"></Input>
                 </div>
-
                 <div style={{ marginTop: "5%" }}>
-                  <Input label="Email" type="primary" width="100%" adornment={<InputAdornment position="end"><EmailIcon/></InputAdornment>}></Input>
+                  <Input
+                    label="Email"
+                    type="primary"
+                    width="100%"
+                    adornment={
+                      <InputAdornment position="end">
+                        <EmailIcon />
+                      </InputAdornment>
+                    }
+                  ></Input>
                 </div>
-
                 <div style={{ marginTop: "5%" }}>
                   <InputPass
                     width="100%"
                     label="Senha"
                     type="primary"
                   ></InputPass>
-                  <subtitle2  style={{fontWeight: 400}}>Senha deve ter pelo menos 8 carater. </subtitle2>
+                  <subtitle2 style={{ fontWeight: 400 }}>
+                    Senha deve ter pelo menos 8 carater.{" "}
+                  </subtitle2>
                 </div>
-                
-
                 <div style={{ marginTop: "5%" }}>
                   <InputPass
                     width="100%"
                     label="Confirmar senha"
                     type="primary"
                   ></InputPass>
-                </div>
+                </div> */}
 
-               
                 <Box
                   sx={{
                     display: "flex",
@@ -110,11 +179,12 @@ export default function Cadastro() {
                     variant="contained"
                     type="submit"
                   >
-                    Cadastrar
+                    Continuar
                   </Button>
                 </Box>
               </form>
-              <div style={{ marginTop: "10%" }}>
+
+              {/* <div style={{ marginTop: "10%" }}>
                 <img alt="or" style={{ width: "100%" }} src={ou} />
               </div>
 
@@ -136,7 +206,7 @@ export default function Cadastro() {
                 <IconButton>
                   <img alt="facebook" src={logoFace} />
                 </IconButton>
-              </div>
+              </div> */}
             </div>
           </Box>
           <Box>
