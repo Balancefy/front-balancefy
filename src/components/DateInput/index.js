@@ -7,7 +7,7 @@ export default function DateInput(props) {
     const style =  props.type === "primary" ? {
         width: '550px',
       } : {
-        width: '340px',
+        width: props.width,
       }
 
     const [value, setValue] = React.useState(new Date());

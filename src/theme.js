@@ -40,6 +40,10 @@ const theme = createTheme({
       fontSize: 24,
       fontWeight: 400
     },
+    body4: {
+      fontSize: 24,
+      fontWeight: 800
+    },
     subtitle1: {
       fontSize: 16,
       textDecoration: "underline"
