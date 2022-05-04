@@ -1,6 +1,8 @@
 import CommentBalancefy from "../Comment";
 import avatar from "../../Images/user2.jpg"
 
+const apiUrl = process.env.REACT_APP_API_URL
+
 export default function CommentsSection(props) {
   const comentarios = [
     {
@@ -17,7 +19,7 @@ export default function CommentsSection(props) {
         return (
           <CommentBalancefy
             name={comentario.nome}
-            imagem={comentario.imagem}
+            imagem={apiUrl + comentario.imagem}
           >{comentario.descricao}</CommentBalancefy>
         );
       })}

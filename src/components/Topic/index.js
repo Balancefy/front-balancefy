@@ -10,10 +10,12 @@ import { Box, IconButton } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+const apiUrl = process.env.REACT_APP_API_URL
+
 function TopicBalancefy(props) {
     const [like, setLike] = useState(false);
 
-    const style = props.style == "forum" ? 
+    const style = props.style === "forum" ? 
         {
             variantTitle: 'h2',
             variant: 'body1',
@@ -53,7 +55,7 @@ function TopicBalancefy(props) {
                             display: "flex",
                             alignItems: "center",
                         }}>
-                            <AvatarBalancefy width={style.sizeImage} imageAvatar={props.avatar}></AvatarBalancefy>
+                            <AvatarBalancefy width={style.sizeImage} imageAvatar={apiUrl + props.avatar}></AvatarBalancefy>
                             <Box sx={{ml: 2}}>
                                 <TitleBalancefy variant={style.variant}>
                                     {props.name}

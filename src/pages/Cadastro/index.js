@@ -22,6 +22,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Alert from "@mui/material/Alert";
 import Collapse from "@mui/material/Collapse";
 import { AuthContext } from "../../contexts/auth";
+import LoginGoogle from "../../components/LoginGoogle";
 
 export default function Cadastro() {
   return (
@@ -125,9 +126,7 @@ export default function Cadastro() {
                   marginTop: "10%",
                 }}
               >
-                <IconButton>
-                  <img alt="gmail" src={logoGoogle} />
-                </IconButton>
+                <LoginGoogle page="register"/>
 
                 <IconButton>
                   <img alt="instagram" src={logoInsta} />

@@ -5,7 +5,6 @@ import InputPass from "../../components/InputPass";
 import Container from "../../components/Container";
 import background from "../../img/login.png";
 import logoFace from "../../img/facebook.svg";
-import logoGoogle from "../../img/google.svg";
 import logoInsta from "../../img/instagram.svg";
 import ou from "../../img/ou.svg";
 import { Box } from "@mui/system";
@@ -16,6 +15,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import Collapse from '@mui/material/Collapse';
 import { AuthContext } from '../../contexts/auth';
 import { Link } from 'react-router-dom';
+import LoginGoogle from '../../components/LoginGoogle';
 
 function Login() {
 
@@ -127,9 +127,7 @@ function Login() {
                   marginTop: "10%",
                 }}
               >
-                <IconButton>
-                  <img alt="gmail" src={logoGoogle} />
-                </IconButton>
+                <LoginGoogle/>
 
                 <IconButton>
                   <img alt="instagram" src={logoInsta} />

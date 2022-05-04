@@ -21,10 +21,10 @@ const downloadCsv = (event) => {
     api
         .get('transaction/report', { responseType: 'blob' })
         .then(async (res) => {
-            let blob = new Blob([res.data], { type: 'application/csv' })
+            let blob = new Blob([res.data], { type: 'text/plain' })
             let link = document.createElement("a");
             link.href = await URL.createObjectURL(blob);
-            link.download = 'movimentacoes.csv'
+            link.download = 'movimentacoes.txt'
             link.click()
             URL.revokeObjectURL(link.href)
         })
