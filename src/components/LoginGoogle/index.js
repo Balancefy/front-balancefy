@@ -8,7 +8,7 @@ import api from "../../service/api";
 const clientId = process.env.REACT_APP_CLIENT_ID_GOOGLE
 
 export default function LoginGoogle(props) {
-    const { signInGoogle } = React.useContext(AuthContext);
+    const { signInSocial } = React.useContext(AuthContext);
 
     const onSuccess = (res) => {
         if(props.page === "register") {
@@ -23,7 +23,7 @@ export default function LoginGoogle(props) {
                 console.log(err)
             })
         } else {
-            signInGoogle(res.profileObj.email)
+            signInSocial(res.profileObj.email)
         }
     };
 

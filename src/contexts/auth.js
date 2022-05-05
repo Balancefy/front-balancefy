@@ -34,7 +34,7 @@ export function AuthProvider(props) {
     }
   }
 
-  async function signInGoogle(email) {
+  async function signInSocial(email) {
     try {
       const response = await api.post('auth/social', {
         email: email
@@ -84,7 +84,7 @@ export function AuthProvider(props) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, signOutDefault, signIn, signInGoogle }}>
+    <AuthContext.Provider value={{ user, signOutDefault, signIn, signInSocial }}>
       {props.children}
     </AuthContext.Provider>
   )

@@ -16,6 +16,7 @@ import Collapse from '@mui/material/Collapse';
 import { AuthContext } from '../../contexts/auth';
 import { Link } from 'react-router-dom';
 import LoginGoogle from '../../components/LoginGoogle';
+import LoginGithub from '../../components/LoginGihub';
 
 function Login() {
 
@@ -129,9 +130,7 @@ function Login() {
               >
                 <LoginGoogle/>
 
-                <IconButton>
-                  <img alt="instagram" src={logoInsta} />
-                </IconButton>
+                <LoginGithub />
 
                 <IconButton>
                   <img alt="facebook" src={logoFace} />

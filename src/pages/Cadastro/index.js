@@ -26,6 +26,7 @@ import Collapse from "@mui/material/Collapse";
 import { AuthContext } from "../../contexts/auth";
 import LoginGoogle from "../../components/LoginGoogle";
 import DateInput from "../../components/DateInput";
+import LoginGithub from "../../components/LoginGihub";
 
 export default function Cadastro() {
   return (
@@ -185,7 +186,7 @@ export default function Cadastro() {
                 </Box>
               </form>
 
-              {/* <div style={{ marginTop: "10%" }}>
+              <div style={{ marginTop: "10%" }}>
                 <img alt="or" style={{ width: "100%" }} src={ou} />
               </div>
 
@@ -198,14 +199,12 @@ export default function Cadastro() {
               >
                 <LoginGoogle page="register"/>
 
-                <IconButton>
-                  <img alt="instagram" src={logoInsta} />
-                </IconButton>
+                <LoginGithub page="register"/>
 
                 <IconButton>
                   <img alt="facebook" src={logoFace} />
                 </IconButton>
-              </div> */}
+              </div>
             </div>
           </Box>
           <Box>
