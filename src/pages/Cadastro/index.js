@@ -27,6 +27,7 @@ import { AuthContext } from "../../contexts/auth";
 import LoginGoogle from "../../components/LoginGoogle";
 import DateInput from "../../components/DateInput";
 import LoginGithub from "../../components/LoginGihub";
+import SelectBalancefy from "../../components/Select";
 
 export default function Cadastro() {
   return (
@@ -49,18 +50,8 @@ export default function Cadastro() {
             >
               <div>
                 <TitleBalancefy variant="h2">
-                  Conte-nos sobre você.
+                  Qual seu principal Objetivo?
                 </TitleBalancefy>
-
-                {/* <TitleBalancefy variant="body3">
-                  Já tem uma conta?{" "}
-                  <Link
-                    to="/login"
-                    style={{ color: "#7DE2D1", textDecoration: "none" }}
-                  >
-                    Log in
-                  </Link>
-                </TitleBalancefy> */}
               </div>
 
               <form
@@ -70,103 +61,52 @@ export default function Cadastro() {
                 }}
               >
                 <div style={{ marginTop: "5%", width: "100%" }}>
-                  <TitleBalancefy variant="body4">
-                    Data de nascimento
-                  </TitleBalancefy>
-                  <DateInput width="100%"> </DateInput>
+                  <TitleBalancefy variant="body4">Objetivo</TitleBalancefy>
                 </div>
+                <Input label="Descrição" type="primary" width="100%"></Input>
 
-                <div>
-                  <Input
-                    label="Renda"
+                <div style={{ marginTop: "5%" }}>
+                  <SelectBalancefy
+                    label="Categoria"
                     type="primary"
+                    content="category"
                     width="100%"
-                    adornment={
-                      <InputAdornment position="end">
-                        <CurrencyExchangeIcon />
-                      </InputAdornment>
-                    }
-                  ></Input>
+                  ></SelectBalancefy>
                 </div>
 
                 <div style={{ marginTop: "5%", width: "100%" }}>
-                  <TitleBalancefy variant="body4">Gastos fixos</TitleBalancefy>
-                  <Input label="Descrição" type="primary" width="100%"></Input>
+                  <TitleBalancefy variant="body4">
+                    Data de conclusão
+                  </TitleBalancefy>
                 </div>
 
-                <div
-                  style={{
-                    justifyContent: "space-between",
-                    marginTop: "5%",
-                    display: "flex",
-                  }}
-                >
+                <DateInput width="100%"> </DateInput>
+
+                <div>
                   <Input
-                    label="Valor"
+                    label="Valor Inicial"
                     type="primary"
-                    width="267px"
+                    width="100%"
                     adornment={
                       <InputAdornment position="end">
                         <CurrencyExchangeIcon />
                       </InputAdornment>
                     }
                   ></Input>
-                  <Input label="Categoria" type="primary" width="267px"></Input>
                 </div>
 
-                <div style={{ marginTop: "5%" }}>
-                  <AddIcon color="primary"></AddIcon>
-                  <subtitle2>Adicionar Gasto</subtitle2>
-                </div>
-
-                {/* <div
-                  style={{
-                    justifyContent: "space-between",
-                    marginTop: "10%",
-                    display: "flex",
-                  }}
-                >
+                <div style={{marginTop: "5%"}}>
                   <Input
-                    label="Nome"
-                    type="primary"
-                    width="267px"
-                    adornment={
-                      <InputAdornment position="end">
-                        <PersonIcon />
-                      </InputAdornment>
-                    }
-                  ></Input>
-                  <Input label="Sobrenome" type="primary" width="267px"></Input>
-                </div>
-                <div style={{ marginTop: "5%" }}>
-                  <Input
-                    label="Email"
+                    label="Valor do objetivo"
                     type="primary"
                     width="100%"
                     adornment={
                       <InputAdornment position="end">
-                        <EmailIcon />
+                        <CurrencyExchangeIcon />
                       </InputAdornment>
                     }
                   ></Input>
                 </div>
-                <div style={{ marginTop: "5%" }}>
-                  <InputPass
-                    width="100%"
-                    label="Senha"
-                    type="primary"
-                  ></InputPass>
-                  <subtitle2 style={{ fontWeight: 400 }}>
-                    Senha deve ter pelo menos 8 carater.{" "}
-                  </subtitle2>
-                </div>
-                <div style={{ marginTop: "5%" }}>
-                  <InputPass
-                    width="100%"
-                    label="Confirmar senha"
-                    type="primary"
-                  ></InputPass>
-                </div> */}
 
                 <Box
                   sx={{
@@ -181,7 +121,7 @@ export default function Cadastro() {
                     variant="contained"
                     type="submit"
                   >
-                    Continuar
+                    Finalizar
                   </Button>
                 </Box>
               </form>
@@ -197,9 +137,9 @@ export default function Cadastro() {
                   marginTop: "10%",
                 }}
               >
-                <LoginGoogle page="register"/>
+                <LoginGoogle page="register" />
 
-                <LoginGithub page="register"/>
+                {/* <LoginGithub page="register"/> */}
 
                 <IconButton>
                   <img alt="facebook" src={logoFace} />
