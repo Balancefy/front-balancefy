@@ -5,5 +5,5 @@ import { OutsideRoutes } from "./app.outside.routes";
 
 export const Routes = () => {
     const { user } = React.useContext(AuthContext);
-    return user != null ? < AuthenticatedRoutes / > : < OutsideRoutes / >
+    return user != null ? < AuthenticatedRoutes /> : < OutsideRoutes />
 }
