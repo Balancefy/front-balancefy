@@ -6,7 +6,7 @@ import MainContainer from "../../components/MainContainer";
 import Container from "../../components/Container";
 import Roadmap from "../../components/Roadmap";
 import Ranking from "../../components/Ranking";
-import {Box} from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 export default function Goals() {
 
@@ -27,19 +27,39 @@ export default function Goals() {
     return (
         <>
             <MainContainer page="Goals">
-                <Container margin="auto" height="95vh" width="60%" borderRadius={10} >
+                <Grid container direction="row" justifyContent="space-evenly" width="100%" height="95vh" margin="auto">
+    
+                    <Grid item md={9}>
+                        <Container height="95vh" width="100%" borderRadius={10}>
+                            aqui
+                            <Grid container justifyContent="space-around">
+                                <Grid item>
+                                    <FaltaMeta>
+                                        2.000,00
+                                    </FaltaMeta>
+                                </Grid>
+                                <Grid item>
+                                    <DataEstimada>23/04/2022</DataEstimada>
+                                </Grid>
+                                <Grid item>
+                                    <ObjetivoAtualBox titulo="Economizar" descricao="Reservar 20 reais por mês, durante 2 meses" xp="10">
+                                    </ObjetivoAtualBox>
+                                </Grid>
+                            </Grid>
+                        </Container>
 
-                    <FaltaMeta>
-                        2.000,00
-                    </FaltaMeta>
-                    <DataEstimada>23/04/2022</DataEstimada>
-                    <ObjetivoAtualBox titulo="Economizar" descricao="Reservar 20 reais por mês, durante 2 meses" xp="10">
-                    </ObjetivoAtualBox>
-                </Container>
-                <div style={{display:"flex", flexWrap: "wrap", margin:"auto" }}>
-                  <Roadmap data={[{id:1, desc: "teste", xp: 10}]}></Roadmap>
-                  <Ranking data={users} marginTop="150px"></Ranking>
-                </div>
+                    </Grid>
+                    <Grid item height="100%">
+                        <Grid container direction="column" justifyContent="space-between" height="100%">
+                            <Grid item>
+                                <Roadmap data={[{ id: 1, desc: "teste", xp: 10 }]}></Roadmap>
+                            </Grid>
+                            <Grid item>
+                                <Ranking data={users}></Ranking>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </MainContainer>
         </>
     )
