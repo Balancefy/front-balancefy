@@ -10,6 +10,8 @@ import { Box, IconButton } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+const apiUrl = process.env.REACT_APP_API_URL
+
 function TopicWithComments(props) {
     const [like, setLike] = useState(false);
 
@@ -26,7 +28,7 @@ function TopicWithComments(props) {
                         display: "flex",
                         alignItems: "center"
                     }}>
-                        <AvatarBalancefy width="50px" imageAvatar={props.avatar}></AvatarBalancefy>
+                        <AvatarBalancefy width="50px" imageAvatar={apiUrl + props.avatar}></AvatarBalancefy>
                         <Box sx={{ml: 2}}>
                             <TitleBalancefy variant="subtitle1">
                                 {props.name}

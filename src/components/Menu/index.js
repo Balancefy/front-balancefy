@@ -8,11 +8,24 @@ import AvatarBalancefy from '../Avatar';
 import { AuthContext } from '../../contexts/auth';
 import React from 'react';
 import SpeedAdd from '../SpeedAdd';
-import avatar from "../../Images/user3.jpg"
+import { useGoogleLogout } from 'react-google-login';
+
+const clientId = process.env.REACT_APP_CLIENT_ID_GOOGLE
+const apiUrl = process.env.REACT_APP_API_URL
 
 export default function Menu(props) {
 
-    const { signOut } = React.useContext(AuthContext);
+    const { signOutDefault, user } = React.useContext(AuthContext);
+
+    const onLogoutSuccess = () => {
+        signOutDefault()
+    }
+
+    const { signOut } = useGoogleLogout({
+        clientId,
+        onLogoutSuccess
+    });
+
     return (
         <>
             <div style={{
@@ -27,7 +40,7 @@ export default function Menu(props) {
                 backgroundColor: "#131515"
             }} >
                 <Link to="/profile">
-                    <AvatarBalancefy imageAvatar={avatar} width="65px" style={{ border: "1px solid #000", marginBottom: "137px", cursor: "pointer" }}></AvatarBalancefy>
+                    <AvatarBalancefy imageAvatar={apiUrl + user.fkUsuario.avatar} width="65px" style={{ border: "1px solid #000", marginBottom: "137px", cursor: "pointer" }}></AvatarBalancefy>
                 </Link>
                 {props.page === "Home" ?
                     <PageIcon selected icon={<HomeIcon sx={{ fontSize: "45px" }} />}></PageIcon> :
@@ -51,7 +64,7 @@ export default function Menu(props) {
                 <div style={{
                     marginTop: "auto"
                 }}>
-                    <PageIcon onClick={signOut} icon={<LogoutIcon sx={{ fontSize: "45px" }} />}></PageIcon>
+                    <PageIcon onClick={user.tipo === "DEFAULT" ? signOutDefault : signOut} icon={<LogoutIcon sx={{ fontSize: "45px" }} />}></PageIcon>
                     <img alt="logo" style={{height: "50px"}} src="./img/icon-white.svg"/>
                 </div>
             </div>

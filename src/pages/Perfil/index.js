@@ -4,17 +4,18 @@ import ProfileBalancefy from '../../components/Profile'
 import React from 'react'
 import { default as TopicBalancefy } from '../../components/Topic/profileVariant'
 import { AuthContext } from '../../contexts/auth'
-import avatar from "../../Images/user3.jpg"
 
 export default function Profile(props) {
     const { user } = React.useContext(AuthContext);
+
+    console.log(user.fkUsuario)
 
     const topics = [
         {
             key: 1,
             title: "Economizar dinheiro",
             description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: avatar,
+            avatar: `http://localhost:8080${user.fkUsuario.avatar}`,
             name: user.fkUsuario.nome,
             comment: "11",
             like: "11",
@@ -25,7 +26,7 @@ export default function Profile(props) {
             key: 2,
             title: "Economizar dinheiro",
             description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: avatar,
+            avatar: `http://localhost:8080${user.fkUsuario.avatar}`,
             name: user.fkUsuario.nome,
             comment: "11",
             like: "11",
@@ -36,7 +37,7 @@ export default function Profile(props) {
             key: 3,
             title: "Economizar dinheiro",
             description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: avatar,
+            avatar: `http://localhost:8080${user.fkUsuario.avatar}`,
             name: user.fkUsuario.nome,
             comment: "11",
             like: "11",
@@ -57,7 +58,7 @@ export default function Profile(props) {
                         alignItems: "center",
                         flexDirection: "column"
                     }}>
-                        <ProfileBalancefy name={user.fkUsuario.nome} imagem={avatar}></ProfileBalancefy>
+                        <ProfileBalancefy name={user.fkUsuario.nome} imagem={user.fkUsuario.avatar}></ProfileBalancefy>
                         <div style={{
                             width: "100%",
                             display: "flex",

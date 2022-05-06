@@ -1,13 +1,15 @@
 import CommentBalancefy from "../Comment";
 import avatar from "../../Images/user2.jpg"
 
+const apiUrl = process.env.REACT_APP_API_URL
+
 export default function CommentsSection(props) {
   const comentarios = [
     {
       id: 1,
       nome: "Bianca",
       descricao: "Que legal! Não sabia disso.",
-      imagem: avatar,
+      imagem: apiUrl + avatar,
       children: [{
         id: 2,
         nome: "Kleber",
@@ -17,14 +19,14 @@ export default function CommentsSection(props) {
           id: 2,
           nome: "Kleber",
           descricao: "Ela é tão necessária, né?",
-          imagem: avatar,
+          imagem: apiUrl + avatar,
         }]
       },
       {
         id: 3,
         nome: "Miguel",
         descricao: "Eu também não, é bem útil.",
-        imagem: avatar,
+        imagem: apiUrl + avatar,
         children: []
       }]
     },
@@ -32,7 +34,7 @@ export default function CommentsSection(props) {
       id: 1,
       nome: "Beatriz",
       descricao: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae magni ipsam eligendi dolores, totam eaque voluptatum doloremque culpa iure autem ullam. Perspiciatis tenetur esse quia laborum? Deserunt minima accusantium ea.",
-      imagem: avatar,
+      imagem: apiUrl + avatar,
       children: []
     }
   ];
