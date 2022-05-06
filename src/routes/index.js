@@ -4,7 +4,6 @@ import { AuthenticatedRoutes } from "./app.inside.routes"
 import { OutsideRoutes } from "./app.outside.routes";
 
 export const Routes = () => {
-    // const { user } = React.useContext(AuthContext);
-    const user = "a";
-    return user != null ? <AuthenticatedRoutes /> : <OutsideRoutes/>
+    const { user } = React.useContext(AuthContext);
+    return user != null ? < AuthenticatedRoutes / > : < OutsideRoutes / >
 }
