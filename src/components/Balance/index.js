@@ -9,11 +9,11 @@ export default function BalanceBalancefy(props) {
         <Container
           background="#4B4B4B"
           height="291px"
-          width="521px"
           borderRadius="10px"
           style={{
             display: "flex",
             flexDirection: "column",
+            
           }}
         >
           <div style={{display:"flex", alignItems:"center", flexDirection:"column"}}>

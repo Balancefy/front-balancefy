@@ -87,7 +87,6 @@ export default function Comments(props) {
                             
                             <Box sx={{mt: 2, ml: 4}}>
                                <CommentsSection> </CommentsSection>
-                               <CommentsSection> </CommentsSection>
                             </Box>
 
                         </Grid>
