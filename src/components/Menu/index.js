@@ -56,8 +56,8 @@ export default function Menu(props) {
                 }
                  {props.page === "Goals" ?
                     <PageIcon selected icon={<TrackChangesIcon sx={{ fontSize: "45px" }} />}></PageIcon> :
-                    <Link to="/" style={{ color:"white" }}>
-                        <PageIcon icon={<TrackChangesIcon  sx={{ fontSize: "45px", color:"#4B4B4B" }} />}></PageIcon>
+                    <Link to="/goals" style={{ color:"white" }}>
+                        <PageIcon icon={<TrackChangesIcon  sx={{ fontSize: "45px"}} />}></PageIcon>
                     </Link>
                 }
                 <SpeedAdd/>
