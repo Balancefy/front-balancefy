@@ -28,7 +28,6 @@ export default function Goals() {
         <>
             <MainContainer page="Goals">
                 <Grid container direction="row" justifyContent="space-evenly" width="100%" height="95vh" margin="auto">
-    
                     <Grid item md={9}>
                         <Container height="95vh" width="100%" borderRadius={10}>
                             aqui
@@ -47,7 +46,6 @@ export default function Goals() {
                                 </Grid>
                             </Grid>
                         </Container>
-
                     </Grid>
                     <Grid item height="100%">
                         <Grid container direction="column" justifyContent="space-between" height="100%">

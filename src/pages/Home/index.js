@@ -14,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import Chip from '@mui/material/Chip';
+import ObjFinal from "../../components/ObjFinal";
 
 
 
@@ -123,6 +124,17 @@ export default function Home() {
                             <Container style={{ display: "flex", height: "100%", width: "560px", justifyContent: "center" }}>
                                 <Grid>
                                     <GoalsBalancefy></GoalsBalancefy>
+                                    <ObjFinal 
+                                        title="Comprar todas peças do PC" 
+                                        desc="Quitar todas as parcelas da casa"
+                                        xp="2000xp"
+                                        metas="1/9"
+                                        >
+                                    </ObjFinal>
+                                    
+                                </Grid>
+                                <Grid>
+                                    
                                 </Grid>
                             </Container>
                         </Grid>

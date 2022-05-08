@@ -11,6 +11,7 @@ import Home from "../pages/Home";
 import Profile from "../pages/Perfil";
 import NotFound from '../pages/404'
 import Goals from '../pages/Goals';
+import TestsComponents from "../pages/TestsComponents";
 
 
 export const AuthenticatedRoutes = () => {
@@ -24,6 +25,7 @@ export const AuthenticatedRoutes = () => {
                 <Route path="/comments" element={<Comments/>} />
                 <Route path="/profile"  element={<Profile/>} />
                 <Route path="/goals"  element={<Goals/>} />
+                <Route path="/test"  element={<TestsComponents/>} />
             </Routes>
         </ Router>
     )
