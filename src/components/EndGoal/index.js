@@ -19,7 +19,7 @@ export default function GoalsBalancefy(props) {
             color: "#7DE2D1",
           }}
         >
-          <h3>Cadastre o seu primeiro objetivo!</h3>
+          <h3>COMPRAR PC GAMER</h3>
         </div>
         {/* <SpeedAdd style={{ left: "50%", position: "relative", top: "53vh" }} /> */}
       </Container>

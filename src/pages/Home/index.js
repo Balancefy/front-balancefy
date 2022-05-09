@@ -129,12 +129,12 @@ export default function Home() {
                                         desc="Quitar todas as parcelas da casa"
                                         xp="2000xp"
                                         metas="1/9"
+                                        tasks={[{}]}
                                         >
                                     </ObjFinal>
-                                    
                                 </Grid>
                                 <Grid>
-                                    
+
                                 </Grid>
                             </Container>
                         </Grid>
