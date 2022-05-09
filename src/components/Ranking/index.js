@@ -1,5 +1,6 @@
 import Container from "../Container";
 import RankPosition from "../RankPosition";
+import TitleWithBorder from "../TitleWithBorder";
 
 export default function Ranking(props) {
   const users = props.data
@@ -14,9 +15,7 @@ export default function Ranking(props) {
   return (
     <>
       <Container height="312px" width="380px" borderRadius="10px">
-        <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-          Ranking
-        </h2>
+        <TitleWithBorder>Ranking</TitleWithBorder>
         <div style={{
           maxHeight: "26vh",
           overflow: "auto",

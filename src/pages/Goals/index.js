@@ -1,4 +1,5 @@
 import Titulo from "../../components/Titulo";
+import ButtonBalancefy from "../../components/Button";
 import FaltaMeta from "../../components/FaltaMeta";
 import DataEstimada from "../../components/DataEstimada";
 import ObjetivoAtualBox from "../../components/ObjetivoAtualBox";
@@ -7,6 +8,7 @@ import Container from "../../components/Container";
 import Roadmap from "../../components/Roadmap";
 import Ranking from "../../components/Ranking";
 import { Box, Grid } from "@mui/material";
+import { height } from "@mui/system";
 
 export default function Goals() {
 
@@ -29,8 +31,16 @@ export default function Goals() {
             <MainContainer page="Goals">
                 <Grid container direction="row" justifyContent="space-evenly" width="100%" height="95vh" margin="auto">
                     <Grid item md={9}>
-                        <Container height="95vh" width="100%" borderRadius={10}>
-                            aqui
+                        <Container height="100%" width="100%" borderRadius={10}>
+                            <Grid container justifyContent="space-between" alignItems="center" paddingLeft="40px" paddingRight="40px" paddingTop="25px" paddingBottom="25px">
+                                <Grid item>
+                                    <Titulo styles={{color:"#7DE2D1", fontSize:24, fontWeight:600}}>Viagem Internacional</Titulo>
+                                </Grid>
+                                <Grid item>
+                                    <ButtonBalancefy>Adicionar Movimentação</ButtonBalancefy>
+                                </Grid>
+                            </Grid>
+
                             <Grid container justifyContent="space-around">
                                 <Grid item>
                                     <FaltaMeta>
