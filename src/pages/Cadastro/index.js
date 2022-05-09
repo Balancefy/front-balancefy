@@ -13,7 +13,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import AddIcon from "@mui/icons-material/Add";
 import EmailIcon from "@mui/icons-material/Email";
-import { Box, flexbox } from "@mui/system";
+import { Box, display, flexbox } from "@mui/system";
 import {
   Button,
   FormControlLabel,
@@ -30,6 +30,10 @@ import LoginGithub from "../../components/LoginGihub";
 import SelectBalancefy from "../../components/Select";
 
 export default function Cadastro() {
+  const [displayOne, setDisplayOne] = React.useState("block");
+  const [displayTwo, setDisplayTwo] = React.useState("none");
+  const [displayThree, setDisplayThree] = React.useState("none");
+
   return (
     <>
       <Container
@@ -48,102 +52,307 @@ export default function Cadastro() {
                 flexDirection: "column",
               }}
             >
-              <div>
-                <TitleBalancefy variant="h2">
-                  Qual seu principal Objetivo?
-                </TitleBalancefy>
-              </div>
+              <div id="form-1" style={{ display: displayOne }}>
+                <div>
+                  <TitleBalancefy variant="h2">
+                    Crie uma nova conta.
+                  </TitleBalancefy>
 
-              <form
-                style={{ width: "550px" }}
-                onSubmit={(event) => {
-                  event.preventDefault();
-                }}
-              >
-                <div style={{ marginTop: "5%", width: "100%" }}>
-                  <TitleBalancefy variant="body4">Objetivo</TitleBalancefy>
-                </div>
-                <Input label="Descrição" type="primary" width="100%"></Input>
-
-                <div style={{ marginTop: "5%" }}>
-                  <SelectBalancefy
-                    label="Categoria"
-                    type="primary"
-                    content="category"
-                    width="100%"
-                  ></SelectBalancefy>
-                </div>
-
-                <div style={{ marginTop: "5%", width: "100%" }}>
-                  <TitleBalancefy variant="body4">
-                    Data de conclusão
+                  <TitleBalancefy variant="body3">
+                    Já tem uma conta?
+                    <Link
+                      to="/login"
+                      style={{ color: "#7DE2D1", textDecoration: "none" }}
+                    >
+                      Log in
+                    </Link>
                   </TitleBalancefy>
                 </div>
 
-                <DateInput width="100%"> </DateInput>
-
-                <div>
-                  <Input
-                    label="Valor Inicial"
-                    type="primary"
-                    width="100%"
-                    adornment={
-                      <InputAdornment position="end">
-                        <CurrencyExchangeIcon />
-                      </InputAdornment>
-                    }
-                  ></Input>
-                </div>
-
-                <div style={{marginTop: "5%"}}>
-                  <Input
-                    label="Valor do objetivo"
-                    type="primary"
-                    width="100%"
-                    adornment={
-                      <InputAdornment position="end">
-                        <CurrencyExchangeIcon />
-                      </InputAdornment>
-                    }
-                  ></Input>
-                </div>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    position: "relative",
-                    width: "100%",
+                <form
+                  style={{ width: "550px" }}
+                  onSubmit={(event) => {
+                    event.preventDefault();
                   }}
                 >
-                  <Button
-                    sx={{ marginTop: "5%", width: "100%", height: "5vh" }}
-                    variant="contained"
-                    type="submit"
+                  <div
+                    style={{
+                      justifyContent: "space-between",
+                      marginTop: "10%",
+                      display: "flex",
+                    }}
                   >
-                    Finalizar
-                  </Button>
-                </Box>
-              </form>
+                    <Input
+                      label="Nome"
+                      type="primary"
+                      width="267px"
+                      adornment={
+                        <InputAdornment position="end">
+                          <PersonIcon />
+                        </InputAdornment>
+                      }
+                    ></Input>
+                    <Input
+                      label="Sobrenome"
+                      type="primary"
+                      width="267px"
+                    ></Input>
+                  </div>
+                  <div style={{ marginTop: "5%" }}>
+                    <Input
+                      label="Email"
+                      type="primary"
+                      width="100%"
+                      adornment={
+                        <InputAdornment position="end">
+                          <EmailIcon />
+                        </InputAdornment>
+                      }
+                    ></Input>
+                  </div>
+                  <div style={{ marginTop: "5%" }}>
+                    <InputPass
+                      width="100%"
+                      label="Senha"
+                      type="primary"
+                    ></InputPass>
+                    <subtitle2 style={{ fontWeight: 400 }}>
+                      Senha deve ter pelo menos 8 carater.{" "}
+                    </subtitle2>
+                  </div>
+                  <div style={{ marginTop: "5%" }}>
+                    <InputPass
+                      width="100%"
+                      label="Confirmar senha"
+                      type="primary"
+                    ></InputPass>
+                  </div>
 
-              <div style={{ marginTop: "10%" }}>
-                <img alt="or" style={{ width: "100%" }} src={ou} />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      position: "relative",
+                      width: "100%",
+                    }}
+                  >
+                    <Button
+                      sx={{ marginTop: "5%", width: "100%", height: "5vh" }}
+                      variant="contained"
+                      type="submit"
+                      onClick={() => {
+                        setDisplayOne("none");
+                        setDisplayTwo("block");
+                        setDisplayThree("none");
+                      }}
+                    >
+                      Continuar
+                    </Button>
+                  </Box>
+                </form>
               </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginTop: "10%",
-                }}
-              >
-                <LoginGoogle page="register" />
+              <div id="form-2" style={{ display: displayTwo }}>
+                <div>
+                  <TitleBalancefy variant="h2">
+                    Conte-nos sobre você.
+                  </TitleBalancefy>
+                </div>
+                <form
+                  style={{ width: "550px" }}
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                  }}
+                >
+                  <div style={{ marginTop: "5%", width: "100%" }}>
+                    <TitleBalancefy variant="body4">
+                      Data de nascimento
+                    </TitleBalancefy>
+                    <DateInput width="100%"> </DateInput>
+                  </div>
+                  <div>
+                    <Input
+                      label="Renda"
+                      type="primary"
+                      width="100%"
+                      adornment={
+                        <InputAdornment position="end">
+                          <CurrencyExchangeIcon />
+                        </InputAdornment>
+                      }
+                    ></Input>
+                  </div>
+                  <div style={{ marginTop: "5%", width: "100%" }}>
+                    <TitleBalancefy variant="body4">
+                      Gastos fixos
+                    </TitleBalancefy>
+                    <Input
+                      label="Descrição"
+                      type="primary"
+                      width="100%"
+                    ></Input>
+                  </div>
+                  <div
+                    style={{
+                      justifyContent: "space-between",
+                      marginTop: "5%",
+                      display: "flex",
+                    }}
+                  >
+                    <Input
+                      label="Valor"
+                      type="primary"
+                      width="267px"
+                      adornment={
+                        <InputAdornment position="end">
+                          <CurrencyExchangeIcon />
+                        </InputAdornment>
+                      }
+                    ></Input>
 
-                {/* <LoginGithub page="register"/> */}
+                    <SelectBalancefy
+                      label="Categoria"
+                      type="primary"
+                      content="category"
+                      width="267px"
+                    ></SelectBalancefy>
+                  </div>
 
-                <IconButton>
-                  <img alt="facebook" src={logoFace} />
-                </IconButton>
+                  <div
+                    style={{
+                      marginTop: "5%",
+                      display: "flex",
+                      alignItems: "center",
+                      height: "fit-content",
+                    }}
+                  >
+                    <AddIcon color="primary"></AddIcon>
+                    <p style={{ margin: 0 }}>Adicionar Gasto</p>
+                  </div>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      position: "relative",
+                      width: "100%",
+                    }}
+                  >
+                    <Button
+                      sx={{ marginTop: "5%", width: "100%", height: "5vh" }}
+                      variant="contained"
+                      type="submit"
+                      onClick={() => {
+                        setDisplayOne("none");
+                        setDisplayTwo("none");
+                        setDisplayThree("block");
+                      }}
+                    >
+                      Continuar
+                    </Button>
+                  </Box>
+                </form>
+              </div>
+
+              <div id="form-3" style={{ display: displayThree }}>
+                <div>
+                  <TitleBalancefy variant="h2">
+                    Qual seu principal Objetivo?
+                  </TitleBalancefy>
+                </div>
+
+                <form
+                  style={{ width: "550px" }}
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                  }}
+                >
+                  <div style={{ marginTop: "5%", width: "100%" }}>
+                    <TitleBalancefy variant="body4">Objetivo</TitleBalancefy>
+                  </div>
+                  <Input label="Descrição" type="primary" width="100%"></Input>
+
+                  <div style={{ marginTop: "5%" }}>
+                    <SelectBalancefy
+                      label="Categoria"
+                      type="primary"
+                      content="category"
+                      width="100%"
+                    ></SelectBalancefy>
+                  </div>
+
+                  <div style={{ marginTop: "5%", width: "100%" }}>
+                    <TitleBalancefy variant="body4">
+                      Data de conclusão
+                    </TitleBalancefy>
+                  </div>
+
+                  <DateInput width="100%"> </DateInput>
+
+                  <div>
+                    <Input
+                      label="Valor Inicial"
+                      type="primary"
+                      width="100%"
+                      adornment={
+                        <InputAdornment position="end">
+                          <CurrencyExchangeIcon />
+                        </InputAdornment>
+                      }
+                    ></Input>
+                  </div>
+
+                  <div style={{ marginTop: "5%" }}>
+                    <Input
+                      label="Valor do objetivo"
+                      type="primary"
+                      width="100%"
+                      adornment={
+                        <InputAdornment position="end">
+                          <CurrencyExchangeIcon />
+                        </InputAdornment>
+                      }
+                    ></Input>
+                  </div>
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      position: "relative",
+                      width: "100%",
+                    }}
+                  >
+                    <Button
+                      sx={{ marginTop: "5%", width: "100%", height: "5vh" }}
+                      variant="contained"
+                      type="submit"
+                    >
+                      Finalizar
+                    </Button>
+                  </Box>
+                </form>
+              </div>
+
+              <div style={{display:displayOne}}>
+                <div style={{ marginTop: "10%" }}>
+                  <img alt="or" style={{ width: "100%" }} src={ou} />
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "10%",
+                  }}
+                >
+                  <LoginGoogle page="register" />
+
+                  {/* <LoginGithub page="register"/> */}
+
+                  <IconButton>
+                    <img alt="facebook" src={logoFace} />
+                  </IconButton>
+                </div>
               </div>
             </div>
           </Box>
