@@ -64,8 +64,8 @@ export default function Menu(props) {
                 <div style={{
                     marginTop: "auto"
                 }}>
-                    <PageIcon onClick={user.tipo === "DEFAULT" ? signOutDefault : signOut} icon={<LogoutIcon sx={{ fontSize: "45px" }} />}></PageIcon>
-                    <img alt="logo" style={{height: "50px"}} src="./img/icon-white.svg"/>
+                    <PageIcon onClick={user.fkUsuario.type === "DEFAULT" ? signOutDefault : signOut} icon={<LogoutIcon sx={{ fontSize: "45px" }} />}></PageIcon>
+                    <img alt="logo" style={{height: "50px"}} src ="./img/icon-white.svg"/>
                 </div>
             </div>
         </>

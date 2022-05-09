@@ -130,7 +130,7 @@ function Login() {
               >
                 <LoginGoogle/>
 
-                <LoginGithub />
+                {/* <LoginGithub /> */}
 
                 <IconButton>
                   <img alt="facebook" src={logoFace} />
