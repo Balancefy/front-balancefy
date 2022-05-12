@@ -23,7 +23,7 @@ function Login() {
   const [open, setOpen] = React.useState(false);
   const [login, setLogin] = React.useState('');
   const [senha, setSenha] = React.useState('');
-  const { signIn, user } = React.useContext(AuthContext);
+  const { signIn, user, signInSocial } = React.useContext(AuthContext);
 
   const [loading, setLoading] = React.useState(false)
 
@@ -128,7 +128,7 @@ function Login() {
                   marginTop: "10%",
                 }}
               >
-                <LoginGoogle/>
+                <LoginGoogle onSuccess={() => signInSocial()} onFailure={() => setOpen(true)}/>
 
                 {/* <LoginGithub /> */}
 

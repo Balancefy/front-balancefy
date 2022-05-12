@@ -23,18 +23,18 @@ export default function LoginGoogle(props) {
                 console.log(err)
             })
         } else {
-            signInSocial(res.profileObj.email)
+            props.onSuccess(res.profileObj.email)
         }
     };
 
     const onFailure = (res) => {
-        console.log(res)
+        props.onFailure()
     };
 
     const { signIn } = useGoogleLogin({
         onSuccess,
         clientId,
-        isSignedIn: true,
+        isSignedIn: false,
         onFailure,
         cookiePolicy: "single_host_origin"
     })
