@@ -5,15 +5,12 @@ import Input from "../../components/Input";
 import InputPass from "../../components/InputPass";
 import Container from "../../components/Container";
 import background from "../../img/login.png";
-import logoFace from "../../img/facebook.svg";
-import logoGoogle from "../../img/google.svg";
-import logoInsta from "../../img/instagram.svg";
 import ou from "../../img/ou.svg";
 import PersonIcon from "@mui/icons-material/Person";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import AddIcon from "@mui/icons-material/Add";
 import EmailIcon from "@mui/icons-material/Email";
-import { Box, display, flexbox } from "@mui/system";
+import { Box } from "@mui/system";
 import {
   Button,
   FormControlLabel,
@@ -28,6 +25,7 @@ import LoginGoogle from "../../components/LoginGoogle";
 import DateInput from "../../components/DateInput";
 import LoginGithub from "../../components/LoginGihub";
 import SelectBalancefy from "../../components/Select";
+import LoginFacebook from "../../components/LoginFacebook";
 
 export default function Cadastro() {
   const [displayOne, setDisplayOne] = React.useState("block");
@@ -347,11 +345,9 @@ export default function Cadastro() {
                 >
                   <LoginGoogle page="register" />
 
-                  {/* <LoginGithub page="register"/> */}
+                  <LoginGithub page="register"/>
 
-                  <IconButton>
-                    <img alt="facebook" src={logoFace} />
-                  </IconButton>
+                  <LoginFacebook page="register"/>
                 </div>
               </div>
             </div>

@@ -1,15 +1,15 @@
-import ImageBg from '../../Images/ImagemFundo.png';
-import Form from '../../Images/Vector.png';
-import Logo from '../../Images/ICON.png';
-import Arco from '../../Images/Arco1.png';
-import Arco2 from '../../Images/Arco2.png';
-import Planejamento from '../../Images/Planejamento.png';
-import Acompanhamento from '../../Images/Acompanhamento.png';
-import Objetivos from '../../Images/Objetivos.png';
-import imageDescricao from '../../Images/imageDescricao.png';
-import iconFacebook from '../../Images/facebook.png';
-import iconInstagram from '../../Images/instagram.png';
-import iconLinkedin from '../../Images/linkedin.png';
+import ImageBg from '../../img/ImagemFundo.png';
+import Form from '../../img/Vector.png';
+import Logo from '../../img/ICON.png';
+import Arco from '../../img/Arco1.png';
+import Arco2 from '../../img/Arco2.png';
+import Planejamento from '../../img/Planejamento.png';
+import Acompanhamento from '../../img/Acompanhamento.png';
+import Objetivos from '../../img/Objetivos.png';
+import imageDescricao from '../../img/imageDescricao.png';
+import iconFacebook from '../../img/facebook.png';
+import iconInstagram from '../../img/instagram.png';
+import iconLinkedin from '../../img/linkedin.png';
 
 
 

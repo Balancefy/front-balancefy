@@ -17,6 +17,7 @@ import { AuthContext } from '../../contexts/auth';
 import { Link } from 'react-router-dom';
 import LoginGoogle from '../../components/LoginGoogle';
 import LoginGithub from '../../components/LoginGihub';
+import LoginFacebook from '../../components/LoginFacebook';
 
 function Login() {
 
@@ -130,11 +131,9 @@ function Login() {
               >
                 <LoginGoogle/>
 
-                {/* <LoginGithub /> */}
+                <LoginGithub />
 
-                <IconButton>
-                  <img alt="facebook" src={logoFace} />
-                </IconButton>
+                <LoginFacebook />
               </div>
             </div>
           </Box>

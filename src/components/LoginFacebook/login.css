@@ -1,0 +1,7 @@
+.kep-login-facebook {
+    background-image: url("../../img/facebook.svg");
+    border-radius: 50% !important;
+    border: 0px !important;
+    width: 60px;
+    height: 60px;
+}

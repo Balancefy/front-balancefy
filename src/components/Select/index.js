@@ -26,16 +26,16 @@ export default function SelectBalancefy(props) {
           {
             props.content === "category" ? 
               content.category.map((c) => {
-                return <MenuItem value={c}>{c}</MenuItem>
+                return <MenuItem key={c} value={c}>{c}</MenuItem>
               })
             :
             props.content === "type" ?
               content.type.map((t) => {
-                return <MenuItem value={t}>{t}</MenuItem>
+                return <MenuItem key={t} value={t}>{t}</MenuItem>
               })
             : 
               content.categoryTransaction.map((t) => {
-                return <MenuItem value={t}>{t}</MenuItem>
+                return <MenuItem key={t} value={t}>{t}</MenuItem>
               })
           }
         </Select>
