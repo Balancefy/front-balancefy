@@ -12,6 +12,10 @@ const theme = createTheme({
       fontWeight: 600,
       textAlign: "initial"
     },
+    h1b: {
+      fontSize: 48,
+      fontWeight: 600
+    },
     h2: {
       fontSize: 24,
       fontWeight: 500

@@ -1,17 +1,11 @@
 import { IconButton } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { AuthContext } from "../../contexts/auth";
+import React, { useEffect } from "react";
 import logoGit from "../../img/github.svg";
-import api from "../../service/api";
 
 const client_id = process.env.REACT_APP_CLIENT_ID_GITHUB
-const redirect_uri = "http://localhost:3000/cadastro"
 
 export default function LoginGithub(props) {
-    const [data, setData] = useState({ errorMessage: ""});
-    const { signInSocial, signInUrlGitHub } = React.useContext(AuthContext);
-
     useEffect(() => {
         const url = window.location.href;
         const hasCode = url.includes("?code=");
@@ -26,24 +20,17 @@ export default function LoginGithub(props) {
             onSuccess(res)
           }).catch((err) => {
             console.log(err)
+            props.onFailure()
           })
         }
       }, []);
 
     const onSuccess = (res) => {
+        props.onSuccess(res.profileObj.email)
         if(props.page === "register") {
-            api.post("/users", {
-                nome: res.data.name,
-                email: res.data.email,
-                avatar: res.data.avatar_url,
-                type: "GITHUB"
-            }).then((res) => {
-                console.log(res)
-            }).catch((err) => {
-                console.log(err)
-            })
+            props.onSuccess(res)
         } else {
-            signInSocial(res.data.email)
+            props.onSuccess(res.data.email)
         }
     };
 

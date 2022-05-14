@@ -4,11 +4,9 @@ import Input from "../../components/Input";
 import InputPass from "../../components/InputPass";
 import Container from "../../components/Container";
 import background from "../../img/login.png";
-import logoFace from "../../img/facebook.svg";
-import logoInsta from "../../img/instagram.svg";
 import ou from "../../img/ou.svg";
 import { Box } from "@mui/system";
-import { Button, CircularProgress, FormControlLabel, IconButton, InputAdornment } from "@mui/material";
+import { Button, CircularProgress, FormControlLabel, InputAdornment } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Alert from '@mui/material/Alert';
 import EmailIcon from '@mui/icons-material/Email';
@@ -18,6 +16,7 @@ import { Link } from 'react-router-dom';
 import LoginGoogle from '../../components/LoginGoogle';
 import LoginGithub from '../../components/LoginGihub';
 import LoginFacebook from '../../components/LoginFacebook';
+import TitleWithDot from '../../components/TitleWithDot';
 
 function Login() {
 
@@ -71,9 +70,8 @@ function Login() {
               }}
             >
               <div>
-                <TitleBalancefy variant="h2">Faça seu Login.</TitleBalancefy>
-                <TitleBalancefy variant="body3"> Não tem uma conta?{" "}
-                </TitleBalancefy>
+                <TitleWithDot>Faça seu login</TitleWithDot>
+                <TitleBalancefy variant="body3"> Não tem uma conta?{" "}</TitleBalancefy>
                 <TitleBalancefy variant="body3" color="#7DE2D1">
                 <Link
                     to="/cadastro"
@@ -131,9 +129,9 @@ function Login() {
               >
                 <LoginGoogle onSuccess={() => signInSocial()} onFailure={() => setOpen(true)}/>
 
-                <LoginGithub />
+                <LoginGithub onSuccess={() => signInSocial()} onFailure={() => setOpen(true)}/>
 
-                <LoginFacebook />
+                <LoginFacebook onSuccess={() => signInSocial()} onFailure={() => setOpen(true)}/>
               </div>
             </div>
           </Box>
