@@ -34,20 +34,57 @@ export default function Goals() {
         { id: 2, desc: "Roupa", porcentagem: 37 },
     ]
 
+    const usersTransactions = [
+        { id: 1, desc: "UBER", amount: "1.000,00", type: "SAIDA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "3.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "4.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
+        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" }
+    ]
+
+    const usersRoadMap = {
+        objetivo: {
+            id: 1, desc: "Viajar para a Australia", xp: 4000
+        },
+        tasks: [
+            { id: 2, desc: "Economizar", xp: 400 },
+            { id: 3, desc: "Economizar", xp: 400 },
+            { id: 4, desc: "Comprar Passagem", xp: 400 },
+            { id: 5, desc: "Economizar", xp: 400 },
+            { id: 6, desc: "Reservar Estadia", xp: 400 },
+            { id: 7, desc: "Economizar", xp: 400 },
+            { id: 7, desc: "Economizar", xp: 400 },
+            { id: 7, desc: "Economizar", xp: 400 },
+            { id: 7, desc: "Economizar", xp: 400 },
+            { id: 7, desc: "Economizar", xp: 400 },
+            { id: 7, desc: "Economizar", xp: 400 }
+        ]
+    }
+
+
     return (
         <>
             <MainContainer page="Goals">
                 <Grid container direction="row" justifyContent="space-evenly" width="100%" height="95vh" margin="auto">
                     <Grid item md={9}>
                         <Container height="100%" width="100%" borderRadius={10}>
-                            <Grid container direction="column" justif>
+                            <Grid container direction="column">
                                 <Grid item>
                                     <Grid container justifyContent="space-between" alignItems="center" paddingLeft="40px" paddingRight="40px" paddingTop="25px" paddingBottom="25px" >
                                         <Grid item>
                                             <Titulo styles={{ color: "#7DE2D1", fontSize: 24, fontWeight: 600 }}>Viagem Internacional</Titulo>
                                         </Grid>
                                         <Grid item>
-                                            <ButtonBalancefy>Adicionar Movimentação</ButtonBalancefy>
+                                            <ButtonBalancefy radius="10px">Adicionar Movimentação</ButtonBalancefy>
                                         </Grid>
                                     </Grid>
 
@@ -67,11 +104,11 @@ export default function Goals() {
                                     </Grid>
                                 </Grid>
                                 <Grid item>
-                                    <Grid container direction="row" paddingLeft="40px" paddingRight="40px" justifyContent="space-between">
+                                    <Grid container direction="row" paddingLeft="33px" paddingRight="33px" justifyContent="space-between" paddingTop="25px" alignItems={"center"}>
                                         <Grid Item>
-                                            <Grid container direction="column" justifyContent="space-between">
+                                            <Grid container direction="column" justifyContent="space-between" spacing={2}>
                                                 <Grid item>
-                                                    <Container height="192px" width="533px" backgroundColor="#4B4B4B">
+                                                    <Container height="192px" width="583px" backgroundColor="#4B4B4B">
                                                         <div style={{ padding: "27px 0px 0px 40px" }}>
                                                             <TitleBalancefy variant="h2">Progresso</TitleBalancefy>
                                                         </div>
@@ -83,7 +120,7 @@ export default function Goals() {
                                             </Grid>
                                         </Grid>
                                         <Grid Item>
-                                            <TransactionGoal></TransactionGoal>
+                                            <TransactionGoal data={usersTransactions}></TransactionGoal>
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -93,7 +130,7 @@ export default function Goals() {
                     <Grid item height="100%">
                         <Grid container direction="column" justifyContent="space-between" height="100%">
                             <Grid item>
-                                <Roadmap data={[{ id: 1, desc: "teste", xp: 10 }]}></Roadmap>
+                                <Roadmap data={usersRoadMap}></Roadmap>
                             </Grid>
                             <Grid item>
                                 <Ranking data={usersRank}></Ranking>

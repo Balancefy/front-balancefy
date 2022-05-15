@@ -6,9 +6,10 @@ export default function ObjetivoAtualBox(props){
         <>
         
       <div style={{
-        margin: "10px auto",
+        height: "206px",
+        margin: "10px",
         background: "#4B4B4B",
-        width: "712px",
+        width: "752px",
         borderRadius: "10px",
         justifyContent: 'center',
         paddingLeft: "30px",
@@ -20,8 +21,8 @@ export default function ObjetivoAtualBox(props){
             <div style={{fontSize:"18px", marginTop:"10px"}}><span style={{color:"FFFFFF"}}>+{props.xp}xp</span></div>
             
             
-            <div style={{width:"100%", display:"flex", justifyContent:"flex-end", flexDirection:"row"}}>
-             <ButtonBalancefy style={{width: "120px", height: "5vh", margin: "0 0 0 auto"}} type="submit">Concluir</ButtonBalancefy>
+            <div style={{width:"100%", display:"flex", justifyContent:"flex-end", flexDirection:"row",  paddingRight:"50px", paddingBottom:"100px"}}>
+             <ButtonBalancefy style={{width: "120px", height: "4vh", marginTop:"-20px", borderRadius:"10px"}} type="submit">Concluir</ButtonBalancefy>
             </div>
         </div>
       

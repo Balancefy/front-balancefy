@@ -6,7 +6,7 @@ export default function FaltaMeta(props){
         <>
         
       <div style={{
-        margin: "10px auto",
+        margin: "10px",
         background: "#4B4B4B",
         height: "203px",
         width: "206px",

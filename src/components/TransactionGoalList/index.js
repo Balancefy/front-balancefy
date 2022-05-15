@@ -1,70 +1,101 @@
 import Container from "../Container";
 import * as React from 'react';
 import TitleBalancefy from "../Title";
-import { DataGrid } from '@mui/x-data-grid';
 import { AuthContext } from "../../contexts/auth";
-
-const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  {
-    field: 'id',
-    headerName: '',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'desc',
-    headerName: '',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'amount',
-    headerName: '',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'type',
-    headerName: '',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'date',
-    headerName: '',
-    width: 150,
-    editable: true,
-  }
-]
-
-const rows = [
-  { id: 1, desc: "UBER", amount: "R$1.000,00", type: "out", date: "26/02/2022" },
-  { id: 2, desc: "Roupa", amount: "R$1.000,00", type: "in", date: "26/02/2022" }
-]
 
 export default function TransactionGoal(props) {
   const { user } = React.useContext(AuthContext)
 
-  const [transaction, setTransaction] = React.useState("");
+  // const [transaction, setTransaction] = React.useState("");
+
+  const rows = Array.from(props.data)
 
   return (
     <>
-      <Container height="580px" width="632px" backgroundColor="#4B4B4B">
-        <div style={{ padding: "27px 0px 0px 40px" }}>
+      <Container height="558px" width="652px" backgroundColor="#4B4B4B">
+        <div style={{ padding: "27px 0px 0px 40px" , marginBottom:"10px"}}>
           <TitleBalancefy variant="h2">Movimentações</TitleBalancefy>
         </div>
-        <div>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-          />
+        <div style={{ height: 420, width: '100%', overflow: "auto", maxHeight:420}}>
+          {rows.map((row) => {
+            return (<>
+              <div style={{borderBottom: "solid 5px #7DE2D1", borderRadius: "5px", paddingLeft: "40px", paddingRight: "30px", height:"35px", marginTop:"25px"}}>
+                <div style={{ display:"flex", fontSize: "14px", justifyContent:"space-around"}}>
+                  <div style={{width:"300px"}}>{row.desc}</div>
+                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>R${row.amount}</div>
+                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{row.type}</div>
+                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{row.date}</div>
+                </div>
+              </div>
+            </>)
+          })}
         </div>
       </Container>
     </>
   );
-} 
+}
+
+
+
+
+
+
+
+// import { DataGrid } from '@mui/x-data-grid';
+{/* <DataGrid
+rows={rows}
+columns={columns}
+pageSize={5}
+rowsPerPageOptions={[9]}
+disableSelectionOnClick
+/> */}
+// const columns = [
+//   {
+//     field: 'Desc',
+//     headerName: 'Descrição',
+//     width: 250,
+//     editable: false,
+//     marginLeft: "40px"
+//   },
+//   {
+//     field: 'Amount',
+//     headerName: 'Valor(R$)',
+//     type: 'number',
+//     width: 100,
+//     editable: false,
+//   },
+//   {
+//     field: 'Type',
+//     headerName: 'Tipo',
+//     type: 'number',
+//     width: 100,
+//     editable: false,
+//   },
+//   {
+//     field: 'date',
+//     headerName: 'Data',
+//     description: 'This column has a value getter and is not sortable.',
+//     sortable: false,
+//     editable: false,
+//     width: 110
+//   },
+// ];
+
+// const rows = [
+//   { id: 1, desc: "UBER", amount: "R$1.000,00", type: "out", date: "26/02/2022" },
+//   { id: 2, desc: "Roupa", amount: "R$1.000,00", type: "in", date: "26/02/2022" }
+// ]
+
+// const rows = [
+//   { id: 1, Desc: 'UBER', Amount: 1000.00, Type: 'SAIDA', date: "26/02/2022" },
+//   { id: 2, Desc: 'ROUPA', Amount: 1000.00, Type: 'ENTRADA', date: "26/02/2022" },
+//   { id: 3, Desc: 'UBER', Amount: 1000.00, Type: 'SAIDA', date: "26/02/2022" },
+  // { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+  // { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+  // { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+  // { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+  // { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+  // { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+  // { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+  // { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+// ];
