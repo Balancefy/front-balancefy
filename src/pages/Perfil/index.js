@@ -1,50 +1,29 @@
 import Container from '../../components/Container'
 import MainContainer from '../../components/MainContainer'
 import ProfileBalancefy from '../../components/Profile'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { default as TopicBalancefy } from '../../components/Topic/profileVariant'
 import { AuthContext } from '../../contexts/auth'
+import api from '../../service/api'
 
-export default function Profile(props) {
+export default function Profile(route) {
     const { user } = React.useContext(AuthContext);
+    const [topics, setTopics] = React.useState([]);
+    const [profileUser, setProfileUser] = React.useState(user);
 
-    console.log(user.fkUsuario)
+    useEffect(() => {
+        console.log(route.params.paramKey)
+        // if(props.idUser !== "") {
+        //     api.get(`/${route.params.paramKey}`)
+        //         .then((res) => setProfileUser(res.data))
+        //         .catch((err) => console.log(err))
+        // }
 
-    const topics = [
-        {
-            key: 1,
-            title: "Economizar dinheiro",
-            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: `http://localhost:8080${user.fkUsuario.avatar}`,
-            name: user.fkUsuario.nome,
-            comment: "11",
-            like: "11",
-            views: "11",
-            date: "2d"
-        },
-        {
-            key: 2,
-            title: "Economizar dinheiro",
-            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: `http://localhost:8080${user.fkUsuario.avatar}`,
-            name: user.fkUsuario.nome,
-            comment: "11",
-            like: "11",
-            views: "11",
-            date: "2d"
-        },
-        {
-            key: 3,
-            title: "Economizar dinheiro",
-            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: `http://localhost:8080${user.fkUsuario.avatar}`,
-            name: user.fkUsuario.nome,
-            comment: "11",
-            like: "11",
-            views: "11",
-            date: "2d"
-        }
-    ]
+        // api.get(`/${props.idUser}`)
+        //     .then((res) => setTopics(res.data))
+        //     .catch((err) => console.log(err))
+    }, [])
+
 
     return (
         <>
@@ -58,7 +37,7 @@ export default function Profile(props) {
                         alignItems: "center",
                         flexDirection: "column"
                     }}>
-                        <ProfileBalancefy name={user.fkUsuario.nome} imagem={user.fkUsuario.avatar}></ProfileBalancefy>
+                        <ProfileBalancefy name={profileUser.fkUsuario.nome} imagem={profileUser.fkUsuario.avatar}></ProfileBalancefy>
                         <div style={{
                             width: "100%",
                             display: "flex",

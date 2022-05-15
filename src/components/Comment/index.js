@@ -11,7 +11,7 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
 import { Box, IconButton } from "@mui/material";
 import Input from "../Input";
-import avatar from "../../Images/user3.jpg"
+import avatar from "../../img/user3.jpg"
 
 
 

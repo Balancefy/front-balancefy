@@ -1,14 +1,16 @@
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../Container";
 import RankPosition from "../RankPosition";
 import TitleWithBorder from "../TitleWithBorder";
 
 export default function Ranking(props) {
+  const navigate = useNavigate();
   const users = props.data
 
   const Positions =
     users.map((user) => {
       return (
-        <RankPosition key={user.id} position={user.p} name={user.name} goals={user.goals} tasks={user.tasks}></RankPosition>
+        <RankPosition onClick={() => navigate("/adicionar", {paramKey: user.id})} key={user.id} position={user.p} name={user.name} goals={user.goals} tasks={user.tasks}></RankPosition>
       );
     })
 

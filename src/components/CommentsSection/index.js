@@ -1,5 +1,5 @@
 import CommentBalancefy from "../Comment";
-import avatar from "../../Images/user2.jpg"
+import avatar from "../../img/user2.jpg"
 
 const apiUrl = process.env.REACT_APP_API_URL
 

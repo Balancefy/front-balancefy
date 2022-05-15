@@ -5,37 +5,54 @@ import Input from "../../components/Input";
 import InputPass from "../../components/InputPass";
 import Container from "../../components/Container";
 import background from "../../img/login.png";
-import logoFace from "../../img/facebook.svg";
-import logoGoogle from "../../img/google.svg";
-import logoInsta from "../../img/instagram.svg";
 import ou from "../../img/ou.svg";
 import PersonIcon from "@mui/icons-material/Person";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import AddIcon from "@mui/icons-material/Add";
 import EmailIcon from "@mui/icons-material/Email";
-import { Box, display, flexbox } from "@mui/system";
+import { Box } from "@mui/system";
 import {
+  Alert,
   Button,
-  FormControlLabel,
-  IconButton,
+  Collapse,
   InputAdornment,
 } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
-import Alert from "@mui/material/Alert";
-import Collapse from "@mui/material/Collapse";
-import { AuthContext } from "../../contexts/auth";
 import LoginGoogle from "../../components/LoginGoogle";
 import DateInput from "../../components/DateInput";
 import LoginGithub from "../../components/LoginGihub";
 import SelectBalancefy from "../../components/Select";
+import LoginFacebook from "../../components/LoginFacebook";
+import api from "../../service/api";
+import TitleWithDot from "../../components/TitleWithDot";
 
 export default function Cadastro() {
   const [displayOne, setDisplayOne] = React.useState("block");
   const [displayTwo, setDisplayTwo] = React.useState("none");
   const [displayThree, setDisplayThree] = React.useState("none");
+  const [open, setOpen] = React.useState(false);
+  const [userType, setUserType] = React.useState("DEFAULT");
+
+  const handleSocialRegister = (res) => {
+    console.log(res)
+    api.post("/users", {
+      nome: res.name,
+      email: res.email,
+      avatar: res.picture.data.url,
+      type: userType
+    }).then((res) => {
+        console.log(res)
+    }).catch((err) => {
+        console.log(err)
+    })
+  }
 
   return (
     <>
+      <Collapse sx={{position: "absolute", top: 20, left: 20, width: 500}} in={open}>
+        <Alert variant="filled" severity="error">
+          Autenticação falha
+        </Alert>
+      </Collapse>
       <Container
         style={{ marginTop: "1.5%" }}
         margin="auto"
@@ -54,17 +71,13 @@ export default function Cadastro() {
             >
               <div id="form-1" style={{ display: displayOne }}>
                 <div>
-                  <TitleBalancefy variant="h2">
-                    Crie uma nova conta.
-                  </TitleBalancefy>
-
-                  <TitleBalancefy variant="body3">
-                    Já tem uma conta?
-                    <Link
-                      to="/login"
+                  <TitleWithDot>Crie uma nova conta</TitleWithDot>
+                  <TitleBalancefy variant="body3"> Já tem uma conta?{" "}</TitleBalancefy>
+                  <TitleBalancefy variant="body3" color="#7DE2D1">
+                  <Link
+                      to="/cadastro"
                       style={{ color: "#7DE2D1", textDecoration: "none" }}
-                    >
-                      Log in
+                    > Log in
                     </Link>
                   </TitleBalancefy>
                 </div>
@@ -345,13 +358,20 @@ export default function Cadastro() {
                     marginTop: "10%",
                   }}
                 >
-                  <LoginGoogle page="register" />
+                  <LoginGoogle page="register" onSuccess={() => {
+                    handleSocialRegister()
+                    setUserType("GOOGLE")
+                  }} onFailure={() => setOpen(true)}/>
 
-                  {/* <LoginGithub page="register"/> */}
+                  <LoginGithub page="register" onSuccess={() => {
+                    handleSocialRegister()
+                    setUserType("GITHUB")
+                  }} onFailure={() => setOpen(true)}/>
 
-                  <IconButton>
-                    <img alt="facebook" src={logoFace} />
-                  </IconButton>
+                  <LoginFacebook page="register" onSuccess={() => {
+                    handleSocialRegister()
+                    setUserType("FACEBOOK")
+                  }} onFailure={() => setOpen(true)}/>
                 </div>
               </div>
             </div>
