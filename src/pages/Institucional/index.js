@@ -74,6 +74,7 @@ function Institucional() {
                             position: "absolute",
                             margin: "2rem 0rem 0rem 0rem",
                             left: "1600px",
+                            cursor:"pointer"
                         }}>
                             Cadastrar
                         </button>

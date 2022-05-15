@@ -6,7 +6,7 @@ function TitleBalancefy(props) {
         <Typography onClick={props.onClick} variant={props.variant} 
         style={{
             color: props.color,
-            ...props.style,
+            ...props.style
         }}>
             {props.children}
         </Typography>
