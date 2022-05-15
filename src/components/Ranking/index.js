@@ -1,16 +1,33 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Container from "../Container";
 import RankPosition from "../RankPosition";
 import TitleWithBorder from "../TitleWithBorder";
 
+import api from "../../service/api";
+
 export default function Ranking(props) {
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-  const users = props.data
+
+  useEffect(() => {
+    api
+      .get("/accounts/rank")
+      .then((res) => {
+        setUsers(res.data.rank)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
   const Positions =
-    users.map((user) => {
+    users.map((user, indice) => {
       return (
-        <RankPosition onClick={() => navigate("/adicionar", {paramKey: user.id})} key={user.id} position={user.p} name={user.name} goals={user.goals} tasks={user.tasks}></RankPosition>
+        <RankPosition onClick={() => {
+          navigate("/profile")
+          localStorage.setItem('profile_id', user.id)
+        }} key={user.id} position={indice+1} name={user.nome} goals={user.objetivo} progress={user.progresso}></RankPosition>
       );
     })
 
@@ -28,16 +45,3 @@ export default function Ranking(props) {
     </>
   );
 }
-
-// const users = [
-//   { id: 1, p: 1, name: "Bruno Ferreira", goals: 1, tasks:13},
-//   { id: 2, p: 2, name: "Amanda", goals: 1, tasks:13 },
-//   { id: 3, p: 3,  name: "Julia Mendes", goals: 1, tasks:13 },
-//   { id: 4, p: 4,  name: "Lucas Alves", goals: 1, tasks:13 },
-//   { id: 5, p: 5,  name: "Beatriz Santos", goals: 1, tasks:1 },
-// ]
-
-// chame no App.js dentro do return()
-// <Ranking data={users}></Ranking>
-
-// AINDA PRECISA ADICIONAR O TITULO NO TOPO!

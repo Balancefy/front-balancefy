@@ -1,5 +1,5 @@
 import logoGoogle from "../../img/google.svg";
-import { useGoogleLogin } from 'react-google-login';
+import GoogleLogin, { useGoogleLogin } from 'react-google-login';
 import React from "react";
 import { IconButton } from "@mui/material";
 
@@ -19,18 +19,18 @@ export default function LoginGoogle(props) {
         props.onFailure()
     };
 
-    const { signIn } = useGoogleLogin({
-        onSuccess,
-        clientId,
-        isSignedIn: true,
-        onFailure,
-        cookiePolicy: "single_host_origin"
-    })
-
     return (
         <>
-            <IconButton onClick={signIn}>
-                <img alt="gmail" src={logoGoogle} />
+            <IconButton>
+                <GoogleLogin
+                  clientId={clientId}
+                  render={renderProps => (
+                    <img onClick={renderProps.onClick} disabled={renderProps.disabled} src={logoGoogle}/>
+                  )}
+                  buttonText=""
+                  onSuccess={onSuccess}
+                  onFailure={onFailure}
+                  cookiePolicy={'single_host_origin'}/>
             </IconButton>
         </>
     )

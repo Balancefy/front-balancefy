@@ -6,20 +6,24 @@ import { default as TopicBalancefy } from '../../components/Topic/profileVariant
 import { AuthContext } from '../../contexts/auth'
 import api from '../../service/api'
 
-export default function Profile(route) {
+export default function Profile() {
     const { user } = React.useContext(AuthContext);
     const [topics, setTopics] = React.useState([]);
     const [profileUser, setProfileUser] = React.useState(user);
 
     useEffect(() => {
-        console.log(route.params.paramKey)
-        // if(props.idUser !== "") {
-        //     api.get(`/${route.params.paramKey}`)
-        //         .then((res) => setProfileUser(res.data))
-        //         .catch((err) => console.log(err))
-        // }
+        const profile_id = localStorage.getItem('profile_id')
 
-        // api.get(`/${props.idUser}`)
+        if(profile_id !== null) {
+            api.get(`/accounts/${profile_id}`)
+                .then((res) => {
+                    setProfileUser(res.data)
+                    localStorage.removeItem('profile_id')
+                })
+                .catch((err) => console.log(err))
+        }
+
+        // api.get(`/${profileUser.id_usuario}`)
         //     .then((res) => setTopics(res.data))
         //     .catch((err) => console.log(err))
     }, [])
@@ -37,7 +41,7 @@ export default function Profile(route) {
                         alignItems: "center",
                         flexDirection: "column"
                     }}>
-                        <ProfileBalancefy name={profileUser.fkUsuario.nome} imagem={profileUser.fkUsuario.avatar}></ProfileBalancefy>
+                        <ProfileBalancefy name={profileUser.usuario.nome} imagem={profileUser.usuario.avatar}></ProfileBalancefy>
                         <div style={{
                             width: "100%",
                             display: "flex",

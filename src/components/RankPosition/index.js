@@ -1,7 +1,8 @@
 export default function RankPosition(props) {
   return (
     <>
-      <div style={{
+      <div onClick={props.onClick}
+      style={{
         display: "flex",
         width: "100%",
         height: "51.2px",
@@ -35,7 +36,7 @@ export default function RankPosition(props) {
         <div style={{
           marginLeft: "50px"
         }}>
-          {props.tasks}
+          {props.progress}
         </div>
 
       </div>
