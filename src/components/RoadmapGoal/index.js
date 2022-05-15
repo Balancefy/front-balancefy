@@ -7,17 +7,28 @@ export default function RoadmapGoal(props) {
         height: "40px",
         background: "#131515",
         alignItems: "center",
-        marginTop: "25px"
+        marginBottom: "25px",
       }}>
-
-        <div style={{
-          width: "28px",
-          height: "28px",
-          background: "#7DE2D1",
-          borderRadius: "50px",
-          marginLeft: "30px"
-        }}>
+        <div style={{ width: "70px", display: "flex", justifyContent: "center", position:"relative"}}>
+          <div style={{
+            width: props.goal ? "28px" : "20px",
+            height: props.goal ? "28px" : "20px",
+            background: "#7DE2D1",
+            borderRadius: "50px",
+            border: "solid 1px #4B4B4B",
+            position: "relative",
+            zIndex: 2
+          }}>
+          </div>
+          <hr style={{
+            display: props.goal ? "none" : "initial", 
+            border: "3px solid #4B4B4B", top: "-55px", width: "5px", height: "50px", position:"absolute",
+            left: "50%",
+            transform: "translate(-50%, 0)",
+            zIndex: 1
+          }}></hr>
         </div>
+
 
         <div style={{
           display: "flex",
@@ -51,7 +62,7 @@ export default function RoadmapGoal(props) {
             }}>
               {props.desc}
             </div>
-            
+
             <div style={{
               color: "#A5A5A5"
             }}>

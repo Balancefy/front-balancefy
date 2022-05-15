@@ -8,7 +8,11 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/lab": "^5.0.0-alpha.75",
     "@mui/material": "^5.5.3",
+<<<<<<< HEAD
     "@mui/x-date-pickers": "^5.0.0-alpha.3",
+=======
+    "@mui/x-data-grid": "^5.11.0",
+>>>>>>> 1c54d7b08692f177c06d509a54859557f588860f
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",

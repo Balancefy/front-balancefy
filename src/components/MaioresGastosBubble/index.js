@@ -12,7 +12,6 @@ export default function MaioresGastosBubble(props) {
     marginTop: "0px"
   }
   return (
-
     <>
       <div style={{
         display: "flex",
