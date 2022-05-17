@@ -25,10 +25,11 @@ import LoginFacebook from "../../components/LoginFacebook";
 import api from "../../service/api";
 import TitleWithDot from "../../components/TitleWithDot";
 import AddExpense from "../../components/AddExpense";
+import Step from "../../components/Step";
 
 export default function Cadastro() {
-  const [displayOne, setDisplayOne] = React.useState("none");
-  const [displayTwo, setDisplayTwo] = React.useState("block");
+  const [displayOne, setDisplayOne] = React.useState("block");
+  const [displayTwo, setDisplayTwo] = React.useState("none");
   const [displayThree, setDisplayThree] = React.useState("none");
   const [open, setOpen] = React.useState(false);
   const [userType, setUserType] = React.useState("DEFAULT");
@@ -79,6 +80,7 @@ export default function Cadastro() {
             >
               <div id="form-1" style={{ display: displayOne }}>
                 <div>
+                  <Step></Step>
                   <TitleWithDot>Crie uma nova conta</TitleWithDot>
                   <TitleBalancefy variant="body3"> Já tem uma conta?</TitleBalancefy>
                   <TitleBalancefy variant="body3" color="#7DE2D1">
