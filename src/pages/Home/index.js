@@ -13,7 +13,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
-import Chip from '@mui/material/Chip';
 import ObjFinal from "../../components/ObjFinal";
 
 
@@ -35,18 +34,6 @@ const downloadCsv = (event) => {
 }
 
 export default function Home() {
-    const users = [
-        { id: 1, p: 1, name: "Bruno Ferreira", goals: 1, tasks: 23 },
-        { id: 2, p: 2, name: "Amanda", goals: 1, tasks: 16 },
-        { id: 3, p: 3, name: "Julia Mendes", goals: 1, tasks: 15 },
-        { id: 4, p: 4, name: "Lucas Alves", goals: 1, tasks: 14 },
-        { id: 5, p: 5, name: "Beatriz Santos", goals: 1, tasks: 13 },
-        { id: 6, p: 6, name: "Bruno Ferreira", goals: 1, tasks: 9 },
-        { id: 7, p: 7, name: "Amanda", goals: 1, tasks: 8 },
-        { id: 8, p: 8, name: "Julia Mendes", goals: 1, tasks: 7 },
-        { id: 9, p: 9, name: "Lucas Alves", goals: 1, tasks: 6 },
-        { id: 10, p: 10, name: "Ricardo Santos", goals: 1, tasks: 5 }
-    ];
 
     const transactions = [
         { id: 1, category: "Mesada", type: "in", title: "Mesada" },
@@ -63,8 +50,6 @@ export default function Home() {
 
     const [transactionType, setTransactionType] = React.useState("");
     const [transactionCategory, setTransactionCategory] = React.useState("");
-
-
 
     return (
         <>
@@ -152,7 +137,7 @@ export default function Home() {
                                     </Container>
                                 </Grid>
                                 <Grid item>
-                                    <Ranking data={users} marginTop="150px"></Ranking>
+                                    <Ranking marginTop="150px"></Ranking>
                                 </Grid>
                             </Grid>
                         </Grid>

@@ -24,6 +24,8 @@ import SelectBalancefy from "../../components/Select";
 import LoginFacebook from "../../components/LoginFacebook";
 import api from "../../service/api";
 import TitleWithDot from "../../components/TitleWithDot";
+import AddExpense from "../../components/AddExpense";
+import Step from "../../components/Step";
 
 export default function Cadastro() {
   const [displayOne, setDisplayOne] = React.useState("block");
@@ -31,6 +33,7 @@ export default function Cadastro() {
   const [displayThree, setDisplayThree] = React.useState("none");
   const [open, setOpen] = React.useState(false);
   const [userType, setUserType] = React.useState("DEFAULT");
+  const [expenses, setExpenses] = React.useState([]);
 
   const handleSocialRegister = (res) => {
     console.log(res)
@@ -40,15 +43,21 @@ export default function Cadastro() {
       avatar: res.picture.data.url,
       type: userType
     }).then((res) => {
-        console.log(res)
+      console.log(res)
     }).catch((err) => {
-        console.log(err)
+      console.log(err)
     })
   }
 
+  const addExpense = () => {
+    setExpenses(expenses.concat(<AddExpense></AddExpense>));
+  }
+
+
+
   return (
     <>
-      <Collapse sx={{position: "absolute", top: 20, left: 20, width: 500}} in={open}>
+      <Collapse sx={{ position: "absolute", top: 20, left: 20, width: 500 }} in={open}>
         <Alert variant="filled" severity="error">
           Autenticação falha
         </Alert>
@@ -64,17 +73,18 @@ export default function Cadastro() {
             <div
               style={{
                 margin: "auto",
-                width: "60%",
+                width: "65%",
                 display: "flex",
                 flexDirection: "column",
               }}
             >
               <div id="form-1" style={{ display: displayOne }}>
                 <div>
+                  <Step></Step>
                   <TitleWithDot>Crie uma nova conta</TitleWithDot>
-                  <TitleBalancefy variant="body3"> Já tem uma conta?{" "}</TitleBalancefy>
+                  <TitleBalancefy variant="body3"> Já tem uma conta?</TitleBalancefy>
                   <TitleBalancefy variant="body3" color="#7DE2D1">
-                  <Link
+                    <Link
                       to="/cadastro"
                       style={{ color: "#7DE2D1", textDecoration: "none" }}
                     > Log in
@@ -83,7 +93,7 @@ export default function Cadastro() {
                 </div>
 
                 <form
-                  style={{ width: "550px" }}
+                  style={{ width: "100%" }}
                   onSubmit={(event) => {
                     event.preventDefault();
                   }}
@@ -167,9 +177,9 @@ export default function Cadastro() {
 
               <div id="form-2" style={{ display: displayTwo }}>
                 <div>
-                  <TitleBalancefy variant="h2">
-                    Conte-nos sobre você.
-                  </TitleBalancefy>
+                  <TitleWithDot>
+                    Conte-nos sobre você
+                  </TitleWithDot>
                 </div>
                 <form
                   style={{ width: "550px" }}
@@ -181,7 +191,7 @@ export default function Cadastro() {
                     <TitleBalancefy variant="body4">
                       Data de nascimento
                     </TitleBalancefy>
-                    <DateInput width="100%"> </DateInput>
+                    <DateInput mt={0.9} width="100%"> </DateInput>
                   </div>
                   <div>
                     <Input
@@ -195,53 +205,64 @@ export default function Cadastro() {
                       }
                     ></Input>
                   </div>
-                  <div style={{ marginTop: "5%", width: "100%" }}>
-                    <TitleBalancefy variant="body4">
-                      Gastos fixos
-                    </TitleBalancefy>
-                    <Input
-                      label="Descrição"
-                      type="primary"
-                      width="100%"
-                    ></Input>
-                  </div>
-                  <div
-                    style={{
-                      justifyContent: "space-between",
-                      marginTop: "5%",
-                      display: "flex",
-                    }}
-                  >
-                    <Input
-                      label="Valor"
-                      type="primary"
-                      width="267px"
-                      adornment={
-                        <InputAdornment position="end">
-                          <CurrencyExchangeIcon />
-                        </InputAdornment>
-                      }
-                    ></Input>
+                  <div style={{ overflow: "auto", height: "300px", paddingRight: "10px",marginTop: "10px" }}>
+                    <div style={{ marginTop: "5%", width: "100%" }}>
+                      <TitleBalancefy variant="body4">
+                        Gastos fixos
+                      </TitleBalancefy>
+                      <Input
+                        mt={0.9}
+                        label="Descrição"
+                        type="primary"
+                        width="100%"
+                      ></Input>
+                    </div>
+                    <div
+                      style={{
+                        justifyContent: "space-between",
+                        marginTop: "5%",
+                        display: "flex",
+                      }}
+                    >
+                      <Input
+                        label="Valor"
+                        type="primary"
+                        width="267px"
+                        adornment={
+                          <InputAdornment position="end">
+                            <CurrencyExchangeIcon />
+                          </InputAdornment>
+                        }
+                      ></Input>
 
-                    <SelectBalancefy
-                      label="Categoria"
-                      type="primary"
-                      content="category"
-                      width="267px"
-                    ></SelectBalancefy>
+                      <SelectBalancefy
+                        label="Categoria"
+                        type="primary"
+                        content="category"
+                        width="267px"
+                      ></SelectBalancefy>
+                    </div>
+                    <div>
+                      <>
+                        {expenses}
+                      </>
+                    </div>
                   </div>
-
                   <div
                     style={{
                       marginTop: "5%",
                       display: "flex",
                       alignItems: "center",
                       height: "fit-content",
+                      cursor: "pointer"
                     }}
+                    onClick={() => addExpense()}
                   >
                     <AddIcon color="primary"></AddIcon>
                     <p style={{ margin: 0 }}>Adicionar Gasto</p>
                   </div>
+
+
                   <Box
                     sx={{
                       display: "flex",
@@ -268,9 +289,9 @@ export default function Cadastro() {
 
               <div id="form-3" style={{ display: displayThree }}>
                 <div>
-                  <TitleBalancefy variant="h2">
-                    Qual seu principal Objetivo?
-                  </TitleBalancefy>
+                  <TitleWithDot>
+                    Qual seu Objetivo?
+                  </TitleWithDot>
                 </div>
 
                 <form
@@ -346,7 +367,7 @@ export default function Cadastro() {
                 </form>
               </div>
 
-              <div style={{display:displayOne}}>
+              <div style={{ display: displayOne }}>
                 <div style={{ marginTop: "10%" }}>
                   <img alt="or" style={{ width: "100%" }} src={ou} />
                 </div>
@@ -361,17 +382,17 @@ export default function Cadastro() {
                   <LoginGoogle page="register" onSuccess={() => {
                     handleSocialRegister()
                     setUserType("GOOGLE")
-                  }} onFailure={() => setOpen(true)}/>
+                  }} onFailure={() => setOpen(true)} />
 
                   <LoginGithub page="register" onSuccess={() => {
                     handleSocialRegister()
                     setUserType("GITHUB")
-                  }} onFailure={() => setOpen(true)}/>
+                  }} onFailure={() => setOpen(true)} />
 
                   <LoginFacebook page="register" onSuccess={() => {
                     handleSocialRegister()
                     setUserType("FACEBOOK")
-                  }} onFailure={() => setOpen(true)}/>
+                  }} onFailure={() => setOpen(true)} />
                 </div>
               </div>
             </div>

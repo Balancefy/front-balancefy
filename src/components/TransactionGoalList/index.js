@@ -2,13 +2,26 @@ import Container from "../Container";
 import * as React from 'react';
 import TitleBalancefy from "../Title";
 import { AuthContext } from "../../contexts/auth";
+import { useState } from "react";
+import { useEffect } from "react";
+import api from "../../service/api";
 
 export default function TransactionGoal(props) {
   const { user } = React.useContext(AuthContext)
+  const [transactions, setTransactions] = useState([]);
 
-  // const [transaction, setTransaction] = React.useState("");
+  useEffect(() => {
+    api
+      .get("/transaction/1")
+      .then((res) => {
+        setTransactions(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
-  const rows = Array.from(props.data)
+
 
   return (
     <>
@@ -17,14 +30,14 @@ export default function TransactionGoal(props) {
           <TitleBalancefy variant="h2">Movimentações</TitleBalancefy>
         </div>
         <div style={{ height: 420, width: '100%', overflow: "auto", maxHeight:420}}>
-          {rows.map((row) => {
+          {transactions.map((row) => {
             return (<>
               <div style={{borderBottom: "solid 5px #7DE2D1", borderRadius: "5px", paddingLeft: "40px", paddingRight: "30px", height:"35px", marginTop:"25px"}}>
                 <div style={{ display:"flex", fontSize: "14px", justifyContent:"space-around"}}>
-                  <div style={{width:"300px"}}>{row.desc}</div>
-                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>R${row.amount}</div>
-                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{row.type}</div>
-                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{row.date}</div>
+                  <div style={{width:"300px"}}>{row.descricao}</div>
+                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>R${row.valor}</div>
+                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{row.tipo}</div>
+                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{row.created_at}</div>
                 </div>
               </div>
             </>)

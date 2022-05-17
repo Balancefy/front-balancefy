@@ -26,6 +26,14 @@ export default function Menu(props) {
         onLogoutSuccess
     });
 
+    const profileValidation = () => {
+        const url = window.location.href;
+
+        if(url.includes("/profile")) {
+            window.location.reload(false)
+        }
+    }
+
     return (
         <>
             <div style={{
@@ -38,10 +46,12 @@ export default function Menu(props) {
                 flexDirection: "column",
                 padding: "40px 0 40px 0",
                 backgroundColor: "#131515"
-            }} >
-                <Link to="/profile">
-                    <AvatarBalancefy imageAvatar={apiUrl + user.fkUsuario.avatar} width="65px" style={{ border: "1px solid #000", marginBottom: "137px", cursor: "pointer" }}></AvatarBalancefy>
-                </Link>
+            }}>
+                <div onClick={profileValidation}>
+                    <Link to="/profile">
+                        <AvatarBalancefy imageAvatar={apiUrl + user.usuario.avatar} width="65px" style={{ border: "1px solid #000", marginBottom: "137px", cursor: "pointer" }}></AvatarBalancefy>
+                    </Link>
+                </div>
                 {props.page === "Home" ?
                     <PageIcon selected icon={<HomeIcon sx={{ fontSize: "45px" }} />}></PageIcon> :
                     <Link to="/" style={{ color:"white" }}>
@@ -64,7 +74,7 @@ export default function Menu(props) {
                 <div style={{
                     marginTop: "auto"
                 }}>
-                    <PageIcon onClick={user.fkUsuario.type === "DEFAULT" ? signOutDefault : signOut} icon={<LogoutIcon sx={{ fontSize: "45px" }} />}></PageIcon>
+                    <PageIcon onClick={user.usuario.type === "DEFAULT" ? signOutDefault : signOut} icon={<LogoutIcon sx={{ fontSize: "45px" }} />}></PageIcon>
                     <img alt="logo" style={{height: "50px"}} src ="./img/icon-white.svg"/>
                 </div>
             </div>
