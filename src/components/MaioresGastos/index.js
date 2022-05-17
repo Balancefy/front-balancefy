@@ -7,7 +7,7 @@ export default function MaioresGastos(props) {
 
   return (
     <>
-      <Container height="348px" width="583px" borderRadius="10px" backgroundColor="#4B4B4B">
+      <Container height="318px" width="583px" borderRadius="10px" backgroundColor="#4B4B4B">
       <div style={{padding:"27px 0px 0px 40px"}}>
         <TitleBalancefy variant="h2">Maiores Gastos</TitleBalancefy>
       </div>

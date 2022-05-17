@@ -106,7 +106,7 @@ export default function Goals() {
                                 <Grid item>
                                     <Grid container direction="row" paddingLeft="33px" paddingRight="33px" justifyContent="space-between" paddingTop="25px" alignItems={"center"}>
                                         <Grid Item>
-                                            <Grid container direction="column" justifyContent="space-between" spacing={2}>
+                                            <Grid container direction="column" justifyContent="space-between" spacing={5}>
                                                 <Grid item>
                                                     <Container height="192px" width="583px" backgroundColor="#4B4B4B">
                                                         <div style={{ padding: "27px 0px 0px 40px" }}>

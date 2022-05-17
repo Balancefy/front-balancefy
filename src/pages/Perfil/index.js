@@ -10,9 +10,9 @@ export default function Profile(route) {
     const { user } = React.useContext(AuthContext);
     const [topics, setTopics] = React.useState([]);
     const [profileUser, setProfileUser] = React.useState(user);
+    const [editing, setEditing] = React.useState(true);
 
     useEffect(() => {
-        console.log(route.params.paramKey)
         // if(props.idUser !== "") {
         //     api.get(`/${route.params.paramKey}`)
         //         .then((res) => setProfileUser(res.data))
@@ -38,30 +38,40 @@ export default function Profile(route) {
                         flexDirection: "column"
                     }}>
                         <ProfileBalancefy name={profileUser.fkUsuario.nome} imagem={profileUser.fkUsuario.avatar}></ProfileBalancefy>
-                        <div style={{
-                            width: "100%",
-                            display: "flex",
-                            justifyContent: "space-between",
-                            marginTop: "100px"
-                        }}>
-                            {topics.map((topic) => {
-                               return (
-                                 <TopicBalancefy 
-                                    description={topic.description}
-                                    title={topic.title}
-                                    avatar={topic.avatar}
-                                    name={topic.name}
-                                    comment={topic.comment}
-                                    like={topic.like}
-                                    views={topic.views}
-                                    date={topic.date}
-                                 />
-                               )
-                            })
-                            }
+                        {!editing &&
+                            <div style={{
+                                width: "100%",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                marginTop: "100px"
+                            }}>
+                                {topics.map((topic) => {
+                                    return (
+                                        <TopicBalancefy
+                                            description={topic.description}
+                                            title={topic.title}
+                                            avatar={topic.avatar}
+                                            name={topic.name}
+                                            comment={topic.comment}
+                                            like={topic.like}
+                                            views={topic.views}
+                                            date={topic.date}
+                                        />
+                                    )
+                                })
+                                }
 
-                        </div>
-
+                            </div>}
+                        {editing &&
+                            <div style={{
+                                width: "100%",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                marginTop: "100px"
+                            }}>
+                                
+                
+                        </div>}
                     </div>
                 </Container>
             </MainContainer>
