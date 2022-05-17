@@ -12,8 +12,14 @@ import { Box, Grid } from "@mui/material";
 import { height } from "@mui/system";
 import TitleBalancefy from "../../components/Title";
 import TransactionGoal from "../../components/TransactionGoalList";
+import ModalMovimentacao from "../../components/ModalMovimentacao";
+import { useState } from "react";
+
 
 export default function Goals() {
+    
+    const [modalState, setModalState] = useState(false);
+
 
     const usersRank = [
         { id: 1, p: 1, name: "Bruno Ferreira", goals: 1, tasks: 23 },
@@ -84,7 +90,7 @@ export default function Goals() {
                                             <Titulo styles={{ color: "#7DE2D1", fontSize: 24, fontWeight: 600 }}>Viagem Internacional</Titulo>
                                         </Grid>
                                         <Grid item>
-                                            <ButtonBalancefy radius="10px">Adicionar Movimentação</ButtonBalancefy>
+                                            <ButtonBalancefy onClick={() => {setModalState(true);}}radius="10px">Adicionar Movimentação</ButtonBalancefy>
                                         </Grid>
                                     </Grid>
 
@@ -138,6 +144,13 @@ export default function Goals() {
                         </Grid>
                     </Grid>
                 </Grid>
+                <ModalMovimentacao
+                    open={modalState}
+                    onClick={() => {
+                        setModalState(false);
+                    }}
+                /> 
+
             </MainContainer>
         </>
     )
