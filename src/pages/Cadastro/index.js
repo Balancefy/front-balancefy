@@ -78,9 +78,10 @@ export default function Cadastro() {
                 flexDirection: "column",
               }}
             >
+
+              <Step />
               <div id="form-1" style={{ display: displayOne }}>
                 <div>
-                  <Step></Step>
                   <TitleWithDot>Crie uma nova conta</TitleWithDot>
                   <TitleBalancefy variant="body3"> Já tem uma conta?</TitleBalancefy>
                   <TitleBalancefy variant="body3" color="#7DE2D1">
@@ -205,7 +206,7 @@ export default function Cadastro() {
                       }
                     ></Input>
                   </div>
-                  <div style={{ overflow: "auto", height: "300px", paddingRight: "10px",marginTop: "10px" }}>
+                  <div style={{ overflow: "auto", height: "300px", paddingRight: "10px", marginTop: "10px" }}>
                     <div style={{ marginTop: "5%", width: "100%" }}>
                       <TitleBalancefy variant="body4">
                         Gastos fixos
@@ -368,7 +369,7 @@ export default function Cadastro() {
               </div>
 
               <div style={{ display: displayOne }}>
-                <div style={{ marginTop: "10%" }}>
+                <div style={{ marginTop: "25px" }}>
                   <img alt="or" style={{ width: "100%" }} src={ou} />
                 </div>
 
@@ -376,7 +377,7 @@ export default function Cadastro() {
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    marginTop: "10%",
+                    marginTop: "5px",
                   }}
                 >
                   <LoginGoogle page="register" onSuccess={() => {
