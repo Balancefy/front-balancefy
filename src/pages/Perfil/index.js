@@ -5,17 +5,39 @@ import React, { useEffect } from 'react'
 import { default as TopicBalancefy } from '../../components/Topic/profileVariant'
 import { AuthContext } from '../../contexts/auth'
 import api from '../../service/api'
+import Input from '../../components/Input'
+import { InputAdornment } from '@mui/material'
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from '@mui/icons-material/Email';
+import LockIcon from '@mui/icons-material/Lock';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { default as Button } from '../../components/Button'
+import { borderRadius, width } from '@mui/system'
+import CheckPassword from '../../components/CheckPassword'
+import InputPass from '../../components/InputPass'
 
 export default function Profile() {
     const { user } = React.useContext(AuthContext);
     const [topics, setTopics] = React.useState([]);
     const [profileUser, setProfileUser] = React.useState(user);
-    const [editing, setEditing] = React.useState(true);
+    const [editing, setEditing] = React.useState(false);
+    const [editPassword, setEditPassword] = React.useState(false);
+
+    const [senhaAtual, setSenhaAtual] = React.useState("");
+
+
+    const [senha, setSenha] = React.useState("");
+    const [confirmarSenha, setConfirmarSenha] = React.useState("");
+
+    const [biggerThanSex, setBiggerThanSex] = React.useState(false);
+    const [atLeastOneSpecialChar, setAtLeastOneSpecialChar] = React.useState(false);
+    const [samePassword, setSamePassword] = React.useState(false);
+    const [oneUpperCase, setOneUpperCase] = React.useState(false);
 
     useEffect(() => {
         const profile_id = localStorage.getItem('profile_id')
 
-        if(profile_id !== null) {
+        if (profile_id !== null) {
             api.get(`/accounts/${profile_id}`)
                 .then((res) => {
                     setProfileUser(res.data)
@@ -28,6 +50,40 @@ export default function Profile() {
         //     .then((res) => setTopics(res.data))
         //     .catch((err) => console.log(err))
     }, [])
+
+    const handleChange = (event) => {
+        this.senha = event.target.value
+        this.confirmarSenha = event.target.value
+    }
+
+    const validPassword = () => {
+        const hasUpperCase = /[A-Z]/.test(senha);
+        const hasSymbol = /[!@#%&*><?]/.test(senha);
+
+        return (senha.length > 6) && hasUpperCase && hasSymbol && (senha === confirmarSenha)
+    }
+
+    const verifyPassword = (value) => {
+        const hasUpperCase = /[A-Z]/.test(value);
+        const hasSymbol = /[!@#%&*><?]/.test(value);
+
+        setBiggerThanSex(value.length > 6)
+        setOneUpperCase(hasUpperCase)
+        setAtLeastOneSpecialChar(hasSymbol)
+        setSamePassword(value === confirmarSenha)
+
+    }
+
+    const changeSenha = (event) => {
+        setSenha(event.target.value)
+        verifyPassword(event.target.value)
+    }
+
+    const changeConfirmarSenha = (event) => {
+        setConfirmarSenha(event.target.value)
+        setSamePassword(event.target.value === senha)
+    }
+
 
 
     return (
@@ -42,7 +98,14 @@ export default function Profile() {
                         alignItems: "center",
                         flexDirection: "column"
                     }}>
-                        <ProfileBalancefy name={profileUser.fkUsuario.nome} imagem={profileUser.fkUsuario.avatar}></ProfileBalancefy>
+                        <ProfileBalancefy name={profileUser.usuario.nome} imagem={profileUser.usuario.avatar}
+                            button={<Button onClick={() => {
+                                setEditPassword(false)
+                                setEditing(!editing)
+                            }} width="150px" height="50px" style={{
+                                fontWeight: "bold",
+                            }}>{editing ? "Cancelar" : "Editar"}</Button>}>
+                        </ProfileBalancefy>
                         {!editing &&
                             <div style={{
                                 width: "100%",
@@ -65,21 +128,117 @@ export default function Profile() {
                                     )
                                 })
                                 }
-
                             </div>}
                         {editing &&
-                            <div style={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "space-between",
-                                marginTop: "100px"
-                            }}>
-                                
-                
-                        </div>}
+                            <div style={{ width: "100%", height: "40vh", display: "flex" }}>
+                                <form
+                                    style={{ width: "100%" }}
+                                    onSubmit={(event) => {
+                                        event.preventDefault();
+                                    }}>
+                                    <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+                                        <div>
+                                            <div style={{ justifyContent: "space-between", display: "flex" }}>
+                                                <Input label="Nome" type="primary" width="547px" adornment={<InputAdornment position="end"> <PersonIcon /></InputAdornment>}></Input>
+                                            </div>
+                                            <div style={{ marginTop: "40px" }}>
+                                                <Input label="Email" type="primary" width="100%" adornment={<InputAdornment position="end"><EmailIcon /></InputAdornment>}></Input>
+                                            </div>
+                                            <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
+                                                <div style={{ display: "flex" }}>
+                                                    <div style={{
+                                                        display: "flex",
+                                                        width: "418px",
+                                                        height: "50px",
+                                                        fontWeight: "bold",
+                                                        borderRadius: "10px",
+                                                        borderTopRightRadius: "0",
+                                                        borderBottomRightRadius: "0",
+                                                        backgroundColor: "#7de2d1",
+                                                        alignItems: "center",
+                                                        color: "black",
+                                                        paddingLeft: "16px"
+                                                    }}>Alterar Senha</div>
+                                                    <Button onClick={() => {
+                                                        setEditPassword(!editPassword)
+                                                    }} width="60px" height="50px" style={{
+                                                        fontWeight: "bold",
+                                                        borderRadius: "10px",
+                                                        borderTopLeftRadius: "0",
+                                                        borderBottomLeftRadius: "0",
+                                                        marginLeft: "2px",
+                                                        fontSize: "36px"
+                                                    }}><span>{`>`}</span></Button>
+                                                </div>
+                                                <div style={{ display: "flex", marginTop: "40px", justifyContent: "space-between", width: "100%" }}>
+                                                    <Button onClick={() => {
+                                                        setEditing(!editing)
+                                                        setEditPassword(false)
+
+                                                    }} width="220px" height="50px" style={{
+                                                        fontWeight: "bold",
+                                                        backgroundColor: "#4B4B4B",
+                                                        borderRadius: "10px",
+                                                        color: "white"
+                                                    }}>Voltar</Button>
+
+                                                    <Button width="220px" height="50px" style={{
+                                                        fontWeight: "bold",
+                                                        borderRadius: "10px",
+                                                    }}>Concluir</Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {editPassword &&
+                                            <>
+                                                <div>
+                                                    <div style={{ justifyContent: "space-between", display: "flex" }}>
+                                                        <InputPass label="Senha Atual" type="primary" width="547px"></InputPass>
+                                                    </div>
+                                                    <div style={{ marginTop: "40px" }}>
+                                                        <InputPass label="Nova Senha" type="primary" width="100%" value={senha} onChange={changeSenha}></InputPass>
+                                                    </div>
+                                                    <div style={{ marginTop: "40px" }}>
+                                                        <InputPass label="Confirmação Nova Senha" type="primary" width="100%" value={confirmarSenha} onChange={changeConfirmarSenha}></InputPass>
+                                                    </div>
+                                                    <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
+                                                        <div style={{ display: "flex" }}>
+                                                            <Button onClick={validPassword} style={{
+                                                                display: "flex",
+                                                                width: "418px",
+                                                                height: "50px",
+                                                                fontWeight: "bold",
+                                                                borderRadius: "10px",
+                                                                backgroundColor: "#7de2d1",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                color: "black",
+                                                                paddingLeft: "16px"
+                                                            }}>Alterar</Button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div style={{ width: "375px", height: "387px", background: "#2B2C28", borderRadius: "10px", alignItems: "center" }}>
+                                                        <div style={{ width: "80%", height: "90%", margin: "auto", paddingTop: "23px" }}>
+                                                            <div style={{ fontSize: "24px", color: "#7DE2D1", fontWeight: "bold", textAlign: "left" }}>
+                                                                Requisitos de uma senha segura:
+                                                            </div>
+                                                            <CheckPassword checked={biggerThanSex} text="Maior que 6 caracteres"></CheckPassword>
+                                                            <CheckPassword checked={atLeastOneSpecialChar} text="Pelo menos um caractere especial"></CheckPassword>
+                                                            <CheckPassword checked={samePassword} text="As senhas devem coincidir"></CheckPassword>
+                                                            <CheckPassword checked={oneUpperCase} text="Uma letra maiúscula "></CheckPassword>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        }
+                                    </div>
+                                </form>
+                            </div>}
                     </div>
                 </Container>
-            </MainContainer>
+            </MainContainer >
         </>
     )
 }

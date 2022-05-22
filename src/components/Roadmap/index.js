@@ -4,29 +4,34 @@ import TitleWithBorder from "../TitleWithBorder";
 
 export default function Roadmap(props) {
   const data = props.data
+  let Tasks;
 
-  const Tasks = data.tasks.map((goal) => {
-    return (
-      <RoadmapGoal
-        key={goal.id}
-        desc={goal.desc}
-        xp={goal.xp}>
-      </RoadmapGoal>
-    );
-  })
+  if (data !== undefined) {
+    Tasks = data.tasks.map((goal) => {
+      return (
+        <RoadmapGoal
+          key={goal.id}
+          desc={goal.descricao}
+          xp={goal.pontuacao}>
+        </RoadmapGoal>
+      );
+    })
+  }
 
   return (
     <>
-      <Container height="55vh" width="380px" borderRadius="10px" style={{ paddingTop: "5px"}}>
+      <Container height="55vh" width="380px" borderRadius="10px" style={{ paddingTop: "5px" }}>
         <TitleWithBorder>Roadmap</TitleWithBorder>
-        <div style={{heigth:"80%", overflow: "auto", maxHeight:"80%", marginTop:"25px", marginRight:"5px"}}>
-          <RoadmapGoal
-            key={data.objetivo.id}
-            desc={data.objetivo.desc}
-            xp={data.objetivo.xp}
-            goal>
-          </RoadmapGoal>
-          {Tasks}
+        <div style={{ heigth: "80%", overflow: "auto", maxHeight: "80%", marginTop: "25px", marginRight: "5px" }}>
+          {data !== undefined ? <>
+            <RoadmapGoal
+              key={data.objetivo.id}
+              desc={data.objetivo.categoria}
+              xp={data.objetivo.pontuacao}
+              goal>
+            </RoadmapGoal>
+            {Tasks}</> : <> </>
+          }
         </div>
 
       </Container>

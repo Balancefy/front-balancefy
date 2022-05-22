@@ -13,12 +13,27 @@ import { height } from "@mui/system";
 import TitleBalancefy from "../../components/Title";
 import TransactionGoal from "../../components/TransactionGoalList";
 import ModalMovimentacao from "../../components/ModalMovimentacao";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import api from "../../service/api";
 
 
 export default function Goals() {
-    
+
     const [modalState, setModalState] = useState(false);
+
+    const [goalRoadmap, setGoalRoadmap] = useState();
+
+    useEffect(() => {
+        api
+          .get(`/accounts/goals/${1}`)
+          .then((res) => {
+            setGoalRoadmap({objetivo: res.data.objetivo, tasks: res.data.tasks })
+        })
+          .catch((err) => {
+            console.log(err)
+          })
+      }, [])
 
 
     const usersRank = [
@@ -90,7 +105,7 @@ export default function Goals() {
                                             <Titulo styles={{ color: "#7DE2D1", fontSize: 24, fontWeight: 600 }}>Viagem Internacional</Titulo>
                                         </Grid>
                                         <Grid item>
-                                            <ButtonBalancefy onClick={() => {setModalState(true);}}radius="10px">Adicionar Movimentação</ButtonBalancefy>
+                                            <ButtonBalancefy onClick={() => { setModalState(true); }} radius="10px">Adicionar Movimentação</ButtonBalancefy>
                                         </Grid>
                                     </Grid>
 
@@ -136,7 +151,7 @@ export default function Goals() {
                     <Grid item height="100%">
                         <Grid container direction="column" justifyContent="space-between" height="100%">
                             <Grid item>
-                                <Roadmap data={usersRoadMap}></Roadmap>
+                                <Roadmap data={goalRoadmap}></Roadmap>
                             </Grid>
                             <Grid item>
                                 <Ranking data={usersRank}></Ranking>
@@ -149,7 +164,7 @@ export default function Goals() {
                     onClick={() => {
                         setModalState(false);
                     }}
-                /> 
+                />
 
             </MainContainer>
         </>

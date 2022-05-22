@@ -8,7 +8,7 @@ function ProfileBalancefy(props) {
     return (
         <>
             <div style={{
-                height: "448px",
+                height: "425px",
                 width: "100%",
                 display: "flex",
                 alignItems: "flex-end",
@@ -16,7 +16,7 @@ function ProfileBalancefy(props) {
             }}>
                 <div style={{
                     position: "absolute",
-                    height: "334px",
+                    height: "310px",
                     width: "100%",
                     backgroundColor: "black",
                     borderTopLeftRadius: "10px",
@@ -67,12 +67,10 @@ function ProfileBalancefy(props) {
                             </div>
                         </div>
                         <div>
-                            <Button width="150px" height="50px" style={{
-                                fontWeight: "bold",
-                            }}>Editar</Button>
+                            {props.button}
                         </div>
                     </div>
-                    
+                
                 </div>
             </div>
         </>

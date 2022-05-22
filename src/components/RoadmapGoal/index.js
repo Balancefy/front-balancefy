@@ -32,14 +32,16 @@ export default function RoadmapGoal(props) {
 
         <div style={{
           display: "flex",
-          width: "200px",
+          width: "250px",
           height: "40px",
           background: "#4B4B4B",
           alignItems: "center",
           borderRadius: "10px",
           fontSize: "12px",
           marginLeft: "30px",
-          flexDirection: "row"
+          flexDirection: "row",
+          paddingTop: "5px",
+          paddingBottom: "5px"
         }}>
 
           <div style={{
