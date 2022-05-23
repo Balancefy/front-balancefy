@@ -50,7 +50,6 @@ export default function TopicProfile(props) {
                     <IconButton>
                         <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
                     </IconButton> {props.like}
-                    <RemoveRedEyeIcon></RemoveRedEyeIcon> {props.views}
                     <AccessTimeIcon></AccessTimeIcon> {props.date}
                 </div>
             </div>

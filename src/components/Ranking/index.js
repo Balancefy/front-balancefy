@@ -11,14 +11,14 @@ export default function Ranking(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // api
-    //   .get("/accounts/rank")
-    //   .then((res) => {
-    //     setUsers(res.data.rank)
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
+    api
+      .get("/accounts/rank")
+      .then((res) => {
+        setUsers(res.data.rank)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }, [])
 
   const Positions =

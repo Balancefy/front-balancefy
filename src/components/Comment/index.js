@@ -12,6 +12,7 @@ import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
 import { Box, IconButton } from "@mui/material";
 import Input from "../Input";
 import avatar from "../../img/user3.jpg"
+import AddComment from '../AddComment';
 
 
 
@@ -87,16 +88,7 @@ function CommentBalancefy(props) {
             </div>
           </div>
 
-          {replying &&
-            <Box sx={{display:"flex",flexDirection:"column"}}>
-              <Box sx={{ display: "flex", alignItems: "center", mt: 1, ml: 4, mb: 2 }}>
-                <AvatarBalancefy imageAvatar={avatar} width="45px" />
-                <Box sx={{ ml: 2, width: "85%" }}>
-                  <Input label="Adicione um comentario" width="100%" />
-                </Box>
-              </Box>
-              <Reply style={{ height: "30px", marginLeft: "auto" }}>Confirmar</Reply>
-            </Box>}
+          {replying && <AddComment/>}
 
 
           {Array.isArray(comment.children) && comment.children.length ?

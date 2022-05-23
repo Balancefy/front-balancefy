@@ -19,7 +19,7 @@ export default function Profile() {
     const [profileUser, setProfileUser] = React.useState(user);
     const [editing, setEditing] = React.useState(false);
     const [editPassword, setEditPassword] = React.useState(false);
-
+    const [buttonEdit, setButtonEdit] = React.useState("block");
 
     const [novaSenha, setNovaSenha] = React.useState("");
     const [senhaAtual, setSenhaAtual] = React.useState("");
@@ -36,6 +36,8 @@ export default function Profile() {
         const profile_id = localStorage.getItem('profile_id')
 
         if (profile_id !== null) {
+            setButtonEdit("none")   
+
             api.get(`/accounts/${profile_id}`)
                 .then((res) => {
                     setProfileUser(res.data)
@@ -119,6 +121,7 @@ export default function Profile() {
                                 setEditing(!editing)
                             }} width="150px" height="50px" style={{
                                 fontWeight: "bold",
+                                display: buttonEdit
                             }}>{editing ? "Cancelar" : "Editar"}</Button>}>
                         </ProfileBalancefy>
                         {!editing &&
@@ -137,7 +140,6 @@ export default function Profile() {
                                             name={topic.name}
                                             comment={topic.comment}
                                             like={topic.like}
-                                            views={topic.views}
                                             date={topic.date}
                                         />
                                     )
@@ -189,7 +191,6 @@ export default function Profile() {
                                                 <Button onClick={() => {
                                                     setEditing(!editing)
                                                     setEditPassword(false)
-
                                                 }} width="220px" height="50px" style={{
                                                     fontWeight: "bold",
                                                     backgroundColor: "#4B4B4B",

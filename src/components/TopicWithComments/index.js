@@ -64,10 +64,6 @@ function TopicWithComments(props) {
                             </IconButton>
                             {props.like}
                         </Box>
-                        
-                        <Box sx={{display: "flex", alignItems: "center", mr: 2}}>
-                            <RemoveRedEyeIcon sx={{mr: 1}}></RemoveRedEyeIcon> {props.views}
-                        </Box>
 
                         <Box sx={{display: "flex", alignItems: "center", mr: 2}}>
                             <AccessTimeIcon sx={{mr: 1}}></AccessTimeIcon> {props.date}

@@ -35,6 +35,7 @@ const downloadCsv = (event) => {
 
 export default function Home() {
     const [transactions, setTransactions] = React.useState();
+    const [dicas, setDicas] = React.useState([]);
 
     useEffect(() => {
         api.get(`transactionFixed/${1}`)
@@ -43,6 +44,15 @@ export default function Home() {
             }).catch(err => {
                 console.log(err);
             })
+
+        api.get("/dicas")
+            .then((res) => {
+                setDicas(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
 
         console.log(transactions)
     }, [])
@@ -142,9 +152,13 @@ export default function Home() {
                                         <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
                                             Dicas Para Você
                                         </h2>
-                                        <Dica title="Economia">Procure por trajetos de ônibus para economizar 50% dos seus gastos, que são utilizados em Uber</Dica>
-                                        <Dica title="Investimento">“Investimentos em Tesouro Selic te trarão 20% de rendimento ao ano” </Dica>
-                                        <Dica title="Investimento">"Acesse esse site e entenda o básico de investimento: <Link to="/" style={{ color: "#7DE2D1", textDecoration: "none" }}>Investimentos1000</Link></Dica>
+                                        {
+                                            dicas.map((dica) => {
+                                                return (
+                                                    <Dica title={dica.titulo}>{dica.descricao}</Dica>
+                                                )
+                                            })
+                                        } 
                                     </Container>
                                 </Grid>
                                 <Grid item>

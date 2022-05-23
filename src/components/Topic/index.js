@@ -51,7 +51,7 @@ function TopicBalancefy(props) {
                     }}>
 
                         <div style={{
-                            width: "40%",
+                            width: "60%",
                             display: "flex",
                             alignItems: "center",
                         }}>
@@ -64,7 +64,7 @@ function TopicBalancefy(props) {
                         </div>
 
                         <div style={{
-                            width: "60%",
+                            width: "50%",
                             height: "75px",
                             display: "inline-flex",
                             alignItems: "center",
@@ -81,7 +81,6 @@ function TopicBalancefy(props) {
                                     like ? <ThumbUpIcon></ThumbUpIcon> : <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
                                 }
                             </IconButton> {props.like}
-                            <RemoveRedEyeIcon></RemoveRedEyeIcon> {props.views}
                             <AccessTimeIcon></AccessTimeIcon> {props.date}
                         </div>
                     </div>

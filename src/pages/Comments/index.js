@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import Input from "../../components/Input";
 import AvatarBalancefy from "../../components/Avatar";
 import CommentsSection from "../../components/CommentsSection";
+import AddComment from "../../components/AddComment";
 
 export default function Comments(props) {
     const topics = [
@@ -78,14 +79,11 @@ export default function Comments(props) {
                                 />
                             </div>  
 
-                            <Box sx={{display: "flex", alignItems: "center", mt: 4, ml: 4}}>
-                                <AvatarBalancefy width="45px"/>
-                                <Box sx={{ml: 2, width: "85%"}}>
-                                    <Input label="Adicione um comentario" width="100%"/>
-                                </Box>
+                            <Box sx={{ width: "100%"}}>
+                                <AddComment/>
                             </Box>
                             
-                            <Box sx={{mt: 2, ml: 4}}>
+                            <Box sx={{ml: 4}}>
                                <CommentsSection> </CommentsSection>
                             </Box>
 
