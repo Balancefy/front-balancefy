@@ -11,10 +11,12 @@ import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import AddIcon from "@mui/icons-material/Add";
 import EmailIcon from "@mui/icons-material/Email";
 import { Box } from "@mui/system";
+import CheckIcon from '@mui/icons-material/Check';
 import {
   Alert,
   Button,
   Collapse,
+  FormHelperText,
   InputAdornment,
 } from "@mui/material";
 import LoginGoogle from "../../components/LoginGoogle";
@@ -26,6 +28,7 @@ import api from "../../service/api";
 import TitleWithDot from "../../components/TitleWithDot";
 import AddExpense from "../../components/AddExpense";
 import Step from "../../components/Step";
+import InputValue from "../../components/InputValue";
 
 export default function Cadastro() {
   const [displayOne, setDisplayOne] = React.useState("block");
@@ -34,26 +37,84 @@ export default function Cadastro() {
   const [open, setOpen] = React.useState(false);
   const [userType, setUserType] = React.useState("DEFAULT");
   const [expenses, setExpenses] = React.useState([]);
+  const [name, setName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [senha, setSenha] = React.useState("");
+  const [avatar, setAvatar] = React.useState("");
+  const [tipo, setTipo] = React.useState("DEFAULT");
+  const [confirmaSenha, setConfirmaSenha] = React.useState("");
+  const [samePass, setSamePass] = React.useState("");
+  const [renda, setRenda] = React.useState("");
+  const [dataNascimento, setDataNascimento] = React.useState(null);
 
   const handleSocialRegister = (res) => {
-    console.log(res)
-    api.post("/users", {
-      nome: res.name,
-      email: res.email,
-      avatar: res.picture.data.url,
-      type: userType
-    }).then((res) => {
-      console.log(res)
-    }).catch((err) => {
-      console.log(err)
-    })
+    setName(res.name)
+    setEmail(res.email)
+    setAvatar(res.picture.data.url)
+    setTipo(userType)
+  }
+
+  const handleFirstStep = () => {
+    localStorage.setItem("@user:firstStep", JSON.stringify({
+      nome: name + lastName,
+      email: email,
+      avatar: avatar,
+      tipo: tipo,
+      senha: senha
+    }))
+
+    setDisplayOne("none");
+    setDisplayTwo("block");
+    setDisplayThree("none");
+  }
+
+  const handleSecondStep = () => {
+    localStorage.setItem("@user:secondStep", JSON.stringify({
+      dataNascimento: name + lastName,
+      renda: email,
+      gastosFixos: expenses
+    }))
+
+    setDisplayOne("none");
+    setDisplayTwo("none");
+    setDisplayThree("block");
+  }
+
+  const handleChangeName = (event) => {
+    setName(event.target.value)
+    console.log(event.target.value)
+  }
+
+  const handleChangeLastName = (event) => {
+    setLastName(event.target.value)
+  }
+
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value)
+  }
+
+  const handleChangeSenha = (event) => {
+    setSenha(event.target.value)
+  }
+
+  const handleChangeConfirmaSenha = (event) => {
+    setConfirmaSenha(event.target.value)
+
+    if(event.target.value === senha) {
+      setSamePass("#7DE2D1")
+    } else {
+      setSamePass("#F45959")
+    }
+  }
+
+  const handleChangeRenda = (event) => {
+    setRenda(event.target.value)
   }
 
   const addExpense = () => {
     setExpenses(expenses.concat(<AddExpense></AddExpense>));
   }
-
-
 
   return (
     <>
@@ -97,12 +158,13 @@ export default function Cadastro() {
                   style={{ width: "100%" }}
                   onSubmit={(event) => {
                     event.preventDefault();
+                    handleFirstStep(event)
                   }}
                 >
                   <div
                     style={{
                       justifyContent: "space-between",
-                      marginTop: "10%",
+                      marginTop: "3vh",
                       display: "flex",
                     }}
                   >
@@ -110,46 +172,57 @@ export default function Cadastro() {
                       label="Nome"
                       type="primary"
                       width="267px"
+                      value={name}
+                      onChange={handleChangeName}
                       adornment={
                         <InputAdornment position="end">
                           <PersonIcon />
                         </InputAdornment>
                       }
-                    ></Input>
+                    />
                     <Input
                       label="Sobrenome"
                       type="primary"
                       width="267px"
-                    ></Input>
+                      value={lastName}
+                      onChange={handleChangeLastName}
+                    />
                   </div>
                   <div style={{ marginTop: "5%" }}>
                     <Input
                       label="Email"
                       type="primary"
                       width="100%"
+                      value={email}
+                      onChange={handleChangeEmail}
                       adornment={
                         <InputAdornment position="end">
                           <EmailIcon />
                         </InputAdornment>
                       }
-                    ></Input>
+                    />
                   </div>
                   <div style={{ marginTop: "5%" }}>
                     <InputPass
                       width="100%"
                       label="Senha"
                       type="primary"
-                    ></InputPass>
-                    <subtitle2 style={{ fontWeight: 400 }}>
-                      Senha deve ter pelo menos 8 carater.{" "}
-                    </subtitle2>
+                      password={senha}
+                      onChange={handleChangeSenha}
+                    />
                   </div>
                   <div style={{ marginTop: "5%" }}>
                     <InputPass
                       width="100%"
                       label="Confirmar senha"
                       type="primary"
-                    ></InputPass>
+                      password={confirmaSenha}
+                      onChange={handleChangeConfirmaSenha}
+                    />
+                    <FormHelperText sx={{display: 'flex', alignItems: 'center'}}>
+                      <CheckIcon sx={{color: samePass}} />
+                      <span style={{marginLeft: '5px'}}>Senhas correspondem</span>
+                    </FormHelperText>
                   </div>
 
                   <Box
@@ -164,11 +237,6 @@ export default function Cadastro() {
                       sx={{ marginTop: "5%", width: "100%", height: "5vh" }}
                       variant="contained"
                       type="submit"
-                      onClick={() => {
-                        setDisplayOne("none");
-                        setDisplayTwo("block");
-                        setDisplayThree("none");
-                      }}
                     >
                       Continuar
                     </Button>
@@ -186,16 +254,17 @@ export default function Cadastro() {
                   style={{ width: "550px" }}
                   onSubmit={(event) => {
                     event.preventDefault();
+                    handleSecondStep()
                   }}
                 >
                   <div style={{ marginTop: "5%", width: "100%" }}>
                     <TitleBalancefy variant="body4">
                       Data de nascimento
                     </TitleBalancefy>
-                    <DateInput mt={0.9} width="100%"> </DateInput>
+                    <DateInput value={dataNascimento} onChange={(newValue) => {setDataNascimento(newValue)}} mt={0.9} width="100%"> </DateInput>
                   </div>
                   <div>
-                    <Input
+                    <InputValue
                       label="Renda"
                       type="primary"
                       width="100%"
@@ -204,7 +273,7 @@ export default function Cadastro() {
                           <CurrencyExchangeIcon />
                         </InputAdornment>
                       }
-                    ></Input>
+                    />
                   </div>
                   <div style={{ overflow: "auto", height: "300px", paddingRight: "10px", marginTop: "10px" }}>
                     <div style={{ marginTop: "5%", width: "100%" }}>
@@ -276,11 +345,6 @@ export default function Cadastro() {
                       sx={{ marginTop: "5%", width: "100%", height: "5vh" }}
                       variant="contained"
                       type="submit"
-                      onClick={() => {
-                        setDisplayOne("none");
-                        setDisplayTwo("none");
-                        setDisplayThree("block");
-                      }}
                     >
                       Continuar
                     </Button>

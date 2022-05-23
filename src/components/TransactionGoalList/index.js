@@ -2,7 +2,6 @@ import Container from "../Container";
 import * as React from 'react';
 import TitleBalancefy from "../Title";
 import { AuthContext } from "../../contexts/auth";
-import { useState } from "react";
 
 export default function TransactionGoal(props) {
   const { user } = React.useContext(AuthContext)

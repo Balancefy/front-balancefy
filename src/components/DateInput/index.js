@@ -14,18 +14,14 @@ export default function DateInput(props) {
         width: props.width,
     }
 
-    const [value, setValue] = React.useState(null);
-
     return (
         <>
             <Box sx={{ '& > :not(style)': { mt: props.mt, width: style.width, mb: 4 } }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns} locale={brLocale}>
                     <DatePicker
                         label={props.label}
-                        value={value}
-                        onChange={(newValue) => {
-                            setValue(newValue);
-                        }}
+                        value={props.value}
+                        onChange={props.onChange}
                         renderInput={(params) => <TextField {...params} />}
                     />
                 </LocalizationProvider>

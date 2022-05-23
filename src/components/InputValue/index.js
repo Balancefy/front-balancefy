@@ -59,7 +59,8 @@ export default function InputValue(props) {
         id="formatted-numberformat-input"
         InputProps={{
           inputComponent: NumberFormatCustom,
-          startAdornment: <InputAdornment position="start">R$</InputAdornment>
+          startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+          endAdornment: props.adornment
         }}
         variant={style.variant}
       />

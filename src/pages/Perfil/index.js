@@ -9,10 +9,7 @@ import Input from '../../components/Input'
 import { Alert, Collapse, InputAdornment } from '@mui/material'
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from '@mui/icons-material/Email';
-import LockIcon from '@mui/icons-material/Lock';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { default as Button } from '../../components/Button'
-import { borderRadius, width } from '@mui/system'
 import CheckPassword from '../../components/CheckPassword'
 import InputPass from '../../components/InputPass'
 
