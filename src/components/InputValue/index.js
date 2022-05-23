@@ -37,24 +37,13 @@ export default function InputValue(props) {
     width: '340px',
     variant: 'standard'
   }
-
-  const [values, setValues] = React.useState({
-    numberformat: '',
-  });
-
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
-  };
   
   return(
-    <Box sx={{'& > :not(style)': { mt: props.mt, width: style.width, }}}> 
+    <Box sx={{'& > :not(style)': { mt: props.mt, width: props.width, }}}> 
      <TextField
         label={props.label}
-        value={values.numberformat}
-        onChange={handleChange}
+        value={props.value}
+        onChange={props.onChange} 
         name="numberformat"
         id="formatted-numberformat-input"
         InputProps={{

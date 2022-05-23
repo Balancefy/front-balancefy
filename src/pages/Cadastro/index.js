@@ -37,32 +37,41 @@ export default function Cadastro() {
   const [open, setOpen] = React.useState(false);
   const [userType, setUserType] = React.useState("DEFAULT");
   const [expenses, setExpenses] = React.useState([]);
-  const [name, setName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [senha, setSenha] = React.useState("");
-  const [avatar, setAvatar] = React.useState("");
-  const [tipo, setTipo] = React.useState("DEFAULT");
   const [confirmaSenha, setConfirmaSenha] = React.useState("");
   const [samePass, setSamePass] = React.useState("");
   const [renda, setRenda] = React.useState("");
   const [dataNascimento, setDataNascimento] = React.useState(null);
+  const [gastos, setGastos] = React.useState([]);
+  
+  const [usuario, setUsuario] = React.useState({
+    nome: "",
+    lastName: "",
+    email: "",
+    avatar: "",
+    tipo: "DEFAULT",
+    senha: ""
+  });
+
+  const [objetivo, setObjetivo] = React.useState({
+    descricao: "",
+    categoria: "",
+    dataConclusao: "",
+    valorInicial: "",
+    valorTotal: ""
+  });
 
   const handleSocialRegister = (res) => {
-    setName(res.name)
-    setEmail(res.email)
-    setAvatar(res.picture.data.url)
-    setTipo(userType)
+    setUsuario({
+      ...usuario,
+      nome: res.name,
+      email: res.email,
+      avatar: res.picture.data.url,
+      tipo: userType
+    })
   }
 
   const handleFirstStep = () => {
-    localStorage.setItem("@user:firstStep", JSON.stringify({
-      nome: name + lastName,
-      email: email,
-      avatar: avatar,
-      tipo: tipo,
-      senha: senha
-    }))
+    localStorage.setItem("@user:firstStep", JSON.stringify(usuario))
 
     setDisplayOne("none");
     setDisplayTwo("block");
@@ -71,9 +80,9 @@ export default function Cadastro() {
 
   const handleSecondStep = () => {
     localStorage.setItem("@user:secondStep", JSON.stringify({
-      dataNascimento: name + lastName,
-      renda: email,
-      gastosFixos: expenses
+      dataNascimento: dataNascimento,
+      renda: renda,
+      gastosFixos: gastos
     }))
 
     setDisplayOne("none");
@@ -81,27 +90,42 @@ export default function Cadastro() {
     setDisplayThree("block");
   }
 
+  const handleThirdStep = () => {
+    localStorage.setItem("@user:thirdStep", JSON.stringify(objetivo))
+  }
+
   const handleChangeName = (event) => {
-    setName(event.target.value)
-    console.log(event.target.value)
+    setUsuario({
+      ...usuario,
+      nome: event.target.value,
+    })
   }
 
   const handleChangeLastName = (event) => {
-    setLastName(event.target.value)
+    setUsuario({
+      ...usuario,
+      lastName: event.target.value,
+    })
   }
 
   const handleChangeEmail = (event) => {
-    setEmail(event.target.value)
+    setUsuario({
+      ...usuario,
+      email: event.target.value,
+    })
   }
 
   const handleChangeSenha = (event) => {
-    setSenha(event.target.value)
+    setUsuario({
+      ...usuario,
+      senha: event.target.value,
+    })
   }
 
   const handleChangeConfirmaSenha = (event) => {
     setConfirmaSenha(event.target.value)
 
-    if(event.target.value === senha) {
+    if(event.target.value === usuario.senha) {
       setSamePass("#7DE2D1")
     } else {
       setSamePass("#F45959")
@@ -112,8 +136,45 @@ export default function Cadastro() {
     setRenda(event.target.value)
   }
 
+  const handleChangeDescricao = (event) => {
+    setObjetivo({
+      ...objetivo,
+      descricao: event.target.value,
+    })
+  }
+
+  const handleChangeCategoria = (event) => {
+    setObjetivo({
+      ...objetivo,
+      categoria: event.target.value,
+    })
+  }
+ 
+  const handleChangeValorInicial = (event) => {
+    setObjetivo({
+      ...objetivo,
+      valorInicial: event.target.value,
+    })
+  }
+
+  const handleChangeValorTotal = (event) => {
+    setObjetivo({
+      ...objetivo,
+      valorTotal: event.target.value,
+    })
+  }
+
   const addExpense = () => {
-    setExpenses(expenses.concat(<AddExpense></AddExpense>));
+    setExpenses(expenses.concat(<AddExpense onChange={handleExpense}></AddExpense>));
+  }
+
+  const handleExpense = (event) => {
+    console.log(event.target.value)
+    // setGastos(gastos.concat({
+    //   descricao: "",
+    //   valor: "",
+    //   categoria: ""
+    // }))
   }
 
   return (
@@ -172,7 +233,7 @@ export default function Cadastro() {
                       label="Nome"
                       type="primary"
                       width="267px"
-                      value={name}
+                      value={usuario.nome}
                       onChange={handleChangeName}
                       adornment={
                         <InputAdornment position="end">
@@ -184,7 +245,7 @@ export default function Cadastro() {
                       label="Sobrenome"
                       type="primary"
                       width="267px"
-                      value={lastName}
+                      value={usuario.lastName}
                       onChange={handleChangeLastName}
                     />
                   </div>
@@ -193,7 +254,7 @@ export default function Cadastro() {
                       label="Email"
                       type="primary"
                       width="100%"
-                      value={email}
+                      value={usuario.email}
                       onChange={handleChangeEmail}
                       adornment={
                         <InputAdornment position="end">
@@ -207,7 +268,7 @@ export default function Cadastro() {
                       width="100%"
                       label="Senha"
                       type="primary"
-                      password={senha}
+                      password={usuario.senha}
                       onChange={handleChangeSenha}
                     />
                   </div>
@@ -261,12 +322,14 @@ export default function Cadastro() {
                     <TitleBalancefy variant="body4">
                       Data de nascimento
                     </TitleBalancefy>
-                    <DateInput value={dataNascimento} onChange={(newValue) => {setDataNascimento(newValue)}} mt={0.9} width="100%"> </DateInput>
+                    <DateInput value={dataNascimento} onChange={(newValue) => {setDataNascimento(newValue)}} mt={0.9} width="100%"/>
                   </div>
                   <div>
                     <InputValue
                       label="Renda"
                       type="primary"
+                      value={renda}
+                      onChange={handleChangeRenda}
                       width="100%"
                       adornment={
                         <InputAdornment position="end">
@@ -275,7 +338,7 @@ export default function Cadastro() {
                       }
                     />
                   </div>
-                  <div style={{ overflow: "auto", height: "300px", paddingRight: "10px", marginTop: "10px" }}>
+                  <div style={{ overflow: "auto", height: "25vh", paddingRight: "10px", marginTop: "10px" }}>
                     <div style={{ marginTop: "5%", width: "100%" }}>
                       <TitleBalancefy variant="body4">
                         Gastos fixos
@@ -294,21 +357,22 @@ export default function Cadastro() {
                         display: "flex",
                       }}
                     >
-                      <Input
-                        label="Valor"
-                        type="primary"
-                        width="267px"
-                        adornment={
-                          <InputAdornment position="end">
-                            <CurrencyExchangeIcon />
-                          </InputAdornment>
-                        }
-                      ></Input>
+                      <InputValue
+                      label="Valor"
+                      type="primary"
+                      value={renda}
+                      width="267px"
+                      adornment={
+                        <InputAdornment position="end">
+                          <CurrencyExchangeIcon />
+                        </InputAdornment>
+                      }
+                    />
 
                       <SelectBalancefy
                         label="Categoria"
                         type="primary"
-                        content="category"
+                        content="categoryTransaction"
                         width="267px"
                       ></SelectBalancefy>
                     </div>
@@ -363,12 +427,19 @@ export default function Cadastro() {
                   style={{ width: "550px" }}
                   onSubmit={(event) => {
                     event.preventDefault();
+                    handleThirdStep();
                   }}
                 >
                   <div style={{ marginTop: "5%", width: "100%" }}>
                     <TitleBalancefy variant="body4">Objetivo</TitleBalancefy>
                   </div>
-                  <Input label="Descrição" type="primary" width="100%"></Input>
+                  <Input 
+                    label="Descrição" 
+                    type="primary" 
+                    width="100%"
+                    onChange={handleChangeDescricao}
+                    value={objetivo.descricao}
+                  />
 
                   <div style={{ marginTop: "5%" }}>
                     <SelectBalancefy
@@ -385,32 +456,45 @@ export default function Cadastro() {
                     </TitleBalancefy>
                   </div>
 
-                  <DateInput width="100%"> </DateInput>
+                  <DateInput 
+                    width="100%" 
+                    value={objetivo.dataConclusao} 
+                    onChange={(newValue) => {
+                      setObjetivo({
+                        ...objetivo,
+                        dataConclusao: newValue,
+                      })
+                    }}
+                  />
 
                   <div>
-                    <Input
+                    <InputValue
                       label="Valor Inicial"
                       type="primary"
+                      onChange={handleChangeValorInicial}
+                      value={objetivo.valorInicial}
                       width="100%"
                       adornment={
                         <InputAdornment position="end">
                           <CurrencyExchangeIcon />
                         </InputAdornment>
                       }
-                    ></Input>
+                    />
                   </div>
 
                   <div style={{ marginTop: "5%" }}>
-                    <Input
+                    <InputValue
                       label="Valor do objetivo"
                       type="primary"
+                      onChange={handleChangeValorTotal}
+                      value={objetivo.valorTotal}
                       width="100%"
                       adornment={
                         <InputAdornment position="end">
                           <CurrencyExchangeIcon />
                         </InputAdornment>
                       }
-                    ></Input>
+                    />
                   </div>
 
                   <Box

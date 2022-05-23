@@ -15,6 +15,8 @@ const AddExpense = props => {
                         label="Descrição"
                         type="primary"
                         width="100%"
+                        value={props.descricaoValue}
+                        onChange={props.onChange}
                     ></Input>
                 </div>
                 <div
@@ -28,6 +30,8 @@ const AddExpense = props => {
                         label="Valor"
                         type="primary"
                         width="267px"
+                        value={props.amountValue}
+                        onChange={props.onChange}
                         adornment={
                             <InputAdornment position="end">
                                 <CurrencyExchangeIcon />
