@@ -6,7 +6,7 @@ import { default as TopicBalancefy } from '../../components/Topic/profileVariant
 import { AuthContext } from '../../contexts/auth'
 import api from '../../service/api'
 import Input from '../../components/Input'
-import { InputAdornment } from '@mui/material'
+import { Alert, Collapse, InputAdornment } from '@mui/material'
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
@@ -33,6 +33,8 @@ export default function Profile() {
     const [samePassword, setSamePassword] = React.useState(false);
     const [oneUpperCase, setOneUpperCase] = React.useState(false);
 
+    const [open, setOpen] = React.useState(false);
+
     useEffect(() => {
         const profile_id = localStorage.getItem('profile_id')
 
@@ -57,6 +59,11 @@ export default function Profile() {
         }).then((res) => {
             console.log(res)
         }).catch((err) => {
+            setOpen(true)
+            setTimeout(() => setOpen(false), 1500)
+            setNovaSenha('')
+            setSenhaAtual('')
+            setConfirmarSenha('')
             console.log(err)
         })
     };
@@ -96,6 +103,11 @@ export default function Profile() {
         <>
             <MainContainer page={"profile"}>
                 <Container height="95vh" width="90%" style={{ margin: "auto", display: "flex", justifyContent: "center" }}>
+                    <Collapse sx={{ position: "absolute", top: 20, left: 20, width: 500 }} in={open}>
+                        <Alert variant="filled" severity="error">
+                            Senha inválida
+                        </Alert>
+                    </Collapse>
                     <div style={{
                         height: "90%",
                         width: "90%",
@@ -142,112 +154,112 @@ export default function Profile() {
                                     onSubmit={(event) => {
                                         event.preventDefault();
                                     }}> */}
-                                    <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
-                                        <div>
-                                            <div style={{ justifyContent: "space-between", display: "flex" }}>
-                                                <Input label="Nome" type="primary" width="547px" adornment={<InputAdornment position="end"> <PersonIcon /></InputAdornment>}></Input>
+                                <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+                                    <div>
+                                        <div style={{ justifyContent: "space-between", display: "flex" }}>
+                                            <Input label="Nome" type="primary" width="547px" adornment={<InputAdornment position="end"> <PersonIcon /></InputAdornment>}></Input>
+                                        </div>
+                                        <div style={{ marginTop: "40px" }}>
+                                            <Input label="Email" type="primary" width="100%" adornment={<InputAdornment position="end"><EmailIcon /></InputAdornment>}></Input>
+                                        </div>
+                                        <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
+                                            <div style={{ display: "flex" }}>
+                                                <div style={{
+                                                    display: "flex",
+                                                    width: "418px",
+                                                    height: "50px",
+                                                    fontWeight: "bold",
+                                                    borderRadius: "10px",
+                                                    borderTopRightRadius: "0",
+                                                    borderBottomRightRadius: "0",
+                                                    backgroundColor: "#7de2d1",
+                                                    alignItems: "center",
+                                                    color: "black",
+                                                    paddingLeft: "16px"
+                                                }}>Alterar Senha</div>
+                                                <Button onClick={() => {
+                                                    setEditPassword(!editPassword)
+                                                }} width="60px" height="50px" style={{
+                                                    fontWeight: "bold",
+                                                    borderRadius: "10px",
+                                                    borderTopLeftRadius: "0",
+                                                    borderBottomLeftRadius: "0",
+                                                    marginLeft: "2px",
+                                                    fontSize: "36px"
+                                                }}><span>{`>`}</span></Button>
                                             </div>
-                                            <div style={{ marginTop: "40px" }}>
-                                                <Input label="Email" type="primary" width="100%" adornment={<InputAdornment position="end"><EmailIcon /></InputAdornment>}></Input>
-                                            </div>
-                                            <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
-                                                <div style={{ display: "flex" }}>
-                                                    <div style={{
-                                                        display: "flex",
-                                                        width: "418px",
-                                                        height: "50px",
-                                                        fontWeight: "bold",
-                                                        borderRadius: "10px",
-                                                        borderTopRightRadius: "0",
-                                                        borderBottomRightRadius: "0",
-                                                        backgroundColor: "#7de2d1",
-                                                        alignItems: "center",
-                                                        color: "black",
-                                                        paddingLeft: "16px"
-                                                    }}>Alterar Senha</div>
-                                                    <Button onClick={() => {
-                                                        setEditPassword(!editPassword)
-                                                    }} width="60px" height="50px" style={{
-                                                        fontWeight: "bold",
-                                                        borderRadius: "10px",
-                                                        borderTopLeftRadius: "0",
-                                                        borderBottomLeftRadius: "0",
-                                                        marginLeft: "2px",
-                                                        fontSize: "36px"
-                                                    }}><span>{`>`}</span></Button>
-                                                </div>
-                                                <div style={{ display: "flex", marginTop: "40px", justifyContent: "space-between", width: "100%" }}>
-                                                    <Button onClick={() => {
-                                                        setEditing(!editing)
-                                                        setEditPassword(false)
+                                            <div style={{ display: "flex", marginTop: "40px", justifyContent: "space-between", width: "100%" }}>
+                                                <Button onClick={() => {
+                                                    setEditing(!editing)
+                                                    setEditPassword(false)
 
-                                                    }} width="220px" height="50px" style={{
-                                                        fontWeight: "bold",
-                                                        backgroundColor: "#4B4B4B",
-                                                        borderRadius: "10px",
-                                                        color: "white"
-                                                    }}>Voltar</Button>
+                                                }} width="220px" height="50px" style={{
+                                                    fontWeight: "bold",
+                                                    backgroundColor: "#4B4B4B",
+                                                    borderRadius: "10px",
+                                                    color: "white"
+                                                }}>Voltar</Button>
 
-                                                    <Button width="220px" height="50px" style={{
-                                                        fontWeight: "bold",
-                                                        borderRadius: "10px",
-                                                    }}>Concluir</Button>
-                                                </div>
+                                                <Button width="220px" height="50px" style={{
+                                                    fontWeight: "bold",
+                                                    borderRadius: "10px",
+                                                }}>Concluir</Button>
                                             </div>
                                         </div>
-                                        {editPassword &&
-                                            <>
-                                                <form onSubmit={(event) => {
-                                                    event.preventDefault()
-                                                    validPassword()
-                                                    handleChangePasswordAPI()
-                                                    }}>
-
-                                                    <div>
-                                                        <div style={{ justifyContent: "space-between", display: "flex" }}>
-                                                            <InputPass label="Senha Atual" type="primary" width="547px" password={senhaAtual} onChange={handleChangeSenha}></InputPass>
-                                                        </div>
-                                                        <div style={{ marginTop: "40px" }}>
-                                                            <InputPass label="Nova Senha" type="primary" width="100%" password={novaSenha} onChange={changeSenha}></InputPass>
-                                                        </div>
-                                                        <div style={{ marginTop: "40px" }}>
-                                                            <InputPass label="Confirmação Nova Senha" type="primary" width="100%" password={confirmarSenha} onChange={changeConfirmarSenha}></InputPass>
-                                                        </div>
-                                                        <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
-                                                            <div style={{ display: "flex" }}>
-                                                                <Button style={{
-                                                                    display: "flex",
-                                                                    width: "418px",
-                                                                    height: "50px",
-                                                                    fontWeight: "bold",
-                                                                    borderRadius: "10px",
-                                                                    backgroundColor: "#7de2d1",
-                                                                    alignItems: "center",
-                                                                    justifyContent: "center",
-                                                                    color: "black",
-                                                                    paddingLeft: "16px"
-                                                                }}>Alterar</Button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                    </div>
+                                    {editPassword &&
+                                        <>
+                                            <form onSubmit={(event) => {
+                                                event.preventDefault()
+                                                validPassword()
+                                                handleChangePasswordAPI()
+                                            }}>
 
                                                 <div>
-                                                    <div style={{ width: "375px", height: "387px", background: "#2B2C28", borderRadius: "10px", alignItems: "center" }}>
-                                                        <div style={{ width: "80%", height: "90%", margin: "auto", paddingTop: "23px" }}>
-                                                            <div style={{ fontSize: "24px", color: "#7DE2D1", fontWeight: "bold", textAlign: "left" }}>
-                                                                Requisitos de uma senha segura:
-                                                            </div>
-                                                            <CheckPassword checked={biggerThanSex} text="Maior que 6 caracteres"></CheckPassword>
-                                                            <CheckPassword checked={atLeastOneSpecialChar} text="Pelo menos um caractere especial"></CheckPassword>
-                                                            <CheckPassword checked={samePassword} text="As senhas devem coincidir"></CheckPassword>
-                                                            <CheckPassword checked={oneUpperCase} text="Uma letra maiúscula "></CheckPassword>
+                                                    <div style={{ justifyContent: "space-between", display: "flex" }}>
+                                                        <InputPass label="Senha Atual" type="primary" width="547px" password={senhaAtual} onChange={handleChangeSenha}></InputPass>
+                                                    </div>
+                                                    <div style={{ marginTop: "40px" }}>
+                                                        <InputPass label="Nova Senha" type="primary" width="100%" password={novaSenha} onChange={changeSenha}></InputPass>
+                                                    </div>
+                                                    <div style={{ marginTop: "40px" }}>
+                                                        <InputPass label="Confirmação Nova Senha" type="primary" width="100%" password={confirmarSenha} onChange={changeConfirmarSenha}></InputPass>
+                                                    </div>
+                                                    <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
+                                                        <div style={{ display: "flex" }}>
+                                                            <Button style={{
+                                                                display: "flex",
+                                                                width: "418px",
+                                                                height: "50px",
+                                                                fontWeight: "bold",
+                                                                borderRadius: "10px",
+                                                                backgroundColor: "#7de2d1",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                color: "black",
+                                                                paddingLeft: "16px"
+                                                            }}>Alterar</Button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </>
-                                        }
-                                    </div>
+                                            </form>
+
+                                            <div>
+                                                <div style={{ width: "375px", height: "387px", background: "#2B2C28", borderRadius: "10px", alignItems: "center" }}>
+                                                    <div style={{ width: "80%", height: "90%", margin: "auto", paddingTop: "23px" }}>
+                                                        <div style={{ fontSize: "24px", color: "#7DE2D1", fontWeight: "bold", textAlign: "left" }}>
+                                                            Requisitos de uma senha segura:
+                                                        </div>
+                                                        <CheckPassword checked={biggerThanSex} text="Maior que 6 caracteres"></CheckPassword>
+                                                        <CheckPassword checked={atLeastOneSpecialChar} text="Pelo menos um caractere especial"></CheckPassword>
+                                                        <CheckPassword checked={samePassword} text="As senhas devem coincidir"></CheckPassword>
+                                                        <CheckPassword checked={oneUpperCase} text="Uma letra maiúscula "></CheckPassword>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </>
+                                    }
+                                </div>
                                 {/* </form> */}
                             </div>}
                     </div>
