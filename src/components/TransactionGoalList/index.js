@@ -3,25 +3,10 @@ import * as React from 'react';
 import TitleBalancefy from "../Title";
 import { AuthContext } from "../../contexts/auth";
 import { useState } from "react";
-import { useEffect } from "react";
-import api from "../../service/api";
 
 export default function TransactionGoal(props) {
   const { user } = React.useContext(AuthContext)
-  const [transactions, setTransactions] = useState([]);
-
-  useEffect(() => {
-    api
-      .get("/transaction/1")
-      .then((res) => {
-        setTransactions(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
-
-
+  const transactions = props.data;
 
   return (
     <>
@@ -30,7 +15,8 @@ export default function TransactionGoal(props) {
           <TitleBalancefy variant="h2">Movimentações</TitleBalancefy>
         </div>
         <div style={{ height: 420, width: '100%', overflow: "auto", maxHeight:420}}>
-          {transactions.map((row) => {
+          {transactions!== undefined? transactions.map((row) => {
+            console.log(transactions)
             return (<>
               <div style={{borderBottom: "solid 5px #7DE2D1", borderRadius: "5px", paddingLeft: "40px", paddingRight: "30px", height:"35px", marginTop:"25px"}}>
                 <div style={{ display:"flex", fontSize: "14px", justifyContent:"space-around"}}>
@@ -40,8 +26,11 @@ export default function TransactionGoal(props) {
                   <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{row.created_at}</div>
                 </div>
               </div>
-            </>)
-          })}
+            </>) 
+          }) 
+          : 
+          <>
+          </> }
         </div>
       </Container>
     </>

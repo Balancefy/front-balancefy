@@ -24,17 +24,28 @@ export default function Goals() {
 
     const [goalRoadmap, setGoalRoadmap] = useState();
 
+    const [transactions, setTransactions] = useState();
+
     useEffect(() => {
         api
-          .get(`/accounts/goals/${1}`)
-          .then((res) => {
-            setGoalRoadmap({objetivo: res.data.objetivo, tasks: res.data.tasks })
-        })
-          .catch((err) => {
-            console.log(err)
-          })
-      }, [])
+            .get(`/accounts/goals/${1}`)
+            .then((res) => {
+                setGoalRoadmap({ objetivo: res.data.objetivo, tasks: res.data.tasks })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
 
+        api
+            .get(`/transactions/goal/${1}`)
+            .then((res) => {
+                setTransactions(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },
+        [])
 
     const usersRank = [
         { id: 1, p: 1, name: "Bruno Ferreira", goals: 1, tasks: 23 },
@@ -53,23 +64,6 @@ export default function Goals() {
         { id: 3, desc: "Comida", porcentagem: 17 },
         { id: 1, desc: "UBER", porcentagem: 55 },
         { id: 2, desc: "Roupa", porcentagem: 37 },
-    ]
-
-    const usersTransactions = [
-        { id: 1, desc: "UBER", amount: "1.000,00", type: "SAIDA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "3.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "4.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" },
-        { id: 2, desc: "ROUPA", amount: "1.000,00", type: "ENTRADA", date: "26/02/2022" }
     ]
 
     const usersRoadMap = {
@@ -141,7 +135,7 @@ export default function Goals() {
                                             </Grid>
                                         </Grid>
                                         <Grid Item>
-                                            <TransactionGoal data={usersTransactions}></TransactionGoal>
+                                            <TransactionGoal data={transactions}></TransactionGoal>
                                         </Grid>
                                     </Grid>
                                 </Grid>
