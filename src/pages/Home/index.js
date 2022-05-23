@@ -34,18 +34,18 @@ const downloadCsv = (event) => {
 }
 
 export default function Home() {
+    const [transactions, setTransactions] = React.useState();
 
-    const transactions = [
-        { id: 1, category: "Mesada", type: "in", title: "Mesada" },
-        { id: 1, category: "Mesada", type: "in", title: "Mesada" },
-        { id: 1, category: "Mesada", type: "in", title: "Mesada" },
-        { id: 1, category: "Mesada", type: "in", title: "Mesada" },
-        { id: 1, category: "Mesada", type: "in", title: "Mesada" },
-        { id: 1, category: "Mesada", type: "in", title: "Mesada" },
-        { id: 1, category: "Mesada", type: "in", title: "Mesada" },
-        { id: 1, category: "Mesada", type: "in", title: "Mesada" },
-        { id: 1, category: "Mesada", type: "in", title: "Mesada" }
-    ]
+    useEffect(() => {
+        api.get(`transactionFixed/${1}`)
+            .then(res => {
+                setTransactions(res.data);
+            }).catch(err => {
+                console.log(err);
+            })
+
+        console.log(transactions)
+    }, [])
 
 
     const [transactionType, setTransactionType] = React.useState("");
@@ -62,7 +62,7 @@ export default function Home() {
                                     <BalanceBalancefy></BalanceBalancefy>
                                 </Grid>
                                 <Grid item>
-                                    <Container background="#4B4B4B" height="90px" width="100%" borderRadius="10px" style={{ display: "flex", alignItems: "center", justifyContent: "center",marginTop: "20px" }}>
+                                    <Container background="#4B4B4B" height="90px" width="100%" borderRadius="10px" style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "20px" }}>
                                         <div>
                                             <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
                                                 Movimentações fixas
@@ -98,8 +98,19 @@ export default function Home() {
                                             </Select>
                                         </FormControl>
                                     </Box>
-                                    <Box sx={{display:"flex", flexWrap: "wrap", minWidth: "521px",maxWidth:"540px"}}>
-                                    {transactions.map((transaction) => (<Transaction/>))}
+                                    <Box sx={{ display: "flex", flexWrap: "wrap", minWidth: "521px", maxWidth: "540px" }}>
+                                        {
+                                            transactions != undefined ?
+                                                transactions.map((transaction) => (
+                                                    <Transaction 
+                                                        key={transaction.id} 
+                                                        category={transaction.categoria} 
+                                                        type={transaction.tipo == "Entrada" ? "in" : "out"} 
+                                                        title={transaction.descricao}>
+                                                        {transaction.valor}
+                                                    </Transaction>
+                                                )) : <></>
+                                        }
                                     </Box>
                                 </Grid>
                             </Grid>
@@ -109,13 +120,13 @@ export default function Home() {
                             <Container style={{ display: "flex", height: "100%", width: "560px", justifyContent: "center" }}>
                                 <Grid>
                                     <GoalsBalancefy></GoalsBalancefy>
-                                    <ObjFinal 
-                                        title="Comprar todas peças do PC" 
+                                    <ObjFinal
+                                        title="Comprar todas peças do PC"
                                         desc="Quitar todas as parcelas da casa"
                                         xp="2000xp"
                                         metas="1/9"
                                         tasks={[{}]}
-                                        >
+                                    >
                                     </ObjFinal>
                                 </Grid>
                                 <Grid>

@@ -11,9 +11,17 @@ export default function ObjFinal(props) {
     <>
       <Grid container direction="column" height="90%" width="100%" flexWrap="nowrap">
         <Grid item height="100%" width="100%">
-          <Container style={{ height: "30%", width: "100%", backgroundColor: "#4B4B4B", marginTop: "20px" }}>
+          <Container style={{ height: "30%", width: "100%", backgroundColor: "#4B4B4B", marginTop: "20px", }}>
             {props.key}
-            <div style={{ display: "flex", margin: "auto", width: "90%", justifyContent: "space-evenly", flexDirection: "column", height: "100%", position: "relative" }}>
+            <div style={{
+              display: "flex",
+              margin: "auto",
+              width: "90%",
+              justifyContent: "space-evenly",
+              flexDirection: "column",
+              height: "100%",
+              position: "relative"
+            }}>
               <div style={{ fontSize: "24px" }}>
                 Objetivo Final
               </div>
@@ -35,11 +43,18 @@ export default function ObjFinal(props) {
               </div>
 
               <div style={{
-                display: "flex", height: "650px",
-                alignItems: "center", flexDirection: "column", position: "absolute", left: 0, right: 0, margin: "0 auto", top: "85%"
+                display: "flex",
+                height: "600px",
+                alignItems: "center", flexDirection: "column",
+                position: "absolute",
+                left: 0,
+                right: 0,
+                margin: "0 auto",
+                bottom: -565,
               }}>
-                <TaskBall></TaskBall>
-                <GoalBall style={{ marginTop: "300px" }}></GoalBall>
+                {tasksArray.map(task => {
+                  return(<TaskBall></TaskBall>)
+                })}
               </div>
             </div>
           </Container>
