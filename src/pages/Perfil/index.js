@@ -211,8 +211,15 @@ export default function Profile() {
                                         <>
                                             <form onSubmit={(event) => {
                                                 event.preventDefault()
-                                                validPassword()
-                                                handleChangePasswordAPI()
+                                                if (validPassword()) {
+                                                    handleChangePasswordAPI()
+                                                } else {
+                                                    setOpen(true)
+                                                    setTimeout(() => setOpen(false), 1500)
+                                                    setNovaSenha('')
+                                                    setSenhaAtual('')
+                                                    setConfirmarSenha('')
+                                                }
                                             }}>
 
                                                 <div>
