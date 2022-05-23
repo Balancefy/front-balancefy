@@ -23,10 +23,9 @@ export default function Profile() {
     const [editing, setEditing] = React.useState(false);
     const [editPassword, setEditPassword] = React.useState(false);
 
+
+    const [novaSenha, setNovaSenha] = React.useState("");
     const [senhaAtual, setSenhaAtual] = React.useState("");
-
-
-    const [senha, setSenha] = React.useState("");
     const [confirmarSenha, setConfirmarSenha] = React.useState("");
 
     const [biggerThanSex, setBiggerThanSex] = React.useState(false);
@@ -49,19 +48,29 @@ export default function Profile() {
         // api.get(`/${profileUser.id_usuario}`)
         //     .then((res) => setTopics(res.data))
         //     .catch((err) => console.log(err))
-    }, [])
+    }, []);
 
-    const handleChange = (event) => {
-        this.senha = event.target.value
-        this.confirmarSenha = event.target.value
-    }
+    const handleChangePasswordAPI = () => {
+        api.put("users/senha", {
+            senhaAtual,
+            novaSenha
+        }).then((res) => {
+            console.log(res)
+        }).catch((err) => {
+            console.log(err)
+        })
+    };
+
+    const handleChangeSenha = (event) => {
+        setSenhaAtual(event.target.value);
+    };
 
     const validPassword = () => {
-        const hasUpperCase = /[A-Z]/.test(senha);
-        const hasSymbol = /[!@#%&*><?]/.test(senha);
+        const hasUpperCase = /[A-Z]/.test(novaSenha);
+        const hasSymbol = /[!@#%&*><?]/.test(novaSenha);
 
-        return (senha.length > 6) && hasUpperCase && hasSymbol && (senha === confirmarSenha)
-    }
+        return (novaSenha.length > 6) && hasUpperCase && hasSymbol && (novaSenha === confirmarSenha)
+    };
 
     const verifyPassword = (value) => {
         const hasUpperCase = /[A-Z]/.test(value);
@@ -71,20 +80,17 @@ export default function Profile() {
         setOneUpperCase(hasUpperCase)
         setAtLeastOneSpecialChar(hasSymbol)
         setSamePassword(value === confirmarSenha)
-
-    }
+    };
 
     const changeSenha = (event) => {
-        setSenha(event.target.value)
+        setNovaSenha(event.target.value)
         verifyPassword(event.target.value)
-    }
+    };
 
     const changeConfirmarSenha = (event) => {
         setConfirmarSenha(event.target.value)
-        setSamePassword(event.target.value === senha)
-    }
-
-
+        setSamePassword(event.target.value === novaSenha)
+    };
 
     return (
         <>
@@ -131,11 +137,11 @@ export default function Profile() {
                             </div>}
                         {editing &&
                             <div style={{ width: "100%", height: "40vh", display: "flex" }}>
-                                <form
+                                {/* <form
                                     style={{ width: "100%" }}
                                     onSubmit={(event) => {
                                         event.preventDefault();
-                                    }}>
+                                    }}> */}
                                     <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
                                         <div>
                                             <div style={{ justifyContent: "space-between", display: "flex" }}>
@@ -191,33 +197,41 @@ export default function Profile() {
                                         </div>
                                         {editPassword &&
                                             <>
-                                                <div>
-                                                    <div style={{ justifyContent: "space-between", display: "flex" }}>
-                                                        <InputPass label="Senha Atual" type="primary" width="547px"></InputPass>
-                                                    </div>
-                                                    <div style={{ marginTop: "40px" }}>
-                                                        <InputPass label="Nova Senha" type="primary" width="100%" value={senha} onChange={changeSenha}></InputPass>
-                                                    </div>
-                                                    <div style={{ marginTop: "40px" }}>
-                                                        <InputPass label="Confirmação Nova Senha" type="primary" width="100%" value={confirmarSenha} onChange={changeConfirmarSenha}></InputPass>
-                                                    </div>
-                                                    <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
-                                                        <div style={{ display: "flex" }}>
-                                                            <Button onClick={validPassword} style={{
-                                                                display: "flex",
-                                                                width: "418px",
-                                                                height: "50px",
-                                                                fontWeight: "bold",
-                                                                borderRadius: "10px",
-                                                                backgroundColor: "#7de2d1",
-                                                                alignItems: "center",
-                                                                justifyContent: "center",
-                                                                color: "black",
-                                                                paddingLeft: "16px"
-                                                            }}>Alterar</Button>
+                                                <form onSubmit={(event) => {
+                                                    event.preventDefault()
+                                                    validPassword()
+                                                    handleChangePasswordAPI()
+                                                    }}>
+
+                                                    <div>
+                                                        <div style={{ justifyContent: "space-between", display: "flex" }}>
+                                                            <InputPass label="Senha Atual" type="primary" width="547px" password={senhaAtual} onChange={handleChangeSenha}></InputPass>
+                                                        </div>
+                                                        <div style={{ marginTop: "40px" }}>
+                                                            <InputPass label="Nova Senha" type="primary" width="100%" password={novaSenha} onChange={changeSenha}></InputPass>
+                                                        </div>
+                                                        <div style={{ marginTop: "40px" }}>
+                                                            <InputPass label="Confirmação Nova Senha" type="primary" width="100%" password={confirmarSenha} onChange={changeConfirmarSenha}></InputPass>
+                                                        </div>
+                                                        <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
+                                                            <div style={{ display: "flex" }}>
+                                                                <Button style={{
+                                                                    display: "flex",
+                                                                    width: "418px",
+                                                                    height: "50px",
+                                                                    fontWeight: "bold",
+                                                                    borderRadius: "10px",
+                                                                    backgroundColor: "#7de2d1",
+                                                                    alignItems: "center",
+                                                                    justifyContent: "center",
+                                                                    color: "black",
+                                                                    paddingLeft: "16px"
+                                                                }}>Alterar</Button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </form>
+
                                                 <div>
                                                     <div style={{ width: "375px", height: "387px", background: "#2B2C28", borderRadius: "10px", alignItems: "center" }}>
                                                         <div style={{ width: "80%", height: "90%", margin: "auto", paddingTop: "23px" }}>
@@ -234,7 +248,7 @@ export default function Profile() {
                                             </>
                                         }
                                     </div>
-                                </form>
+                                {/* </form> */}
                             </div>}
                     </div>
                 </Container>
