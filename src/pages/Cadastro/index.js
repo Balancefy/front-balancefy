@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import TitleBalancefy from "../../components/Title";
 import Input from "../../components/Input";
@@ -18,6 +18,7 @@ import {
   Collapse,
   FormHelperText,
   InputAdornment,
+  StepContext,
 } from "@mui/material";
 import LoginGoogle from "../../components/LoginGoogle";
 import DateInput from "../../components/DateInput";
@@ -32,6 +33,7 @@ import InputValue from "../../components/InputValue";
 
 export default function Cadastro() {
   const [displayOne, setDisplayOne] = React.useState("block");
+  const [step, setStep] = React.useState(1); 
   const [displayTwo, setDisplayTwo] = React.useState("none");
   const [displayThree, setDisplayThree] = React.useState("none");
   const [open, setOpen] = React.useState(false);
@@ -76,6 +78,7 @@ export default function Cadastro() {
     setDisplayOne("none");
     setDisplayTwo("block");
     setDisplayThree("none");
+    setStep(step+1);
   }
 
   const handleSecondStep = () => {
@@ -88,6 +91,7 @@ export default function Cadastro() {
     setDisplayOne("none");
     setDisplayTwo("none");
     setDisplayThree("block");
+    setStep (step+1); 
   }
 
   const handleThirdStep = () => {
@@ -201,7 +205,7 @@ export default function Cadastro() {
               }}
             >
 
-              <Step />
+              <Step  step = {step}/>
               <div id="form-1" style={{ display: displayOne }}>
                 <div>
                   <TitleWithDot>Crie uma nova conta</TitleWithDot>
