@@ -8,9 +8,9 @@ export default function MaioresGastos(props) {
   return (
     <>
       <Container height="318px" width="583px" borderRadius="10px" backgroundColor="#4B4B4B">
-      <div style={{padding:"27px 0px 0px 40px"}}>
-        <TitleBalancefy variant="h2">Maiores Gastos</TitleBalancefy>
-      </div>
+        <div style={{ padding: "27px 0px 0px 40px" }}>
+          <TitleBalancefy variant="h2">Maiores Gastos</TitleBalancefy>
+        </div>
 
         <div style={{
           display: "flex",
@@ -18,10 +18,13 @@ export default function MaioresGastos(props) {
           alignItems: "center",
           position: "relative"
         }}>
+          {gastos != undefined && gastos.lenght != 0 ? <>
+            <MaioresGastosBubble third id={3} desc={gastos[0].tipo} porcentagem={gastos[2].porcentagem} ></MaioresGastosBubble>
+            <MaioresGastosBubble primary id={1} desc={gastos[1].tipo} porcentagem={gastos[0].porcentagem} ></MaioresGastosBubble>
+            <MaioresGastosBubble secondary id={2} desc={gastos[2].tipo} porcentagem={gastos[1].porcentagem} ></MaioresGastosBubble>
+          </>
+            : <></>}
 
-          <MaioresGastosBubble third id={gastos[0].id} desc={gastos[0].desc} porcentagem={gastos[0].porcentagem} color={gastos[0].color}></MaioresGastosBubble>
-          <MaioresGastosBubble primary id={gastos[1].id} desc={gastos[1].desc} porcentagem={gastos[1].porcentagem} color={gastos[1].color}></MaioresGastosBubble>
-          <MaioresGastosBubble secondary id={gastos[2].id} desc={gastos[2].desc} porcentagem={gastos[2].porcentagem} color={gastos[2].color}></MaioresGastosBubble>
         </div>
       </Container>
     </>

@@ -25,9 +25,12 @@ export default function Goals() {
 
     const [transactions, setTransactions] = useState();
 
+    const [expenses, setExpenses] = useState();
+    
+    const goalId = 1;
     useEffect(() => {
         api
-            .get(`/accounts/goals/${1}`)
+            .get(`/accounts/goals/${goalId}`)
             .then((res) => {
                 setGoalRoadmap({ objetivo: res.data.objetivo, tasks: res.data.tasks })
             })
@@ -43,6 +46,16 @@ export default function Goals() {
             .catch((err) => {
                 console.log(err)
             })
+
+        api
+            .get(`transactions/goal/${goalId}/expenses`)
+            .then(res => {
+                setExpenses(res.data.list);
+            }).catch(err => {
+                console.log(err);
+            })
+
+            console.log(expenses);
     },
         [])
 
@@ -59,12 +72,7 @@ export default function Goals() {
         { id: 10, p: 10, name: "Ricardo Santos", goals: 1, tasks: 5 }
     ];
 
-    const gastos = [
-        { id: 3, desc: "Comida", porcentagem: 17 },
-        { id: 1, desc: "UBER", porcentagem: 55 },
-        { id: 2, desc: "Roupa", porcentagem: 37 },
-    ]
-
+  
     const usersRoadMap = {
         objetivo: {
             id: 1, desc: "Viajar para a Australia", xp: 4000
@@ -129,7 +137,7 @@ export default function Goals() {
                                                     </Container>
                                                 </Grid>
                                                 <Grid item>
-                                                    <MaioresGastos data={gastos}></MaioresGastos>
+                                                    <MaioresGastos data={expenses}></MaioresGastos>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
