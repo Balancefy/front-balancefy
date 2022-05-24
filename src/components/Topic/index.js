@@ -7,13 +7,18 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { Box, IconButton } from "@mui/material";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../../service/api";
+import { AuthContext } from "../../contexts/auth";
 
 const apiUrl = process.env.REACT_APP_API_URL
 
 function TopicBalancefy(props) {
-    const [like, setLike] = useState(false);
+    const { user } = useContext(AuthContext);
+    const [like, setLike] = useState(props.liked);
+    const [likes, setLikes] = useState(props.like);
+    const data = Math.ceil((new Date().getTime() - new Date(props.date).getTime()) / (1000 * 3600 * 24))
 
     const style = props.style === "forum" ? 
         {
@@ -25,6 +30,19 @@ function TopicBalancefy(props) {
             variant: 'body2',
             sizeImage: '35px',
         }
+
+    const likeTopic = () => {
+        const url = !like ? `like/${props.id}` : `unlike/${props.id}`
+        
+        api.patch(`/forum/${url}`)
+            .then((res) => {
+                setLikes(res.data.likes)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
 
     return (
         <>
@@ -75,13 +93,16 @@ function TopicBalancefy(props) {
                                 <IconButton>
                                     <CommentIcon></CommentIcon>
                                 </IconButton>
-                            </Link> {props.comment}
-                            <IconButton onClick={() => {setLike(!like)}}>
+                            </Link> {props.comment !== null ? 0 : props.comment}
+                            <IconButton onClick={() => {
+                                likeTopic()
+                                setLike(!like)
+                            }}>
                                 {
                                     like ? <ThumbUpIcon></ThumbUpIcon> : <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
                                 }
-                            </IconButton> {props.like}
-                            <AccessTimeIcon></AccessTimeIcon> {props.date}
+                            </IconButton> {likes}
+                            <AccessTimeIcon></AccessTimeIcon> {data + "d"}
                         </div>
                     </div>
 

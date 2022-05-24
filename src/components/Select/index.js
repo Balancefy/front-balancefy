@@ -8,20 +8,14 @@ export default function SelectBalancefy(props) {
   } : {
     variant: 'standard'
   }
-
-  const [category, setCategory] = React.useState('');
-
-  const handleChange = (event) => {
-    setCategory(event.target.value);
-  };
   
   return(
       <FormControl variant={style.variant} sx={{ mt: props.mt, mr: props.mr, mb: props.mb, width: props.width}}>
         <InputLabel>{props.label}</InputLabel>
         <Select
-          value={category}
+          value={props.value}
           label={props.label}
-          onChange={handleChange}
+          onChange={props.onChange}
         >
           {
             props.content === "category" ? 

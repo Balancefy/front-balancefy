@@ -33,17 +33,27 @@ import InputValue from "../../components/InputValue";
 
 export default function Cadastro() {
   const [displayOne, setDisplayOne] = React.useState("block");
-  const [step, setStep] = React.useState(1); 
   const [displayTwo, setDisplayTwo] = React.useState("none");
   const [displayThree, setDisplayThree] = React.useState("none");
+  const [step, setStep] = React.useState(1); 
   const [open, setOpen] = React.useState(false);
-  const [userType, setUserType] = React.useState("DEFAULT");
   const [expenses, setExpenses] = React.useState([]);
+
+  const [userType, setUserType] = React.useState("DEFAULT");
   const [confirmaSenha, setConfirmaSenha] = React.useState("");
   const [samePass, setSamePass] = React.useState("");
-  const [renda, setRenda] = React.useState("");
-  const [dataNascimento, setDataNascimento] = React.useState(null);
   const [gastos, setGastos] = React.useState([]);
+
+  const [gasto, setGasto] = React.useState({
+    descricao: "",
+    valor: "",
+    categoria: ""
+  });
+
+  const [conta, setConta] = React.useState({
+    renda: "",
+    dataNascimento: null
+  });
   
   const [usuario, setUsuario] = React.useState({
     nome: "",
@@ -57,7 +67,7 @@ export default function Cadastro() {
   const [objetivo, setObjetivo] = React.useState({
     descricao: "",
     categoria: "",
-    dataConclusao: "",
+    dataConclusao: null,
     valorInicial: "",
     valorTotal: ""
   });
@@ -82,11 +92,7 @@ export default function Cadastro() {
   }
 
   const handleSecondStep = () => {
-    localStorage.setItem("@user:secondStep", JSON.stringify({
-      dataNascimento: dataNascimento,
-      renda: renda,
-      gastosFixos: gastos
-    }))
+    localStorage.setItem("@user:secondStep", JSON.stringify(conta))
 
     setDisplayOne("none");
     setDisplayTwo("none");
@@ -137,7 +143,10 @@ export default function Cadastro() {
   }
 
   const handleChangeRenda = (event) => {
-    setRenda(event.target.value)
+    setConta({
+      ...conta,
+      renda: event.target.value
+    })
   }
 
   const handleChangeDescricao = (event) => {
@@ -169,10 +178,10 @@ export default function Cadastro() {
   }
 
   const addExpense = () => {
-    setExpenses(expenses.concat(<AddExpense onChange={handleExpense}></AddExpense>));
+    setExpenses(expenses.concat(<AddExpense onChange={handleExpenseDescricao}></AddExpense>));
   }
 
-  const handleExpense = (event) => {
+  const handleExpenseDescricao = (event) => {
     console.log(event.target.value)
     // setGastos(gastos.concat({
     //   descricao: "",
@@ -180,6 +189,26 @@ export default function Cadastro() {
     //   categoria: ""
     // }))
   }
+
+  const handleExpenseValor = (event) => {
+    console.log(event.target.value)
+    // setGastos(gastos.concat({
+    //   descricao: "",
+    //   valor: "",
+    //   categoria: ""
+    // }))
+  }
+
+  const handleExpenseCategoria = (event) => {
+    console.log(event.target.value)
+    // setGastos(gastos.concat({
+    //   descricao: "",
+    //   valor: "",
+    //   categoria: ""
+    // }))
+  }
+
+
 
   return (
     <>
@@ -256,6 +285,7 @@ export default function Cadastro() {
                   <div style={{ marginTop: "5%" }}>
                     <Input
                       label="Email"
+                      typeInput="email"
                       type="primary"
                       width="100%"
                       value={usuario.email}
@@ -326,13 +356,18 @@ export default function Cadastro() {
                     <TitleBalancefy variant="body4">
                       Data de nascimento
                     </TitleBalancefy>
-                    <DateInput value={dataNascimento} onChange={(newValue) => {setDataNascimento(newValue)}} mt={0.9} width="100%"/>
+                    <DateInput value={conta.dataNascimento} onChange={(newValue) => {
+                      setConta({
+                        ...conta,
+                        dataNascimento: newValue
+                      })
+                    }} mt={0.9} width="100%"/>
                   </div>
                   <div>
                     <InputValue
                       label="Renda"
                       type="primary"
-                      value={renda}
+                      value={conta.renda}
                       onChange={handleChangeRenda}
                       width="100%"
                       adornment={
@@ -351,6 +386,7 @@ export default function Cadastro() {
                         mt={0.9}
                         label="Descrição"
                         type="primary"
+                        value={gasto.descricao}
                         width="100%"
                       ></Input>
                     </div>
@@ -364,7 +400,7 @@ export default function Cadastro() {
                       <InputValue
                       label="Valor"
                       type="primary"
-                      value={renda}
+                      value={gasto.valor}
                       width="267px"
                       adornment={
                         <InputAdornment position="end">
@@ -377,6 +413,7 @@ export default function Cadastro() {
                         label="Categoria"
                         type="primary"
                         content="categoryTransaction"
+                        value={gasto.categoria}
                         width="267px"
                       ></SelectBalancefy>
                     </div>
@@ -451,6 +488,8 @@ export default function Cadastro() {
                       type="primary"
                       content="category"
                       width="100%"
+                      onChange={handleChangeCategoria}
+                      value={objetivo.categoria}
                     ></SelectBalancefy>
                   </div>
 
@@ -475,6 +514,7 @@ export default function Cadastro() {
                     <InputValue
                       label="Valor Inicial"
                       type="primary"
+                      required
                       onChange={handleChangeValorInicial}
                       value={objetivo.valorInicial}
                       width="100%"

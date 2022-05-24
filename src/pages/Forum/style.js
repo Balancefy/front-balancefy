@@ -26,7 +26,7 @@ export const styles = {
         pt: 4,
         pb: 10
     },
-    topics: {
+    topico: {
         maxHeight: "70vh", 
         overflow: "auto",
     },
