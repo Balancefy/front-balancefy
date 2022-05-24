@@ -15,7 +15,6 @@ export default function TransactionGoal(props) {
         </div>
         <div style={{ height: 420, width: '100%', overflow: "auto", maxHeight:420}}>
           {transactions!== undefined? transactions.map((row) => {
-            console.log(transactions)
             return (<>
               <div style={{borderBottom: "solid 5px #7DE2D1", borderRadius: "5px", paddingLeft: "40px", paddingRight: "30px", height:"35px", marginTop:"25px"}}>
                 <div style={{ display:"flex", fontSize: "14px", justifyContent:"space-around"}}>

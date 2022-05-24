@@ -13,7 +13,7 @@ import TitleBalancefy from "../../components/Title";
 import TransactionGoal from "../../components/TransactionGoalList";
 import ModalMovimentacao from "../../components/ModalMovimentacao";
 import { useEffect, useState } from "react";
-
+import { formatDate } from "../../service/utils";
 import api from "../../service/api";
 
 
@@ -24,15 +24,22 @@ export default function Goals() {
     const [goalRoadmap, setGoalRoadmap] = useState();
 
     const [transactions, setTransactions] = useState();
+    
+    const [estimatedTime, setEstimatedTime] = useState('Carregando...');
+
+    const [currentTask, setCurrentTask] = useState();
 
     const [expenses, setExpenses] = useState();
-    
+
     const goalId = 1;
     useEffect(() => {
         api
             .get(`/accounts/goals/${goalId}`)
             .then((res) => {
-                setGoalRoadmap({ objetivo: res.data.objetivo, tasks: res.data.tasks })
+                setGoalRoadmap({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks).reverse() })
+                setCurrentTask(Array.from(res.data.tasks).find(it => it.done == 0));
+
+                setEstimatedTime(formatDate(res.data.objetivo.tempoEstimado.replace('-', '/')));
             })
             .catch((err) => {
                 console.log(err)
@@ -54,10 +61,14 @@ export default function Goals() {
             }).catch(err => {
                 console.log(err);
             })
-
-            console.log(expenses);
+        
     },
         [])
+
+
+
+
+
 
 
 
@@ -86,10 +97,10 @@ export default function Goals() {
                                             </FaltaMeta>
                                         </Grid>
                                         <Grid item>
-                                            <DataEstimada>23/04/2022</DataEstimada>
+                                            <DataEstimada>{estimatedTime}</DataEstimada>
                                         </Grid>
                                         <Grid item>
-                                            <ObjetivoAtualBox titulo="Economizar" descricao="Reservar 20 reais por mês, durante 2 meses" xp="10">
+                                            <ObjetivoAtualBox titulo={currentTask != undefined ? currentTask.descricao : "Default"} descricao={`R$ ${currentTask != undefined && currentTask.valor != null ? currentTask.valor : "0,00" }`} xp={currentTask ? currentTask.pontuacao : "0"}>
                                             </ObjetivoAtualBox>
                                         </Grid>
                                     </Grid>
