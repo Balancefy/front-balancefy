@@ -11,6 +11,8 @@ import Input from "../../components/Input";
 import AvatarBalancefy from "../../components/Avatar";
 import CommentsSection from "../../components/CommentsSection";
 import AddComment from "../../components/AddComment";
+import React, { useEffect } from "react";
+import api from "../../service/api"
 
 export default function Comments(props) {
     const topics = [

@@ -8,60 +8,25 @@ import { styles } from "./style"
 import { Box } from "@mui/system";
 import TopicMostLiked from "../../components/TopicMostLiked";
 import ModalTopico from "../../components/ModalTopico";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainContainer from "../../components/MainContainer";
+import api from "../../service/api";
 
 export default function Forum(props) {
     const [modalState, setModalState] = useState(false);
     const [like, setLike] = useState(false);
     const [modalTitle, setModalTitle] = useState("Novo Tópico");
-
-    const topics = [
-        {
-            key: 1,
-            title: "Economizar dinheiro",
-            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: "BS",
-            name: "Beatriz Santos",
-            comment: "11",
-            like: "11",
-            views: "11",
-            date: "2d"
-        },
-        {
-            key: 2,
-            title: "Economizar dinheiro",
-            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: "BS",
-            name: "Beatriz Santos",
-            comment: "11",
-            like: "11",
-            views: "11",
-            date: "2d"
-        },
-        {
-            key: 3,
-            title: "Economizar dinheiro",
-            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: "BS",
-            name: "Beatriz Santos",
-            comment: "11",
-            like: "11",
-            views: "11",
-            date: "2d"
-        },
-        {
-            key: 4,
-            title: "Economizar dinheiro",
-            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: "BS",
-            name: "Beatriz Santos",
-            comment: "11",
-            like: "11",
-            views: "11",
-            date: "2d"
-        },
-    ]
+    const [topics, setTopics] = useState([]);
+    
+    useEffect(() => {
+        api.get("/forum")
+            .then((res) => {
+                setTopics(res.data);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
 
     const mostLikedPost = [
         {key: 5, title: "Economize ja!", like: "22" },
@@ -100,7 +65,7 @@ export default function Forum(props) {
                                         return(
                                             <div key={post.key} style={{marginRight: "5%"}}>
                                                 <TopicBalancefy
-                                                    title={post.title}
+                                                    title={post.topico.titulo}
                                                     description={post.description}
                                                     avatar={post.avatar}
                                                     name={post.name}
