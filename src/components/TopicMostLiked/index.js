@@ -4,11 +4,14 @@ import TitleBalancefy from "../Title";
 
 export default function TopicMostLiked(props) {
     return (
-        <Box sx={{display: "flex", alignItems: "center", mt: 2,  ml: 2}}>
-            <TitleBalancefy variant="h4">{props.title}</TitleBalancefy>
-            <Box sx={{display: "flex", alignItems: "center", ml: 12}}>
-                <ThumbUpIcon sx={{mr: 1}}/> {props.like}
+        <>
+            <Box sx={{mt: 2, display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center"}}>
+                <TitleBalancefy variant="h4">{props.title}</TitleBalancefy>
+                <Box sx={{display: "flex", justifyContent: "center"}}>
+                    <ThumbUpIcon sx={{mr: 1}}/> {props.like}
+                </Box>
             </Box>
-        </Box>
+
+        </>
     )
 }
