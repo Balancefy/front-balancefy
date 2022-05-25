@@ -25,11 +25,13 @@ export default function Goals() {
 
     const [transactions, setTransactions] = useState();
     
-    const [estimatedTime, setEstimatedTime] = useState('Carregando...');
+    const [estimatedTime, setEstimatedTime] = useState('Loading...');
 
     const [currentTask, setCurrentTask] = useState();
 
     const [expenses, setExpenses] = useState();
+
+    const [reachout, setReachout] = useState("0,00")
 
     const goalId = 1;
     useEffect(() => {
@@ -61,15 +63,16 @@ export default function Goals() {
             }).catch(err => {
                 console.log(err);
             })
+
+        api
+            .get(`accounts/goals/${goalId}/reachout`)
+            .then(res => {
+                setReachout(res.data.value.toFixed(2).replace(".",","));
+            })
+            
         
     },
         [])
-
-
-
-
-
-
 
 
 
@@ -93,14 +96,14 @@ export default function Goals() {
                                     <Grid container justifyContent="space-around">
                                         <Grid item>
                                             <FaltaMeta>
-                                                2.000,00
+                                                {reachout}
                                             </FaltaMeta>
                                         </Grid>
                                         <Grid item>
                                             <DataEstimada>{estimatedTime}</DataEstimada>
                                         </Grid>
                                         <Grid item>
-                                            <ObjetivoAtualBox titulo={currentTask != undefined ? currentTask.descricao : "Default"} descricao={`R$ ${currentTask != undefined && currentTask.valor != null ? currentTask.valor : "0,00" }`} xp={currentTask ? currentTask.pontuacao : "0"}>
+                                            <ObjetivoAtualBox titulo={currentTask != undefined ? currentTask.descricao : "Loading..."} descricao={`R$ ${currentTask != undefined && currentTask.valor != null ? currentTask.valor : "0,00" }`} xp={currentTask ? currentTask.pontuacao : "0"}>
                                             </ObjetivoAtualBox>
                                         </Grid>
                                     </Grid>
