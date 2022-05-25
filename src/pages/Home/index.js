@@ -71,7 +71,7 @@ export default function Home() {
         if(selectedGoal != -1){
             api.get(`/accounts/goals/${selectedGoal}`)
                 .then(res => {
-                    setCurrentGoal({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks).reverse() })
+                    setCurrentGoal({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks)})
                 }).catch(err => {
                     console.log(err);
                 })
