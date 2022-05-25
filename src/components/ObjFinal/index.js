@@ -44,16 +44,17 @@ export default function ObjFinal(props) {
 
               <div style={{
                 display: "flex",
-                height: "600px",
+                height: "560px",
                 alignItems: "center", flexDirection: "column",
                 position: "absolute",
+                overflow: 'auto',
                 left: 0,
                 right: 0,
                 margin: "0 auto",
-                bottom: -565,
+                bottom: -570,
               }}>
                 {tasksArray.map(task => {
-                  return(<TaskBall></TaskBall>)
+                  return (<TaskBall desc={task.descricao} xp={task.pontuacao} valor={!!task.valor  ?  task.valor.toFixed(2).replace(".",",") : "0,00"}></TaskBall>)
                 })}
               </div>
             </div>

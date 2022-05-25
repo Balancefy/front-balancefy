@@ -1,28 +1,30 @@
-import Container from "../Container";
+import React from "react";
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 export default function GoalsBalancefy(props) {
-  return (
+    return (
     <>
-      <Container
-        height="64px"
-        width="480px"
-        borderRadius="10px"
-        backgroundColor="#4B4B4B"
-      >
-        <div
-          style={{
-            display: "flex",
-            width: "480px",
-            height: "64px",
-            margin: "40px",
-            textAlign: "center",
-            color: "#7DE2D1",
+      <FormControl sx={{ height: "64px", width: "480px", mt: "30px", borderRadius: "10px" }}>
+        <Select
+          labelId="goal-select-label"
+          id="goal-select"
+          value={props.value}
+          defaultValue={-1}
+          sx={{
+            backgroundColor: "#4B4B4B",
+            color: "#7DE2D1"
           }}
+          onChange={props.onChange}
         >
-          <h3>COMPRAR PC GAMER</h3>
-        </div>
-        {/* <SpeedAdd style={{ left: "50%", position: "relative", top: "53vh" }} /> */}
-      </Container>
+          { props.data != undefined ? 
+          props.data.map(goal => {
+            console.log(goal)
+            return <MenuItem value={goal.id}>{goal.descricao}</MenuItem>
+          }) : <></>}
+        </Select>
+      </FormControl>
     </>
   );
 }

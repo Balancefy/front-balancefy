@@ -17,6 +17,8 @@ import ObjFinal from "../../components/ObjFinal";
 
 
 
+
+
 const downloadCsv = (event) => {
     api
         .get('transaction/report', { responseType: 'blob' })
@@ -36,6 +38,9 @@ const downloadCsv = (event) => {
 export default function Home() {
     const [transactions, setTransactions] = React.useState();
     const [dicas, setDicas] = React.useState([]);
+    const [selectedGoal, setSelectedGoal] = React.useState(-1);
+    const [accountGoals, setAccountGoals] = React.useState([]);
+    const [currentGoal, setCurrentGoal] = React.useState();
 
     useEffect(() => {
         api.get(`transactionFixed/${1}`)
@@ -52,10 +57,26 @@ export default function Home() {
             .catch((err) => {
                 console.log(err)
             })
-
-
-        console.log(transactions)
+        
+        api.get("accounts/goals")
+            .then(res => {
+                setAccountGoals(res.data)
+                setSelectedGoal(Array.from(res.data).find(it => !!it == true ).id)
+            }).catch(err => {
+                console.log(err);
+            })
     }, [])
+
+    useEffect(() => {
+        if(selectedGoal != -1){
+            api.get(`/accounts/goals/${selectedGoal}`)
+                .then(res => {
+                    setCurrentGoal({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks).reverse() })
+                }).catch(err => {
+                    console.log(err);
+                })
+        }
+    },[selectedGoal])
 
 
     const [transactionType, setTransactionType] = React.useState("");
@@ -127,17 +148,27 @@ export default function Home() {
                         </Grid>
 
                         <Grid item height="100%" >
-                            <Container style={{ display: "flex", height: "100%", width: "560px", justifyContent: "center" }}>
+                            <Container style={{ display: "flex", height: "100%", width: "560px", justifyContent: "center", overflow: "hidden" }}>
                                 <Grid>
-                                    <GoalsBalancefy></GoalsBalancefy>
-                                    <ObjFinal
-                                        title="Comprar todas peças do PC"
-                                        desc="Quitar todas as parcelas da casa"
-                                        xp="2000xp"
-                                        metas="1/9"
-                                        tasks={[{}]}
+                                    <GoalsBalancefy data={accountGoals} value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value) }/>
+                                    {
+                                    currentGoal != undefined ? <ObjFinal
+                                        title={currentGoal.objetivo.categoria}
+                                        desc={currentGoal.objetivo.descricao}
+                                        xp={currentGoal.objetivo.pontuacao +"XP"}
+                                        metas={`${Array.from(currentGoal.tasks).filter(it => it.done == 1).length}/${currentGoal.tasks.length}`}
+                                        tasks={currentGoal.tasks}
                                     >
-                                    </ObjFinal>
+                                    </ObjFinal> :          
+                                     <Container style={{ height: "30%", width: "100%", backgroundColor: "#4B4B4B", marginTop: "20px", display: "flex", justifyContent: "center", alignItems: "center" }}> 
+                                        <div style={{
+                                            color: "#7DE2D1",
+                                            fontSize: "30px"
+                                        }}>Loading...</div>
+                                     </Container>
+
+                                    }
+                                    
                                 </Grid>
                                 <Grid>
 
