@@ -2,6 +2,7 @@ import Container from "../Container";
 import * as React from 'react';
 import TitleBalancefy from "../Title";
 import { AuthContext } from "../../contexts/auth";
+import { formatDate } from "../../service/utils"
 
 export default function TransactionGoal(props) {
   const { user } = React.useContext(AuthContext)
@@ -9,7 +10,7 @@ export default function TransactionGoal(props) {
 
   return (
     <>
-      <Container height="558px" backgroundColor="#4B4B4B">
+      <Container height="52vh" backgroundColor="#4B4B4B">
         <div style={{ padding: "27px 0px 0px 40px" , marginBottom:"10px"}}>
           <TitleBalancefy variant="h2">Movimentações</TitleBalancefy>
         </div>
@@ -18,10 +19,10 @@ export default function TransactionGoal(props) {
             return (
               <div key={row.id} style={{borderBottom: "solid 5px #7DE2D1", borderRadius: "5px", paddingLeft: "40px", paddingRight: "30px", height:"35px", marginTop:"25px"}}>
                 <div style={{ display:"flex", fontSize: "14px", justifyContent:"space-around"}}>
-                  <div style={{width:"300px"}}>{row.descricao}</div>
+                  <div style={{width:"300px"}}>{(row.descricao).substring(0, 40)}</div>
                   <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>R${row.valor}</div>
                   <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{row.tipo}</div>
-                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{row.created_at}</div>
+                  <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{formatDate(row.createdAt)}</div>
                 </div>
               </div>
               ) 

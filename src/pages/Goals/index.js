@@ -111,7 +111,7 @@ export default function Goals() {
                                 </Grid>
                                 <Grid item>
                                     <Grid container spacing={6}>
-                                        <Grid item md={5.8}>
+                                        <Grid item md={5.5}>
                                             <Grid container direction="column" rowSpacing={5}>
                                                 <Grid item md={4}>
                                                     <Container height="192px" backgroundColor="#4B4B4B">
@@ -125,7 +125,7 @@ export default function Goals() {
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-                                        <Grid item md={6.2}>
+                                        <Grid item md={6.5}>
                                             <TransactionGoal data={transactions}></TransactionGoal>
                                         </Grid>
                                     </Grid>
