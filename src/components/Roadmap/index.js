@@ -10,7 +10,7 @@ export default function Roadmap(props) {
     Tasks = data.tasks.map((goal) => {
       return (
         <RoadmapGoal
-          key={goal.id}
+          key={goal.ordem}
           desc={goal.descricao}
           xp={goal.pontuacao}>
         </RoadmapGoal>
@@ -20,7 +20,7 @@ export default function Roadmap(props) {
 
   return (
     <>
-      <Container height="55vh" width="380px" borderRadius="10px" style={{ paddingTop: "5px" }}>
+      <Container height="60vh" width="380px" borderRadius="10px" style={{ paddingTop: "5px" }}>
         <TitleWithBorder>Roadmap</TitleWithBorder>
         <div style={{ heigth: "80%", overflow: "auto", maxHeight: "80%", marginTop: "25px", marginRight: "5px" }}>
           {data !== undefined ? <>

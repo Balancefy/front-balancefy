@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import ButtonBalancefy from "../Button";
 import TitleBalancefy from "../Title";
 export default function ObjetivoAtualBox(props) {
@@ -7,10 +6,8 @@ export default function ObjetivoAtualBox(props) {
     <>
 
       <div style={{
-        height: "206px",
-        margin: "10px",
+        height: "21vh",
         background: "#4B4B4B",
-        width: "752px",
         borderRadius: "10px",
         justifyContent: 'center',
         paddingLeft: "30px",

@@ -3,22 +3,22 @@ import TitleBalancefy from "../Title";
 import AvatarBalancefy from "../Avatar";
 import CommentIcon from '@mui/icons-material/Comment';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { Box, IconButton } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../service/api";
-import { AuthContext } from "../../contexts/auth";
-
-const apiUrl = process.env.REACT_APP_API_URL
 
 function TopicBalancefy(props) {
-    const { user } = useContext(AuthContext);
     const [like, setLike] = useState(props.liked);
     const [likes, setLikes] = useState(props.like);
     const data = Math.ceil((new Date().getTime() - new Date(props.date).getTime()) / (1000 * 3600 * 24))
+    const navigate = useNavigate()
+
+    const toComments = () => {
+        navigate('/comments',{state:props.id});
+    }
 
     const style = props.style === "forum" ? 
         {
@@ -73,7 +73,7 @@ function TopicBalancefy(props) {
                             display: "flex",
                             alignItems: "center",
                         }}>
-                            <AvatarBalancefy width={style.sizeImage} imageAvatar={apiUrl + props.avatar}></AvatarBalancefy>
+                            <AvatarBalancefy width={style.sizeImage} imageAvatar={props.avatar}></AvatarBalancefy>
                             <Box sx={{ml: 2}}>
                                 <TitleBalancefy variant={style.variant}>
                                     {props.name}
@@ -89,11 +89,9 @@ function TopicBalancefy(props) {
                             justifyContent: "space-evenly",
                             paddingLeft: "70px"
                         }}>
-                            <Link to="/comments">
-                                <IconButton>
-                                    <CommentIcon></CommentIcon>
-                                </IconButton>
-                            </Link> {props.comment !== null ? 0 : props.comment}
+                            <IconButton onClick={()=>{toComments()}}>
+                                <CommentIcon></CommentIcon>
+                            </IconButton> {props.comment !== null ? 0 : props.comment}
                             <IconButton onClick={() => {
                                 likeTopic()
                                 setLike(!like)

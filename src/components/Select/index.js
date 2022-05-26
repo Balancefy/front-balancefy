@@ -1,16 +1,31 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import api from "../../service/api";
 import { content } from "./content";
 
 export default function SelectBalancefy(props) {
+  const [goalsCategory, setGoalsCategory] = useState([]);
+
   const style =  props.type === "primary" ? {
     variant: 'outlined'
+  } : props.type==="home" ? {
+    variant: 'outlined',
+    color: '#131515'
   } : {
     variant: 'standard'
   }
+
+  useEffect(() => {
+    if(props.content === "category") {
+      api.get("/goals")
+        .then((res) => {
+          setGoalsCategory(res.data.data)
+        })
+    }
+  }, [])
   
   return(
-      <FormControl variant={style.variant} sx={{ mt: props.mt, mr: props.mr, mb: props.mb, width: props.width}}>
+      <FormControl variant={style.variant} sx={{ mt: props.mt, mr: props.mr, mb: props.mb, width: props.width, backgroundColor: style.color, borderRadius: "5px"}}>
         <InputLabel>{props.label}</InputLabel>
         <Select
           value={props.value}
@@ -19,8 +34,8 @@ export default function SelectBalancefy(props) {
         >
           {
             props.content === "category" ? 
-              content.category.map((c) => {
-                return <MenuItem key={c} value={c}>{c}</MenuItem>
+              goalsCategory.map((c) => {
+                return <MenuItem key={c.id} value={c.id}>{c.categoria}</MenuItem>
               })
             :
             props.content === "type" ?

@@ -5,15 +5,13 @@ import Dica from "../../components/Dica";
 import Transaction from "../../components/Transaction";
 import MainContainer from "../../components/MainContainer";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import BalanceBalancefy from "../../components/Balance";
 import GoalsBalancefy from "../../components/EndGoal";
 import api from "../../service/api";
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
 import ObjFinal from "../../components/ObjFinal";
+import SelectBalancefy from "../../components/Select";
+import TitleWithBorder from "../../components/TitleWithBorder";
 
 
 
@@ -61,14 +59,14 @@ export default function Home() {
         api.get("accounts/goals")
             .then(res => {
                 setAccountGoals(res.data)
-                setSelectedGoal(Array.from(res.data).find(it => !!it == true ).id)
+                setSelectedGoal(Array.from(res.data).find(it => !!it === true ).id)
             }).catch(err => {
                 console.log(err);
             })
     }, [])
 
     useEffect(() => {
-        if(selectedGoal != -1){
+        if(selectedGoal !== -1){
             api.get(`/accounts/goals/${selectedGoal}`)
                 .then(res => {
                     setCurrentGoal({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks)})
@@ -104,39 +102,21 @@ export default function Home() {
                                         </div>
                                     </Container>
                                     <Box sx={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
-                                        <FormControl sx={{ width: "180px", marginTop: "15px", backgroundColor: "#131515" }}>
-                                            <InputLabel id="transaction-type">Tipo</InputLabel>
-                                            <Select
-                                                labelId="transaction-type"
-                                                label="Tipo"
-                                                value={transactionType}
-                                                onChange={(e) => setTransactionType(e.target.value)}
-                                            >
-                                                <MenuItem value={"Entrada"}>Entrada</MenuItem>
-                                                <MenuItem value={"Saída"}>Saída</MenuItem>
-
-                                            </Select>
+                                        <FormControl sx={{ width: "180px", marginTop: "15px" }}>
+                                            <SelectBalancefy onChange={(e) => setTransactionType(e.target.value)} type="home" label="Tipo" value={transactionType} content="type"/>
                                         </FormControl>
-                                        <FormControl sx={{ width: "180px", marginTop: "15px", backgroundColor: "#131515" }}>
-                                            <InputLabel id="transaction-category">Categoria</InputLabel>
-                                            <Select
-                                                labelId="transaction-category"
-                                                label="Categoria"
-                                                onChange={(e) => setTransactionCategory(e.target.value)}
-                                            >
-                                                <MenuItem value={"Lazer"}>Lazer</MenuItem>
-                                                <MenuItem value={"Mesada"}>Mesada</MenuItem>
-                                            </Select>
+                                        <FormControl sx={{ width: "180px", marginTop: "15px" }}>
+                                            <SelectBalancefy onChange={(e) => setTransactionCategory(e.target.value)} type="home" label="Categoria" value={transactionCategory} content="categoryTransaction"/>
                                         </FormControl>
                                     </Box>
                                     <Box sx={{ display: "flex", flexWrap: "wrap", minWidth: "521px", maxWidth: "540px" }}>
                                         {
-                                            transactions != undefined ?
+                                            transactions !== undefined ?
                                                 transactions.map((transaction) => (
                                                     <Transaction 
                                                         key={transaction.id} 
                                                         category={transaction.categoria} 
-                                                        type={transaction.tipo == "Entrada" ? "in" : "out"} 
+                                                        type={transaction.tipo === "Entrada" ? "in" : "out"} 
                                                         title={transaction.descricao}>
                                                         {transaction.valor}
                                                     </Transaction>
@@ -152,11 +132,11 @@ export default function Home() {
                                 <Grid>
                                     <GoalsBalancefy data={accountGoals} value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value) }/>
                                     {
-                                    currentGoal != undefined ? <ObjFinal
+                                    currentGoal !== undefined ? <ObjFinal
                                         title={currentGoal.objetivo.categoria}
                                         desc={currentGoal.objetivo.descricao}
                                         xp={currentGoal.objetivo.pontuacao +"XP"}
-                                        metas={`${Array.from(currentGoal.tasks).filter(it => it.done == 1).length}/${currentGoal.tasks.length}`}
+                                        metas={`${Array.from(currentGoal.tasks).filter(it => it.done === 1).length}/${currentGoal.tasks.length}`}
                                         tasks={currentGoal.tasks}
                                     >
                                     </ObjFinal> :          
@@ -179,21 +159,19 @@ export default function Home() {
                         <Grid item height="100%">
                             <Grid height="100%" container direction="column" justifyContent="space-between">
                                 <Grid item>
-                                    <Container background="#4B4B4B" height="570px" width="380px" borderRadius="10px">
-                                        <h2 style={{ textAlign: "center", paddingTop: "5px", margin: 0 }}>
-                                            Dicas Para Você
-                                        </h2>
+                                    <Container background="#4B4B4B" height="60vh" width="380px" borderRadius="10px">
+                                        <TitleWithBorder>Dicas Para Você</TitleWithBorder>
                                         {
                                             dicas.map((dica) => {
                                                 return (
-                                                    <Dica title={dica.titulo}>{dica.descricao}</Dica>
+                                                    <Dica key={dica.id} title={dica.titulo}>{dica.descricao}</Dica>
                                                 )
                                             })
                                         } 
                                     </Container>
                                 </Grid>
                                 <Grid item>
-                                    <Ranking marginTop="150px"></Ranking>
+                                    <Ranking/>
                                 </Grid>
                             </Grid>
                         </Grid>

@@ -11,7 +11,6 @@ import SpeedAdd from '../SpeedAdd';
 import { useGoogleLogout } from 'react-google-login';
 
 const clientId = process.env.REACT_APP_CLIENT_ID_GOOGLE
-const apiUrl = process.env.REACT_APP_API_URL
 
 export default function Menu(props) {
 
@@ -49,7 +48,7 @@ export default function Menu(props) {
             }}>
                 <div onClick={profileValidation}>
                     <Link to="/profile">
-                        <AvatarBalancefy imageAvatar={apiUrl + user.usuario.avatar} width="65px" style={{ border: "1px solid #000", marginBottom: "137px", cursor: "pointer" }}></AvatarBalancefy>
+                        <AvatarBalancefy imageAvatar={user.usuario.avatar} width="65px" style={{ border: "1px solid #000", marginBottom: "137px", cursor: "pointer" }}></AvatarBalancefy>
                     </Link>
                 </div>
                 {props.page === "Home" ?

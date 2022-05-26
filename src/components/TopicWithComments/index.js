@@ -3,17 +3,29 @@ import TitleBalancefy from "../Title";
 import AvatarBalancefy from "../Avatar";
 import CommentIcon from '@mui/icons-material/Comment';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { Box, IconButton } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-const apiUrl = process.env.REACT_APP_API_URL
+import api from "../../service/api";
 
 function TopicWithComments(props) {
-    const [like, setLike] = useState(false);
+    const [like, setLike] = useState(props.liked);
+    const [likes, setLikes] = useState(props.likes);
+    const data = Math.ceil((new Date().getTime() - new Date(props.date).getTime()) / (1000 * 3600 * 24))
+
+    const likeTopic = () => {
+        const url = !like ? `like/${props.id}` : `unlike/${props.id}`
+        
+        api.patch(`/forum/${url}`)
+            .then((res) => {
+                setLikes(res.data.likes)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
     return (
         <>
@@ -28,7 +40,7 @@ function TopicWithComments(props) {
                         display: "flex",
                         alignItems: "center"
                     }}>
-                        <AvatarBalancefy width="50px" imageAvatar={apiUrl + props.avatar}></AvatarBalancefy>
+                        <AvatarBalancefy width="50px" imageAvatar={props.avatar}></AvatarBalancefy>
                         <Box sx={{ml: 2}}>
                             <TitleBalancefy variant="subtitle1">
                                 {props.name}
@@ -57,16 +69,19 @@ function TopicWithComments(props) {
                         </Box>
 
                         <Box sx={{display: "flex", alignItems: "center", mr: 2}}>
-                            <IconButton sx={{mr: 1}} onClick={() => {setLike(!like)}}>
+                            <IconButton sx={{mr: 1}} onClick={() => {
+                                likeTopic()
+                                setLike(!like)
+                            }}>
                                 {
                                     like ? <ThumbUpIcon></ThumbUpIcon> : <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
                                 }
                             </IconButton>
-                            {props.like}
+                            {likes}
                         </Box>
 
                         <Box sx={{display: "flex", alignItems: "center", mr: 2}}>
-                            <AccessTimeIcon sx={{mr: 1}}></AccessTimeIcon> {props.date}
+                            <AccessTimeIcon sx={{mr: 1}}></AccessTimeIcon> {data + "d"}
                         </Box>
                     </div>
                 </div>

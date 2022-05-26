@@ -1,11 +1,10 @@
-import { fontSize, margin, textAlign } from "@mui/system";
 import PushPinIcon from '@mui/icons-material/PushPin';
 
 function Dica(props) {
   return (
     <>
       <div style={{
-        margin: "10px auto",
+        margin: "2vh auto",
         background: "#4B4B4B",
         height: "158px",
         width: "330px",

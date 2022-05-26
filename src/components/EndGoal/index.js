@@ -1,7 +1,7 @@
 import React from "react";
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 
 export default function GoalsBalancefy(props) {
     return (
@@ -18,10 +18,9 @@ export default function GoalsBalancefy(props) {
           }}
           onChange={props.onChange}
         >
-          { props.data != undefined ? 
+          { props.data !== undefined ? 
           props.data.map(goal => {
-            console.log(goal)
-            return <MenuItem value={goal.id}>{goal.descricao}</MenuItem>
+            return <MenuItem key={goal.id} value={goal.id}>{goal.descricao}</MenuItem>
           }) : <></>}
         </Select>
       </FormControl>

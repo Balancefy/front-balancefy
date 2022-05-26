@@ -1,4 +1,4 @@
-import { Divider, Grid, IconButton, InputBase, Pagination, Paper } from "@mui/material";
+import { Divider, Grid, IconButton, InputBase, Paper } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import Container from "../../components/Container";
 import TopicBalancefy from "../../components/Topic";
@@ -35,7 +35,7 @@ export default function Forum(props) {
             .catch((err) => {
                 console.log(err)
             })
-    }, [])
+    }, [topics])
 
     const handleSearch = (event) => {
         setSearch(event.target.value)
@@ -110,7 +110,7 @@ export default function Forum(props) {
                                     mostLikedPost.map((post) => {
                                         return(
                                             <div key={post.topico.id}>
-                                                <TopicMostLiked  title={post.topico.titulo} like={post.topico.likes}/>
+                                                <TopicMostLiked id={post.topico.id} title={post.topico.titulo} like={post.topico.likes}/>
                                             </div>
                                         )
                                     })

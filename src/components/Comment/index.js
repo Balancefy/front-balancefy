@@ -9,24 +9,22 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
-import { Box, IconButton } from "@mui/material";
-import Input from "../Input";
-import avatar from "../../img/user3.jpg"
 import AddComment from '../AddComment';
 
-
+const apiUrl = process.env.REACT_APP_API_URL
 
 function CommentBalancefy(props) {
   let comment = props.data
   const [showMore, setShowMore] = React.useState(false);
   const [replying, setReplying] = React.useState(false);
   const [like, setLike] = React.useState(false);
-  const [dislike, setDislike] = React.useState(false)
+  const [dislike, setDislike] = React.useState(false);
+  const image = (comment.imagem).startsWith("/user-photos") ? apiUrl + comment.imagem : comment.imagem
 
   return (
     <>
       <Container height="auto" width="100%" >
-        <div
+        <div 
           style={{
             height: "100%",
             width: "100%",
@@ -47,7 +45,7 @@ function CommentBalancefy(props) {
               display: "flex",
               alignItems: "center"
             }}>
-              <AvatarBalancefy imageAvatar={comment.imagem} width="40px"></AvatarBalancefy>
+              <AvatarBalancefy imageAvatar={image} width="40px"></AvatarBalancefy>
 
               <TitleBalancefy style={{ marginLeft: "10px" }} variant="h3">{comment.nome}</TitleBalancefy>
             </div>

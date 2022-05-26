@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material";
 import Container from "../../components/Container";
-import GoalBall from "../../components/GoalBall";
 import TaskBall from "../TaskBall";
 
 export default function ObjFinal(props) {
@@ -54,7 +53,7 @@ export default function ObjFinal(props) {
                 bottom: -570,
               }}>
                 {tasksArray.map(task => {
-                  return (<TaskBall desc={task.descricao} xp={task.pontuacao} valor={!!task.valor  ?  task.valor.toFixed(2).replace(".",",") : "0,00"}></TaskBall>)
+                  return (<TaskBall key={task.ordem} desc={task.descricao} xp={task.pontuacao} valor={!!task.valor  ?  task.valor.toFixed(2).replace(".",",") : "0,00"}></TaskBall>)
                 })}
               </div>
             </div>

@@ -1,4 +1,3 @@
-import Container from "../../components/Container";
 import CalendarIcon from "../../img/calendar_1_1.svg";
 export default function DataEstimada(props){
    
@@ -6,10 +5,8 @@ export default function DataEstimada(props){
         <>
         
       <div style={{
-        margin: "10px auto",
         background: "#4B4B4B",
-        height: "203px",
-        width: "206px",
+        height: "21vh",
         borderRadius: "10px",
         justifyContent: 'center',
         paddingLeft: "30px",

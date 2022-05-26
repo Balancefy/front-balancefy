@@ -12,15 +12,17 @@ import EmailIcon from '@mui/icons-material/Email';
 import { default as Button } from '../../components/Button'
 import CheckPassword from '../../components/CheckPassword'
 import InputPass from '../../components/InputPass'
+import { useLocation } from 'react-router-dom'
 
 export default function Profile() {
     const { user } = React.useContext(AuthContext);
+    const location = useLocation();
+    const [profileId, setProfileId] = React.useState();
     const [topics, setTopics] = React.useState([]);
-    const [profileUser, setProfileUser] = React.useState(user);
+    const [profileUser, setProfileUser] = React.useState(location.state !== null ? location.state : user);
     const [editing, setEditing] = React.useState(false);
     const [editPassword, setEditPassword] = React.useState(false);
     const [buttonEdit, setButtonEdit] = React.useState("block");
-
     const [novaSenha, setNovaSenha] = React.useState("");
     const [senhaAtual, setSenhaAtual] = React.useState("");
     const [confirmarSenha, setConfirmarSenha] = React.useState("");
@@ -33,23 +35,12 @@ export default function Profile() {
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
-        const profile_id = localStorage.getItem('profile_id')
-
-        if (profile_id !== null) {
-            setButtonEdit("none")   
-
-            api.get(`/accounts/${profile_id}`)
-                .then((res) => {
-                    setProfileUser(res.data)
-                    localStorage.removeItem('profile_id')
-                })
-                .catch((err) => console.log(err))
-        }
-
-        // api.get(`/${profileUser.id_usuario}`)
-        //     .then((res) => setTopics(res.data))
-        //     .catch((err) => console.log(err))
-    }, []);
+        api.get(`/forum/accounts/${profileUser.id}`)
+            .then((res) => {
+                setTopics(res.data.list)
+            })
+            .catch((err) => console.log(err))
+    }, [profileUser]);
 
     const handleChangePasswordAPI = () => {
         api.put("users/senha", {
@@ -112,7 +103,6 @@ export default function Profile() {
                         width: "90%",
                         margin: "auto",
                         display: "flex",
-                        alignItems: "center",
                         flexDirection: "column"
                     }}>
                         <ProfileBalancefy name={profileUser.usuario.nome} imagem={profileUser.usuario.avatar}
@@ -125,27 +115,42 @@ export default function Profile() {
                             }}>{editing ? "Cancelar" : "Editar"}</Button>}>
                         </ProfileBalancefy>
                         {!editing &&
-                            <div style={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "space-between",
-                                marginTop: "100px"
-                            }}>
-                                {topics.map((topic) => {
-                                    return (
-                                        <TopicBalancefy
-                                            description={topic.description}
-                                            title={topic.title}
-                                            avatar={topic.avatar}
-                                            name={topic.name}
-                                            comment={topic.comment}
-                                            like={topic.like}
-                                            date={topic.date}
-                                        />
-                                    )
-                                })
-                                }
-                            </div>}
+                            <>
+                                <h2 style={{
+                                    fontWeight: 600,
+                                    color: "#7DE2D1",
+                                    marginTop: "5vh",
+                                    fontSize: "28px"
+                                }}>{profileUser === user ? "Seus Tópicos" : "Tópicos de " + profileUser.usuario.nome}</h2>
+                                <div style={{
+                                    width: "100%",
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    marginTop: "3vh"
+                                }}>
+                                    {
+                                        topics !== undefined ? 
+                                            topics.map((post) => {
+                                                return(
+                                                    <div key={post.topico.id} style={{marginRight: "5%"}}>
+                                                        <TopicBalancefy
+                                                            id={post.topico.id}
+                                                            title={post.topico.titulo}
+                                                            description={post.topico.descricao}
+                                                            comment={15}
+                                                            like={post.topico.likes}
+                                                            date={post.topico.createdAt}
+                                                            liked={post.liked}
+                                                            style="forum"
+                                                        />
+                                                    </div>
+                                                )
+                                            })
+                                        : <></>
+                                    }
+                                </div>
+                            </>
+                            }
                         {editing &&
                             <div style={{ width: "100%", height: "40vh", display: "flex" }}>
                                 {/* <form

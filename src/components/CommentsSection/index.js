@@ -1,7 +1,6 @@
 import CommentBalancefy from "../Comment";
 import avatar from "../../img/user2.jpg"
 
-const apiUrl = process.env.REACT_APP_API_URL
 
 export default function CommentsSection(props) {
   const comentarios = [
@@ -9,32 +8,32 @@ export default function CommentsSection(props) {
       id: 1,
       nome: "Bianca",
       descricao: "Que legal! Não sabia disso.",
-      imagem: apiUrl + avatar,
+      imagem: "/user-photos/1/avatar/user.jpg",
       children: [{
-        id: 2,
+        id: 3,
         nome: "Kleber",
         descricao: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae magni ipsam eligendi dolores, totam eaque voluptatum doloremque culpa iure autem ullam. Perspiciatis tenetur esse quia laborum? Deserunt minima accusantium ea.",
-        imagem: avatar,
+        imagem: "",
         children: [{
-          id: 2,
+          id: 4,
           nome: "Kleber",
           descricao: "Ela é tão necessária, né?",
-          imagem: apiUrl + avatar,
+          imagem: avatar,
         }]
       },
       {
         id: 3,
         nome: "Miguel",
         descricao: "Eu também não, é bem útil.",
-        imagem: apiUrl + avatar,
+        imagem: avatar,
         children: []
       }]
     },
     {
-      id: 1,
+      id: 2,
       nome: "Beatriz",
       descricao: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae magni ipsam eligendi dolores, totam eaque voluptatum doloremque culpa iure autem ullam. Perspiciatis tenetur esse quia laborum? Deserunt minima accusantium ea.",
-      imagem: apiUrl + avatar,
+      imagem: avatar,
       children: []
     }
   ];
@@ -48,7 +47,7 @@ export default function CommentsSection(props) {
       }}>
         {comentarios.map((comentario) => {
           return (
-            <CommentBalancefy data={comentario}>{comentario.descricao}</CommentBalancefy>
+            <CommentBalancefy key={comentario.id} data={comentario}>{comentario.descricao}</CommentBalancefy>
           );
         })}
       </div>

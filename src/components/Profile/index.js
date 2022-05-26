@@ -2,8 +2,6 @@
 import { default as Avatar } from '../Avatar'
 import { default as Button } from '../Button'
 
-const apiUrl = process.env.REACT_APP_API_URL
-
 function ProfileBalancefy(props) {
     return (
         <>
@@ -39,7 +37,7 @@ function ProfileBalancefy(props) {
                         position: "absolute",
                         top: "-150px"
                     }}>
-                        <Avatar width="250px" imageAvatar={apiUrl + props.imagem} style={{
+                        <Avatar width="250px" imageAvatar={props.imagem} style={{
                             border: "10px solid #131515"
                         }}></Avatar>
                     </div>

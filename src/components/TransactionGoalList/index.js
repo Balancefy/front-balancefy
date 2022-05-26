@@ -9,14 +9,14 @@ export default function TransactionGoal(props) {
 
   return (
     <>
-      <Container height="558px" width="652px" backgroundColor="#4B4B4B">
+      <Container height="558px" backgroundColor="#4B4B4B">
         <div style={{ padding: "27px 0px 0px 40px" , marginBottom:"10px"}}>
           <TitleBalancefy variant="h2">Movimentações</TitleBalancefy>
         </div>
         <div style={{ height: 420, width: '100%', overflow: "auto", maxHeight:420}}>
           {transactions!== undefined? transactions.map((row) => {
-            return (<>
-              <div style={{borderBottom: "solid 5px #7DE2D1", borderRadius: "5px", paddingLeft: "40px", paddingRight: "30px", height:"35px", marginTop:"25px"}}>
+            return (
+              <div key={row.id} style={{borderBottom: "solid 5px #7DE2D1", borderRadius: "5px", paddingLeft: "40px", paddingRight: "30px", height:"35px", marginTop:"25px"}}>
                 <div style={{ display:"flex", fontSize: "14px", justifyContent:"space-around"}}>
                   <div style={{width:"300px"}}>{row.descricao}</div>
                   <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>R${row.valor}</div>
@@ -24,7 +24,7 @@ export default function TransactionGoal(props) {
                   <div style={{display:"flex", justifyContent:"flex-end", width:"100px"}}>{row.created_at}</div>
                 </div>
               </div>
-            </>) 
+              ) 
           }) 
           : 
           <>
@@ -42,13 +42,13 @@ export default function TransactionGoal(props) {
 
 
 // import { DataGrid } from '@mui/x-data-grid';
-{/* <DataGrid
+/* <DataGrid
 rows={rows}
 columns={columns}
 pageSize={5}
 rowsPerPageOptions={[9]}
 disableSelectionOnClick
-/> */}
+/> */
 // const columns = [
 //   {
 //     field: 'Desc',

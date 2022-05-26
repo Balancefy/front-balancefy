@@ -6,51 +6,39 @@ import TitleBalancefy from "../../components/Title";
 import TopicBalancefy from "../../components/Topic";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import TopicWithComments from "../../components/TopicWithComments";
-import { Link } from "react-router-dom";
-import Input from "../../components/Input";
-import AvatarBalancefy from "../../components/Avatar";
+import { Link, useLocation } from "react-router-dom";
 import CommentsSection from "../../components/CommentsSection";
 import AddComment from "../../components/AddComment";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../../service/api"
 
 export default function Comments(props) {
-    const topics = [
-        {
-            key: 1,
-            title: "Economizar dinheiro",
-            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: "BS",
-            name: "Beatriz Santos",
-            comment: "11",
-            like: "11",
-            views: "11",
-            date: "2d"
-        },
-        {
-            key: 2,
-            title: "Economizar dinheiro",
-            description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-            avatar: "BS",
-            name: "Beatriz Santos",
-            comment: "11",
-            like: "11",
-            views: "11",
-            date: "2d"
-        },
-    ]
+    const location = useLocation();
+    const postId = location.state
+    const [post, setPost] = useState();
+    const [similarPost, setSimilarPost] = useState([]);
 
-    const post = {
-        key: 1,
-        title: "Economizar dinheiro",
-        description: "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta? Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.",
-        avatar: "BS",
-        name: "Beatriz Santos",
-        comment: "11",
-        like: "11",
-        views: "11",
-        date: "2d"
-    }
+    useEffect(() => {
+
+        api.get(`/forum/${postId}`)
+            .then((res) => {
+                setPost(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+        if(post !== undefined && post !== "") {
+            api.get(`/forum/topics/${(post.topico.titulo).slice(0,4)}`)
+            .then((res) => {
+                console.log(res)
+                setSimilarPost(res.data.list);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+    }, [post])
 
      return(
          <>
@@ -63,22 +51,33 @@ export default function Comments(props) {
                                 </IconButton>
                             </Link>
                         
-                        <TitleBalancefy variant="h2" color="#7DE2D1">{post.title}</TitleBalancefy>
+                            {
+                                post !== undefined && post !== "" ? 
+                                    <TitleBalancefy variant="h2" color="#7DE2D1">{post.topico.titulo}</TitleBalancefy>
+                                : 
+                                    <></>
+                            }
                     </Box>
 
                     <Grid container sx={{mt: 2, ml:2}}>
                         <Grid item md={1.5}></Grid>
                         <Grid item md={5} sx={{mt: 10}}>
                             <div>
-                                <TopicWithComments
-                                    description={post.description}
-                                    avatar={post.avatar}
-                                    name={post.name}
-                                    comment={post.comment}
-                                    like={post.like}
-                                    views={post.views}
-                                    date={post.date}
-                                />
+                                {
+                                    post !== undefined && post !== "" ? 
+                                        <TopicWithComments
+                                            id={post.topico.id}
+                                            description={post.topico.descricao}
+                                            avatar={post.autor.fkUsuario.avatar}
+                                            name={post.autor.fkUsuario.nome}
+                                            comment={15}
+                                            likes={post.topico.likes}
+                                            liked={post.liked}
+                                            date={post.topico.createdAt}
+                                        />
+                                    : 
+                                    <></>
+                                }
                             </div>  
 
                             <Box sx={{ width: "100%"}}>
@@ -99,24 +98,34 @@ export default function Comments(props) {
                             <Box sx={{mb: 6}}>
                                 <TitleBalancefy variant="h2" color="#7DE2D1">Publicações como esta:</TitleBalancefy>
                             </Box>
-                            {
-                                topics.map((post) => {
-                                    return(
-                                        <div key={post.key}>
-                                            <TopicBalancefy
-                                                title={post.title}
-                                                description={post.description}
-                                                avatar={post.avatar}
-                                                name={post.name}
-                                                comment={post.comment}
-                                                like={post.like}
-                                                views={post.views}
-                                                date={post.date}
-                                            />
-                                        </div>
-                                    )
-                                })
-                            }
+                            <div style={{
+                                maxHeight: "70vh", 
+                                overflow: "auto",
+                            }}>
+                                {
+                                    similarPost !== undefined ? 
+                                        similarPost.map((post) => {
+                                            return(
+                                                <div key={post.topico.id} style={{marginRight: "5%"}}>
+                                                    <TopicBalancefy
+                                                        id={post.topico.id}
+                                                        title={post.topico.titulo}
+                                                        description={post.topico.descricao}
+                                                        avatar={post.autor.fkUsuario.avatar}
+                                                        name={post.autor.fkUsuario.nome}
+                                                        comment={post.comment}
+                                                        like={post.topico.likes}
+                                                        date={post.topico.createdAt}
+                                                        liked={post.liked}
+                                                        style="forum"
+                                                    />
+                                                </div>
+                                            )
+                                        })
+                                    : 
+                                        <></>
+                                }
+                            </div>
                         </Grid>
                     </Grid>
                 </Container>
