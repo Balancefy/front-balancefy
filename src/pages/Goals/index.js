@@ -71,9 +71,14 @@ export default function Goals() {
             })
 
 
-    }, [])
+    }, [currentTask])
 
-
+    const accomplishTask  = (id) => {
+        api.patch(`accounts/goals/tasks/`, id)
+            .then(res => {
+                setCurrentTask(res.data);
+            })
+    }
 
     return (
         <>
@@ -103,8 +108,13 @@ export default function Goals() {
                                             <DataEstimada>{estimatedTime}</DataEstimada>
                                         </Grid>
                                         <Grid item md={7.2}>
-                                            <ObjetivoAtualBox titulo={currentTask !== undefined ? currentTask.descricao : "Loading..."} descricao={`R$ ${currentTask !== undefined && currentTask.valor !== null ? currentTask.valor : "0,00"}`} xp={currentTask ? currentTask.pontuacao : "0"}>
-                                            </ObjetivoAtualBox>
+                                            <ObjetivoAtualBox
+                                                titulo={currentTask !== undefined ? currentTask.descricao : "Você não tem um objetivo!"}
+                                                descricao={`R$ ${currentTask !== undefined && currentTask.valor !== null ? currentTask.valor : "0,00"}`}
+                                                xp={currentTask ? currentTask.pontuacao : "0"} 
+                                                onClick={() => accomplishTask(currentTask.id) }
+                                            />
+
                                         </Grid>
                                     </Grid>
                                 </Grid>
