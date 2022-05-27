@@ -10,7 +10,7 @@ export default function TransactionGoal(props) {
 
   return (
     <>
-      <Container height="52vh" backgroundColor="#4B4B4B">
+      <Container height="100%" backgroundColor="#4B4B4B">
         <div style={{ padding: "27px 0px 0px 40px" , marginBottom:"10px"}}>
           <TitleBalancefy variant="h2">Movimentações</TitleBalancefy>
         </div>

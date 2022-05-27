@@ -13,7 +13,7 @@ export default function FaltaMeta(props){
           paddingTop: "15px"
         }}>
             <img alt="saveMoney" width="50px" src={SaveMoney} />
-            <div style={{marginTop:"30px"}}>Falta para Meta</div>
+            <div style={{marginTop:"30px"}}>Falta pro Objetivo</div>
             <div style={{fontSize:"24px", marginTop:"10px"}}>R$ <span style={{color:"#7DE2D1"}}>{props.children}</span></div>
         </div>
       

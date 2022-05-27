@@ -12,6 +12,7 @@ import { Grid } from "@mui/material";
 import TitleBalancefy from "../../components/Title";
 import TransactionGoal from "../../components/TransactionGoalList";
 import ModalMovimentacao from "../../components/ModalMovimentacao";
+import Progress from "../../components/Progress";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../service/utils";
 import api from "../../service/api";
@@ -21,10 +22,10 @@ export default function Goals() {
 
     const [modalState, setModalState] = useState(false);
 
-    const [goalRoadmap, setGoalRoadmap] = useState();
+    const [goal, setGoal] = useState();
 
     const [transactions, setTransactions] = useState();
-    
+
     const [estimatedTime, setEstimatedTime] = useState('Loading...');
 
     const [currentTask, setCurrentTask] = useState();
@@ -38,7 +39,7 @@ export default function Goals() {
         api
             .get(`/accounts/goals/${goalId}`)
             .then((res) => {
-                setGoalRoadmap({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks).reverse() })
+                setGoal({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks).reverse() })
                 setCurrentTask(Array.from(res.data.tasks).find(it => it.done === 0));
 
                 setEstimatedTime(formatDate(res.data.objetivo.tempoEstimado.replace('-', '/')));
@@ -67,12 +68,11 @@ export default function Goals() {
         api
             .get(`accounts/goals/${goalId}/reachout`)
             .then(res => {
-                setReachout(res.data.value.toFixed(2).replace(".",","));
+                setReachout(res.data.value.toFixed(2).replace(".", ","));
             })
-            
-        
-    },
-        [])
+
+
+    }, [])
 
 
 
@@ -95,30 +95,32 @@ export default function Goals() {
                                 </Grid>
                                 <Grid item>
                                     <Grid container spacing={6}>
-                                                <Grid item md={2.4}>
-                                                    <FaltaMeta>
-                                                        {reachout}
-                                                    </FaltaMeta>
-                                                </Grid>
-                                                <Grid item md={2.4}>
-                                                    <DataEstimada>{estimatedTime}</DataEstimada>
-                                                </Grid>
-                                                <Grid item md={7.2}>
-                                                    <ObjetivoAtualBox titulo={currentTask !== undefined ? currentTask.descricao : "Loading..."} descricao={`R$ ${currentTask !== undefined && currentTask.valor !== null ? currentTask.valor : "0,00" }`} xp={currentTask ? currentTask.pontuacao : "0"}>
-                                                    </ObjetivoAtualBox>
-                                                </Grid>
+                                        <Grid item md={2.4}>
+                                            <FaltaMeta>
+                                                {reachout}
+                                            </FaltaMeta>
                                         </Grid>
+                                        <Grid item md={2.4}>
+                                            <DataEstimada>{estimatedTime}</DataEstimada>
+                                        </Grid>
+                                        <Grid item md={7.2}>
+                                            <ObjetivoAtualBox titulo={currentTask !== undefined ? currentTask.descricao : "Loading..."} descricao={`R$ ${currentTask !== undefined && currentTask.valor !== null ? currentTask.valor : "0,00"}`} xp={currentTask ? currentTask.pontuacao : "0"}>
+                                            </ObjetivoAtualBox>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                                 <Grid item>
                                     <Grid container spacing={6}>
                                         <Grid item md={5.5}>
                                             <Grid container direction="column" rowSpacing={5}>
                                                 <Grid item md={4}>
-                                                    <Container height="192px" backgroundColor="#4B4B4B">
-                                                        <div style={{ padding: "27px 0px 0px 40px" }}>
-                                                            <TitleBalancefy variant="h2">Progresso</TitleBalancefy>
-                                                        </div>
-                                                    </Container>
+                                                    <Progress
+                                                        pontuacao={
+                                                            !!goal == true ? Array.from(goal.tasks).filter(it => it.done == 1).reduce((accumulator, it) => {
+                                                                return accumulator + it.pontuacao;
+                                                            }, 0) : 0
+                                                        }
+                                                        totalValue={!!goal == true ? goal.objetivo.pontuacao : 0} />
                                                 </Grid>
                                                 <Grid item md={4}>
                                                     <MaioresGastos data={expenses}></MaioresGastos>
@@ -136,7 +138,7 @@ export default function Goals() {
                     <Grid item height="100%">
                         <Grid container direction="column" justifyContent="space-between" height="100%">
                             <Grid item>
-                                <Roadmap data={goalRoadmap}></Roadmap>
+                                <Roadmap data={goal}></Roadmap>
                             </Grid>
                             <Grid item>
                                 <Ranking></Ranking>
