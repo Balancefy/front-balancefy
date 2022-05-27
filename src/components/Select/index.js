@@ -32,6 +32,7 @@ export default function SelectBalancefy(props) {
           label={props.label}
           onChange={props.onChange}
         >
+          <MenuItem key="" value=""></MenuItem>
           {
             props.content === "category" ? 
               goalsCategory.map((c) => {

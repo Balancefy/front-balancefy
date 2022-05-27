@@ -14,7 +14,7 @@ export default function LoginGithub(props) {
           const newUrl = url.split("?code=");
           window.history.pushState({}, null, newUrl[0]);
     
-          axios.post("http://localhost:8081/authenticate", {
+          axios.post("https://node-server-balancefy.herokuapp.com/authenticate", {
             code: newUrl[1]
           }).then((res) => {
             onSuccess(res)

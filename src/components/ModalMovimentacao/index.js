@@ -11,6 +11,10 @@ import ButtonBalancefy from "../Button";
 export default function ModalMovimentacao(props) {
   let modalState = props.open
 
+  const handleMovimentacao = () => {
+
+  }
+
   return (
     <Modal open={modalState}>
       <Box sx={style}>
@@ -23,9 +27,12 @@ export default function ModalMovimentacao(props) {
         <Typography variant="h6" color="primary" sx={{mt: 1}}>
           {props.title}
         </Typography>
-        <form>
-          <Input mt='10px' label="Descrição"/>
-          <InputValue mt='20px' label="Valor"/>
+        <form onSubmit={(event) => {
+            event.preventDefault() 
+            handleMovimentacao()
+          }}>
+          <Input mt='10px' width="100%" label="Descrição"/>
+          <InputValue mt='20px' width="100%" label="Valor"/>
           <SelectBalancefy mt='20px' type="categoryTransaction" label="Categoria" width="340px"/>
           <SelectBalancefy mt='20px' mb="40px" content="type" label="Tipo de Movimentação" width="340px"/>
           <ButtonBalancefy width="340px" color="primary" height="40px">Concluir</ButtonBalancefy>
