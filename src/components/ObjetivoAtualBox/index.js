@@ -22,7 +22,7 @@ export default function ObjetivoAtualBox(props) {
 
 
         <div style={{ width: "100%", display: "flex", justifyContent: "flex-end", flexDirection: "row", paddingRight: "50px", paddingBottom: "100px" }}>
-          <ButtonBalancefy style={{ width: "120px", height: "4vh", marginTop: "-20px", borderRadius: "10px" }} type="submit">Concluir</ButtonBalancefy>
+          <ButtonBalancefy onClick={props.onClick} style={{ width: "120px", height: "4vh", marginTop: "-20px", borderRadius: "10px" }} type="submit">Concluir</ButtonBalancefy>
         </div>
       </div>
 
