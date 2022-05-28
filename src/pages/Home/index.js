@@ -12,6 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import ObjFinal from "../../components/ObjFinal";
 import SelectBalancefy from "../../components/Select";
 import TitleWithBorder from "../../components/TitleWithBorder";
+import { format } from "date-fns";
 
 
 const downloadCsv = (event) => {
@@ -31,19 +32,19 @@ const downloadCsv = (event) => {
 }
 const uploadTxt = (event) => {
     console.log("TEST");
-    // api
-    //     .get('/transactionFixed', { responseType: 'blob' })
-    //     .then(async (res) => {
-    //         let blob = new Blob([res.data], { type: 'text/plain' })
-    //         let link = document.createElement("a");
-    //         link.href = await URL.createObjectURL(blob);
-    //         link.download = 'movimentacoes.txt'
-    //         link.click()
-    //         URL.revokeObjectURL(link.href)
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
+    api
+        .get('/transactionFixed', { responseType: 'blob' })
+        .then(async (res) => {
+            let blob = new Blob([res.data], { type: 'text/plain' })
+            let link = document.createElement("a");
+            link.href = await URL.createObjectURL(blob);
+            link.download = 'movimentacoes.txt'
+            link.click()
+            URL.revokeObjectURL(link.href)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 
 export default function Home() {
@@ -53,9 +54,22 @@ export default function Home() {
     const [accountGoals, setAccountGoals] = React.useState([]);
     const [currentGoal, setCurrentGoal] = React.useState();
 
-    const uploadFile = (e) => {
+    const uploadFile = async (e) => {
+        e.stopPropagation()
         e.preventDefault();
         let file = e.target.files[0];
+        let form = new FormData();
+
+        form.append("arquivo", file)
+        await api
+        .post("/transactionFixed/uploadTxt", form, {
+            headers: {"Content-Type": "multipart/form-data"},
+        })
+        .then(res => {
+            window.location.reload();
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     const inputFile = React.useRef(null);
