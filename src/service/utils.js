@@ -26,4 +26,20 @@ export const uploadFile = async (e) => {
     })
 }
 
+export const uploadImage = async (file) => {
+    let form = new FormData();
+    form.append("image", file)
+    await api
+    .put("/users/upload/avatar", form, {
+        headers: {"Content-Type": "multipart/form-data"},
+    })
+    .then(res => {
+        console.log(res);
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
+
+
 export let isInThePast = (date) => date.setHours(0, 0, 0, 0) <= new Date().toLocaleDateString("pt-br");

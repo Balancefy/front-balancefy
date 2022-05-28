@@ -2,11 +2,16 @@ import Avatar from "@mui/material/Avatar";
 import React, { useState } from "react";
 import { Button } from "@mui/material";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-
+import ModalProfile from '../ModalProfile';
+import { AuthContext } from "../../contexts/auth";
 const apiUrl = process.env.REACT_APP_API_URL
+
 function AvatarBalancefy(props) {
     const imagem = (props.imageAvatar).startsWith("/user-photos") ? apiUrl + props.imageAvatar : props.imageAvatar
     const editing = props.editing;
+    const [open, setOpen] = useState(false);
+    const { user } = React.useContext(AuthContext);
+
 
     return (
         <>
@@ -26,6 +31,7 @@ function AvatarBalancefy(props) {
                     <Button
                         variant="contained"
                         color={"secondary"}
+                        onClick={() => setOpen(true)}
                         sx={{
                             height: "60px",
                             width: "60px",
@@ -43,7 +49,7 @@ function AvatarBalancefy(props) {
                         <CameraAltIcon fontSize="inherit" />
                     </Button>
                 }
-
+                <ModalProfile src={imagem} closeAction={() => setOpen(false)} open={open}/>
             </div>
         </>
     )

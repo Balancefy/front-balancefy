@@ -65,7 +65,6 @@ export default function SpeedAdd(props) {
             />
 
             <input type='file' id='file' ref={inputFile} onChange={(e) => uploadFile(e)} style={{ display: 'none' }} />
-
         </>
 
     )
