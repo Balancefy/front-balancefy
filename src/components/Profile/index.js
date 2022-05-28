@@ -37,7 +37,7 @@ function ProfileBalancefy(props) {
                         position: "absolute",
                         top: "-150px"
                     }}>
-                        <Avatar width="250px" imageAvatar={props.imagem} style={{
+                        <Avatar width="250px" editing={props.editing} imageAvatar={props.imagem} style={{
                             border: "10px solid #131515"
                         }}></Avatar>
                     </div>

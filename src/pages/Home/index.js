@@ -13,7 +13,7 @@ import ObjFinal from "../../components/ObjFinal";
 import SelectBalancefy from "../../components/Select";
 import TitleWithBorder from "../../components/TitleWithBorder";
 import { format } from "date-fns";
-
+import { uploadFile } from "../../service/utils";
 
 const downloadCsv = (event) => {
     api
@@ -54,23 +54,6 @@ export default function Home() {
     const [accountGoals, setAccountGoals] = React.useState([]);
     const [currentGoal, setCurrentGoal] = React.useState();
 
-    const uploadFile = async (e) => {
-        e.stopPropagation()
-        e.preventDefault();
-        let file = e.target.files[0];
-        let form = new FormData();
-
-        form.append("arquivo", file)
-        await api
-        .post("/transactionFixed/uploadTxt", form, {
-            headers: {"Content-Type": "multipart/form-data"},
-        })
-        .then(res => {
-            window.location.reload();
-        }).catch(err => {
-            console.log(err);
-        })
-    }
 
     const inputFile = React.useRef(null);
 
@@ -134,10 +117,10 @@ export default function Home() {
                                                 <Button onClick={downloadCsv} sx={{ height: "3vh", width: "300px" }}>Download CSV</Button>
                                             </div>
                                             <div style={{ display: "flex" }}>
-                                                <Button onClick= {() => inputFile.current.click()} sx={{ height: "3vh", width: "300px" }}>
+                                                {/* <Button onClick= {() => inputFile.current.click()} sx={{ height: "3vh", width: "300px" }}>
                                                     <input type='file' id='file' ref={inputFile} onChange={(e) => uploadFile(e)} style={{ display: 'none' }} />
                                                     Import TXT
-                                                </Button>
+                                                </Button> */}
                                             </div>
                                         </div>
                                     </Container>
