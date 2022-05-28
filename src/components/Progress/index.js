@@ -4,7 +4,6 @@ import TitleBalancefy from '../Title';
 
 const Progress = (props) => {
 
-    console.log(props.pontuacao);
     return (
         <>
             <Container height="192px" backgroundColor="#4B4B4B">

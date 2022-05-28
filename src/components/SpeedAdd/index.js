@@ -16,11 +16,12 @@ export default function SpeedAdd(props) {
     const [amountModalState, setAmountModalState] = useState(false);
 
     const actions = [
-        { icon: <FileDownloadIcon onClick={() => setTopicModalState(true)}/>, name: 'Download Movimentações' },
         { icon: <AttachMoneyOutlinedIcon onClick={() => setAmountModalState(true)} />, name: 'Nova Movimentação' },
+        { icon: <FileDownloadIcon onClick={() => setTopicModalState(true)}/>, name: 'Download Movimentações' },
         { icon: <FlagOutlinedIcon onClick={() => setGoalModalState(true)}/>, name: 'Novo Objetivo' },
         { icon: <ForumIcon onClick={() => setTopicModalState(true)}/>, name: 'Novo Tópico' },
         { icon: <FileUploadIcon onClick={() => setTopicModalState(true)}/>, name: 'Upload Movimentações' },
+
     ];
 
     return(
@@ -48,7 +49,7 @@ export default function SpeedAdd(props) {
                 }}
             />   
             <ModalMovimentacao
-                open={true}
+                open={amountModalState}
                 title="Nova Movimentação"
                 onClick={() => {
                     setAmountModalState(false);

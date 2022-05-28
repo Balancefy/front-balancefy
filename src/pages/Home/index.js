@@ -36,7 +36,7 @@ const downloadCsv = (event) => {
 export default function Home() {
     const [transactions, setTransactions] = React.useState();
     const [dicas, setDicas] = React.useState([]);
-    const [selectedGoal, setSelectedGoal] = React.useState(-1);
+    const [selectedGoal, setSelectedGoal] = React.useState("");
     const [accountGoals, setAccountGoals] = React.useState([]);
     const [currentGoal, setCurrentGoal] = React.useState();
 
@@ -66,7 +66,7 @@ export default function Home() {
     }, [])
 
     useEffect(() => {
-        if(selectedGoal !== -1){
+        if(selectedGoal !== ""){
             api.get(`/accounts/goals/${selectedGoal}`)
                 .then(res => {
                     setCurrentGoal({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks)})
