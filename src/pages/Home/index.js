@@ -14,9 +14,6 @@ import SelectBalancefy from "../../components/Select";
 import TitleWithBorder from "../../components/TitleWithBorder";
 
 
-
-
-
 const downloadCsv = (event) => {
     api
         .get('transaction/report', { responseType: 'blob' })
@@ -32,6 +29,22 @@ const downloadCsv = (event) => {
             console.log(err);
         });
 }
+const uploadTxt = (event) => {
+    console.log("TEST");
+    // api
+    //     .get('/transactionFixed', { responseType: 'blob' })
+    //     .then(async (res) => {
+    //         let blob = new Blob([res.data], { type: 'text/plain' })
+    //         let link = document.createElement("a");
+    //         link.href = await URL.createObjectURL(blob);
+    //         link.download = 'movimentacoes.txt'
+    //         link.click()
+    //         URL.revokeObjectURL(link.href)
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
+}
 
 export default function Home() {
     const [transactions, setTransactions] = React.useState();
@@ -39,6 +52,13 @@ export default function Home() {
     const [selectedGoal, setSelectedGoal] = React.useState("");
     const [accountGoals, setAccountGoals] = React.useState([]);
     const [currentGoal, setCurrentGoal] = React.useState();
+
+    const uploadFile = (e) => {
+        e.preventDefault();
+        let file = e.target.files[0];
+    }
+
+    const inputFile = React.useRef(null);
 
     useEffect(() => {
         api.get(`transactionFixed/${1}`)
@@ -55,11 +75,11 @@ export default function Home() {
             .catch((err) => {
                 console.log(err)
             })
-        
+
         api.get("accounts/goals")
             .then(res => {
                 setAccountGoals(res.data)
-                setSelectedGoal(Array.from(res.data).find(it => !!it === true ).id)
+                setSelectedGoal(Array.from(res.data).find(it => !!it === true).id)
             }).catch(err => {
                 console.log(err);
             })
@@ -69,12 +89,12 @@ export default function Home() {
         if(selectedGoal !== ""){
             api.get(`/accounts/goals/${selectedGoal}`)
                 .then(res => {
-                    setCurrentGoal({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks)})
+                    setCurrentGoal({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks) })
                 }).catch(err => {
                     console.log(err);
                 })
         }
-    },[selectedGoal])
+    }, [selectedGoal])
 
 
     const [transactionType, setTransactionType] = React.useState("");
@@ -99,24 +119,30 @@ export default function Home() {
                                             <div style={{ display: "flex" }}>
                                                 <Button onClick={downloadCsv} sx={{ height: "3vh", width: "300px" }}>Download CSV</Button>
                                             </div>
+                                            <div style={{ display: "flex" }}>
+                                                <Button onClick= {() => inputFile.current.click()} sx={{ height: "3vh", width: "300px" }}>
+                                                    <input type='file' id='file' ref={inputFile} onChange={(e) => uploadFile(e)} style={{ display: 'none' }} />
+                                                    Import TXT
+                                                </Button>
+                                            </div>
                                         </div>
                                     </Container>
                                     <Box sx={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
                                         <FormControl sx={{ width: "180px", marginTop: "15px" }}>
-                                            <SelectBalancefy onChange={(e) => setTransactionType(e.target.value)} type="home" label="Tipo" value={transactionType} content="type"/>
+                                            <SelectBalancefy onChange={(e) => setTransactionType(e.target.value)} type="home" label="Tipo" value={transactionType} content="type" />
                                         </FormControl>
                                         <FormControl sx={{ width: "180px", marginTop: "15px" }}>
-                                            <SelectBalancefy onChange={(e) => setTransactionCategory(e.target.value)} type="home" label="Categoria" value={transactionCategory} content="categoryTransaction"/>
+                                            <SelectBalancefy onChange={(e) => setTransactionCategory(e.target.value)} type="home" label="Categoria" value={transactionCategory} content="categoryTransaction" />
                                         </FormControl>
                                     </Box>
                                     <Box sx={{ display: "flex", flexWrap: "wrap", minWidth: "521px", maxWidth: "540px" }}>
                                         {
                                             transactions !== undefined ?
                                                 transactions.map((transaction) => (
-                                                    <Transaction 
-                                                        key={transaction.id} 
-                                                        category={transaction.categoria} 
-                                                        type={transaction.tipo === "Entrada" ? "in" : "out"} 
+                                                    <Transaction
+                                                        key={transaction.id}
+                                                        category={transaction.categoria}
+                                                        type={transaction.tipo === "Entrada" ? "in" : "out"}
                                                         title={transaction.descricao}>
                                                         {transaction.valor}
                                                     </Transaction>
@@ -130,25 +156,25 @@ export default function Home() {
                         <Grid item height="100%" >
                             <Container style={{ display: "flex", height: "100%", width: "560px", justifyContent: "center", overflow: "hidden" }}>
                                 <Grid>
-                                    <GoalsBalancefy data={accountGoals} value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value) }/>
+                                    <GoalsBalancefy data={accountGoals} value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value)} />
                                     {
-                                    currentGoal !== undefined ? <ObjFinal
-                                        title={currentGoal.objetivo.categoria}
-                                        desc={currentGoal.objetivo.descricao}
-                                        xp={currentGoal.objetivo.pontuacao +"XP"}
-                                        metas={`${Array.from(currentGoal.tasks).filter(it => it.done === 1).length}/${currentGoal.tasks.length}`}
-                                        tasks={currentGoal.tasks}
-                                    >
-                                    </ObjFinal> :          
-                                     <Container style={{ height: "30%", width: "100%", backgroundColor: "#4B4B4B", marginTop: "20px", display: "flex", justifyContent: "center", alignItems: "center" }}> 
-                                        <div style={{
-                                            color: "#7DE2D1",
-                                            fontSize: "30px"
-                                        }}>Loading...</div>
-                                     </Container>
+                                        currentGoal !== undefined ? <ObjFinal
+                                            title={currentGoal.objetivo.categoria}
+                                            desc={currentGoal.objetivo.descricao}
+                                            xp={currentGoal.objetivo.pontuacao + "XP"}
+                                            metas={`${Array.from(currentGoal.tasks).filter(it => it.done === 1).length}/${currentGoal.tasks.length}`}
+                                            tasks={currentGoal.tasks}
+                                        >
+                                        </ObjFinal> :
+                                            <Container style={{ height: "30%", width: "100%", backgroundColor: "#4B4B4B", marginTop: "20px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                                <div style={{
+                                                    color: "#7DE2D1",
+                                                    fontSize: "30px"
+                                                }}>Loading...</div>
+                                            </Container>
 
                                     }
-                                    
+
                                 </Grid>
                                 <Grid>
 
@@ -167,11 +193,11 @@ export default function Home() {
                                                     <Dica key={dica.id} title={dica.titulo}>{dica.descricao}</Dica>
                                                 )
                                             })
-                                        } 
+                                        }
                                     </Container>
                                 </Grid>
                                 <Grid item>
-                                    <Ranking/>
+                                    <Ranking />
                                 </Grid>
                             </Grid>
                         </Grid>
