@@ -1,4 +1,10 @@
+import ButtonBalancefy from '../Button';
+import CheckIcon from '@mui/icons-material/Check';
+import React from 'react';
 export default function TaskBall(props) {
+  const [done, setDone] = React.useState(props.done);
+
+  
   return (
     <>
       <div style={{
@@ -33,21 +39,31 @@ export default function TaskBall(props) {
           background: "#4B4B4B",
           alignItems: "center",
           borderRadius: "10px",
+          justifyContent: "space-between",
+          position: "relative",
           fontSize: "12px",
           marginLeft: "30px",
           flexDirection: "row",
           paddingTop: "5px",
-          paddingBottom: "5px"
+          paddingBottom: "5px",
+          overflow: "hidden"
         }}>
-
-          <div style={{
-            width: "28px",
-            height: "28px",
-            background: "#C4C4C4",
-            borderRadius: "10px",
-            marginLeft: "10px"
+          {done == 1 ? <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            background: "rgba(0,0,0,0.8)",
+            fontSize: "18px",
+            color: "#7de2d1",
+            zIndex: 2,
+            top: 0,
+            left: 0
           }}>
-          </div>
+            Concluído!
+          </div> : <></>}
 
           <div style={{
             display: "flex",
@@ -71,6 +87,12 @@ export default function TaskBall(props) {
               R$ {props.valor}
             </div>
           </div>
+          <ButtonBalancefy onClick={() => {
+            setDone(1);
+            props.onClick()
+          }} style={{ width: "30px", height: "30px", marginTop: "-20px", borderRadius: "5px", marginRight: "10px" }} type="submit">
+            <CheckIcon></CheckIcon>
+          </ButtonBalancefy>
         </div>
       </div>
     </>

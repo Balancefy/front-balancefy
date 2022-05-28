@@ -1,10 +1,22 @@
 import { Grid } from "@mui/material";
 import Container from "../../components/Container";
 import TaskBall from "../TaskBall";
+import api from "../../service/api";
+import React from 'react';
 
 export default function ObjFinal(props) {
 
   const tasksArray = Array.from(props.tasks);
+
+  const accomplishTask = (id) => {
+    api.patch(`accounts/goals/tasks/`, id).then((res) => {
+    })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+
 
   return (
     <>
@@ -44,7 +56,8 @@ export default function ObjFinal(props) {
               <div style={{
                 display: "flex",
                 height: "560px",
-                alignItems: "center", flexDirection: "column",
+                alignItems: "center",
+                flexDirection: "column",
                 position: "absolute",
                 overflow: 'auto',
                 left: 0,
@@ -53,7 +66,7 @@ export default function ObjFinal(props) {
                 bottom: -570,
               }}>
                 {tasksArray.map(task => {
-                  return (<TaskBall key={task.ordem} desc={task.descricao} xp={task.pontuacao} valor={!!task.valor  ?  task.valor.toFixed(2).replace(".",",") : "0,00"}></TaskBall>)
+                  return (<TaskBall onClick={() => accomplishTask(task.id)} done={task.done} key={task.ordem} desc={task.descricao} xp={task.pontuacao} valor={!!task.valor ? task.valor.toFixed(2).replace(".", ",") : "0,00"}></TaskBall>)
                 })}
               </div>
             </div>
