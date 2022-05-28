@@ -3,6 +3,8 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { default as TModel } from './transactionModel'
 
 export default function BalanceBalancefy(props) {
+  const balance = props.balance
+
   return (
     <>
       <div>
@@ -47,7 +49,9 @@ export default function BalanceBalancefy(props) {
                   margin: "0 10px 0 5px"
                 }}
               >
-                30.000,00
+               {
+                balance.saldo !== "" || balance.saldo !== undefined ? Number(balance.saldo).toFixed(2) : (0).toFixed(2)
+               }
               </h3>
 
               <RemoveRedEyeIcon sx={{marginTop:"10px", cursor:"pointer"}}></RemoveRedEyeIcon>
@@ -62,10 +66,8 @@ export default function BalanceBalancefy(props) {
               marginTop: "60px",
             }}
           >
-            <TModel value="2000,00" />
-            <TModel out value="450,00" />
-
-
+            <TModel value={balance.saldo !== "" || balance.saldo !== undefined ? Number(balance.entrada).toFixed(2) : (0).toFixed(2)} />
+            <TModel out value={balance.saldo !== "" || balance.saldo !== undefined ? Number(balance.saida).toFixed(2) : (0).toFixed(2)} />
           </div>
         </Container>
       </div>

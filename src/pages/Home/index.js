@@ -52,6 +52,7 @@ export default function Home() {
     const [selectedGoal, setSelectedGoal] = React.useState("");
     const [accountGoals, setAccountGoals] = React.useState([]);
     const [currentGoal, setCurrentGoal] = React.useState();
+    const [balance, setBalance] = React.useState("");
 
 
     const inputFile = React.useRef(null);
@@ -76,6 +77,14 @@ export default function Home() {
             .then(res => {
                 setAccountGoals(res.data)
                 setSelectedGoal(Array.from(res.data).find(it => !!it === true).id)
+            }).catch(err => {
+                console.log(err);
+            })
+
+        api.get("/accounts/balance")
+            .then(res => {
+                console.log(res)
+                setBalance(res.data)
             }).catch(err => {
                 console.log(err);
             })
@@ -104,7 +113,7 @@ export default function Home() {
                         <Grid item >
                             <Grid container direction="column">
                                 <Grid item>
-                                    <BalanceBalancefy></BalanceBalancefy>
+                                    <BalanceBalancefy balance={balance}></BalanceBalancefy>
                                 </Grid>
                                 <Grid item>
                                     <Container background="#4B4B4B" height="90px" width="100%" borderRadius="10px" style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "20px" }}>

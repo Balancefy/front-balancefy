@@ -16,7 +16,7 @@ const AddExpense = props => {
                         type="primary"
                         width="100%"
                         value={props.descricaoValue}
-                        onChange={props.onChange}
+                        onChange={props.onChangeDescricao}
                     ></Input>
                 </div>
                 <div
@@ -31,7 +31,7 @@ const AddExpense = props => {
                         type="primary"
                         width="267px"
                         value={props.amountValue}
-                        onChange={props.onChange}
+                        onChange={props.onChangeAmount}
                         adornment={
                             <InputAdornment position="end">
                                 <CurrencyExchangeIcon />
@@ -44,6 +44,8 @@ const AddExpense = props => {
                         type="primary"
                         content="category"
                         width="267px"
+                        value={props.categoria}
+                        onChange={props.onChangeCategoria}
                     ></SelectBalancefy>
                 </div>
             </div>
