@@ -48,7 +48,7 @@ export default function Menu(props) {
             }}>
                 <div onClick={profileValidation}>
                     <Link to="/profile">
-                        <AvatarBalancefy imageAvatar={user.usuario.avatar} width="65px" style={{ border: "1px solid #000", marginBottom: "137px", cursor: "pointer" }}></AvatarBalancefy>
+                        <AvatarBalancefy imageAvatar={user.usuario.avatar} width="65px" style={{ border: "1px solid #000", marginBottom: "120px", cursor: "pointer" }}></AvatarBalancefy>
                     </Link>
                 </div>
                 {props.page === "Home" ?
@@ -63,12 +63,14 @@ export default function Menu(props) {
                         <PageIcon icon={<ForumIcon sx={{ fontSize: "45px" }} />}></PageIcon>
                     </Link>
                 }
-                 {props.page === "Goals" ?
-                    <PageIcon selected icon={<TrackChangesIcon sx={{ fontSize: "45px" }} />}></PageIcon> :
-                    <Link to="/goals" style={{ color:"white" }}>
-                        <PageIcon icon={<TrackChangesIcon  sx={{ fontSize: "45px"}} />}></PageIcon>
-                    </Link>
+                {
+                    props.page === "Goals" ?
+                        <PageIcon selected icon={<TrackChangesIcon sx={{ fontSize: "45px" }} />}></PageIcon> :
+                        <Link to="/goals" style={{ color:"white" }}>
+                            <PageIcon icon={<TrackChangesIcon  sx={{ fontSize: "45px"}} />}></PageIcon>
+                        </Link>
                 }
+                
                 <SpeedAdd/>
                 <div style={{
                     marginTop: "auto"

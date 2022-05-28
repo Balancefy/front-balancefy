@@ -28,10 +28,12 @@ export default function SelectBalancefy(props) {
       <FormControl variant={style.variant} sx={{ mt: props.mt, mr: props.mr, mb: props.mb, width: props.width, backgroundColor: style.color, borderRadius: "5px"}}>
         <InputLabel>{props.label}</InputLabel>
         <Select
+          defaultValue={-1}
           value={props.value}
           label={props.label}
           onChange={props.onChange}
         >
+          <MenuItem key="" value=""></MenuItem>
           {
             props.content === "category" ? 
               goalsCategory.map((c) => {

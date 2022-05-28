@@ -11,7 +11,7 @@ export default function GoalsBalancefy(props) {
           labelId="goal-select-label"
           id="goal-select"
           value={props.value}
-          defaultValue={-1}
+          defaultValue={""}
           sx={{
             backgroundColor: "#4B4B4B",
             color: "#7DE2D1"

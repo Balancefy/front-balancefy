@@ -9,7 +9,6 @@ import Roadmap from "../../components/Roadmap";
 import Ranking from "../../components/Ranking";
 import MaioresGastos from "../../components/MaioresGastos";
 import { Grid } from "@mui/material";
-import TitleBalancefy from "../../components/Title";
 import TransactionGoal from "../../components/TransactionGoalList";
 import ModalMovimentacao from "../../components/ModalMovimentacao";
 import Progress from "../../components/Progress";
@@ -126,11 +125,11 @@ export default function Goals() {
                                                 <Grid item md={4}>
                                                     <Progress
                                                         pontuacao={
-                                                            !!goal == true ? Array.from(goal.tasks).filter(it => it.done == 1).reduce((accumulator, it) => {
+                                                            !!goal === true ? Array.from(goal.tasks).filter(it => it.done === 1).reduce((accumulator, it) => {
                                                                 return accumulator + it.pontuacao;
                                                             }, 0) : 0
                                                         }
-                                                        totalValue={!!goal == true ? goal.objetivo.pontuacao : 0} />
+                                                        totalValue={!!goal === true ? goal.objetivo.pontuacao : 0} />
                                                 </Grid>
                                                 <Grid item md={4}>
                                                     <MaioresGastos data={expenses}></MaioresGastos>
