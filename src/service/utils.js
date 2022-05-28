@@ -34,7 +34,7 @@ export const uploadImage = async (file) => {
         headers: {"Content-Type": "multipart/form-data"},
     })
     .then(res => {
-        console.log(res);
+        window.location.reload();
     }).catch(err => {
         console.log(err);
     })
