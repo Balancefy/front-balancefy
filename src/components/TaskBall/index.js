@@ -2,7 +2,7 @@ import ButtonBalancefy from '../Button';
 import CheckIcon from '@mui/icons-material/Check';
 import React from 'react';
 export default function TaskBall(props) {
-  const [done, setDone] = React.useState(props.done);
+  const clicked  = props.done == 1;
 
   
   return (
@@ -48,7 +48,7 @@ export default function TaskBall(props) {
           paddingBottom: "5px",
           overflow: "hidden"
         }}>
-          {done == 1 ? <div style={{
+          {props.done == 1 && clicked ? <div style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -88,7 +88,6 @@ export default function TaskBall(props) {
             </div>
           </div>
           <ButtonBalancefy onClick={() => {
-            setDone(1);
             props.onClick()
           }} style={{ width: "30px", height: "30px", marginTop: "-20px", borderRadius: "5px", marginRight: "10px" }} type="submit">
             <CheckIcon></CheckIcon>
