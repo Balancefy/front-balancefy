@@ -4,9 +4,11 @@ import ButtonBalancefy from "../Button";
 import { style } from "./style";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { uploadImage } from "../../service/utils";
+import { AuthContext } from "../../contexts/auth";
+const apiUrl = process.env.REACT_APP_API_URL
 
 export default function ModalProfile(props) {
-
+    const {user} = React.useContext(AuthContext);
     const modalState = props.open
     const [image, setImage] = useState(props.src);
     const [fileImage, setFileImage] = useState(null);
@@ -25,7 +27,7 @@ export default function ModalProfile(props) {
         e.stopPropagation();
         e.preventDefault();
 
-        const file = e.target.files[0]; 
+        const file = e.target.files[0];
         let imageUrl = URL.createObjectURL(file);
         setFileImage(file);
         setImage(imageUrl);
@@ -37,7 +39,15 @@ export default function ModalProfile(props) {
             props.closeAction()
             return;
         }
-        uploadImage(fileImage);
+        uploadImage(fileImage).then(() => {
+            localStorage.setItem("@balancefy:user", JSON.stringify({
+                ...user,
+                usuario: {
+                    ...user.usuario,
+                    avatar: image 
+                }
+            }))
+        });
     }
 
     return (
