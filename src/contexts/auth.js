@@ -64,6 +64,7 @@ export function AuthProvider(props) {
   function signOutDefault() {
       setUser(null)
       localStorage.removeItem('@balancefy:token')
+      localStorage.removeItem('@newTransaction')
       localStorage.removeItem('@balancefy:user')
       window.location.href = "/";
   }

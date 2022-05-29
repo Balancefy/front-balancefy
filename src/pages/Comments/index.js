@@ -18,6 +18,8 @@ export default function Comments(props) {
     const [post, setPost] = useState();
     const [similarPost, setSimilarPost] = useState([]);
     const [comentarios, setComentarios] = useState([]);
+    const [newComment, setNewComment] = useState(false);
+    const [message, setMessage] = useState("");
 
     useEffect(() => {
         api.get(`/forum/${postId}`)
@@ -48,7 +50,21 @@ export default function Comments(props) {
         //         })
 
         // }
-    }, [])
+    }, [newComment])
+
+    const replyTopic = () => {
+        api.post("/comentario", {
+          idTopico: postId,
+          conteudo: message,
+        })
+          .then((res)=> {
+            setNewComment(true)
+            console.log(res);
+          })
+          .catch(err => {
+    
+          })
+      }
 
     return (
         <>
@@ -80,7 +96,7 @@ export default function Comments(props) {
                                             description={post.topico.descricao}
                                             avatar={post.autor.fkUsuario.avatar}
                                             name={post.autor.fkUsuario.nome}
-                                            comment={15}
+                                            comment={comentarios.length}
                                             likes={post.topico.likes}
                                             liked={post.liked}
                                             date={post.topico.createdAt}
@@ -91,7 +107,7 @@ export default function Comments(props) {
                             </div>
 
                             <Box sx={{ width: "100%" }}>
-                                <AddComment />
+                                <AddComment onChange={(event) => {setMessage(event.target.value)}} value={message} replyAction={() => replyTopic()}/>
                             </Box>
 
                             <Box sx={{ ml: 4 }}>

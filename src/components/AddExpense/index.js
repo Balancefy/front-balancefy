@@ -42,10 +42,9 @@ const AddExpense = props => {
                     <SelectBalancefy
                         label="Categoria"
                         type="primary"
-                        content="category"
                         width="267px"
                         value={props.categoria}
-                        onChange={props.onChangeCategoria}
+                        onChange={props.onChange}
                     ></SelectBalancefy>
                 </div>
             </div>

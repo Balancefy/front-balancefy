@@ -19,6 +19,14 @@ export default function ModalMovimentacao(props) {
     tipo: ""
   });
 
+  const [transactionGoals, setTransactionGoals] = useState({
+    valor: "",
+    topico: "",
+    descricao: "",
+    tipo: "",
+    fkObjetivoConta: props.fkObjetivo
+  });
+
   const handleMovimentacao = () => {
 
     if(props.title === "Nova Movimentação") {
@@ -31,8 +39,20 @@ export default function ModalMovimentacao(props) {
           console.log(err)
         })
 
-    } else if(props.title === "Nova Movimentação do Objetivo") {
-      console.log("create fixa" + JSON.stringify(transaction))
+    } else if(props.title === "Movimentação do Objetivo") {
+      api.post("/transactions", {
+        valor: transaction.valor,
+        descricao: transaction.descricao,
+        tipo: transaction.tipo,
+        topico: transaction.categoria,
+        fkObjetivoConta: props.fkObjetivo.objetivo
+      })
+        .then((res) => {
+            localStorage.setItem("@newTransaction", false)
+            window.location.reload()
+        }).catch((err) => {
+          console.log(err)
+        })
     }
   }
 

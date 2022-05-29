@@ -14,10 +14,10 @@ export default function AddComment(props) {
       <Box sx={{ display: "flex", alignItems: "center", mt: 1, ml: 4, mb: 2 }}>
         <AvatarBalancefy imageAvatar={user.usuario.avatar} width="45px" />
         <Box sx={{ ml: 2, width: "85%" }}>
-          <Input  label="Adicione um comentario" width="100%" />
+          <Input value={props.value} onChange={props.onChange}  label="Adicione um comentario" width="100%" />
         </Box>
       </Box>
-      <Reply onClick ={() => props.replyAction("teste")} style={{ height: "30px", marginLeft: "auto" }}>Confirmar</Reply>
+      <Reply onClick ={props.replyAction} style={{ height: "30px", marginLeft: "auto" }}>Confirmar</Reply>
     </Box>
   )
 }

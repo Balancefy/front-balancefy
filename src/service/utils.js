@@ -41,3 +41,5 @@ export const uploadImage = async (file) => {
 }
 
 export const isInThePast = (date) => new Date(date.toLocaleDateString("pt-BR")) < new Date()
+
+export const isInTheFuture = (date) => new Date(date.toLocaleDateString("pt-BR")) > new Date()

@@ -89,7 +89,7 @@ export default function Forum(props) {
                                                         description={post.topico.descricao}
                                                         avatar={post.autor.fkUsuario.avatar}
                                                         name={post.autor.fkUsuario.nome}
-                                                        comment={post.comment}
+                                                        comment={post.commentSize}
                                                         like={post.topico.likes}
                                                         date={post.topico.createdAt}
                                                         liked={post.liked}
