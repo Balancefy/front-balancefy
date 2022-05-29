@@ -18,7 +18,7 @@ export default function MaioresGastos(props) {
           alignItems: "center",
           position: "relative"
         }}>
-          {gastos !== undefined && gastos.lenght !== 0 ? <>
+          {gastos !== undefined && gastos.length !== 0 ? <>
             <MaioresGastosBubble third id={3} desc={gastos[0].tipo} porcentagem={gastos[2].porcentagem} ></MaioresGastosBubble>
             <MaioresGastosBubble primary id={1} desc={gastos[1].tipo} porcentagem={gastos[0].porcentagem} ></MaioresGastosBubble>
             <MaioresGastosBubble secondary id={2} desc={gastos[2].tipo} porcentagem={gastos[1].porcentagem} ></MaioresGastosBubble>

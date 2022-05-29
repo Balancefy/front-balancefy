@@ -16,23 +16,7 @@ import TitleWithBorder from "../../components/TitleWithBorder";
 
 const downloadCsv = (event) => {
     api
-        .get('transaction/report', { responseType: 'blob' })
-        .then(async (res) => {
-            let blob = new Blob([res.data], { type: 'text/plain' })
-            let link = document.createElement("a");
-            link.href = await URL.createObjectURL(blob);
-            link.download = 'movimentacoes.txt'
-            link.click()
-            URL.revokeObjectURL(link.href)
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-}
-const uploadTxt = (event) => {
-    console.log("TEST");
-    api
-        .get('/transactionFixed', { responseType: 'blob' })
+        .get('transactions/report', { responseType: 'blob' })
         .then(async (res) => {
             let blob = new Blob([res.data], { type: 'text/plain' })
             let link = document.createElement("a");
@@ -113,13 +97,9 @@ export default function Home() {
                                                 Movimentações fixas
                                             </h2>
                                             <div style={{ display: "flex" }}>
-                                                <Button onClick={downloadCsv} sx={{ height: "3vh", width: "300px" }}>Download CSV</Button>
+                                                <Button onClick={downloadCsv} sx={{ height: "3vh", width: "300px" }}>Download TXT</Button>
                                             </div>
                                             <div style={{ display: "flex" }}>
-                                                {/* <Button onClick= {() => inputFile.current.click()} sx={{ height: "3vh", width: "300px" }}>
-                                                    <input type='file' id='file' ref={inputFile} onChange={(e) => uploadFile(e)} style={{ display: 'none' }} />
-                                                    Import TXT
-                                                </Button> */}
                                             </div>
                                         </div>
                                     </Container>
@@ -152,7 +132,7 @@ export default function Home() {
                         <Grid item height="100%" >
                             <Container style={{ display: "flex", height: "100%", width: "560px", justifyContent: "center", overflow: "hidden" }}>
                                 <Grid>
-                                    <GoalsBalancefy data={accountGoals} value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value)} />
+                                    <GoalsBalancefy page="home" data={accountGoals} value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value)} />
                                     {
                                         currentGoal !== undefined ? <ObjFinal
                                             title={currentGoal.objetivo.categoria}

@@ -8,13 +8,15 @@ import Container from "../../components/Container";
 import Roadmap from "../../components/Roadmap";
 import Ranking from "../../components/Ranking";
 import MaioresGastos from "../../components/MaioresGastos";
-import { Grid } from "@mui/material";
+import { Box, FormControl, Grid } from "@mui/material";
 import TransactionGoal from "../../components/TransactionGoalList";
 import ModalMovimentacao from "../../components/ModalMovimentacao";
 import Progress from "../../components/Progress";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { formatDate } from "../../service/utils";
 import api from "../../service/api";
+import SelectBalancefy from "../../components/Select";
+import GoalsBalancefy from "../../components/EndGoal";
 
 
 export default function Goals() {
@@ -31,54 +33,69 @@ export default function Goals() {
 
     const [expenses, setExpenses] = useState();
 
-    const [reachout, setReachout] = useState("0,00")
+    const [reachout, setReachout] = useState("0,00");
 
-    const goalId = 1;
+    const [selectedGoal, setSelectedGoal] = React.useState("");
+
+    const [accountGoals, setAccountGoals] = React.useState([]);
+
     useEffect(() => {
-        api
-            .get(`/accounts/goals/${goalId}`)
-            .then((res) => {
-                setGoal({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks).reverse() })
-                setCurrentTask(Array.from(res.data.tasks).find(it => it.done === 0));
+        if (selectedGoal !== "") {
+            api
+                .get(`/accounts/goals/${selectedGoal}`)
+                .then((res) => {
+                    setGoal({ objetivo: res.data.objetivo, tasks: Array.from(res.data.tasks).reverse() })
+                    setCurrentTask(Array.from(res.data.tasks).find(it => it.done === 0));
 
-                setEstimatedTime(formatDate(res.data.objetivo.tempoEstimado.replace('-', '/')));
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+                    setEstimatedTime(formatDate(res.data.objetivo.tempoEstimado.replace('-', '/')));
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
 
-        api
-            .get(`/transactions/goal/${1}`)
-            .then((res) => {
-                setTransactions(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+            api
+                .get(`/transactions/goal/${1}`)
+                .then((res) => {
+                    setTransactions(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
 
-        api
-            .get(`transactions/goal/${goalId}/expenses`)
-            .then(res => {
-                setExpenses(res.data.list);
-            }).catch(err => {
-                console.log(err);
-            })
+            api
+                .get(`transactions/goal/${selectedGoal}/expenses`)
+                .then(res => {
+                    setExpenses(res.data.list);
+                }).catch(err => {
+                    console.log(err);
+                })
 
-        api
-            .get(`accounts/goals/${goalId}/reachout`)
-            .then(res => {
-                setReachout(res.data.value.toFixed(2).replace(".", ","));
-            })
+            api
+                .get(`accounts/goals/${selectedGoal}/reachout`)
+                .then(res => {
+                    setReachout(res.data.value.toFixed(2).replace(".", ","));
+                })
 
+        } else {
 
-    }, [currentTask])
+            api.get("accounts/goals")
+                .then(res => {
+                    setAccountGoals(res.data)
+                    setSelectedGoal(Array.from(res.data).find(it => !!it === true).id)
+                }).catch(err => {
+                    console.log(err);
+                })
+        }
 
-    const accomplishTask  = (id) => {
+    }, [currentTask, selectedGoal])
+
+    const accomplishTask = (id) => {
         api.patch(`accounts/goals/tasks/`, id)
             .then(res => {
                 setCurrentTask(res.data);
             })
     }
+
 
     return (
         <>
@@ -90,7 +107,7 @@ export default function Goals() {
                                 <Grid item>
                                     <Grid container justifyContent="space-between" >
                                         <Grid item>
-                                            <Titulo styles={{ color: "#7DE2D1", fontSize: 24, fontWeight: 600 }}>Viagem Internacional</Titulo>
+                                            <GoalsBalancefy data={accountGoals} value={selectedGoal} onChange={(event) => setSelectedGoal(event.target.value)} />
                                         </Grid>
                                         <Grid item>
                                             <ButtonBalancefy onClick={() => { setModalState(true); }} radius="10px">Adicionar Movimentação</ButtonBalancefy>
@@ -111,8 +128,9 @@ export default function Goals() {
                                             <ObjetivoAtualBox
                                                 titulo={currentTask !== undefined ? currentTask.descricao : "Você não tem um objetivo!"}
                                                 descricao={`R$ ${currentTask !== undefined && currentTask.valor !== null ? currentTask.valor : "0,00"}`}
-                                                xp={currentTask ? currentTask.pontuacao : "0"} 
-                                                onClick={() => accomplishTask(currentTask.id) }
+                                                xp={currentTask ? currentTask.pontuacao : "0"}
+                                                onClick={() => accomplishTask(currentTask.id)}
+                                                hasTask={!!currentTask}
                                             />
 
                                         </Grid>
