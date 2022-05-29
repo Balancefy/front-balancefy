@@ -66,8 +66,8 @@ const theme = createTheme({
                     h3: 'h3',
                     h4: 'h4',
                     h5: 'h5',
-                    subtitle1: 'sub1',
-                    subtitle2: 'sub2',
+                    subtitle1: 'u',
+                    subtitle2: 'u',
                     body1: 'span',
                     body2: 'span',
                     body3: 'span',
@@ -98,6 +98,9 @@ const theme = createTheme({
             main: '#131515',
             contrastText: '#FFF',
         },
+        error: {
+            main: '#F45959'
+        }
     },
 });
 

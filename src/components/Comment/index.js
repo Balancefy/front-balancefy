@@ -21,12 +21,14 @@ function CommentBalancefy(props) {
   const [like, setLike] = React.useState(false);
   const [dislike, setDislike] = React.useState(false);
   const image = (comment.fkConta.usuario.avatar);
-  console.log(image)
+  const [message, setMessage] = React.useState("");
 
-  const replyComment = (message) => {
+  const date = Math.ceil((new Date().getTime() - new Date(comment.createdAt).getTime()) / (1000 * 3600 * 24))
+
+  const replyComment = () => {
     api.post("/comentario", {
       idTopico: props.topicId,
-      idComentario: comment.idComentario,
+      idComentario: comment.id,
       conteudo: message,
     })
       .then((res)=> {
@@ -72,7 +74,7 @@ function CommentBalancefy(props) {
               }}
             >
               <AccessAlarmIcon></AccessAlarmIcon>
-              20m
+              {date + "d"}
             </div>
           </div>
           <div style={{
@@ -102,7 +104,7 @@ function CommentBalancefy(props) {
             </div>
           </div>
 
-          {replying && <AddComment replyAction={() => replyComment()}/>}
+          {replying && <AddComment onChange={(event) => {setMessage(event.target.value)}} replyAction={() => replyComment()}/>}
 
 
           {Array.isArray(comment.listComentarios) && comment.listComentarios.length ?
@@ -124,7 +126,7 @@ function CommentBalancefy(props) {
               <div style={{
                 marginLeft: "40px",
               }}>
-                {showMore && comment.listComentarios.map(data => <CommentBalancefy data={{ ...data}}>{data.descricao}</CommentBalancefy>)}
+                {showMore && comment.listComentarios.map(data => <CommentBalancefy key={data.id} data={{ ...data}}>{data.descricao}</CommentBalancefy>)}
               </div>
             </> :
             <>

@@ -28,16 +28,27 @@ export default function ModalMovimentacao(props) {
 
   const handleMovimentacao = () => {
     if (props.title === "Nova Movimentação") {
-      console.log(transaction.tipo)
       api.post("/transactionFixed", transaction)
         .then((res) => {
           window.location.reload()
         }).catch((err) => {
           console.log(err)
         })
-    }
-    else if (props.title === "Nova Movimentação do Objetivo") {
-      console.log("create fixa" + JSON.stringify(transaction))
+
+    } else if(props.title === "Movimentação do Objetivo") {
+      api.post("/transactions", {
+        valor: transaction.valor,
+        descricao: transaction.descricao,
+        tipo: transaction.tipo,
+        topico: transaction.categoria,
+        fkObjetivoConta: props.fkObjetivo.objetivo
+      })
+        .then((res) => {
+            localStorage.setItem("@newTransaction", false)
+            window.location.reload()
+        }).catch((err) => {
+          console.log(err)
+        })
     }
   }
 
@@ -103,7 +114,8 @@ export default function ModalMovimentacao(props) {
             setValidValueipt(validValueTransaciton(transaction.valor))
             setValidTipoIpt(validTypeTransaciton(transaction.tipo))
             if (validTransaction()) {
-              handleMovimentacao()
+              console.log("funfo")
+              // handleMovimentacao()
             } else {
               setOpen(true)
               setTimeout(() => setOpen(false), 1500)

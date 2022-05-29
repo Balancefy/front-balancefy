@@ -15,7 +15,7 @@ export default function CommentsSection(props) {
       }}>
         {comentarios.map((comentario) => {
           return (
-            <CommentBalancefy topicId={topicId} key={comentario.id} data={comentario}>{comentario.descricao}</CommentBalancefy>
+            <CommentBalancefy key={comentario.id} topicId={topicId} data={comentario}>{comentario.descricao}</CommentBalancefy>
           );
         })}
       </div>

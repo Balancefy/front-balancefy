@@ -210,7 +210,7 @@ export default function Profile() {
                                                             id={post.topico.id}
                                                             title={post.topico.titulo}
                                                             description={post.topico.descricao}
-                                                            comment={15}
+                                                            comment={post.commentSize}
                                                             like={post.topico.likes}
                                                             date={post.topico.createdAt}
                                                             liked={post.liked}

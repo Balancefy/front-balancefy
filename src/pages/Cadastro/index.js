@@ -30,6 +30,7 @@ import TitleWithDot from "../../components/TitleWithDot";
 import AddExpense from "../../components/AddExpense";
 import Step from "../../components/Step";
 import InputValue from "../../components/InputValue";
+import { isInThePast } from "../../service/utils";
 
 export default function Cadastro() {
   const [displayOne, setDisplayOne] = React.useState("block");
@@ -42,13 +43,35 @@ export default function Cadastro() {
   const [userType, setUserType] = React.useState("DEFAULT");
   const [confirmaSenha, setConfirmaSenha] = React.useState("");
   const [samePass, setSamePass] = React.useState("");
-  // const [gastos, setGastos] = React.useState([gasto]);
+  const [correctPass, setCorrectPass] = React.useState("");
+  const [dateMessage, setDateMessage] = React.useState("");
+  
+  const [error, setError] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState(false);
+
+  const [gastos, setGastos] = React.useState([{
+    descricao: "",
+    valor: "",
+    categoria: ""
+  }]);
 
   const [gasto, setGasto] = React.useState({
     descricao: "",
     valor: "",
     categoria: ""
   });
+
+  useEffect(() => {
+    console.log(gastos)
+  }, [gastos])
+
+  const teste = {
+    descricao: "",
+    valor: "",
+    categoria: ""
+  }
+
+  console.log(gastos)
 
   const [conta, setConta] = React.useState({
     renda: "",
@@ -92,7 +115,10 @@ export default function Cadastro() {
   }
 
   const handleSecondStep = () => {
-    localStorage.setItem("@user:secondStep", JSON.stringify(conta))
+    localStorage.setItem("@user:secondStep", JSON.stringify({
+      conta,
+      gasto
+    }))
 
     setDisplayOne("none");
     setDisplayTwo("none");
@@ -101,6 +127,18 @@ export default function Cadastro() {
   }
 
   const handleThirdStep = () => {
+    if(Number(objetivo.valorTotal) < Number(objetivo.valorInicial)) {
+      setErrorMessage("Seu valor inicial é maior que o valor final")
+      setError(true)
+      return
+    }
+
+    if(isInThePast(new Date(objetivo.tempoEstimado))) {
+      setErrorMessage("Data precisa ser futura!")
+      setError(true)
+      return
+    }
+
     localStorage.setItem("@user:thirdStep", JSON.stringify(objetivo))
   }
 
@@ -125,11 +163,24 @@ export default function Cadastro() {
     })
   }
 
+  const verifyPassword = (value) => {
+    const hasUpperCase = /[A-Z]/.test(value);
+    const hasSymbol = /[!@#%&*><?]/.test(value);
+
+    if(hasSymbol && hasUpperCase) {
+      setCorrectPass("#7DE2D1")
+    } else {
+      setCorrectPass("#F45959")
+    }
+  };
+
   const handleChangeSenha = (event) => {
     setUsuario({
       ...usuario,
       senha: event.target.value,
     })
+
+    verifyPassword(event.target.value)
   }
 
   const handleChangeConfirmaSenha = (event) => {
@@ -177,8 +228,9 @@ export default function Cadastro() {
     })
   }
 
-  const addExpense = () => {
-    setExpenses(expenses.concat(<AddExpense onChange={handleExpenseDescricao}></AddExpense>));
+  const addExpense = async () => {    
+    setGastos(gastos.concat(teste))
+    setExpenses(expenses.concat(<AddExpense categoria={gastos[gastos.length-1].categoria} onChange={(event) => handleExpenseCategoria(event, gastos.length-1)}></AddExpense>));
   }
 
   const handleExpenseDescricao = (event) => {
@@ -197,14 +249,18 @@ export default function Cadastro() {
   })
   }
 
-  const handleExpenseCategoria = (event) => {
-    console.log(event.target.value)
-    setGasto({
-      ...gasto,
-      categoria: event.target.value
-    })
-  }
+  const handleExpenseCategoria = (event, indice) => {
 
+    const copyGastos = gastos
+
+    let copyGasto = { ...gastos[indice] }
+
+    copyGasto.categoria = event.target.value
+
+    copyGastos[indice] = copyGasto
+
+    setGastos(copyGastos)
+  }
 
 
   return (
@@ -262,7 +318,7 @@ export default function Cadastro() {
                     <Input
                       label="Nome"
                       type="primary"
-                      width="267px"
+                      width="300px"
                       value={usuario.nome}
                       onChange={handleChangeName}
                       adornment={
@@ -274,7 +330,7 @@ export default function Cadastro() {
                     <Input
                       label="Sobrenome"
                       type="primary"
-                      width="300px"
+                      width="320px"
                       value={usuario.lastName}
                       onChange={handleChangeLastName}
                     />
@@ -302,6 +358,10 @@ export default function Cadastro() {
                       password={usuario.senha}
                       onChange={handleChangeSenha}
                     />
+                    <FormHelperText sx={{display: 'flex', alignItems: 'center'}}>
+                      <CheckIcon sx={{color: correctPass}} />
+                      <span style={{marginLeft: '5px'}}>Mínimo de 8 caracteres, uma letra maiúscula e um caracter especial</span>
+                    </FormHelperText>
                   </div>
                   <div style={{ marginTop: "5%" }}>
                     <InputPass
@@ -360,7 +420,7 @@ export default function Cadastro() {
                       })
                     }} mt={0.9} width="100%"/>
                   </div>
-                  <div>
+                  <div style={{marginTop: '1vh'}}>
                     <InputValue
                       label="Renda"
                       type="primary"
@@ -384,7 +444,7 @@ export default function Cadastro() {
                         label="Descrição"
                         type="primary"
                         value={gasto.descricao}
-                        onChange={handleChangeDescricao}
+                        onChange={handleExpenseDescricao}
                         width="100%"
                       ></Input>
                     </div>
@@ -412,7 +472,8 @@ export default function Cadastro() {
                         label="Categoria"
                         type="primary"
                         content="categoryTransaction"
-                        value={gasto.categoria}
+                        value={gastos[0].categoria}
+                        onChange={(event) => handleExpenseCategoria(event, 0)}
                         width="267px"
                       ></SelectBalancefy>
                     </div>
@@ -470,7 +531,7 @@ export default function Cadastro() {
                     handleThirdStep();
                   }}
                 >
-                  <div style={{ marginTop: "5%", width: "100%" }}>
+                  <div style={{ marginTop: "5%", marginBottom: "1vh", width: "100%" }}>
                     <TitleBalancefy variant="body4">Objetivo</TitleBalancefy>
                   </div>
                   <Input 
@@ -509,7 +570,7 @@ export default function Cadastro() {
                     }}
                   />
 
-                  <div>
+                  <div style={{marginTop: "2vh"}}>
                     <InputValue
                       label="Valor Inicial"
                       type="primary"
@@ -539,7 +600,13 @@ export default function Cadastro() {
                       }
                     />
                   </div>
-
+                  {
+                    error ? 
+                      <FormHelperText sx={{color: "#F45959", fontSize: "16px", mb: 2}}>
+                        <b>{errorMessage}</b>
+                      </FormHelperText>
+                  : <></>
+                  }
                   <Box
                     sx={{
                       display: "flex",

@@ -42,6 +42,7 @@ export const uploadImage = async (file) => {
 
 export const isInThePast = (date) => new Date(date.toLocaleDateString("pt-BR")) < new Date()
 
+export const isInTheFuture = (date) => new Date(date.toLocaleDateString("pt-BR")) > new Date()
 export const validPassword = (novaSenha) => {
     const hasUpperCase = /[A-Z]/.test(novaSenha);
     const hasSymbol = /[!@#%&*><?]/.test(novaSenha);

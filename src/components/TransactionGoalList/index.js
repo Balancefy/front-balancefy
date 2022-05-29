@@ -3,16 +3,34 @@ import * as React from 'react';
 import TitleBalancefy from "../Title";
 import { AuthContext } from "../../contexts/auth";
 import { formatDate } from "../../service/utils"
+import { Button } from "@mui/material";
+import api from "../../service/api";
 
 export default function TransactionGoal(props) {
   const { user } = React.useContext(AuthContext)
-  const transactions = props.data;
+  const transactions = Array.from(props.data).reverse();
+  const [disabled, setDisable] = React.useState(!!localStorage.getItem("@newTransaction") ? localStorage.getItem("@newTransaction").toBool : true)
+
+  const undo = () => {
+    api.delete("/transactions/delete").then((res) => {
+      console.log(res)
+      if(res.data <= -1) {
+        localStorage.setItem("@newTransaction", true)
+        setDisable(true)
+      }
+    }).catch((err) => {
+      localStorage.setItem("@newTransaction", true)
+      setDisable(true)
+      console.log(err)
+    })
+  }
 
   return (
     <>
       <Container height="100%" backgroundColor="#4B4B4B">
-        <div style={{ padding: "27px 0px 0px 40px" , marginBottom:"10px"}}>
+        <div style={{ padding: "27px 0px 0px 40px" , marginBottom:"10px", display: "flex", justifyContent: "space-between"}}>
           <TitleBalancefy variant="h2">Movimentações</TitleBalancefy>
+          <Button disabled={disabled} color="error" onClick={() => {undo()}} sx={{ height: "3vh", width: "300px", mr: 2 }}>Desfazer Movimentação</Button>
         </div>
         <div style={{ height: 420, width: '100%', overflow: "auto", maxHeight:420}}>
           {transactions!== undefined? transactions.map((row) => {

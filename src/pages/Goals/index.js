@@ -155,7 +155,7 @@ export default function Goals() {
                                             </Grid>
                                         </Grid>
                                         <Grid item md={6.5}>
-                                            <TransactionGoal data={transactions}></TransactionGoal>
+                                            <TransactionGoal data={!!transactions ? transactions : []}></TransactionGoal>
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -175,6 +175,8 @@ export default function Goals() {
                 </Grid>
                 <ModalMovimentacao
                     open={modalState}
+                    fkObjetivo={goal}
+                    title={"Movimentação do Objetivo"}
                     onClick={() => {
                         setModalState(false);
                     }}

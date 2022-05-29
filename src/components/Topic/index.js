@@ -43,7 +43,6 @@ function TopicBalancefy(props) {
             })
     }
 
-
     return (
         <>
             <Container backgroundColor="#131515" height="222px" width={props.width} borderRadius="10px">
@@ -91,7 +90,7 @@ function TopicBalancefy(props) {
                         }}>
                             <IconButton onClick={()=>{toComments()}}>
                                 <CommentIcon></CommentIcon>
-                            </IconButton> {props.comment !== null ? 0 : props.comment}
+                            </IconButton> {props.comment !== null ? props.comment : 0}
                             <IconButton onClick={() => {
                                 likeTopic()
                                 setLike(!like)
