@@ -95,7 +95,7 @@ export default function Comments(props) {
                             </Box>
 
                             <Box sx={{ ml: 4 }}>
-                                <CommentsSection comments={!!comentarios ? comentarios : []} />
+                                <CommentsSection topicId={1} comments={!!comentarios ? comentarios : []} />
                             </Box>
 
                         </Grid>
