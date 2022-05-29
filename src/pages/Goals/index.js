@@ -54,7 +54,7 @@ export default function Goals() {
                 })
 
             api
-                .get(`/transactions/goal/${1}`)
+                .get(`/transactions/goal/${selectedGoal}`)
                 .then((res) => {
                     setTransactions(res.data)
                 })
