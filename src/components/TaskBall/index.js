@@ -89,6 +89,7 @@ export default function TaskBall(props) {
           </div>
           <ButtonBalancefy onClick={() => {
             props.onClick()
+            window.location.reload()
           }} style={{ width: "30px", height: "30px", marginTop: "-20px", borderRadius: "5px", marginRight: "10px" }} type="submit">
             <CheckIcon></CheckIcon>
           </ButtonBalancefy>
