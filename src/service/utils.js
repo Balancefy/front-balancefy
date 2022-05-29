@@ -41,3 +41,17 @@ export const uploadImage = async (file) => {
 }
 
 export const isInThePast = (date) => new Date(date.toLocaleDateString("pt-BR")) < new Date()
+
+export const validPassword = (novaSenha) => {
+    const hasUpperCase = /[A-Z]/.test(novaSenha);
+    const hasSymbol = /[!@#%&*><?]/.test(novaSenha);
+    return hasUpperCase && hasSymbol
+}
+
+export const validName = (name) => {
+    return name.length > 2 
+}
+
+export const validEmail = (email) => {
+    return /@\w{5,}.com/.test(email)
+}

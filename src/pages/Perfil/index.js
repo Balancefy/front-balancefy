@@ -6,13 +6,16 @@ import { default as TopicBalancefy } from '../../components/Topic/profileVariant
 import { AuthContext } from '../../contexts/auth'
 import api from '../../service/api'
 import Input from '../../components/Input'
-import { Alert, Collapse, InputAdornment } from '@mui/material'
+import { Alert, Collapse, FormHelperText, InputAdornment } from '@mui/material'
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from '@mui/icons-material/Email';
 import { default as Button } from '../../components/Button'
 import CheckPassword from '../../components/CheckPassword'
 import InputPass from '../../components/InputPass'
 import { useLocation } from 'react-router-dom'
+import CheckIcon from '@mui/icons-material/Check';
+import { validEmail, validName } from '../../service/utils'
+import { set } from 'date-fns'
 
 export default function Profile() {
     const { user } = React.useContext(AuthContext);
@@ -30,6 +33,10 @@ export default function Profile() {
         nome: "",
         email: ""
     })
+
+    const [validNameIpt, setValidNameIpt] = React.useState(false);
+    const [validEmailIpt, setValidEmailIpt] = React.useState(false);
+
     const [newUser, setNewUser] = React.useState(user)
 
     const [biggerThanSex, setBiggerThanSex] = React.useState(false);
@@ -38,6 +45,7 @@ export default function Profile() {
     const [oneUpperCase, setOneUpperCase] = React.useState(false);
 
     const [open, setOpen] = React.useState(false);
+    const [openSimpleEdit, setOpenSimpleEdit] = React.useState(false);
 
     useEffect(() => {
         api.get(`/forum/accounts/${profileUser.id}`)
@@ -45,7 +53,7 @@ export default function Profile() {
                 setTopics(res.data.list)
             })
             .catch((err) => console.log(err))
-    }, [profileUser]);
+    }, [profileUser, biggerThanSex]);
 
     const handleChangePasswordAPI = () => {
         api.put("users/senha", {
@@ -54,29 +62,49 @@ export default function Profile() {
         }).then((res) => {
             console.log(res)
         }).catch((err) => {
-            setOpen(true)
-            setTimeout(() => setOpen(false), 1500)
-            setNovaSenha('')
-            setSenhaAtual('')
-            setConfirmarSenha('')
-            console.log(err)
+        setOpen(true)
+        setTimeout(() => setOpen(false), 1500)
+        cleanupPasswordValidation()
+        console.log(err)
         })
     };
+    
+    const cleanupPasswordValidation = () => {
+        setNovaSenha('')
+        setSenhaAtual('')
+        setConfirmarSenha('')
+        setBiggerThanSex(false)
+        setAtLeastOneSpecialChar(false)
+        setSamePassword(false)
+        setOneUpperCase(false)
+    }
 
     const handleSimpleEdit = () => {
-        api.put("users", editUser).then((res) => {
-            localStorage.setItem("@balancefy:user", JSON.stringify({
-                ...newUser,
-                usuario: {
-                    ...newUser.usuario,
-                    nome: editUser.nome
-                }
-            }))
+        if (validEmailIpt && validNameIpt) {
+            api.put("users", editUser).then((res) => {
+                localStorage.setItem("@balancefy:user", JSON.stringify({
+                    ...newUser,
+                    usuario: {
+                        ...newUser.usuario,
+                        nome: editUser.nome
+                    }
+                }))
 
-            window.location.reload()
-        }).catch((err) => {
-            console.log(err)
-        })
+                window.location.reload()
+            }).catch((err) => {
+                console.log(err)
+            })
+        } else {
+            setOpenSimpleEdit(true)
+            setTimeout(() => setOpenSimpleEdit(false), 1500)
+            setEditUser({
+                nome: "",
+                email: ""
+            })
+            setValidEmailIpt(false)
+            setValidNameIpt(false)
+        }
+
     };
 
     const handleChangeSenha = (event) => {
@@ -111,6 +139,8 @@ export default function Profile() {
     };
 
     const handleChangeNome = (event) => {
+        setValidNameIpt(validName(event.target.value))
+
         setEditUser({
             ...editUser,
             nome: event.target.value
@@ -118,6 +148,8 @@ export default function Profile() {
     }
 
     const handleChangeEmail = (event) => {
+        setValidEmailIpt(validEmail(event.target.value))
+
         setEditUser({
             ...editUser,
             email: event.target.value
@@ -133,6 +165,11 @@ export default function Profile() {
                             Senha inválida
                         </Alert>
                     </Collapse>
+                    <Collapse sx={{ position: "absolute", top: 20, left: 20, width: 500 }} in={openSimpleEdit}>
+                        <Alert variant="filled" severity="error">
+                            Email ou Nome Inválido!
+                        </Alert>
+                    </Collapse>
                     <div style={{
                         height: "90%",
                         width: "90%",
@@ -141,14 +178,14 @@ export default function Profile() {
                         flexDirection: "column"
                     }}>
                         <ProfileBalancefy name={profileUser.usuario.nome} editing={editing} imagem={profileUser.usuario.avatar}
-                            button={profileUser === user &&<Button 
+                            button={profileUser === user && <Button
                                 onClick={() => {
-                                setEditPassword(false)
-                                setEditing(!editing)
-                            }} width="150px" height="50px" style={{
-                                fontWeight: "bold",
-                                display: buttonEdit
-                            }}>{editing ? "Cancelar" : "Editar"}</Button>}>
+                                    setEditPassword(false)
+                                    setEditing(!editing)
+                                }} width="150px" height="50px" style={{
+                                    fontWeight: "bold",
+                                    display: buttonEdit
+                                }}>{editing ? "Cancelar" : "Editar"}</Button>}>
                         </ProfileBalancefy>
                         {!editing &&
                             <>
@@ -165,10 +202,10 @@ export default function Profile() {
                                     marginTop: "3vh"
                                 }}>
                                     {
-                                        topics !== undefined ? 
+                                        topics !== undefined ?
                                             topics.map((post) => {
-                                                return(
-                                                    <div key={post.topico.id} style={{marginRight: "5%"}}>
+                                                return (
+                                                    <div key={post.topico.id} style={{ marginRight: "5%" }}>
                                                         <TopicBalancefy
                                                             id={post.topico.id}
                                                             title={post.topico.titulo}
@@ -182,13 +219,13 @@ export default function Profile() {
                                                     </div>
                                                 )
                                             })
-                                        : <></>
+                                            : <></>
                                     }
                                 </div>
                             </>
-                            }
+                        }
                         {editing &&
-                            <div style={{ width: "100%", height: "40vh", display: "flex" }}>
+                            <div style={{ width: "100%", height: "40vh", display: "flex", }}>
                                 <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
                                     <div>
                                         <form
@@ -198,45 +235,53 @@ export default function Profile() {
                                                 handleSimpleEdit()
                                             }}
                                         >
-                                            <div style={{ justifyContent: "space-between", display: "flex" }}>
+                                            <div style={{ justifyContent: "space-between", display: "flex", flexDirection: "column" }}>
                                                 <Input label="Nome" value={editUser.nome} onChange={handleChangeNome} type="primary" width="547px" adornment={<InputAdornment position="end"> <PersonIcon /></InputAdornment>}></Input>
+                                                <FormHelperText sx={{ display: 'flex', alignItems: 'center' }}>
+                                                    <CheckIcon sx={{ color: validNameIpt ? "#7DE2D1" : "#F45959" }} />
+                                                    <span style={{ marginLeft: '5px' }}>Novo nome precisa ter pelo menos 3 Letras</span>
+                                                </FormHelperText>
                                             </div>
                                             {
-                                                user.usuario.tipo === "DEFAULT" ? 
-                                                <>
-                                                    <div style={{ marginTop: "40px" }}>
-                                                        <Input label="Email" value={editUser.email} onChange={handleChangeEmail} type="primary" width="100%" adornment={<InputAdornment position="end"><EmailIcon /></InputAdornment>}></Input>
-                                                    </div>
-                                                    <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
-                                                        <div style={{ display: "flex" }}>
-                                                            <div style={{
-                                                                display: "flex",
-                                                                width: "418px",
-                                                                height: "50px",
-                                                                fontWeight: "bold",
-                                                                borderRadius: "10px",
-                                                                borderTopRightRadius: "0",
-                                                                borderBottomRightRadius: "0",
-                                                                backgroundColor: "#7de2d1",
-                                                                alignItems: "center",
-                                                                color: "black",
-                                                                paddingLeft: "16px"
-                                                            }}>Alterar Senha</div>
-                                                            <Button type="button" onClick={() => {
-                                                                setEditPassword(!editPassword)
-                                                            }} width="60px" height="50px" style={{
-                                                                fontWeight: "bold",
-                                                                borderRadius: "10px",
-                                                                borderTopLeftRadius: "0",
-                                                                borderBottomLeftRadius: "0",
-                                                                marginLeft: "2px",
-                                                                fontSize: "36px"
-                                                            }}><span>{`>`}</span></Button>
+                                                user.usuario.tipo === "DEFAULT" ?
+                                                    <>
+                                                        <div style={{ marginTop: "40px" }}>
+                                                            <Input label="Email" value={editUser.email} onChange={handleChangeEmail} type="primary" width="100%" adornment={<InputAdornment position="end"><EmailIcon /></InputAdornment>}></Input>
+                                                            <FormHelperText sx={{ display: 'flex', alignItems: 'center' }}>
+                                                                <CheckIcon sx={{ color: validEmailIpt ? "#7DE2D1" : "#F45959" }} />
+                                                                <span style={{ marginLeft: '5px' }}>Domínio de e-mail válido</span>
+                                                            </FormHelperText>
                                                         </div>
-                                                    </div>
-                                                </>
-                                                : 
-                                                <></>
+                                                        <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
+                                                            <div style={{ display: "flex" }}>
+                                                                <div style={{
+                                                                    display: "flex",
+                                                                    width: "418px",
+                                                                    height: "50px",
+                                                                    fontWeight: "bold",
+                                                                    borderRadius: "10px",
+                                                                    borderTopRightRadius: "0",
+                                                                    borderBottomRightRadius: "0",
+                                                                    backgroundColor: "#7de2d1",
+                                                                    alignItems: "center",
+                                                                    color: "black",
+                                                                    paddingLeft: "16px"
+                                                                }}>Alterar Senha</div>
+                                                                <Button type="button" onClick={() => {
+                                                                    setEditPassword(!editPassword)
+                                                                }} width="60px" height="50px" style={{
+                                                                    fontWeight: "bold",
+                                                                    borderRadius: "10px",
+                                                                    borderTopLeftRadius: "0",
+                                                                    borderBottomLeftRadius: "0",
+                                                                    marginLeft: "2px",
+                                                                    fontSize: "36px"
+                                                                }}><span>{`>`}</span></Button>
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                    :
+                                                    <></>
                                             }
 
                                             <div style={{ display: "flex", marginTop: "40px", justifyContent: "space-between", width: "100%" }}>
@@ -255,7 +300,7 @@ export default function Profile() {
                                                     borderRadius: "10px",
                                                 }}>Concluir</Button>
                                             </div>
-                                            
+
                                         </form>
                                     </div>
                                     {editPassword &&
