@@ -1,12 +1,6 @@
 import { Button } from "@mui/material";
 
 function ButtonBalancefy(props) {
-  const buttonActionType = props.buttonActionType === "button" ? {
-    type: "button"
-  } : {
-    type: "submit"
-  }
-
   const buttonTypes = {
     Primary: "primary",
     Secondary: "secondary",
@@ -14,7 +8,7 @@ function ButtonBalancefy(props) {
   return (
     <>
       <Button
-        type={props.buttonActionType}
+        type={!!props.type == true ? props.type : "submit"}
         variant="contained"
         color={props.color}
         style={{
