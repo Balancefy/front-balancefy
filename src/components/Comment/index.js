@@ -19,7 +19,7 @@ function CommentBalancefy(props) {
   const [replying, setReplying] = React.useState(false);
   const [like, setLike] = React.useState(false);
   const [dislike, setDislike] = React.useState(false);
-  const image = (comment.imagem).startsWith("/user-photos") ? apiUrl + comment.imagem : comment.imagem
+  const image = (comment.fkConta.usuario.avatar).startsWith("/user-photos") ? apiUrl + comment.imagem : comment.imagem
 
   return (
     <>
@@ -47,7 +47,7 @@ function CommentBalancefy(props) {
             }}>
               <AvatarBalancefy imageAvatar={image} width="40px"></AvatarBalancefy>
 
-              <TitleBalancefy style={{ marginLeft: "10px" }} variant="h3">{comment.nome}</TitleBalancefy>
+              <TitleBalancefy style={{ marginLeft: "10px" }} variant="h3">{comment.fkConta.usuario.nome}</TitleBalancefy>
             </div>
             <div
               style={{
@@ -89,7 +89,7 @@ function CommentBalancefy(props) {
           {replying && <AddComment/>}
 
 
-          {Array.isArray(comment.children) && comment.children.length ?
+          {Array.isArray(comment.listComentarios) && comment.listComentarios.length ?
             <>
 
               <div onClick={() => setShowMore(!showMore)} style={{
@@ -108,7 +108,7 @@ function CommentBalancefy(props) {
               <div style={{
                 marginLeft: "40px",
               }}>
-                {showMore && comment.children.map(data => <CommentBalancefy data={{ ...data }}>{data.descricao}</CommentBalancefy>)}
+                {showMore && comment.listComentarios.map(data => <CommentBalancefy data={{ ...data}}>{data.descricao}</CommentBalancefy>)}
               </div>
             </> :
             <>

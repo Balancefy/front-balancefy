@@ -17,9 +17,9 @@ export default function Comments(props) {
     const postId = location.state
     const [post, setPost] = useState();
     const [similarPost, setSimilarPost] = useState([]);
+    const [comentarios, setComentarios] = useState([]);
 
     useEffect(() => {
-
         api.get(`/forum/${postId}`)
             .then((res) => {
                 setPost(res.data)
@@ -28,43 +28,53 @@ export default function Comments(props) {
                 console.log(err)
             })
 
-        if(post !== undefined && post !== "") {
-            api.get(`/forum/topics/${(post.topico.titulo).slice(0,4)}`)
+        api.get(`/comentario/${postId}`)
             .then((res) => {
-                console.log(res)
-                setSimilarPost(res.data.list);
+                setComentarios(res.data.list)
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err);
             })
-        }
-    }, [post])
 
-     return(
-         <>
+
+        // if (post !== undefined && post !== "") {
+        //     api.get(`/forum/topics/${(post.topico.titulo).slice(0, 4)}`)
+        //         .then((res) => {
+        //             console.log(res)
+        //             setSimilarPost(res.data.list);
+        //         })
+        //         .catch((err) => {
+        //             console.log(err)
+        //         })
+
+        // }
+    }, [])
+
+    return (
+        <>
             <MainContainer page="Forum">
                 <Container margin="auto" height="95vh" width="90%" borderRadius={10} >
-                    <Box sx={{display: "flex", alignItems: "center", mt: 4, ml: 4}}>
-                            <Link to="/forum">
-                                <IconButton sx={{mr: 4}}>
-                                    <ArrowBackIcon color="primary" fontSize="large"/>
-                                </IconButton>
-                            </Link>
-                        
-                            {
-                                post !== undefined && post !== "" ? 
-                                    <TitleBalancefy variant="h2" color="#7DE2D1">{post.topico.titulo}</TitleBalancefy>
-                                : 
-                                    <></>
-                            }
+                    <Box sx={{ display: "flex", alignItems: "center", mt: 4, ml: 4 }}>
+                        <Link to="/forum">
+                            <IconButton sx={{ mr: 4 }}>
+                                <ArrowBackIcon color="primary" fontSize="large" />
+                            </IconButton>
+                        </Link>
+
+                        {
+                            post !== undefined && post !== "" ?
+                                <TitleBalancefy variant="h2" color="#7DE2D1">{post.topico.titulo}</TitleBalancefy>
+                                :
+                                <></>
+                        }
                     </Box>
 
-                    <Grid container sx={{mt: 2, ml:2}}>
+                    <Grid container sx={{ mt: 2, ml: 2 }}>
                         <Grid item md={1.5}></Grid>
-                        <Grid item md={5} sx={{mt: 10}}>
+                        <Grid item md={5} sx={{ mt: 10 }}>
                             <div>
                                 {
-                                    post !== undefined && post !== "" ? 
+                                    post !== undefined && post !== "" ?
                                         <TopicWithComments
                                             id={post.topico.id}
                                             description={post.topico.descricao}
@@ -75,38 +85,38 @@ export default function Comments(props) {
                                             liked={post.liked}
                                             date={post.topico.createdAt}
                                         />
-                                    : 
-                                    <></>
+                                        :
+                                        <></>
                                 }
-                            </div>  
+                            </div>
 
-                            <Box sx={{ width: "100%"}}>
-                                <AddComment/>
+                            <Box sx={{ width: "100%" }}>
+                                <AddComment />
                             </Box>
-                            
-                            <Box sx={{ml: 4}}>
-                               <CommentsSection> </CommentsSection>
+
+                            <Box sx={{ ml: 4 }}>
+                                <CommentsSection comments={!!comentarios ? comentarios : []} />
                             </Box>
 
                         </Grid>
                         <Grid item md={0.5}>
                         </Grid>
                         <Grid item md={0.5}>
-                            <div style={{border: '1px solid #4B4B4B', height: '80vh', width: 0}}></div>
+                            <div style={{ border: '1px solid #4B4B4B', height: '80vh', width: 0 }}></div>
                         </Grid>
-                        <Grid item md={4} sx={{mt: 4}}>
-                            <Box sx={{mb: 6}}>
+                        <Grid item md={4} sx={{ mt: 4 }}>
+                            <Box sx={{ mb: 6 }}>
                                 <TitleBalancefy variant="h2" color="#7DE2D1">Publicações como esta:</TitleBalancefy>
                             </Box>
                             <div style={{
-                                maxHeight: "70vh", 
+                                maxHeight: "70vh",
                                 overflow: "auto",
                             }}>
                                 {
-                                    similarPost !== undefined ? 
+                                    similarPost !== undefined ?
                                         similarPost.map((post) => {
-                                            return(
-                                                <div key={post.topico.id} style={{marginRight: "5%"}}>
+                                            return (
+                                                <div key={post.topico.id} style={{ marginRight: "5%" }}>
                                                     <TopicBalancefy
                                                         id={post.topico.id}
                                                         title={post.topico.titulo}
@@ -122,7 +132,7 @@ export default function Comments(props) {
                                                 </div>
                                             )
                                         })
-                                    : 
+                                        :
                                         <></>
                                 }
                             </div>
@@ -130,6 +140,6 @@ export default function Comments(props) {
                     </Grid>
                 </Container>
             </MainContainer>
-         </>
-     )
+        </>
+    )
 }

@@ -3,7 +3,9 @@ import avatar from "../../img/user2.jpg"
 
 
 export default function CommentsSection(props) {
-  const comentarios = [
+  const comentarios = Array.from(props.comments); 
+  console.log(comentarios);
+  const comentarioos = [
     {
       id: 1,
       nome: "Bianca",
