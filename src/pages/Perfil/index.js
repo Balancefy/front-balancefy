@@ -141,7 +141,7 @@ export default function Profile() {
                         flexDirection: "column"
                     }}>
                         <ProfileBalancefy name={profileUser.usuario.nome} editing={editing} imagem={profileUser.usuario.avatar}
-                            button={<Button 
+                            button={profileUser === user &&<Button 
                                 onClick={() => {
                                 setEditPassword(false)
                                 setEditing(!editing)
