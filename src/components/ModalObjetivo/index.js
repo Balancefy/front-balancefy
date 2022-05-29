@@ -1,4 +1,4 @@
-import { Box, IconButton, Modal, Typography } from "@mui/material";
+import { Box, FormHelperText, IconButton, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import Input from "../Input";
@@ -14,6 +14,8 @@ export default function ModalObjetivo(props) {
   const [categoryGoalId, setCategoryGoalId] = useState("");
   const [date, setDate] = useState(null);
   const [alerta, setAlert] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(() => {
     if(alerta) {
@@ -31,32 +33,34 @@ export default function ModalObjetivo(props) {
   let modalState = props.open
 
   const handleObjetivo = () => {
-
-    console.log(newGoal.valorInicial > newGoal.valorTotal)
-
-    if(newGoal.valorInicial > newGoal.valorTotal) {
-      alert("Seu valor inicial é maior que o valor final")
+    if(Number(newGoal.valorTotal) < Number(newGoal.valorInicial)) {
+      setErrorMessage("Seu valor inicial é maior que o valor final")
+      setError(true)
       return
     }
 
     if(isInThePast(new Date(newGoal.tempoEstimado))) {
-      alert("Data passada seu bobo")
+      setErrorMessage("Data precisa ser futura!")
+      setError(true)
       return
     }
 
-    api.post("/accounts/goals", {
-      ...newGoal,
-      objetivo: {
-        id: categoryGoalId
-      }
-    })
-    .then((res) => {
-        window.location.reload()
-    }).catch((err) => {
-      if(err === "Error: Request failed with status code 500") {
-        setAlert(true)
-      }
-    })
+    if(!error) {
+      api.post("/accounts/goals", {
+        ...newGoal,
+        objetivo: {
+          id: categoryGoalId
+        }
+      })
+      .then((res) => {
+          window.location.reload()
+      }).catch((err) => {
+        if(err === "Error: Request failed with status code 500") {
+          setError(true)
+          setErrorMessage("Data muito recente para quantidade de recursos disponíveis")
+        }
+      })
+    }
   }
 
   const handleObjetivoCategoriaId = (event) => {
@@ -116,7 +120,14 @@ export default function ModalObjetivo(props) {
             })
           }} value={date}
           width="100%"
-          label="Data de Conclusão" mt='20px'></DateInput>
+          label="Data de Conclusão" mt='20px'/>
+          {
+            error ? 
+              <FormHelperText sx={{color: "#F45959", fontSize: "16px", mb: 2}}>
+                <b>{errorMessage}</b>
+              </FormHelperText>
+           : <></>
+          }
           <ButtonBalancefy width="340px" color="primary" height="40px">Concluir</ButtonBalancefy>
         </form>
       </Box>

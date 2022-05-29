@@ -57,12 +57,6 @@ function ProfileBalancefy(props) {
                             }}>
                                 {props.name}
                             </div>
-                            <div style={{
-                                fontSize: "20px",
-                                color: "#7DE2D1"
-                            }}>
-                                Mão de Vaca
-                            </div>
                         </div>
                         <div>
                             {props.button}

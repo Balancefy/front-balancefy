@@ -16,7 +16,7 @@ export default function DateInput(props) {
 
     return (
         <>
-            <Box sx={{ '& > :not(style)': { mt: props.mt, width: style.width, mb: 4 } }}>
+            <Box sx={{ '& > :not(style)': { mt: props.mt, width: style.width } }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns} locale={brLocale}>
                     <DatePicker
                         label={props.label}

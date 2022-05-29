@@ -40,6 +40,4 @@ export const uploadImage = async (file) => {
     })
 }
 
-
-
-export let isInThePast = (date) => date.setHours(0, 0, 0, 0) <= new Date().toLocaleDateString("pt-br");
+export const isInThePast = (date) => new Date(date.toLocaleDateString("pt-BR")) < new Date()

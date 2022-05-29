@@ -42,7 +42,7 @@ export default function Cadastro() {
   const [userType, setUserType] = React.useState("DEFAULT");
   const [confirmaSenha, setConfirmaSenha] = React.useState("");
   const [samePass, setSamePass] = React.useState("");
-  const [gastos, setGastos] = React.useState([]);
+  // const [gastos, setGastos] = React.useState([gasto]);
 
   const [gasto, setGasto] = React.useState({
     descricao: "",
@@ -183,29 +183,26 @@ export default function Cadastro() {
 
   const handleExpenseDescricao = (event) => {
     console.log(event.target.value)
-    // setGastos(gastos.concat({
-    //   descricao: "",
-    //   valor: "",
-    //   categoria: ""
-    // }))
+    setGasto({
+        ...gasto,
+        descricao: event.target.value
+    })
   }
 
   const handleExpenseValor = (event) => {
     console.log(event.target.value)
-    // setGastos(gastos.concat({
-    //   descricao: "",
-    //   valor: "",
-    //   categoria: ""
-    // }))
+    setGasto({
+      ...gasto,
+      valor: event.target.value
+  })
   }
 
   const handleExpenseCategoria = (event) => {
     console.log(event.target.value)
-    // setGastos(gastos.concat({
-    //   descricao: "",
-    //   valor: "",
-    //   categoria: ""
-    // }))
+    setGasto({
+      ...gasto,
+      categoria: event.target.value
+    })
   }
 
 
@@ -241,7 +238,7 @@ export default function Cadastro() {
                   <TitleBalancefy variant="body3"> Já tem uma conta?</TitleBalancefy>
                   <TitleBalancefy variant="body3" color="#7DE2D1">
                     <Link
-                      to="/cadastro"
+                      to="/login"
                       style={{ color: "#7DE2D1", textDecoration: "none" }}
                     > Log in
                     </Link>
@@ -277,7 +274,7 @@ export default function Cadastro() {
                     <Input
                       label="Sobrenome"
                       type="primary"
-                      width="267px"
+                      width="300px"
                       value={usuario.lastName}
                       onChange={handleChangeLastName}
                     />
@@ -387,6 +384,7 @@ export default function Cadastro() {
                         label="Descrição"
                         type="primary"
                         value={gasto.descricao}
+                        onChange={handleChangeDescricao}
                         width="100%"
                       ></Input>
                     </div>
@@ -401,6 +399,7 @@ export default function Cadastro() {
                       label="Valor"
                       type="primary"
                       value={gasto.valor}
+                      onChange={handleExpenseValor}
                       width="267px"
                       adornment={
                         <InputAdornment position="end">

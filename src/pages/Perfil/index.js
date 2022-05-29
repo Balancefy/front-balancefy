@@ -26,6 +26,11 @@ export default function Profile() {
     const [novaSenha, setNovaSenha] = React.useState("");
     const [senhaAtual, setSenhaAtual] = React.useState("");
     const [confirmarSenha, setConfirmarSenha] = React.useState("");
+    const [editUser, setEditUser] = React.useState({
+        nome: "",
+        email: ""
+    })
+    const [newUser, setNewUser] = React.useState(user)
 
     const [biggerThanSex, setBiggerThanSex] = React.useState(false);
     const [atLeastOneSpecialChar, setAtLeastOneSpecialChar] = React.useState(false);
@@ -54,6 +59,22 @@ export default function Profile() {
             setNovaSenha('')
             setSenhaAtual('')
             setConfirmarSenha('')
+            console.log(err)
+        })
+    };
+
+    const handleSimpleEdit = () => {
+        api.put("users", editUser).then((res) => {
+            localStorage.setItem("@balancefy:user", JSON.stringify({
+                ...newUser,
+                usuario: {
+                    ...newUser.usuario,
+                    nome: editUser.nome
+                }
+            }))
+
+            window.location.reload()
+        }).catch((err) => {
             console.log(err)
         })
     };
@@ -88,6 +109,20 @@ export default function Profile() {
         setConfirmarSenha(event.target.value)
         setSamePassword(event.target.value === novaSenha)
     };
+
+    const handleChangeNome = (event) => {
+        setEditUser({
+            ...editUser,
+            nome: event.target.value
+        })
+    }
+
+    const handleChangeEmail = (event) => {
+        setEditUser({
+            ...editUser,
+            email: event.target.value
+        })
+    }
 
     return (
         <>
@@ -153,45 +188,56 @@ export default function Profile() {
                             }
                         {editing &&
                             <div style={{ width: "100%", height: "40vh", display: "flex" }}>
-                                {/* <form
-                                    style={{ width: "100%" }}
-                                    onSubmit={(event) => {
-                                        event.preventDefault();
-                                    }}> */}
                                 <div style={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
                                     <div>
-                                        <div style={{ justifyContent: "space-between", display: "flex" }}>
-                                            <Input label="Nome" type="primary" width="547px" adornment={<InputAdornment position="end"> <PersonIcon /></InputAdornment>}></Input>
-                                        </div>
-                                        <div style={{ marginTop: "40px" }}>
-                                            <Input label="Email" type="primary" width="100%" adornment={<InputAdornment position="end"><EmailIcon /></InputAdornment>}></Input>
-                                        </div>
-                                        <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
-                                            <div style={{ display: "flex" }}>
-                                                <div style={{
-                                                    display: "flex",
-                                                    width: "418px",
-                                                    height: "50px",
-                                                    fontWeight: "bold",
-                                                    borderRadius: "10px",
-                                                    borderTopRightRadius: "0",
-                                                    borderBottomRightRadius: "0",
-                                                    backgroundColor: "#7de2d1",
-                                                    alignItems: "center",
-                                                    color: "black",
-                                                    paddingLeft: "16px"
-                                                }}>Alterar Senha</div>
-                                                <Button onClick={() => {
-                                                    setEditPassword(!editPassword)
-                                                }} width="60px" height="50px" style={{
-                                                    fontWeight: "bold",
-                                                    borderRadius: "10px",
-                                                    borderTopLeftRadius: "0",
-                                                    borderBottomLeftRadius: "0",
-                                                    marginLeft: "2px",
-                                                    fontSize: "36px"
-                                                }}><span>{`>`}</span></Button>
+                                        <form
+                                            style={{ width: "100%" }}
+                                            onSubmit={(event) => {
+                                                event.preventDefault();
+                                                handleSimpleEdit()
+                                            }}
+                                        >
+                                            <div style={{ justifyContent: "space-between", display: "flex" }}>
+                                                <Input label="Nome" value={editUser.nome} onChange={handleChangeNome} type="primary" width="547px" adornment={<InputAdornment position="end"> <PersonIcon /></InputAdornment>}></Input>
                                             </div>
+                                            {
+                                                user.usuario.tipo === "DEFAULT" ? 
+                                                <>
+                                                    <div style={{ marginTop: "40px" }}>
+                                                        <Input label="Email" value={editUser.email} onChange={handleChangeEmail} type="primary" width="100%" adornment={<InputAdornment position="end"><EmailIcon /></InputAdornment>}></Input>
+                                                    </div>
+                                                    <div style={{ display: "flex", marginTop: "40px", flexDirection: "column", width: "fit-content" }}>
+                                                        <div style={{ display: "flex" }}>
+                                                            <div style={{
+                                                                display: "flex",
+                                                                width: "418px",
+                                                                height: "50px",
+                                                                fontWeight: "bold",
+                                                                borderRadius: "10px",
+                                                                borderTopRightRadius: "0",
+                                                                borderBottomRightRadius: "0",
+                                                                backgroundColor: "#7de2d1",
+                                                                alignItems: "center",
+                                                                color: "black",
+                                                                paddingLeft: "16px"
+                                                            }}>Alterar Senha</div>
+                                                            <Button onClick={() => {
+                                                                setEditPassword(!editPassword)
+                                                            }} width="60px" height="50px" style={{
+                                                                fontWeight: "bold",
+                                                                borderRadius: "10px",
+                                                                borderTopLeftRadius: "0",
+                                                                borderBottomLeftRadius: "0",
+                                                                marginLeft: "2px",
+                                                                fontSize: "36px"
+                                                            }}><span>{`>`}</span></Button>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                                : 
+                                                <></>
+                                            }
+
                                             <div style={{ display: "flex", marginTop: "40px", justifyContent: "space-between", width: "100%" }}>
                                                 <Button onClick={() => {
                                                     setEditing(!editing)
@@ -208,7 +254,8 @@ export default function Profile() {
                                                     borderRadius: "10px",
                                                 }}>Concluir</Button>
                                             </div>
-                                        </div>
+                                            
+                                        </form>
                                     </div>
                                     {editPassword &&
                                         <>
@@ -270,7 +317,6 @@ export default function Profile() {
                                         </>
                                     }
                                 </div>
-                                {/* </form> */}
                             </div>}
                     </div>
                 </Container>
