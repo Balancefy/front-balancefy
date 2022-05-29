@@ -10,6 +10,7 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
 import AddComment from '../AddComment';
+import api from '../../service/api';
 
 const apiUrl = process.env.REACT_APP_API_URL
 
@@ -19,7 +20,22 @@ function CommentBalancefy(props) {
   const [replying, setReplying] = React.useState(false);
   const [like, setLike] = React.useState(false);
   const [dislike, setDislike] = React.useState(false);
-  const image = (comment.fkConta.usuario.avatar).startsWith("/user-photos") ? apiUrl + comment.imagem : comment.imagem
+  const image = (comment.fkConta.usuario.avatar);
+  console.log(image)
+
+  const replyComment = (message) => {
+    api.post("/comentario", {
+      idTopico: props.topicId,
+      idComentario: comment.idComentario,
+      conteudo: message,
+    })
+      .then((res)=> {
+        console.log(res);
+      })
+      .catch(err => {
+
+      })
+  }
 
   return (
     <>
@@ -86,7 +102,7 @@ function CommentBalancefy(props) {
             </div>
           </div>
 
-          {replying && <AddComment/>}
+          {replying && <AddComment replyAction={() => replyComment()}/>}
 
 
           {Array.isArray(comment.listComentarios) && comment.listComentarios.length ?
