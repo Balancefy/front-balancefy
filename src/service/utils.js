@@ -55,3 +55,19 @@ export const validName = (name) => {
 export const validEmail = (email) => {
     return /@\w{5,}.com/.test(email)
 }
+
+export const validDescTransaciton = (descTransaciton) => {
+    return descTransaciton.length > 1
+}
+
+export const validValueTransaciton = (valueTransaciton) => {
+    return valueTransaciton > 0 
+}
+
+export const validCategoriaTransaciton = (categoriaTransaciton) => {
+    return categoriaTransaciton !== ""
+}
+
+export const validTypeTransaciton = (typeTransaciton) => {
+    return typeTransaciton !== ""
+}
