@@ -58,7 +58,7 @@ export const validEmail = (email) => {
 }
 
 export const validDescTransaciton = (descTransaciton) => {
-    return descTransaciton.length > 1
+    return descTransaciton.length > 0
 }
 
 export const validValueTransaciton = (valueTransaciton) => {

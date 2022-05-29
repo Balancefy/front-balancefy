@@ -20,11 +20,11 @@ export default function ModalMovimentacao(props) {
     tipo: ""
   });
 
-  const [ open, setOpen ] = React.useState(false);
-  const [ validDescIpt, setValidDescIpt ] = React.useState(false);
-  const [ validValueIpt, setValidValueipt ] = React.useState(false);
-  const [ validCategoriaIpt, setValidCategoriaIpt ] = React.useState(false);
-  const [ validTipoIpt, setValidTipoIpt ] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [validDescIpt, setValidDescIpt] = React.useState(false);
+  const [validValueIpt, setValidValueipt] = React.useState(false);
+  const [validCategoriaIpt, setValidCategoriaIpt] = React.useState(false);
+  const [validTipoIpt, setValidTipoIpt] = React.useState(false);
 
   const handleMovimentacao = () => {
     if (props.title === "Nova Movimentação") {
@@ -35,7 +35,7 @@ export default function ModalMovimentacao(props) {
           console.log(err)
         })
 
-    } else if(props.title === "Movimentação do Objetivo") {
+    } else if (props.title === "Movimentação do Objetivo") {
       api.post("/transactions", {
         valor: transaction.valor,
         descricao: transaction.descricao,
@@ -44,8 +44,8 @@ export default function ModalMovimentacao(props) {
         fkObjetivoConta: props.fkObjetivo.objetivo
       })
         .then((res) => {
-            localStorage.setItem("@newTransaction", false)
-            window.location.reload()
+          localStorage.setItem("@newTransaction", false)
+          window.location.reload()
         }).catch((err) => {
           console.log(err)
         })
@@ -53,6 +53,8 @@ export default function ModalMovimentacao(props) {
   }
 
   const handleDescricao = (event) => {
+    setValidDescIpt(validDescTransaciton(event.target.value))
+    console.log(validDescTransaciton(event.target.value))
     setTransaction({
       ...transaction,
       descricao: event.target.value
@@ -60,6 +62,8 @@ export default function ModalMovimentacao(props) {
   }
 
   const handleCategory = (event) => {
+    setValidCategoriaIpt(validCategoriaTransaciton(event.target.value))
+    console.log(validCategoriaTransaciton(event.target.value))
     setTransaction({
       ...transaction,
       categoria: event.target.value
@@ -67,6 +71,8 @@ export default function ModalMovimentacao(props) {
   }
 
   const handleType = (event) => {
+    setValidTipoIpt(validTypeTransaciton(event.target.value))
+    console.log(validTypeTransaciton(event.target.value))
     setTransaction({
       ...transaction,
       tipo: event.target.value
@@ -74,6 +80,9 @@ export default function ModalMovimentacao(props) {
   }
 
   const handleValor = (event) => {
+    setValidValueipt(validValueTransaciton(event.target.value))
+    console.log(validValueTransaciton(event.target.value))
+
     if (!(transaction.valor.length === 0 && event.target.value === 0)) {
       setTransaction({
         ...transaction,
@@ -83,10 +92,8 @@ export default function ModalMovimentacao(props) {
   }
 
   const validTransaction = () => {
-    if(validDescIpt && validCategoriaIpt && validValueIpt && validTipoIpt){
-      return true
-    }
-    return false
+    return validDescIpt && validCategoriaIpt && validValueIpt && validTipoIpt
+
   }
 
   return (
@@ -109,13 +116,8 @@ export default function ModalMovimentacao(props) {
           </Typography>
           <form onSubmit={(event) => {
             event.preventDefault()
-            setValidDescIpt(validDescTransaciton(transaction.descricao))
-            setValidCategoriaIpt(validCategoriaTransaciton(transaction.categoria))
-            setValidValueipt(validValueTransaciton(transaction.valor))
-            setValidTipoIpt(validTypeTransaciton(transaction.tipo))
             if (validTransaction()) {
-              console.log("funfo")
-              // handleMovimentacao()
+              handleMovimentacao()
             } else {
               setOpen(true)
               setTimeout(() => setOpen(false), 1500)
