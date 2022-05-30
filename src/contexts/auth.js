@@ -36,6 +36,7 @@ export function AuthProvider(props) {
 
   async function signInSocial(email) {
     try {
+      console.log(email)
       const response = await api.post('auth/social', {
         email: email
       })

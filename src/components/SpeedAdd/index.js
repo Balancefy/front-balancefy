@@ -9,7 +9,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ModalTopico from '../ModalTopico';
 import ModalObjetivo from '../ModalObjetivo';
 import ModalMovimentacao from '../ModalMovimentacao';
-import { uploadFile } from '../../service/utils';
+import { downloadCsv, uploadFile } from '../../service/utils';
 
 export default function SpeedAdd(props) {
     const [goalModalState, setGoalModalState] = useState(false);
@@ -19,7 +19,7 @@ export default function SpeedAdd(props) {
 
     const actions = [
         { icon: <AttachMoneyOutlinedIcon onClick={() => setAmountModalState(true)} />, name: 'Nova Movimentação' },
-        { icon: <FileDownloadIcon onClick={() => setTopicModalState(true)} />, name: 'Download Movimentações' },
+        { icon: <FileDownloadIcon onClick={() => downloadCsv()} />, name: 'Download Movimentações' },
         { icon: <FlagOutlinedIcon onClick={() => setGoalModalState(true)} />, name: 'Novo Objetivo' },
         { icon: <ForumIcon onClick={() => setTopicModalState(true)} />, name: 'Novo Tópico' },
         { icon: <FileUploadIcon onClick={() => inputFile.current.click()} />, name: 'Upload Movimentações' },

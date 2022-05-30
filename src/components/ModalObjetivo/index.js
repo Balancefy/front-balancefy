@@ -55,10 +55,8 @@ export default function ModalObjetivo(props) {
       .then((res) => {
           window.location.reload()
       }).catch((err) => {
-        if(err === "Error: Request failed with status code 500") {
-          setError(true)
-          setErrorMessage("Data muito recente para quantidade de recursos disponíveis")
-        }
+        setError(true)
+        setErrorMessage("Data muito recente para quantidade de recursos disponíveis")
       })
     }
   }
@@ -123,12 +121,12 @@ export default function ModalObjetivo(props) {
           label="Data de Conclusão" mt='20px'/>
           {
             error ? 
-              <FormHelperText sx={{color: "#F45959", fontSize: "16px", mb: 2}}>
+              <FormHelperText sx={{color: "#F45959", fontSize: "16px"}}>
                 <b>{errorMessage}</b>
               </FormHelperText>
            : <></>
           }
-          <ButtonBalancefy width="340px" color="primary" height="40px">Concluir</ButtonBalancefy>
+          <ButtonBalancefy style={{marginTop: "2vh"}} width="340px" color="primary" height="40px">Concluir</ButtonBalancefy>
         </form>
       </Box>
     </Modal>

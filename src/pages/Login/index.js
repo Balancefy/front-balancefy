@@ -127,11 +127,11 @@ function Login() {
                   marginTop: "10%",
                 }}
               >
-                <LoginGoogle onSuccess={() => signInSocial()} onFailure={() => setOpen(true)}/>
+                <LoginGoogle onSuccess={(email) => signInSocial(email)} onFailure={() => setOpen(true)}/>
 
-                <LoginGithub onSuccess={() => signInSocial()} onFailure={() => setOpen(true)}/>
+                <LoginGithub onSuccess={(email) => signInSocial(email)} onFailure={() => setOpen(true)}/>
 
-                <LoginFacebook onSuccess={() => signInSocial()} onFailure={() => setOpen(true)}/>
+                <LoginFacebook onSuccess={(email) => signInSocial(email)} onFailure={() => setOpen(true)}/>
               </div>
             </div>
           </Box>

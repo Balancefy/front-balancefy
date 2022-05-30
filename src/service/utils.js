@@ -72,3 +72,19 @@ export const validCategoriaTransaciton = (categoriaTransaciton) => {
 export const validTypeTransaciton = (typeTransaciton) => {
     return typeTransaciton !== ""
 }
+
+export const downloadCsv = (event) => {
+    api
+        .get('transactions/report', { responseType: 'blob' })
+        .then(async (res) => {
+            let blob = new Blob([res.data], { type: 'text/plain' })
+            let link = document.createElement("a");
+            link.href = await URL.createObjectURL(blob);
+            link.download = 'movimentacoes.txt'
+            link.click()
+            URL.revokeObjectURL(link.href)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}

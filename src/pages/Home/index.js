@@ -13,23 +13,7 @@ import ObjFinal from "../../components/ObjFinal";
 import SelectBalancefy from "../../components/Select";
 import TitleWithBorder from "../../components/TitleWithBorder";
 import { AuthContext } from "../../contexts/auth";
-
-
-const downloadCsv = (event) => {
-    api
-        .get('transactions/report', { responseType: 'blob' })
-        .then(async (res) => {
-            let blob = new Blob([res.data], { type: 'text/plain' })
-            let link = document.createElement("a");
-            link.href = await URL.createObjectURL(blob);
-            link.download = 'movimentacoes.txt'
-            link.click()
-            URL.revokeObjectURL(link.href)
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-}
+import { downloadCsv } from "../../service/utils";
 
 export default function Home() {
     const { user } = useContext(AuthContext);

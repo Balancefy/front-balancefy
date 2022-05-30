@@ -158,11 +158,12 @@ export default function Cadastro() {
     api.post("/accounts", {
       renda: accountData.renda,
       fkUsuario: {
-        nome: userData.nome + " " + userData.lastName,
+        nome: userData.nome + " " + (!!userData.lastName ? userData.lastName : ""),
         email: userData.email,
         senha: userData.senha,
         dataNasc: accountData.dataNascimento,
-        tipo: userData.tipo
+        tipo: userData.tipo,
+        avatar: !!userData.avatar ? userData.avatar : ""
       }
     }).then((res) => {
         registerTransaction(res.data.id)
