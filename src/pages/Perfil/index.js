@@ -82,13 +82,13 @@ export default function Profile() {
     }
 
     const handleSimpleEdit = () => {
-        if (validEmailIpt && validNameIpt) {
+        if (validEmailIpt || validNameIpt) {
             api.put("users", editUser).then((res) => {
                 localStorage.setItem("@balancefy:user", JSON.stringify({
                     ...newUser,
                     usuario: {
                         ...newUser.usuario,
-                        nome: editUser.nome
+                        nome: !!editUser.nome ? editUser.nome : newUser.usuario.nome
                     }
                 }))
 
