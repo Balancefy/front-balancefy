@@ -87,7 +87,7 @@ export default function Comments(props) {
                     </Box>
 
                     <Grid container sx={{ mt: 2, ml: 2 }}>
-                        <Grid item md={1.5}></Grid>
+                        <Grid item md={2}></Grid>
                         <Grid item md={5} sx={{ mt: 10 }}>
                             <div>
                                 {
@@ -116,13 +116,13 @@ export default function Comments(props) {
                             </Box>
 
                         </Grid>
-                        <Grid item md={0.5}>
+                        <Grid item md={1}>
                         </Grid>
-                        <Grid item md={0.5}>
+                        <Grid item md={1}>
                             <div style={{ border: '1px solid #4B4B4B', height: '80vh', width: 0 }}></div>
                         </Grid>
-                        <Grid item md={4} sx={{ mt: 4 }}>
-                            <Box sx={{ mb: 6 }}>
+                        <Grid item md={2} sx={{ mt: 4 }}>
+                            {/* <Box sx={{ mb: 6 }}>
                                 <TitleBalancefy variant="h2" color="#7DE2D1">Publicações como esta:</TitleBalancefy>
                             </Box>
                             <div style={{
@@ -152,7 +152,7 @@ export default function Comments(props) {
                                         :
                                         <></>
                                 }
-                            </div>
+                            </div> */}
                         </Grid>
                     </Grid>
                 </Container>

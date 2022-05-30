@@ -13,13 +13,13 @@ export default function TransactionGoal(props) {
 
   const undo = () => {
     api.delete("/transactions/delete").then((res) => {
-      console.log(res)
       if(res.data <= -1) {
-        localStorage.setItem("@newTransaction", true)
+        localStorage.removeItem("@newTransaction", true)
         setDisable(true)
       }
+      window.location.reload()
     }).catch((err) => {
-      localStorage.setItem("@newTransaction", true)
+      localStorage.removeItem("@newTransaction", true)
       setDisable(true)
       console.log(err)
     })

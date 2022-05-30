@@ -38,14 +38,12 @@ const Progress = (props) => {
                         }}></div>
                     </div>
                     <div style={{ marginTop: "10px" }}>
-                        {(props.pontuacao * 100) / props.totalValue}%
+                        {((props.pontuacao * 100) / props.totalValue).toFixed(2)}%
                     </div>
                     <div style={{ marginTop: "10px" }}>
-                        {props.pontuacao}/{props.totalValue} XP
+                        {Math.ceil(props.pontuacao).toFixed(0)}/{props.totalValue} XP
                     </div>
                 </div>
-
-
             </Container>
         </>
     )

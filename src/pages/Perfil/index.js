@@ -60,6 +60,8 @@ export default function Profile() {
             senhaAtual,
             novaSenha
         }).then((res) => {
+            setEditing(!editing)
+            setEditPassword(false)
             console.log(res)
         }).catch((err) => {
         setOpen(true)

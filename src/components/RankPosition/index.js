@@ -29,12 +29,11 @@ export default function RankPosition(props) {
         }}>
           {props.name}
         </div>
-        <div style={{
-        }}>
+        <div style={{}}>
           {props.goals}
         </div>
         <div style={{
-          marginLeft: "50px"
+          marginLeft: "30px"
         }}>
           {props.progress}
         </div>

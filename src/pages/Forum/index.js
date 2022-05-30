@@ -20,14 +20,16 @@ export default function Forum(props) {
     const [search, setSearch] = React.useState("");
 
     useEffect(() => {
-        api.get("/forum")
+        if(search === "" || search.length < 3) {
+            api.get("/forum")
             .then((res) => {
                 setTopics(res.data.list);
             })
             .catch((err) => {
                 console.log(err)
             })
-
+        }
+    
         api.get("/forum/mostLike")
             .then((res) => {
                 setMostLiked(res.data.list);
