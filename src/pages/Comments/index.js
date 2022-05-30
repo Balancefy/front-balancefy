@@ -59,6 +59,7 @@ export default function Comments(props) {
         })
           .then((res)=> {
             setNewComment(true)
+            setMessage("")
             console.log(res);
           })
           .catch(err => {

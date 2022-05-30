@@ -4,7 +4,7 @@ import { Box, Button, Grid } from "@mui/material";
 import Dica from "../../components/Dica";
 import Transaction from "../../components/Transaction";
 import MainContainer from "../../components/MainContainer";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import BalanceBalancefy from "../../components/Balance";
 import GoalsBalancefy from "../../components/EndGoal";
 import api from "../../service/api";
@@ -12,6 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import ObjFinal from "../../components/ObjFinal";
 import SelectBalancefy from "../../components/Select";
 import TitleWithBorder from "../../components/TitleWithBorder";
+import { AuthContext } from "../../contexts/auth";
 
 
 const downloadCsv = (event) => {
@@ -31,6 +32,7 @@ const downloadCsv = (event) => {
 }
 
 export default function Home() {
+    const { user } = useContext(AuthContext);
     const [transactions, setTransactions] = React.useState();
     const [dicas, setDicas] = React.useState([]);
     const [selectedGoal, setSelectedGoal] = React.useState("");
@@ -42,7 +44,7 @@ export default function Home() {
     const inputFile = React.useRef(null);
 
     useEffect(() => {
-        api.get(`transactionFixed/${1}`)
+        api.get(`transactionFixed/${user.id}`)
             .then(res => {
                 setTransactions(res.data);
             }).catch(err => {

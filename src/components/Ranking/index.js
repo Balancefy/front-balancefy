@@ -42,6 +42,7 @@ export default function Ranking(props) {
         <TitleWithBorder>Ranking</TitleWithBorder>
         <div style={{
           margin: "2vh auto",
+          maxHeight: "20vh",
           overflow: "auto",
         }}>
           {Positions}

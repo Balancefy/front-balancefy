@@ -3,6 +3,7 @@ import Input from "../Input";
 import { InputAdornment } from "@mui/material";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import SelectBalancefy from "../Select";
+import InputValue from "../InputValue";
 
 const AddExpense = props => {
     return (
@@ -26,25 +27,25 @@ const AddExpense = props => {
                         display: "flex",
                     }}
                 >
-                    <Input
-                        label="Valor"
-                        type="primary"
-                        width="267px"
-                        value={props.amountValue}
-                        onChange={props.onChangeAmount}
-                        adornment={
-                            <InputAdornment position="end">
-                                <CurrencyExchangeIcon />
-                            </InputAdornment>
-                        }
-                    ></Input>
+                    <InputValue
+                      label="Valor"
+                      type="primary"
+                      value={props.amountValue}
+                      onChange={props.onChangeAmount}
+                      width="267px"
+                      adornment={
+                        <InputAdornment position="end">
+                          <CurrencyExchangeIcon />
+                        </InputAdornment>
+                      }
+                    />
 
                     <SelectBalancefy
                         label="Categoria"
                         type="primary"
                         width="267px"
                         value={props.categoria}
-                        onChange={props.onChange}
+                        onChange={props.onChangeCategoria}
                     ></SelectBalancefy>
                 </div>
             </div>

@@ -8,6 +8,7 @@ function Container(props) {
       width: props.width,
       borderRadius: "10px",
       margin: props.margin,
+      maxHeight: props.height,
       ...props.style
     }}>
       {props.children}

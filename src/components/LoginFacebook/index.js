@@ -10,7 +10,7 @@ export default function LoginFacebook(props) {
 
     const responseFacebook = (res) => {
         if(props.page === "register") {
-            props.onSuccess(res)
+            props.onSuccess(res, "FACEBOOK")
         } else {
             props.onSuccess(res.email)
         }

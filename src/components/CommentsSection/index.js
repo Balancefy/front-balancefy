@@ -3,7 +3,7 @@ import avatar from "../../img/user2.jpg"
 
 
 export default function CommentsSection(props) {
-  const comentarios = Array.from(props.comments); 
+  const comentarios = Array.from(props.comments).reverse(); 
   const topicId = props.topicId;
   
   return (

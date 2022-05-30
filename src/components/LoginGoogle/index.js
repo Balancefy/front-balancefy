@@ -9,7 +9,7 @@ export default function LoginGoogle(props) {
 
     const onSuccess = (res) => {
         if(props.page === "register") {
-            props.onSuccess(res)
+            props.onSuccess(res, "GOOGLE")
         } else {
             props.onSuccess(res.profileObj.email)
         }

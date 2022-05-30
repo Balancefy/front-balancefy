@@ -1,3 +1,4 @@
+import { Code } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import axios from "axios";
 import React, { useEffect } from "react";
@@ -14,9 +15,11 @@ export default function LoginGithub(props) {
           const newUrl = url.split("?code=");
           window.history.pushState({}, null, newUrl[0]);
     
+          console.log(newUrl[1])
           axios.post("https://node-server-balancefy.herokuapp.com/authenticate", {
             code: newUrl[1]
           }).then((res) => {
+            console.log(res)
             onSuccess(res)
           }).catch((err) => {
             console.log(err)
@@ -26,9 +29,8 @@ export default function LoginGithub(props) {
       }, []);
 
     const onSuccess = (res) => {
-        props.onSuccess(res.profileObj.email)
         if(props.page === "register") {
-            props.onSuccess(res)
+            props.onSuccess(res, "GITHUB")
         } else {
             props.onSuccess(res.data.email)
         }

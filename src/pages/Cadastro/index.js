@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TitleBalancefy from "../../components/Title";
 import Input from "../../components/Input";
 import InputPass from "../../components/InputPass";
@@ -33,18 +33,16 @@ import InputValue from "../../components/InputValue";
 import { isInThePast } from "../../service/utils";
 
 export default function Cadastro() {
+  const navigate = useNavigate()
   const [displayOne, setDisplayOne] = React.useState("block");
   const [displayTwo, setDisplayTwo] = React.useState("none");
   const [displayThree, setDisplayThree] = React.useState("none");
   const [step, setStep] = React.useState(1); 
   const [open, setOpen] = React.useState(false);
-  const [expenses, setExpenses] = React.useState([]);
-
   const [userType, setUserType] = React.useState("DEFAULT");
   const [confirmaSenha, setConfirmaSenha] = React.useState("");
   const [samePass, setSamePass] = React.useState("");
   const [correctPass, setCorrectPass] = React.useState("");
-  const [dateMessage, setDateMessage] = React.useState("");
   
   const [error, setError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState(false);
@@ -52,26 +50,16 @@ export default function Cadastro() {
   const [gastos, setGastos] = React.useState([{
     descricao: "",
     valor: "",
-    categoria: ""
+    categoria: "",
+    tipo: "Saída"
   }]);
 
-  const [gasto, setGasto] = React.useState({
+  const gasto = {
     descricao: "",
     valor: "",
-    categoria: ""
-  });
-
-  useEffect(() => {
-    console.log(gastos)
-  }, [gastos])
-
-  const teste = {
-    descricao: "",
-    valor: "",
-    categoria: ""
+    categoria: "",
+    tipo: "Saída"
   }
-
-  console.log(gastos)
 
   const [conta, setConta] = React.useState({
     renda: "",
@@ -95,14 +83,39 @@ export default function Cadastro() {
     valorTotal: ""
   });
 
-  const handleSocialRegister = (res) => {
-    setUsuario({
-      ...usuario,
-      nome: res.name,
-      email: res.email,
-      avatar: res.picture.data.url,
-      tipo: userType
-    })
+  const handleSocialRegister = (res, type) => {
+    let createUser = {}
+
+    if(type == "FACEBOOK") {
+      createUser = {
+        nome: res.name,
+        email: res.email,
+        avatar: res.picture.data.url,
+        tipo: type
+      }
+    } else if(type == "GITHUB") {
+      createUser = {
+        nome: res.name,
+        email: res.login,
+        avatar: res.avatar_url,
+        tipo: type
+      }
+    } else if(type === "GOOGLE") {
+      createUser = {
+        nome: res.profileObj.name,
+        email: res.profileObj.email,
+        avatar: res.profileObj.imageUrl,
+        tipo: type
+      }
+    }
+
+    console.log(createUser)
+    localStorage.setItem("@user:firstStep", JSON.stringify(createUser))
+
+    setDisplayOne("none");
+    setDisplayTwo("block");
+    setDisplayThree("none");
+    setStep(step+1);
   }
 
   const handleFirstStep = () => {
@@ -117,7 +130,7 @@ export default function Cadastro() {
   const handleSecondStep = () => {
     localStorage.setItem("@user:secondStep", JSON.stringify({
       conta,
-      gasto
+      gastos
     }))
 
     setDisplayOne("none");
@@ -139,7 +152,46 @@ export default function Cadastro() {
       return
     }
 
-    localStorage.setItem("@user:thirdStep", JSON.stringify(objetivo))
+    const userData = JSON.parse(localStorage.getItem("@user:firstStep"))
+    const accountData = JSON.parse(localStorage.getItem("@user:secondStep")).conta
+
+    api.post("/accounts", {
+      renda: accountData.renda,
+      fkUsuario: {
+        nome: userData.nome + " " + userData.lastName,
+        email: userData.email,
+        senha: userData.senha,
+        dataNasc: accountData.dataNascimento,
+        tipo: userData.tipo
+      }
+    }).then((res) => {
+        registerTransaction(res.data.id)
+    })
+  }
+
+  const registerTransaction = (id) => {
+    const transactions = JSON.parse(localStorage.getItem("@user:secondStep")).gastos
+    console.log(transactions)
+
+    api.post(`/transactionFixed/account/${id}`, transactions).then(res => {
+      registerDream(id)
+    }).catch(err => console.log(err))
+  }
+
+  const registerDream = (id) => {
+    api.post(`/accounts/goals/register/${id}`, {
+      objetivo: {
+        id: objetivo.categoria
+      }, 
+      "descricao": objetivo.descricao,
+      "valorTotal": objetivo.valorTotal,
+      "valorInicial": objetivo.valorInicial,
+      "tempoEstimado": new Date(objetivo.dataConclusao).toLocaleDateString("pt-BR")
+    }).then(res => {
+      localStorage.removeItem("@user:firstStep")
+      localStorage.removeItem("@user:secondStep")
+      navigate('/login')
+    }).catch(err => console.log(err))
   }
 
   const handleChangeName = (event) => {
@@ -229,37 +281,28 @@ export default function Cadastro() {
   }
 
   const addExpense = async () => {    
-    setGastos(gastos.concat(teste))
-    setExpenses(expenses.concat(<AddExpense categoria={gastos[gastos.length-1].categoria} onChange={(event) => handleExpenseCategoria(event, gastos.length-1)}></AddExpense>));
+    setGastos(gastos.concat(gasto))
   }
 
-  const handleExpenseDescricao = (event) => {
-    console.log(event.target.value)
-    setGasto({
-        ...gasto,
-        descricao: event.target.value
-    })
+  const handleExpenseCategoria = index => e => {
+    let newArr = [...gastos];
+    newArr[index].categoria = e.target.value
+
+    setGastos(newArr);
   }
 
-  const handleExpenseValor = (event) => {
-    console.log(event.target.value)
-    setGasto({
-      ...gasto,
-      valor: event.target.value
-  })
+  const handleExpenseValor = index => e => {
+    let newArr = [...gastos];
+    newArr[index].valor = e.target.value
+
+    setGastos(newArr);
   }
 
-  const handleExpenseCategoria = (event, indice) => {
+  const handleExpenseDescricao = index => e => {
+    let newArr = [...gastos];
+    newArr[index].descricao = e.target.value
 
-    const copyGastos = gastos
-
-    let copyGasto = { ...gastos[indice] }
-
-    copyGasto.categoria = event.target.value
-
-    copyGastos[indice] = copyGasto
-
-    setGastos(copyGastos)
+    setGastos(newArr);
   }
 
 
@@ -443,8 +486,8 @@ export default function Cadastro() {
                         mt={0.9}
                         label="Descrição"
                         type="primary"
-                        value={gasto.descricao}
-                        onChange={handleExpenseDescricao}
+                        value={gastos[0].descricao}
+                        onChange={handleExpenseDescricao(0)}
                         width="100%"
                       ></Input>
                     </div>
@@ -458,8 +501,8 @@ export default function Cadastro() {
                       <InputValue
                       label="Valor"
                       type="primary"
-                      value={gasto.valor}
-                      onChange={handleExpenseValor}
+                      value={gastos[0].valor}
+                      onChange={handleExpenseValor(0)}
                       width="267px"
                       adornment={
                         <InputAdornment position="end">
@@ -473,13 +516,29 @@ export default function Cadastro() {
                         type="primary"
                         content="categoryTransaction"
                         value={gastos[0].categoria}
-                        onChange={(event) => handleExpenseCategoria(event, 0)}
+                        onChange={handleExpenseCategoria(0)}
                         width="267px"
                       ></SelectBalancefy>
                     </div>
                     <div>
                       <>
-                        {expenses}
+                        {
+                          gastos.length > 1 ?
+                            gastos.map((data, index) => {
+                              if(index!== 0) {
+                                return <AddExpense 
+                                  descricaoValue={data.descricao} 
+                                  onChangeDescricao={handleExpenseDescricao(index)}
+                                  amountValue={data.valor} 
+                                  onChangeAmount={handleExpenseValor(index)}
+                                  categoria={data.categoria} 
+                                  onChangeCategoria={handleExpenseCategoria(index)}
+                                ></AddExpense>
+                              }
+                            })
+                          : 
+                          <></>
+                        }
                       </>
                     </div>
                   </div>
@@ -638,18 +697,18 @@ export default function Cadastro() {
                     marginTop: "5px",
                   }}
                 >
-                  <LoginGoogle page="register" onSuccess={() => {
-                    handleSocialRegister()
+                  <LoginGoogle page="register" onSuccess={(res) => {
+                    handleSocialRegister(res, "GOOGLE")
                     setUserType("GOOGLE")
                   }} onFailure={() => setOpen(true)} />
 
-                  <LoginGithub page="register" onSuccess={() => {
-                    handleSocialRegister()
+                  <LoginGithub page="register" onSuccess={(res) => {
+                    handleSocialRegister(res, "GITHUB")
                     setUserType("GITHUB")
                   }} onFailure={() => setOpen(true)} />
 
-                  <LoginFacebook page="register" onSuccess={() => {
-                    handleSocialRegister()
+                  <LoginFacebook page="register" onSuccess={(res) => {
+                    handleSocialRegister(res, "FACEBOOK")
                     setUserType("FACEBOOK")
                   }} onFailure={() => setOpen(true)} />
                 </div>

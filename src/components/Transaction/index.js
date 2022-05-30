@@ -53,7 +53,7 @@ export default function Transaction(props) {
                     }}>R$</div>
                     <div style={{
                         color: props.type === "out" ? "#F45959" : "#7DE2D1", 
-                    }}>{props.children}</div>
+                    }}>{Number(props.type === "out" ? props.children * -1 : props.children).toFixed(2)}</div>
                 </div>
             </div>
         </>
