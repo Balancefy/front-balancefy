@@ -701,7 +701,7 @@ export default function Cadastro() {
                   <LoginGoogle page="register" onSuccess={(res) => {
                     handleSocialRegister(res, "GOOGLE")
                     setUserType("GOOGLE")
-                  }} onFailure={() => setOpen(true)} />
+                  }} />
 
                   <LoginGithub page="register" onSuccess={(res) => {
                     handleSocialRegister(res, "GITHUB")

@@ -127,7 +127,7 @@ function Login() {
                   marginTop: "10%",
                 }}
               >
-                <LoginGoogle onSuccess={(email) => signInSocial(email)} onFailure={() => setOpen(true)}/>
+                <LoginGoogle onSuccess={(email) => signInSocial(email)}/>
 
                 <LoginGithub onSuccess={(email) => signInSocial(email)} onFailure={() => setOpen(true)}/>
 
