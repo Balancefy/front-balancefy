@@ -17,7 +17,8 @@ export default function LoginGithub(props) {
     
           console.log(newUrl[1])
           axios.post("https://node-server-balancefy.herokuapp.com/authenticate", {
-            code: newUrl[1]
+            code: newUrl[1],
+            page: props.page === "register" ? "Cadastro" : "Login"
           }).then((res) => {
             console.log(res)
             onSuccess(res)
@@ -30,9 +31,9 @@ export default function LoginGithub(props) {
 
     const onSuccess = (res) => {
         if(props.page === "register") {
-            props.onSuccess(res, "GITHUB")
+            props.onSuccess(res.data, "GITHUB")
         } else {
-            props.onSuccess(res.data.email)
+            props.onSuccess(res.data.login)
         }
     };
 
