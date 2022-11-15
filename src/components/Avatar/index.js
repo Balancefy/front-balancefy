@@ -4,10 +4,10 @@ import { Button } from "@mui/material";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ModalProfile from '../ModalProfile';
 import { AuthContext } from "../../contexts/auth";
-const apiUrl = process.env.REACT_APP_API_URL
+const bucketUrl = process.env.REACT_S3_BUCKET_URL
 
 function AvatarBalancefy(props) {
-    const imagem = (props.imageAvatar).startsWith("/user-photos") ? apiUrl + props.imageAvatar : props.imageAvatar
+    const imagem = bucketUrl + props.imageAvatar 
     const editing = props.editing;
     const [open, setOpen] = useState(false);
     const { user } = React.useContext(AuthContext);
