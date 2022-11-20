@@ -16,7 +16,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy docker image') {
+        stage('Push to registry') {
             steps {
                 echo 'deploying docker image...'
                 script {
