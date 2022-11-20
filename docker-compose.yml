@@ -1,47 +1,31 @@
-version : '3.4'
+version: '3'
 
-services: 
+networks: 
+  default: 
+    external: 
+      name: balancefynet
+
+services:
+
+# FRONTEND
   frontend1:
-    build: 
-      context: .
+    image: ${FRONTEND_IMAGE_VERSION}
+  
+
   frontend2:
-    build:
-      context: .
-  lb-frontend-nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile.loadbalance
+    image: ${FRONTEND_IMAGE_VERSION}
+   
+
+  loadbalance:
+    image: nginx:latest
+    
+    volumes:
+      - ../lb/nginx.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt/live/balancefy.ddns.net/cert.pem:/etc/nginx/conf.d/cert.pem
+      - /etc/letsencrypt/live/balancefy.ddns.net/privkey.pem:/etc/nginx/conf.d/privkey.pem
     depends_on:
       - frontend1
       - frontend2
-    ports: 
-      - 8081:80
-
-  balancefy:
-    build: 
-      context: ./root
-    restart: always
     ports:
-      - "8080:8080"
-    depends_on:
-      - balancefydb
-  balancefydb:
-    image: postgres:10.5
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=balancefy
-    ports:
-      - "5432:5432"
-    volumes:
-      - db:/var/lib/mysql
-      - ./migration.sql:/docker-entrypoint-initdb.d/migration.sql
-
-volumes:
-  db:
-
-networks:
-  default:
-    driver: bridge
-    name: frontend1
+      - 80:80
+      - 443:443
