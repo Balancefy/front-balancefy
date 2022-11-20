@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:aws": "env-cmd -f .env.local react-scripts build"
+    "build:aws": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
