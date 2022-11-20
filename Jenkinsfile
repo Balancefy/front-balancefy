@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Push to registry') {
             steps {
-                echo 'deploying docker image...'
+                echo 'deploying docker image frontend...'
                 script {
                     docker.withRegistry( '', registryCredential) {
                         dockerImage.push()
