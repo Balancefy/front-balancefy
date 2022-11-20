@@ -10,10 +10,12 @@ services:
 # FRONTEND
   frontend1:
     image: ${FRONTEND_IMAGE_VERSION}
+    env_file: ../.env
   
 
   frontend2:
     image: ${FRONTEND_IMAGE_VERSION}
+    env_file: ../.env
    
 
   loadbalance:
