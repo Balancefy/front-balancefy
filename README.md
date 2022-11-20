@@ -6,3 +6,5 @@ docker run -it -v ${pwd}:/app ubuntu bash
 (cria e connecta em um container que ja se connecta com a maquina)
 
 crie as certificacoes com certbot
+
+test
