@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "bvediner/balancefy-frontend"
+        registry = "craybor/balancefy-frontend"
         registryCredential = 'dockerhub'
         dockerImage = ''
     }
