@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: 'http://api-balancefy.ddns.net:8080',
+    baseURL: 'https://api-balancefy.ddns.net/api',
 })
 
 export default api;
